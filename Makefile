@@ -1,5 +1,5 @@
 # project name (generate executable with this name)
-TARGET   = tpman
+TARGET   = larasnake
 
 CC       = g++
 # compiling flags here
