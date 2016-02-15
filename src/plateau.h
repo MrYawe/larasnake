@@ -10,3 +10,4 @@ int getValue(Board b, int posx, int posy);
 void setValue(Board b, int posx, int posy, int val);
 void displayBoard(Board b);
 void freeBoard(Board b);
+

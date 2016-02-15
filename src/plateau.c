@@ -5,29 +5,37 @@
 Board initBoard(int sizeX, int sizeY)
 {
   Board b;
-  // allocation of tab
-  b.tab = malloc(sizeY*sizeof(int*));
-  int i;
-  for ( i = 0; i < sizeY; i++ )
+  // Check for negative sizes
+  if (sizeX >= 0 && sizeY >=0)
   {
-    b.tab[i] = malloc(sizeX*sizeof(int));
+    // Allocation of tab
+    b.tab = malloc(sizeY*sizeof(int*));
+    int i;
+    for ( i = 0; i < sizeY; i++ )
+    {
+      b.tab[i] = malloc(sizeX*sizeof(int));
+    }
+    // Set sizes
+    b.tailleX = sizeX;
+    b.tailleY = sizeY;
   }
-  // set sizes
-  b.tailleX = sizeX;
-  b.tailleY = sizeY;
+  else
+  {
+    printf("InitBoard: error negative size!\n");
+  }
   return b;
 }
 
 int getValue(Board b, int posx, int posy)
 {
   // Check for out of range exceptions
-  if (posx < b.tailleX && posy < b.tailleY)
+  if (posx < b.tailleX && posy < b.tailleY && posx >= 0 && posy >=0)
   {
     return b.tab[posx][posy];
   }
   else
   {
-    printf("Erreur : getValue out of range\n");
+    printf("GetValue: error out of range\n");
     return -1;
   }
 }
@@ -35,13 +43,13 @@ int getValue(Board b, int posx, int posy)
 void setValue(Board b, int posx, int posy, int val)
 {
   // Check for out of range exceptions
-  if (posx < b.tailleX && posy < b.tailleY)
+  if (posx < b.tailleX && posy < b.tailleY && posx >= 0 && posy >=0)
   {
     b.tab[posx][posy] = val;
   }
   else
   {
-    printf("Erreur : setValue out of range\n");
+    printf("SetValue: error out of range\n");
   }
 }
 
@@ -67,3 +75,4 @@ void freeBoard(Board b)
   }
   free(b.tab);
 }
+
