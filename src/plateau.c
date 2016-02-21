@@ -14,7 +14,7 @@
 /**
  * \fn initBoard
  * \brief La fonction crée le plateau
- * \details La fonction alloue la mémoire necessaire au plateau et remplis les éléments de la structure
+ * \details La fonction alloue la mémoire necessaire au plateau et remplit les éléments de la structure
  * \param sizeX Entier qui done la taille en X du plateau créé
  * \param sizeY Entier qui done la taille en Y du plateau créé
  * \return Variable de type Board qui contiendra le plateau
@@ -26,11 +26,11 @@ Board initBoard(int sizeX, int sizeY)
   if (sizeX >= 0 && sizeY >=0)
   {
     // Allocation of tab
-    b.tab = malloc(sizeY*sizeof(int*));
+    b.tab = (int**) malloc(sizeY*sizeof(int*));
     int i;
     for ( i = 0; i < sizeY; i++ )
     {
-      b.tab[i] = malloc(sizeX*sizeof(int));
+      b.tab[i] = (int*) malloc(sizeX*sizeof(int));
     }
     // Set sizes
     b.tailleX = sizeX;
@@ -52,12 +52,12 @@ Board initBoard(int sizeX, int sizeY)
  * \param posy Variable de type Int qui correpond à l'emplacement Y de la valeur à récupérer
  * \return Variable de type int qui correspond à l'entier situé l'emplacement voulu sur le plateau
  */
-int getValue(Board b, int posx, int posy)
+int getValue(Board *b, int posx, int posy)
 {
   // Check for out of range exceptions
-  if (posx < b.tailleX && posy < b.tailleY && posx >= 0 && posy >=0)
+  if (posx < b->tailleX && posy < b->tailleY && posx >= 0 && posy >=0)
   {
-    return b.tab[posx][posy];
+    return b->tab[posx][posy];
   }
   else
   {
@@ -75,12 +75,12 @@ int getValue(Board b, int posx, int posy)
  * \param posy Variable de type Int qui correpond à l'emplacement Y de la valeur à attribuer
  * \param val Variable de type Int qui correpond à la valeur à attribuer
  */
-void setValue(Board b, int posx, int posy, int val)
+void setValue(Board *b, int posx, int posy, int val)
 {
   // Check for out of range exceptions
-  if (posx < b.tailleX && posy < b.tailleY && posx >= 0 && posy >=0)
+  if (posx < b->tailleX && posy < b->tailleY && posx >= 0 && posy >=0)
   {
-    b.tab[posx][posy] = val;
+    b->tab[posx][posy] = val;
   }
   else
   {
@@ -94,12 +94,12 @@ void setValue(Board b, int posx, int posy, int val)
  * \details La fonction affiche pour chaque case du plateau sa valeur dans la console
  * \param b Variable de type Board qui correspond au tableau à afficher
  */
-void displayBoard(Board b)
+void displayBoard(Board *b)
 {
   int i, j;
-  for(j=0; j<b.tailleY; j++)
+  for(j=0; j<b->tailleY; j++)
   {
-    for (i=0; i<b.tailleX; i++)
+    for (i=0; i<b->tailleX; i++)
     {
       printf(" %d ", getValue(b, i, j));
     }
@@ -113,13 +113,13 @@ void displayBoard(Board b)
  * \details La fonction libère entièrement le tableau à deux dimensions de la mémoire
  * \param b Variable de type Board qui correspond au tableau à effacer
  */
-void freeBoard(Board b)
+void freeBoard(Board *b)
 {
   int i;
-  for ( i = 0; i < b.tailleY; i++ )
+  for ( i = 0; i < b->tailleY; i++ )
   {
-    free(b.tab[i]);
+    free(b->tab[i]);
   }
-  free(b.tab);
+  free(b->tab);
 }
 

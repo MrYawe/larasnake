@@ -5,7 +5,7 @@ CC       = g++
 # compiling flags here
 CFLAGS   = -Wall -I.
 
-LINKER   = g++ -o
+LINKER   = gcc -o
 # linking flags here
 LFLAGS   = -I. -lm
 
