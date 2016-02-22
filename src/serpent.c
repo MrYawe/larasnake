@@ -85,15 +85,15 @@ void turnRight(Snake *s)
 }
 
 /**
- * \fn getPosition
- * \brief La fonction renvoie les valeurs d'un maillon de la liste
+ * \fn getPosX
+ * \brief La fonction renvoie la valeur posX d'un maillon
  * \details La fonction se déplace dans la liste jusqu'à l'endroit voulu puis renvoie la valeur. Une erreur est levée si la valeur passée en paramètre n'est pas bonne.
  * \param s Variable de type Snake* qui pointe vers le snake à analyser
  * \param pos Variable de type int qui correspond à l'emplacement voulu
  */
-int* getPosition(Snake *s, int pos)
+int getPosX(Snake *s, int pos)
 {
-	int[2] res = {0, 0};
+	int res = 0;
 	if (pos < 0 || pos >= s->size)
 	{
 		printf("getPosition : Error pos out of range\n");
@@ -106,7 +106,34 @@ int* getPosition(Snake *s, int pos)
 		{
 			e = e->next;
 		}
-		res = {e->posX, e->posY}
+		res = e->posX;
+	}		
+	return res;
+}
+
+/**
+ * \fn getPosY
+ * \brief La fonction renvoie la valeur posY d'un maillon
+ * \details La fonction se déplace dans la liste jusqu'à l'endroit voulu puis renvoie la valeur. Une erreur est levée si la valeur passée en paramètre n'est pas bonne.
+ * \param s Variable de type Snake* qui pointe vers le snake à analyser
+ * \param pos Variable de type int qui correspond à l'emplacement voulu
+ */
+int getPosY(Snake *s, int pos)
+{
+	int res = 0;
+	if (pos < 0 || pos >= s->size)
+	{
+		printf("getPosition : Error pos out of range\n");
+	}
+	else
+	{
+		int i;
+		Element *e = s->first;
+		for (i = 0; i < pos; i++)
+		{
+			e = e->next;
+		}
+		res = e->posY;
 	}		
 	return res;
 }

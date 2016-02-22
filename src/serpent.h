@@ -48,7 +48,8 @@ void goUp(Snake *s);
 void goDown(Snake *s);
 void turnLeft(Snake *s);
 void turnRight(Snake *s);
-int* getPosition(Snake *s, int pos);
+int getPosX(Snake *s, int pos);
+int getPosY(Snake *s, int pos);
 
 void displaySnake(Snake *s);
 void deleteSnake(Snake *s);
