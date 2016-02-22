@@ -24,8 +24,8 @@ typedef struct Element
 {
 	int posX;
 	int posY;
-	Element *suivant;
-	Element *precedent;
+	Element *next;
+	Element *previous;
 } Element;
 
 /**
@@ -35,19 +35,20 @@ typedef struct Element
  **/
 typedef struct Snake
 {
-	Element *premier;
-	Element *dernier;
-	int taille;
+	Element *first;
+	Element *last;
+	int size;
 	Direction direction;
 } Snake;
 
 
 Snake createSnake(int taille);
 
-void monte(Snake *s);
-void descend(Snake *s);
-void tourneGauche(Snake *s);
-void tourneDroite(Snake *s);
+void goUp(Snake *s);
+void goDown(Snake *s);
+void turnLeft(Snake *s);
+void turnRight(Snake *s);
+int* getPosition(Snake *s, int pos);
 
 void displaySnake(Snake *s);
 void deleteSnake(Snake *s);
