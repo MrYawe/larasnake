@@ -1,5 +1,8 @@
 # Snake
 
+## Installation
+`bash install.sh`   
+Ceci installera toutes les dépendances du projet.
 ## Memo Git
 
 * **Clone**: récupérer le repo  
@@ -14,7 +17,7 @@ N'oubliez pas de toujours sauvegarder en local avant de push.
 `git push`
 
 * **Pull**: récuperer les modifications des autres      
-N'oubliez pas de toujours sauvegarder en local avec de pull.   
+N'oubliez pas de toujours sauvegarder en local avant de pull.   
 `git pull`
 
 ## Liens
