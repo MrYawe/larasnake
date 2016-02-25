@@ -1,11 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "plateau.h"
-#include "serpent.h"
+#include "jeu.h"
 
 int main(int argc, char *argv[]) 
 {
-	printf("Hello World!\n");
+	printf("Hello world !\n");
 	return 0;
 }

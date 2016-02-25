@@ -10,6 +10,39 @@
 #include <stdlib.h>
 #include "serpent.h"
 
+
+static void addFirstElement(Snake *s, int posX, int posY);
+static void addLastElement(Snake *s, int posX, int posY);
+static void deleteFirstElement(Snake *s);
+static void deleteLastElement(Snake *s);
+
+
+/**
+ * \struct Snake
+ * \brief La structure représente le snake
+ * \details La structure contient un pointeur vers le début et la fin de la liste, un attribut taille de la liste, et un attribut direction qui représente la direction actuelle du snake
+ **/
+struct Snake
+{
+	Element *first;
+	Element *last;
+	int size;
+	Direction direction;
+};
+
+/**
+ * \struct Element
+ * \brief La structure représente un élément de la liste chainée qui contient le snake
+ * \details La structure contient 4 éléments : la position X, la position Y, l'élément suivant et précedent de la liste
+ **/
+struct Element 
+{
+	int posX;
+	int posY;
+	Element *next;
+	Element *previous;
+};
+
 /**
  * \fn createSnake
  * \brief La fonction crée et renvoie un snake
@@ -17,17 +50,17 @@
  * \param size Entier qui correspond au nombre d'anneaux pour le snake
  * \return Variable de type Snake qui contiendra un snake
  */
-Snake createSnake(int size)
+Snake* createSnake(int size)
 {
-	Snake s;
-	s.first = NULL;
-	s.last = NULL;
-	s.direction = NIL;
-	s.size = 0;
+	Snake *s = malloc(sizeof(Snake));
+	s->first = NULL;
+	s->last = NULL;
+	s->direction = NIL;
+	s->size = 0;
 	int i;
 	for (i=0; i<size; i++)
 	{
-		addFirstElement(&s, 0, 0);
+		addFirstElement(s, 0, 0);
 	}	
 	return s;
 }
@@ -160,6 +193,35 @@ void displaySnake(Snake *s)
 }
 
 /**
+ * \fn updateElement
+ * \brief La fonction modifie les valeurs d'un élément de la liste
+ * \details La fonction attribue les valeurs passées en paramètres à l'élément situé à la posElem position
+ * \param s Variable de type Snake* qui pointe vers le snake à modifier
+ * \param posElem Variable de type int qui correspond à l'emplacement dans la liste de l'element à modifier
+ * \param posX Variable de type int qui correspond à la valeur à rajouter pour la position X
+ * \param posY Variable de type int qui correspond à la valeur à rajouter pour la position Y
+ */
+void updateElement(Snake *s, int posElem, int posX, int posY)
+{
+	if (posElem < 0 || posElem >= s->size)
+	{
+		printf("updateElement : Error posElem out of range\n");
+	}
+	else
+	{
+		int i;
+		Element *e = s->first;
+		for (i = 0; i < posElem; i++)
+		{
+			e = e->next;
+		}
+		e->posX = posX;
+		e->posY = posY;
+	}	
+}
+
+
+/**
  * \fn deleteSnake
  * \brief La fonction libère le serpent de la mémoire
  * \details La fonction libère entièrement chaque élément de la liste chainée
@@ -186,7 +248,7 @@ void deleteSnake(Snake *s)
  * \param posX Variable de type int qui correspond à la valeur à rajouter pour la position X
  * \param posY Variable de type int qui correspond à la valeur à rajouter pour la position Y
  */
-void addFirstElement(Snake *s, int posX, int posY)
+static void addFirstElement(Snake *s, int posX, int posY)
 {
 	Element *e = (Element*) malloc(sizeof(Element));
 	e->posX = posX;
@@ -214,7 +276,7 @@ void addFirstElement(Snake *s, int posX, int posY)
  * \param posX Variable de type int qui correspond à la valeur à rajouter pour la position X
  * \param posY Variable de type int qui correspond à la valeur à rajouter pour la position Y
  */
-void addLastElement(Snake *s, int posX, int posY)
+static void addLastElement(Snake *s, int posX, int posY)
 {
 	if (s->size == 0)
 	{
@@ -239,7 +301,7 @@ void addLastElement(Snake *s, int posX, int posY)
  * \details La fonction supprime le first élément de la liste et envoie un message d'erreur si la liste est vide
  * \param s Variable de type Snake* qui pointe vers le snake à modifier
  */
-void deleteFirstElement(Snake *s)
+static void deleteFirstElement(Snake *s)
 {
 	if (s->size == 0)
 	{
@@ -261,7 +323,7 @@ void deleteFirstElement(Snake *s)
  * \details La fonction supprime le last élément de la liste et envoie un message d'erreur si la liste est vide
  * \param s Variable de type Snake* qui pointe vers le snake à modifier
  */
-void deleteLastElement(Snake *s)
+static void deleteLastElement(Snake *s)
 {
 	if (s->size == 0)	
 	{
@@ -275,32 +337,4 @@ void deleteLastElement(Snake *s)
 		free(e);
 		s->size --;
 	}
-}
-
-/**
- * \fn updateElement
- * \brief La fonction modifie les valeurs d'un élément de la liste
- * \details La fonction attribue les valeurs passées en paramètres à l'élément situé à la posElem position
- * \param s Variable de type Snake* qui pointe vers le snake à modifier
- * \param posElem Variable de type int qui correspond à l'emplacement dans la liste de l'element à modifier
- * \param posX Variable de type int qui correspond à la valeur à rajouter pour la position X
- * \param posY Variable de type int qui correspond à la valeur à rajouter pour la position Y
- */
-void updateElement(Snake *s, int posElem, int posX, int posY)
-{
-	if (posElem < 0 || posElem >= s->size)
-	{
-		printf("updateElement : Error posElem out of range\n");
-	}
-	else
-	{
-		int i;
-		Element *e = s->first;
-		for (i = 0; i < posElem; i++)
-		{
-			e = e->next;
-		}
-		e->posX = posX;
-		e->posY = posY;
-	}	
 }

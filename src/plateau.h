@@ -7,20 +7,12 @@
  * \details Toutes les entêtes de fonctions et structure necessaires à gérer le plateau : création, récupérer des valeurs, les modifier, afficher le plateau et libérer la mémoire
  */
 
-/**
- * \struct Board
- * \brief La structure représente un plateau
- * \details La structure contient un tableau à deux dimensions contenant les valeurs du plateau, un entier pour la taille X et un entier pour la taille Y
- **/
-typedef struct Board
-{
-  int** tab;
-  int tailleX;
-  int tailleY;
-} Board;
+typedef struct Board Board;
 
-Board initBoard(int sizeX, int sizeY);
+Board* initBoard(int sizeX, int sizeY);
 int getValue(Board *b, int posx, int posy);
 void setValue(Board *b, int posx, int posy, int val);
+int getTailleX(Board *b);
+int getTailleY(Board *b);
 void displayBoard(Board *b);
 void freeBoard(Board *b);

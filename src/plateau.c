@@ -11,6 +11,19 @@
 #include <stdlib.h>
 #include "plateau.h"
 
+
+/**
+ * \struct Board
+ * \brief La structure représente un plateau
+ * \details La structure contient un tableau à deux dimensions contenant les valeurs du plateau, un entier pour la taille X et un entier pour la taille Y
+ **/
+struct Board
+{
+  int** tab;
+  int tailleX;
+  int tailleY;
+};
+
 /**
  * \fn initBoard
  * \brief La fonction crée le plateau
@@ -19,22 +32,22 @@
  * \param sizeY Entier qui done la taille en Y du plateau créé
  * \return Variable de type Board qui contiendra le plateau
  */
-Board initBoard(int sizeX, int sizeY)
+Board* initBoard(int sizeX, int sizeY)
 {
-  Board b;
+  Board *b = (Board*) malloc(sizeof(Board));
   // Check for negative sizes
   if (sizeX >= 0 && sizeY >=0)
   {
     // Allocation of tab
-    b.tab = (int**) malloc(sizeY*sizeof(int*));
+    b->tab = (int**) malloc(sizeY*sizeof(int*));
     int i;
     for ( i = 0; i < sizeY; i++ )
     {
-      b.tab[i] = (int*) malloc(sizeX*sizeof(int));
+      b->tab[i] = (int*) malloc(sizeX*sizeof(int));
     }
     // Set sizes
-    b.tailleX = sizeX;
-    b.tailleY = sizeY;
+    b->tailleX = sizeX;
+    b->tailleY = sizeY;
   }
   else
   {
@@ -87,6 +100,51 @@ void setValue(Board *b, int posx, int posy, int val)
     printf("SetValue: error out of range\n");
   }
 }
+
+
+/**
+ * \fn getTailleX
+ * \brief La fonction renvoie la taille X du plateau
+ * \details La fonction renvoie la valeur correspondante à la taille en X du tableau
+ * \param b Variable de type Board qui correspond au tableau en question
+ * \return Variable de type int qui correspond à la taille en X du tableau
+ */
+int getTailleX(Board *b)
+{
+  int res;
+  if (b == NULL)
+  {
+    res = 0;
+  }
+  else
+  {
+    res = b->tailleX;
+  }
+  return res;
+}
+
+
+/**
+ * \fn getTailleY
+ * \brief La fonction renvoie la taille Y du plateau
+ * \details La fonction renvoie la valeur correspondante à la taille en Y du tableau
+ * \param b Variable de type Board qui correspond au tableau en question
+ * \return Variable de type int qui correspond à la taille en Y du tableau
+ */
+int getTailleY(Board *b)
+{
+  int res;
+  if (b == NULL)
+  {
+    res = 0;
+  }
+  else
+  {
+    res = b->tailleY;
+  }
+  return res;
+}
+
 
 /**
  * \fn displayBoard
