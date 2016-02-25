@@ -20,13 +20,14 @@ typedef enum Direction {UP, LEFT, RIGHT, DOWN, NIL} Direction;
  * \brief La structure représente un élément de la liste chainée qui contient le snake
  * \details La structure contient 4 éléments : la position X, la position Y, l'élément suivant et précedent de la liste
  **/
-typedef struct Element 
+typedef struct Element Element;
+struct Element 
 {
 	int posX;
 	int posY;
 	Element *next;
 	Element *previous;
-} Element;
+};
 
 /**
  * \struct Snake

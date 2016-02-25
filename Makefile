@@ -1,7 +1,7 @@
 # project name (generate executable with this name)
 TARGET   = larasnake
 
-CC       = g++
+CC       = gcc
 # compiling flags here
 CFLAGS   = -Wall -I.
 
