@@ -7,12 +7,22 @@
  * \details Toutes les entêtes de fonctions et structure necessaires à gérer le plateau : création, récupérer des valeurs, les modifier, afficher le plateau et libérer la mémoire
  */
 
+ /**
+ * \enum BoardControl
+ * \brief Valeurs de gestion du tableau
+ * \details Contient toutes les valeurs pour la gestion du tableau
+ **/
+typedef enum BoardControl {Line, Column} BoardControl;
 typedef struct Board Board;
 
 Board* initBoard(int sizeX, int sizeY);
+
 int getValue(Board *b, int posx, int posy);
 void setValue(Board *b, int posx, int posy, int val);
-int getTailleX(Board *b);
-int getTailleY(Board *b);
+int getTaille(Board *b, BoardControl c);
+
 void displayBoard(Board *b);
 void freeBoard(Board *b);
+
+// TODO: bordure qui se grise 
+// TODO: bordure qui se dégrise

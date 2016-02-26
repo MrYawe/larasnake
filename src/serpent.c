@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include "serpent.h"
 
-
+// Headers for static functions of snake file
 static void addFirstElement(Snake *s, int posX, int posY);
 static void addLastElement(Snake *s, int posX, int posY);
 static void deleteFirstElement(Snake *s);
@@ -28,6 +28,7 @@ struct Snake
 	Element *last;
 	int size;
 	Direction direction;
+	Way way;
 };
 
 /**
@@ -57,6 +58,7 @@ Snake* createSnake(int size)
 	s->last = NULL;
 	s->direction = NIL;
 	s->size = 0;
+	s->way = Normal;
 	int i;
 	for (i=0; i<size; i++)
 	{
@@ -73,8 +75,16 @@ Snake* createSnake(int size)
  */
 void goUp(Snake *s)
 {
-	addLastElement(s, s->last->posX, s->last->posY + 1);
-	deleteFirstElement(s);
+	if (s->way == Normal)
+	{
+		addLastElement(s, s->last->posX, s->last->posY + 1);
+		deleteFirstElement(s);
+	}
+	else if (s->way == Reversed)
+	{
+		addFirstElement(s, s->first->posX, s->first->posY + 1);
+		deleteLastElement(s);
+	}	
 	s->direction = UP;
 }
 
@@ -86,8 +96,16 @@ void goUp(Snake *s)
  */
 void goDown(Snake *s)
 {
-	addLastElement(s, s->last->posX, s->last->posY - 1);
-	deleteFirstElement(s);
+	if (s->way == Normal)
+	{
+		addLastElement(s, s->last->posX, s->last->posY - 1);
+		deleteFirstElement(s);
+	}
+	else if (s->way == Reversed)
+	{
+		addFirstElement(s, s->first->posX, s->first->posY - 1);
+		deleteLastElement(s);
+	}	
 	s->direction = DOWN;
 }
 
@@ -99,8 +117,16 @@ void goDown(Snake *s)
  */
 void turnLeft(Snake *s)
 {
-	addLastElement(s, s->last->posX - 1, s->last->posY);
-	deleteFirstElement(s);
+	if (s->way == Normal)
+	{
+		addLastElement(s, s->last->posX - 1, s->last->posY);
+		deleteFirstElement(s);
+	}
+	else if (s->way == Reversed)
+	{
+		addFirstElement(s, s->first->posX - 1, s->first->posY);
+		deleteLastElement(s);
+	}	
 	s->direction = LEFT;
 }
 
@@ -112,8 +138,16 @@ void turnLeft(Snake *s)
  */
 void turnRight(Snake *s)
 {
-	addLastElement(s, s->last->posX + 1, s->last->posY);
-	deleteFirstElement(s);
+	if (s->way == Normal)
+	{
+		addLastElement(s, s->last->posX + 1, s->last->posY);
+		deleteFirstElement(s);
+	}
+	else if (s->way == Reversed)
+	{
+		addFirstElement(s, s->first->posX + 1, s->first->posY);
+		deleteLastElement(s);
+	}
 	s->direction = RIGHT;
 }
 
@@ -169,6 +203,40 @@ int getPosY(Snake *s, int pos)
 		res = e->posY;
 	}		
 	return res;
+}
+
+/**
+ * \fn getWay
+ * \brief La fonction renvoie le sens du serpent
+ * \details La fonction récupère le sens du serpent dans la structure
+ * \param s Variable de type Snake* qui pointe vers le snake à parcourir
+ */
+Way getWay(Snake *s)
+{
+	return s->way;
+}
+
+/**
+ * \fn setWay
+ * \brief La fonction modifie le sens du serpent
+ * \details La fonction modifie le sens du serpent dans la structure par la valeur passée en paramètres
+ * \param s Variable de type Snake* qui pointe vers le snake à parcourir
+ * \param w Variable de type Way qui est la valeur à attribuer au snake
+ */
+void setWay(Snake *s, Way w)
+{
+	s->way = w;
+}
+
+/**
+ * \fn getSize
+ * \brief La fonction renvoie la taille du serpent
+ * \details La fonction récupère la taille dans la structure
+ * \param s Variable de type Snake* qui pointe vers le snake à parcourir
+ */
+int getSize(Snake *s)
+{
+	return s->size;
 }
 
 /**

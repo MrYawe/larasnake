@@ -10,7 +10,7 @@ void initGame()
 
 Board* playRound()
 {
-return initBoard(3, 3);
+	return initBoard(3, 3);
 }
 
 

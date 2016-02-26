@@ -109,42 +109,26 @@ void setValue(Board *b, int posx, int posy, int val)
  * \param b Variable de type Board qui correspond au tableau en question
  * \return Variable de type int qui correspond à la taille en X du tableau
  */
-int getTailleX(Board *b)
+int getTaille(Board *b, BoardControl c)
 {
-  int res;
-  if (b == NULL)
+  int res = 0;
+  if (b != NULL)
   {
-    res = 0;
-  }
-  else
-  {
-    res = b->tailleX;
-  }
+    if (c == Line)
+    {
+      res = b->tailleX;
+    }
+    else if (c == Line)
+    {
+      res = b->tailleY;
+    }
+    else
+    {
+      printf("GetTaille : error enum not known\n");
+    }
+  }  
   return res;
 }
-
-
-/**
- * \fn getTailleY
- * \brief La fonction renvoie la taille Y du plateau
- * \details La fonction renvoie la valeur correspondante à la taille en Y du tableau
- * \param b Variable de type Board qui correspond au tableau en question
- * \return Variable de type int qui correspond à la taille en Y du tableau
- */
-int getTailleY(Board *b)
-{
-  int res;
-  if (b == NULL)
-  {
-    res = 0;
-  }
-  else
-  {
-    res = b->tailleY;
-  }
-  return res;
-}
-
 
 /**
  * \fn displayBoard
@@ -179,5 +163,5 @@ void freeBoard(Board *b)
     free(b->tab[i]);
   }
   free(b->tab);
+  free(b);
 }
-
