@@ -1,3 +1,5 @@
+#ifndef BOARD_H
+#define BOARD_H
 /**
  * \file board.h
  * \author groupe Larakis
@@ -15,7 +17,7 @@
  * \details Contient toutes les valeurs pour la gestion du snake
  **/
 typedef enum Control {Line, Column} Control;
-#define ControlDef ControlDef;
+#define ControlDef
 #endif
 typedef struct Board Board;
 
@@ -30,3 +32,5 @@ void freeBoard(Board *b);
 
 // TODO: bordure qui se grise 
 // TODO: bordure qui se dégrise
+
+#endif

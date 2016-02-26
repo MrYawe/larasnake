@@ -1,3 +1,5 @@
+#ifndef SNAKE_H
+#define SNAKE_H
 /**
  * \file snake.h
  * \author groupe Larakis
@@ -30,7 +32,7 @@ typedef enum Way {Normal, Reversed} Way;
  * \details Contient toutes les valeurs pour la gestion du snake
  **/
 typedef enum Control {Line, Column} Control;
-#define ControlDef ControlDef;
+#define ControlDef
 #endif
 
 typedef struct Element Element;
@@ -73,3 +75,5 @@ void deleteSnake(Snake *s);
 // TODO: Augmenter la taille de X elements
 // TODO: Diminuer la taille de X elements
 // TODO: TP d'une case à une autre
+
+#endif
