@@ -42,35 +42,35 @@ typedef struct Snake Snake;
 /* ***************
  *   Init Snake  *
  *************** */
-Snake* createSnake(int taille);
+Snake* snakeCreate(int taille);
 
 /* ***************
  *   Move Snake  *
  *************** */
-void goUp(Snake *s);
-void goDown(Snake *s);
-void turnLeft(Snake *s);
-void turnRight(Snake *s);
+void snakeGoUp(Snake *s);
+void snakeGoDown(Snake *s);
+void snakeTurnLeft(Snake *s);
+void snakeTurnRight(Snake *s);
 
 /* ****************
  *    Accessors   *
  **************** */
-int getPos(Snake *s, int pos, Control c);
+int snakeGetPos(Snake *s, int pos, Control c);
 
-Way getWay(Snake *s);
-void setWay(Snake *s, Way w);
+Way snakeGetWay(Snake *s);
+void snakeSetWay(Snake *s, Way w);
 
-int getSize(Snake *s);
+int snakeGetSize(Snake *s);
 
-void setIsGhost(Snake *s, bool b);
-bool isGhost(Snake *s);
+void snakeSetGhost(Snake *s, bool b);
+bool snakeIsGhost(Snake *s);
 
 /* ***************
  *   Utilitary   *
  *************** */
-void displaySnake(Snake *s);
-void updateElement(Snake *s, int posElem, int posX, int posY);
-void deleteSnake(Snake *s);
+void snakeDisplay(Snake *s);
+void snakeUpdateElement(Snake *s, int posElem, int posX, int posY);
+void snakeDeleteSnake(Snake *s);
 
 // TODO: Augmenter la taille de X elements
 // TODO: Diminuer la taille de X elements

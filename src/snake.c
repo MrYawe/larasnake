@@ -11,10 +11,10 @@
 #include "snake.h"
 
 // Headers for static functions of snake file
-static void addFirstElement(Snake *s, int posX, int posY);
-static void addLastElement(Snake *s, int posX, int posY);
-static void deleteFirstElement(Snake *s);
-static void deleteLastElement(Snake *s);
+static void snakeAddFirstElement(Snake *s, int posX, int posY);
+static void snakeAddLastElement(Snake *s, int posX, int posY);
+static void snakeDeleteFirstElement(Snake *s);
+static void snakeDeleteLastElement(Snake *s);
 
 
 /**
@@ -46,13 +46,13 @@ struct Element
 };
 
 /**
- * \fn createSnake
+ * \fn snakeCreate
  * \brief La fonction crée et renvoie un snake
  * \details La fonction alloue la mémoire necessaire à un snake et remplit les éléments de la structure
  * \param size Entier qui correspond au nombre d'anneaux pour le snake
  * \return Variable de type Snake qui contiendra un snake
  */
-Snake* createSnake(int size)
+Snake* snakeCreate(int size)
 {
 	Snake *s = malloc(sizeof(Snake));
 	s->first = NULL;
@@ -64,109 +64,109 @@ Snake* createSnake(int size)
 	int i;
 	for (i=0; i<size; i++)
 	{
-		addFirstElement(s, 0, 0);
+		snakeAddFirstElement(s, 0, 0);
 	}	
 	return s;
 }
 
 /**
- * \fn goUp
- * \brief La fonction ajuste le snake pour que sa position goUp d'une case
+ * \fn snakeGoUp
+ * \brief La fonction ajuste le snake pour que sa position monte d'une case
  * \details La fonction rajoute un élément en tête de liste et supprime le last de manière à permettre au snake de goUpr
  * \param s Variable de type Snake* qui pointe vers le snake à faire goUpr
  */
-void goUp(Snake *s)
+void snakeGoUp(Snake *s)
 {
 	if (s->way == Normal)
 	{
-		addLastElement(s, s->last->posX, s->last->posY + 1);
-		deleteFirstElement(s);
+		snakeAddLastElement(s, s->last->posX, s->last->posY + 1);
+		snakeDeleteFirstElement(s);
 	}
 	else if (s->way == Reversed)
 	{
-		addFirstElement(s, s->first->posX, s->first->posY + 1);
-		deleteLastElement(s);
+		snakeAddFirstElement(s, s->first->posX, s->first->posY + 1);
+		snakeDeleteLastElement(s);
 	}	
 	s->direction = UP;
 }
 
 /**
- * \fn goDown
+ * \fn snakeGoDown
  * \brief La fonction ajuste le snake pour que sa position goDowne d'une case
  * \details La fonction rajoute un élément en tête de liste et supprime le last de manière à permettre au snake de goDownre
  * \param s Variable de type Snake* qui pointe vers le snake à faire goDownre
  */
-void goDown(Snake *s)
+void snakeGoDown(Snake *s)
 {
 	if (s->way == Normal)
 	{
-		addLastElement(s, s->last->posX, s->last->posY - 1);
-		deleteFirstElement(s);
+		snakeAddLastElement(s, s->last->posX, s->last->posY - 1);
+		snakeDeleteFirstElement(s);
 	}
 	else if (s->way == Reversed)
 	{
-		addFirstElement(s, s->first->posX, s->first->posY - 1);
-		deleteLastElement(s);
+		snakeAddFirstElement(s, s->first->posX, s->first->posY - 1);
+		snakeDeleteLastElement(s);
 	}	
 	s->direction = DOWN;
 }
 
 /**
- * \fn turnLeft
+ * \fn snakeTurnLeft
  * \brief La fonction ajuste le snake pour qu'il soit déplacé vers la gauche
  * \details La fonction rajoute un élément en tête de liste et supprime le last de manière à permettre au snake de tourner à gauche
  * \param s Variable de type Snake* qui pointe vers le snake à faire tourner à gauche
  */
-void turnLeft(Snake *s)
+void snakeTurnLeft(Snake *s)
 {
 	if (s->way == Normal)
 	{
-		addLastElement(s, s->last->posX - 1, s->last->posY);
-		deleteFirstElement(s);
+		snakeAddLastElement(s, s->last->posX - 1, s->last->posY);
+		snakeDeleteFirstElement(s);
 	}
 	else if (s->way == Reversed)
 	{
-		addFirstElement(s, s->first->posX - 1, s->first->posY);
-		deleteLastElement(s);
+		snakeAddFirstElement(s, s->first->posX - 1, s->first->posY);
+		snakeDeleteLastElement(s);
 	}	
 	s->direction = LEFT;
 }
 
 /**
- * \fn turnRight
+ * \fn snakeTurnRight
  * \brief La fonction ajuste le snake pour qu'il soit déplacé vers la droite
  * \details La fonction rajoute un élément en tête de liste et supprime le last de manière à permettre au snake de tourner à droite
  * \param s Variable de type Snake* qui pointe vers le snake à faire tourner à droite
  */
-void turnRight(Snake *s)
+void snakeTurnRight(Snake *s)
 {
 	if (s->way == Normal)
 	{
-		addLastElement(s, s->last->posX + 1, s->last->posY);
-		deleteFirstElement(s);
+		snakeAddLastElement(s, s->last->posX + 1, s->last->posY);
+		snakeDeleteFirstElement(s);
 	}
 	else if (s->way == Reversed)
 	{
-		addFirstElement(s, s->first->posX + 1, s->first->posY);
-		deleteLastElement(s);
+		snakeAddFirstElement(s, s->first->posX + 1, s->first->posY);
+		snakeDeleteLastElement(s);
 	}
 	s->direction = RIGHT;
 }
 
 /**
- * \fn getPos
+ * \fn snakeGetPos
  * \brief La fonction renvoie la valeur pos d'un maillon
- * \details La fonction se déplace dans la liste jusqu'à l'endroit voulu puis renvoie la valeur. Une erreur est levée si la valeur passée en paramètre n'est pas bonne.
+ * \details La fonction se déplace dans la liste jusqu'à l'endroit voulu puis renvoie la valeur. Une erreur est levée si la valeur passée en paramètre n'est pas bonne
  * \param s Variable de type Snake* qui pointe vers le snake à analyser
  * \param pos Variable de type int qui correspond à l'emplacement voulu
- * \param c Variable de type enum ControlS qui correspond à ligne ou colonne suivant ce que l'on souhaite récupérer
+ * \param c Variable de type enum Control qui correspond à ligne ou colonne suivant ce que l'on souhaite récupérer
  */
-int getPos(Snake *s, int pos, Control c)
+int snakeGetPos(Snake *s, int pos, Control c)
 {
 	int res = 0;
 	if (pos < 0 || pos >= s->size)
 	{
-		printf("getPosition : Error pos out of range\n");
+		printf("snakeGetPosition : Error pos parameter out of range\n");
 	}
 	else
 	{
@@ -190,70 +190,70 @@ int getPos(Snake *s, int pos, Control c)
 }
 
 /**
- * \fn getWay
+ * \fn snakeGetWay
  * \brief La fonction renvoie le sens du serpent
  * \details La fonction récupère le sens du serpent dans la structure
  * \param s Variable de type Snake* qui pointe vers le snake à parcourir
  */
-Way getWay(Snake *s)
+Way snakeGetWay(Snake *s)
 {
 	return s->way;
 }
 
 /**
- * \fn setWay
+ * \fn snakeGetWay
  * \brief La fonction modifie le sens du serpent
  * \details La fonction modifie le sens du serpent dans la structure par la valeur passée en paramètre
  * \param s Variable de type Snake* qui pointe vers le snake à parcourir
  * \param w Variable de type Way qui est la valeur à attribuer au snake
  */
-void setWay(Snake *s, Way w)
+void snakeSetWay(Snake *s, Way w)
 {
 	s->way = w;
 }
 
 /**
- * \fn getSize
+ * \fn snakeGetSize
  * \brief La fonction renvoie la taille du serpent
  * \details La fonction récupère la taille dans la structure
  * \param s Variable de type Snake* qui pointe vers le snake à parcourir
  */
-int getSize(Snake *s)
+int snakeGetSize(Snake *s)
 {
 	return s->size;
 }
 
 /**
- * \fn setIsGhost
+ * \fn snakeSetGhost
  * \brief La fonction modifie le serpent pour le passer ou non en fantôme
  * \details La fonction modifie l'attribue isGhost serpent dans la structure par la valeur passée en paramètre
  * \param s Variable de type Snake* qui pointe vers le snake à parcourir
  * \param b Variable de type bool qui est la valeur à attribuer au snake
  */
-void setIsGhost(Snake *s, bool b)
+void snakeSetGhost(Snake *s, bool b)
 {
 	s->isGhost = b;
 }
 
 
 /**
- * \fn isGhost
+ * \fn snakeIsGhost
  * \brief La fonction renvoie le booleen qui dit si le Snake est un fantome ou non
  * \details La fonction récupère le booleen isGhost dans la structure du snake
  * \param s Variable de type Snake* qui pointe vers le snake à parcourir
  */
-bool isGhost(Snake *s)
+bool snakeIsGhost(Snake *s)
 {
 	return s->isGhost;
 }
 
 /**
- * \fn displaySnake
+ * \fn snakeDisplay
  * \brief La fonction affiche le contenu du snake
  * \details La fonction affiche pour chaque element du plateau son contenu ainsi que la direction du snake
  * \param s Variable de type Snake* qui pointe vers le snake à afficher
  */
-void displaySnake(Snake *s)
+void snakeDisplay(Snake *s)
 {
 	char const* direc[] = {"le haut", "la gauche", "la droite", "le bas", "indéfini"};
 	printf("Le snake va vers %s\n", direc[s->direction]);
@@ -269,7 +269,7 @@ void displaySnake(Snake *s)
 }
 
 /**
- * \fn updateElement
+ * \fn snakeUpdateElement
  * \brief La fonction modifie les valeurs d'un élément de la liste
  * \details La fonction attribue les valeurs passées en paramètres à l'élément situé à la posElem position
  * \param s Variable de type Snake* qui pointe vers le snake à modifier
@@ -277,11 +277,11 @@ void displaySnake(Snake *s)
  * \param posX Variable de type int qui correspond à la valeur à rajouter pour la position X
  * \param posY Variable de type int qui correspond à la valeur à rajouter pour la position Y
  */
-void updateElement(Snake *s, int posElem, int posX, int posY)
+void snakeUpdateElement(Snake *s, int posElem, int posX, int posY)
 {
 	if (posElem < 0 || posElem >= s->size)
 	{
-		printf("updateElement : Error posElem out of range\n");
+		printf("snakeUpdateElement : Error posElem parameter out of range\n");
 	}
 	else
 	{
@@ -298,12 +298,12 @@ void updateElement(Snake *s, int posElem, int posX, int posY)
 
 
 /**
- * \fn deleteSnake
+ * \fn snakeDelete
  * \brief La fonction libère le serpent de la mémoire
  * \details La fonction libère entièrement chaque élément de la liste chainée
  * \param s Variable de type Snake* qui pointe vers le snake à libérer
  */
-void deleteSnake(Snake *s)
+void snakeDelete(Snake *s)
 {
 	Element *curs = s->first;
 	Element *curssuiv;
@@ -317,14 +317,14 @@ void deleteSnake(Snake *s)
 
 
 /**
- * \fn addFirstElement
+ * \fn snakeAddFirstElement
  * \brief La fonction ajoute un élément au début de la liste chaînée
  * \details La fonction crée un élément en mémoire, lui attribue les valeurs passées en paramètres et gère le cas de la liste vide et l'ajoute en début de liste
  * \param s Variable de type Snake* qui pointe vers le snake à modifier
  * \param posX Variable de type int qui correspond à la valeur à rajouter pour la position X
  * \param posY Variable de type int qui correspond à la valeur à rajouter pour la position Y
  */
-static void addFirstElement(Snake *s, int posX, int posY)
+static void snakeAddFirstElement(Snake *s, int posX, int posY)
 {
 	Element *e = (Element*) malloc(sizeof(Element));
 	e->posX = posX;
@@ -345,22 +345,22 @@ static void addFirstElement(Snake *s, int posX, int posY)
 }
 
 /**
- * \fn addFirstElement
+ * \fn snakeAddLastElement
  * \brief La fonction ajoute un élément à la fin de la liste chaînée
  * \details La fonction crée un élément en mémoire, lui attribue les valeurs passées en paramètres et gère le cas de la liste vide et l'ajoute en fin de liste
  * \param s Variable de type Snake* qui pointe vers le snake à modifier
  * \param posX Variable de type int qui correspond à la valeur à rajouter pour la position X
  * \param posY Variable de type int qui correspond à la valeur à rajouter pour la position Y
  */
-static void addLastElement(Snake *s, int posX, int posY)
+static void snakeAddLastElement(Snake *s, int posX, int posY)
 {
 	if (s->size == 0)
 	{
-		addFirstElement(s, posX, posY);
+		snakeAddFirstElement(s, posX, posY);
 	}
 	else
 	{
-		Element *e = (Element*) malloc (sizeof(Element));
+		Element *e = (Element*) malloc(sizeof(Element));
 		e->posX = posX;
 		e->posY = posY;
 		e->previous = s->last;
@@ -372,16 +372,16 @@ static void addLastElement(Snake *s, int posX, int posY)
 }
 
 /**
- * \fn deleteFirstElement
+ * \fn snakeDeleteFirstElement
  * \brief La fonction supprime un élément au début de la liste chaînée
  * \details La fonction supprime le first élément de la liste et envoie un message d'erreur si la liste est vide
  * \param s Variable de type Snake* qui pointe vers le snake à modifier
  */
-static void deleteFirstElement(Snake *s)
+static void snakeDeleteFirstElement(Snake *s)
 {
 	if (s->size == 0)
 	{
-		printf("deleteFirstElement : Empty list\n");
+		printf("snakeDeleteFirstElement : Empty list\n");
 	}
 	else
 	{
@@ -394,16 +394,16 @@ static void deleteFirstElement(Snake *s)
 }
 
 /**
- * \fn deleteLastElement
+ * \fn snakeDeleteLastElement
  * \brief La fonction supprime un élément à la fin de la liste chaînée
  * \details La fonction supprime le last élément de la liste et envoie un message d'erreur si la liste est vide
  * \param s Variable de type Snake* qui pointe vers le snake à modifier
  */
-static void deleteLastElement(Snake *s)
+static void snakeDeleteLastElement(Snake *s)
 {
 	if (s->size == 0)	
 	{
-		printf("deletaLastElement : Empty List !\n");
+		printf("snakeDeleteLastElement : Empty List !\n");
 	}
 	else
 	{
@@ -413,4 +413,5 @@ static void deleteLastElement(Snake *s)
 		free(e);
 		s->size --;
 	}
+	free(s);
 }

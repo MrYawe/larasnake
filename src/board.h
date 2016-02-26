@@ -24,20 +24,20 @@ typedef struct Board Board;
 /* ***************
  *   Init Board  *
  *************** */
-Board* initBoard(int sizeX, int sizeY);
+Board* boardInit(int sizeX, int sizeY);
 
 /* ****************
  *    Accessors   *
  **************** */
-int getValue(Board *b, int posx, int posy);
-void setValue(Board *b, int posx, int posy, int val);
-int getTaille(Board *b, Control c);
+int boardGetValue(Board *b, int posx, int posy);
+void boardSetValue(Board *b, int posx, int posy, int val);
+int boardGetTaille(Board *b, Control c);
 
 /* ***************
  *   Utilitary   *
  *************** */
-void displayBoard(Board *b);
-void freeBoard(Board *b);
+void boardDisplay(Board *b);
+void boardFree(Board *b);
 
 // TODO: bordure qui se grise 
 // TODO: bordure qui se dégrise
