@@ -161,7 +161,7 @@ void snakeTurnRight(Snake *s)
  * \param posX Variable de type int qui correspond à la position en X de la case ciblée
  * \param posY Variable de type int qui correspond à la position en Y de la case ciblée
  */
-void snakeTP(Snake *s, int posX, int poxY)
+void snakeTeleportation(Snake *s, int posX, int posY)
 {
 	if (s->way == Normal)
 	{

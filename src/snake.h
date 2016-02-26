@@ -51,7 +51,7 @@ void snakeGoUp(Snake *s);
 void snakeGoDown(Snake *s);
 void snakeTurnLeft(Snake *s);
 void snakeTurnRight(Snake *s);
-void snakeTeleportation(Snake *s, int posX, int poxY);
+void snakeTeleportation(Snake *s, int posX, int posY);
 
 /* ****************
  *    Accessors   *
