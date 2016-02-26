@@ -1,5 +1,5 @@
 /**
- * \file serpent.h
+ * \file snake.h
  * \author groupe Larakis
  * \version 1
  * \date 21/02/2016

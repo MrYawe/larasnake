@@ -1,5 +1,5 @@
 /**
- * \file plateau.c
+ * \file board.c
  * \author groupe Larakis
  * \version 1
  * \date 20/02/2016
@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "plateau.h"
+#include "board.h"
 
 
 /**

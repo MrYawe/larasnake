@@ -1,5 +1,5 @@
 /**
- * \file serpent.c
+ * \file snake.c
  * \author groupe Larakis
  * \version 1
  * \date 21/02/2016
@@ -8,7 +8,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include "serpent.h"
+#include "snake.h"
 
 // Headers for static functions of snake file
 static void addFirstElement(Snake *s, int posX, int posY);

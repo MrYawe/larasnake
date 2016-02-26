@@ -1,5 +1,5 @@
 /**
- * \file plateau.h
+ * \file board.h
  * \author groupe Larakis
  * \version 1
  * \date 20/02/2016
