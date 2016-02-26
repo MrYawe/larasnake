@@ -21,12 +21,21 @@ typedef enum Control {Line, Column} Control;
 #endif
 typedef struct Board Board;
 
+/* ***************
+ *   Init Board  *
+ *************** */
 Board* initBoard(int sizeX, int sizeY);
 
+/* ****************
+ *    Accessors   *
+ **************** */
 int getValue(Board *b, int posx, int posy);
 void setValue(Board *b, int posx, int posy, int val);
 int getTaille(Board *b, Control c);
 
+/* ***************
+ *   Utilitary   *
+ *************** */
 void displayBoard(Board *b);
 void freeBoard(Board *b);
 
