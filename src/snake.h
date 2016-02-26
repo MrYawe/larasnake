@@ -51,6 +51,7 @@ void snakeGoUp(Snake *s);
 void snakeGoDown(Snake *s);
 void snakeTurnLeft(Snake *s);
 void snakeTurnRight(Snake *s);
+void snakeTeleportation(Snake *s, int posX, int poxY);
 
 /* ****************
  *    Accessors   *
@@ -74,6 +75,5 @@ void snakeDeleteSnake(Snake *s);
 
 // TODO: Augmenter la taille de X elements
 // TODO: Diminuer la taille de X elements
-// TODO: TP d'une case à une autre
 
 #endif

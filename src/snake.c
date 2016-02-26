@@ -154,6 +154,28 @@ void snakeTurnRight(Snake *s)
 }
 
 /**
+ * \fn snakeTeleportation
+ * \brief La fonction ajuste le snake pour qu'il soit déplacé vers la case cible
+ * \details La fonction rajoute un élément en tête de liste à la position cible et supprime le last de manière à permettre au snake de se téléporter
+ * \param s Variable de type Snake* qui pointe vers le snake à téléporter
+ * \param posX Variable de type int qui correspond à la position en X de la case ciblée
+ * \param posY Variable de type int qui correspond à la position en Y de la case ciblée
+ */
+void snakeTP(Snake *s, int posX, int poxY)
+{
+	if (s->way == Normal)
+	{
+		snakeAddFirstElement(s, posX, posY);
+		snakeDeleteLastElement(s);
+	}
+	else if (s->way == Reversed)
+	{
+		snakeAddLastElement(s, posX, posY);
+		snakeDeleteFirstElement(s);
+	}	
+}
+
+/**
  * \fn snakeGetPos
  * \brief La fonction renvoie la valeur pos d'un maillon
  * \details La fonction se déplace dans la liste jusqu'à l'endroit voulu puis renvoie la valeur. Une erreur est levée si la valeur passée en paramètre n'est pas bonne
