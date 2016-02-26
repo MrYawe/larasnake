@@ -29,6 +29,7 @@ struct Snake
 	int size;
 	Direction direction;
 	Way way;
+	bool isGhost;
 };
 
 /**
@@ -59,6 +60,7 @@ Snake* createSnake(int size)
 	s->direction = NIL;
 	s->size = 0;
 	s->way = Normal;
+	s->isGhost = false;
 	int i;
 	for (i=0; i<size; i++)
 	{
@@ -152,13 +154,14 @@ void turnRight(Snake *s)
 }
 
 /**
- * \fn getPosX
- * \brief La fonction renvoie la valeur posX d'un maillon
+ * \fn getPos
+ * \brief La fonction renvoie la valeur pos d'un maillon
  * \details La fonction se déplace dans la liste jusqu'à l'endroit voulu puis renvoie la valeur. Une erreur est levée si la valeur passée en paramètre n'est pas bonne.
  * \param s Variable de type Snake* qui pointe vers le snake à analyser
  * \param pos Variable de type int qui correspond à l'emplacement voulu
+ * \param c Variable de type enum ControlS qui correspond à ligne ou colonne suivant ce que l'on souhaite récupérer
  */
-int getPosX(Snake *s, int pos)
+int getPos(Snake *s, int pos, Control c)
 {
 	int res = 0;
 	if (pos < 0 || pos >= s->size)
@@ -173,34 +176,15 @@ int getPosX(Snake *s, int pos)
 		{
 			e = e->next;
 		}
-		res = e->posX;
-	}		
-	return res;
-}
-
-/**
- * \fn getPosY
- * \brief La fonction renvoie la valeur posY d'un maillon
- * \details La fonction se déplace dans la liste jusqu'à l'endroit voulu puis renvoie la valeur. Une erreur est levée si la valeur passée en paramètre n'est pas bonne.
- * \param s Variable de type Snake* qui pointe vers le snake à analyser
- * \param pos Variable de type int qui correspond à l'emplacement voulu
- */
-int getPosY(Snake *s, int pos)
-{
-	int res = 0;
-	if (pos < 0 || pos >= s->size)
-	{
-		printf("getPosition : Error pos out of range\n");
-	}
-	else
-	{
-		int i;
-		Element *e = s->first;
-		for (i = 0; i < pos; i++)
+		if (c == Line)
 		{
-			e = e->next;
+			res = e->posX;
 		}
-		res = e->posY;
+		else if (c == Column)
+		{
+			res = e->posY;
+		}
+		
 	}		
 	return res;
 }
@@ -219,7 +203,7 @@ Way getWay(Snake *s)
 /**
  * \fn setWay
  * \brief La fonction modifie le sens du serpent
- * \details La fonction modifie le sens du serpent dans la structure par la valeur passée en paramètres
+ * \details La fonction modifie le sens du serpent dans la structure par la valeur passée en paramètre
  * \param s Variable de type Snake* qui pointe vers le snake à parcourir
  * \param w Variable de type Way qui est la valeur à attribuer au snake
  */
@@ -237,6 +221,30 @@ void setWay(Snake *s, Way w)
 int getSize(Snake *s)
 {
 	return s->size;
+}
+
+/**
+ * \fn setIsGhost
+ * \brief La fonction modifie le serpent pour le passer ou non en fantôme
+ * \details La fonction modifie l'attribue isGhost serpent dans la structure par la valeur passée en paramètre
+ * \param s Variable de type Snake* qui pointe vers le snake à parcourir
+ * \param b Variable de type bool qui est la valeur à attribuer au snake
+ */
+void setIsGhost(Snake *s, bool b)
+{
+	s->isGhost = b;
+}
+
+
+/**
+ * \fn isGhost
+ * \brief La fonction renvoie le booleen qui dit si le Snake est un fantome ou non
+ * \details La fonction récupère le booleen isGhost dans la structure du snake
+ * \param s Variable de type Snake* qui pointe vers le snake à parcourir
+ */
+bool isGhost(Snake *s)
+{
+	return s->isGhost;
 }
 
 /**

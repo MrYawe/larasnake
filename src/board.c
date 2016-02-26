@@ -43,7 +43,7 @@ Board* initBoard(int sizeX, int sizeY)
     int i;
     for ( i = 0; i < sizeY; i++ )
     {
-      b->tab[i] = (int*) malloc(sizeX*sizeof(int));
+      b->tab[i] = (int*) calloc(sizeX, sizeof(int));
     }
     // Set sizes
     b->tailleX = sizeX;
@@ -109,7 +109,7 @@ void setValue(Board *b, int posx, int posy, int val)
  * \param b Variable de type Board qui correspond au tableau en question
  * \return Variable de type int qui correspond à la taille en X du tableau
  */
-int getTaille(Board *b, BoardControl c)
+int getTaille(Board *b, Control c)
 {
   int res = 0;
   if (b != NULL)
