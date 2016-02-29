@@ -20,6 +20,12 @@ N'oubliez pas de toujours sauvegarder en local avant de push.
 N'oubliez pas de toujours sauvegarder en local avant de pull.   
 `git pull`
 
+* **--assume-unchanged**: ne pas tenir compte des changements en local d'un fichier       
+Utilisé pour le main.c lors du développement des classes sans avoir à commit le fichier main de test        
+`git update-index --assume-unchanged <filename>`
+* **--no-assume-unchanged**: arrêter d'ignorer les changements du fichier       
+`git update-index --no-assume-unchanged <filename>`
+
 ## Liens
 * [Cahier des charges](https://goo.gl/QdoBUI)
 * [Trello](https://trello.com/b/cI9Wid56/ipi-snake)
