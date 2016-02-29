@@ -24,6 +24,13 @@ typedef enum Direction {UP, LEFT, RIGHT, DOWN, NIL} Direction;
  **/
 typedef enum Way {Normal, Reversed} Way;
 
+/**
+ * \enum Type
+ * \brief Permet de gérer le type du snake
+ * \details Contient tous les types possibles pour le snake
+ **/
+typedef enum Type {Feu, Eau, Plante} Type;
+
 // ifndef pour être sûr de définir l'enum Control qu'une seule fois
 #ifndef ControlDef
  /**
@@ -42,7 +49,7 @@ typedef struct Snake Snake;
 /* ***************
  *   Init Snake  *
  *************** */
-Snake* snakeCreate(int taille);
+Snake* snakeCreate(int size, int id);
 
 /* ***************
  *   Move Snake  *
@@ -58,6 +65,9 @@ void snakeTeleportation(Snake *s, int posX, int posY);
  **************** */
 int snakeGetPos(Snake *s, int pos, Control c);
 
+Direction snakeGetDirection(Snake *s);
+void snakeSetDirection(Snake *s, Direction d);
+
 Way snakeGetWay(Snake *s);
 void snakeSetWay(Snake *s, Way w);
 
@@ -65,6 +75,11 @@ int snakeGetSize(Snake *s);
 
 void snakeSetGhost(Snake *s, bool b);
 bool snakeIsGhost(Snake *s);
+
+int snakeGetId(Snake *s);
+
+Type snakeGetType(Snake *s);
+void snakeSetType(Snake *s, Type t);
 
 /* ***************
  *   Utilitary   *

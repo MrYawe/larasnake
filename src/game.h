@@ -4,8 +4,11 @@
 #include "board.h"
 #include "snake.h"
 
-void initGame();
-Board* playRound();
+Board* initGame();
+void initSnake(Board *b, Snake *s1, Snake *s2);
+void avanceSnake(Board *b, Snake *s);
+void updateSnake(Board *b, Snake *s);
+void playRound();
 void endGame();
 
 #endif

@@ -24,12 +24,14 @@ static void snakeDeleteLastElement(Snake *s);
  **/
 struct Snake
 {
+	int id;
 	Element *first;
 	Element *last;
 	int size;
 	Direction direction;
 	Way way;
 	bool isGhost;
+	Type type;
 };
 
 /**
@@ -50,16 +52,17 @@ struct Element
  * \brief La fonction crée et renvoie un snake
  * \details La fonction alloue la mémoire necessaire à un snake et remplit les éléments de la structure
  * \param size Entier qui correspond au nombre d'anneaux pour le snake
+ * \param id Entier qui correspond à l'id du snake
  * \return Variable de type Snake qui contiendra un snake
  */
-Snake* snakeCreate(int size)
+Snake* snakeCreate(int size, int id)
 {
 	Snake *s = malloc(sizeof(Snake));
 	s->first = NULL;
 	s->last = NULL;
-	s->direction = NIL;
 	s->size = 0;
 	s->way = Normal;
+	s->id = id;
 	s->isGhost = false;
 	int i;
 	for (i=0; i<size; i++)
@@ -211,6 +214,16 @@ int snakeGetPos(Snake *s, int pos, Control c)
 	return res;
 }
 
+Direction snakeGetDirection(Snake *s)
+{
+	return s->direction;
+}
+
+void snakeSetDirection(Snake *s, Direction d)
+{
+	s->direction = d;
+}
+
 /**
  * \fn snakeGetWay
  * \brief La fonction renvoie le sens du serpent
@@ -270,6 +283,41 @@ bool snakeIsGhost(Snake *s)
 }
 
 /**
+ * \fn snakeGetId
+ * \brief La fonction renvoie l'id du serpent
+ * \details La fonction récupère l'id dans la structure
+ * \param s Variable de type Snake* qui pointe vers le snake à parcourir
+ * \return Variable de type int 
+ */
+int snakeGetId(Snake *s)
+{
+	return s->id;
+}
+
+/**
+ * \fn snakeGetType
+ * \brief La fonction renvoie le type du serpent
+ * \details La fonction récupère le type du serpent dans la structure
+ * \param s Variable de type Snake* qui pointe vers le snake à parcourir
+ */
+Type snakeGetType(Snake *s)
+{
+	return s->type;
+}
+
+/**
+ * \fn snakeGetType
+ * \brief La fonction modifie le type du serpent
+ * \details La fonction modifie le type du serpent dans la structure par la valeur passée en paramètre
+ * \param s Variable de type Snake* qui pointe vers le snake à parcourir
+ * \param t Variable de type Type qui est la valeur à attribuer au snake
+ */
+void snakeSetType(Snake *s, Type t)
+{
+	s->type = t;
+}
+
+/**
  * \fn snakeDisplay
  * \brief La fonction affiche le contenu du snake
  * \details La fonction affiche pour chaque element du plateau son contenu ainsi que la direction du snake
@@ -279,6 +327,9 @@ void snakeDisplay(Snake *s)
 {
 	char const* direc[] = {"le haut", "la gauche", "la droite", "le bas", "indéfini"};
 	printf("Le snake va vers %s\n", direc[s->direction]);
+	char const* sens[] = {"normalement", "dans le sens inverse"};
+	printf("Le snake se déplace %s\n", sens[s->way]);
+	printf("L'id du snake est : %d\n", s->id);
 
 	Element *curseur = s->first;
 	int i=0;
@@ -435,5 +486,4 @@ static void snakeDeleteLastElement(Snake *s)
 		free(e);
 		s->size --;
 	}
-	free(s);
 }
