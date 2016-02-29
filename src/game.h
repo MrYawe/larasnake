@@ -5,10 +5,8 @@
 #include "snake.h"
 
 Board* initGame();
-void initSnake(Board *b, Snake *s1, Snake *s2);
-void avanceSnake(Board *b, Snake *s);
+void initSnakes(Board *b, Snake *s1, Snake *s2);
 void updateSnake(Board *b, Snake *s);
-void playRound();
-void endGame();
+void moveSnake(Board *b, Snake *s);
 
 #endif

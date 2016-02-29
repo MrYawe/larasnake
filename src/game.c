@@ -3,12 +3,14 @@
 #include <unistd.h>
 #include "game.h"
 
+static void checkMovement(Snake *s);
+
 Board* initGame()
 {
 	Board *b = boardInit(14, 14);
 	Snake *s1 = snakeCreate(3, 1);
 	Snake *s2 = snakeCreate(3, 2);
-	initSnake(b, s1, s2);
+	initSnakes(b, s1, s2);
 	boardDisplay(b);
 	while(1)
 	{
@@ -20,7 +22,7 @@ Board* initGame()
 	return b;
 }
 
-void initSnake(Board *b, Snake *s1, Snake *s2)
+void initSnakes(Board *b, Snake *s1, Snake *s2)
 {
 	int i;
 	for (i=0; i<snakeGetSize(s1); i++)
@@ -46,67 +48,42 @@ void updateSnake(Board *b, Snake *s)
 	}
 }
 
-void avanceSnake(Board *b, Snake *s)
+void moveSnake(Board *b, Snake *s)
 {
-	Direction d = snakeGetDirection(s);
 	Way w = snakeGetWay(s);
 	snakeDisplay(s);
 	if (w == Normal)
 	{
 		boardSetValue(b, snakeGetPos(s, 0, Line), snakeGetPos(s, 0, Column), 0);
-		switch (d)
-		{ 
-			case UP:
-				snakeGoUp(s);
-			break;
-			case DOWN:
-				snakeGoDown(s);
-			break;
-			case LEFT:
-				snakeTurnLeft(s);
-			break;
-			case RIGHT:
-				snakeTurnRight(s);
-			break;
-			default:
-				printf("erreur avanceSnake\n");
-			break;
-		}
+		checkMovement(s);
 		boardSetValue(b, snakeGetPos(s, snakeGetSize(s)-1, Line), snakeGetPos(s, snakeGetSize(s)-1, Column), snakeGetId(s));
 	}
 	else if (w == Reversed)
 	{
 		boardSetValue(b, snakeGetPos(s, snakeGetSize(s)-1, Line), snakeGetPos(s, snakeGetSize(s)-1, Column), 0);
-		switch (d)
-		{ 
-			case UP:
-				snakeGoUp(s);
-			break;
-			case DOWN:
-				snakeGoDown(s);
-			break;
-			case LEFT:
-				snakeTurnLeft(s);
-			break;
-			case RIGHT:
-				snakeTurnRight(s);
-			break;
-			default:
-				printf("erreur avanceSnake\n");
-			break;
-		}			
+		checkMovement(s);
 		boardSetValue(b, snakeGetPos(s, 0, Line), snakeGetPos(s, 0, Column), snakeGetId(s));
 	}	
 }
 
-void playRound()
+static void checkMovement(Snake *s)
 {
-
+	switch (snakeGetDirection(s))
+	{ 
+		case UP:
+			snakeGoUp(s);
+		break;
+		case DOWN:
+			snakeGoDown(s);
+		break;
+		case LEFT:
+			snakeTurnLeft(s);
+		break;
+		case RIGHT:
+			snakeTurnRight(s);
+		break;
+		default:
+			printf("Error checkMovement\n");
+		break;
+	}	
 }
-
-void endGame()
-{
-
-}
-
-
