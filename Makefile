@@ -3,11 +3,11 @@ TARGET   = larasnake
 
 CC       = gcc
 # compiling flags here
-CFLAGS   = -Wall -I.
+CFLAGS   = -Wall -I. `sdl-config --libs` -lSDL_image
 
 LINKER   = gcc -o
 # linking flags here
-LFLAGS   = -I. -lm
+LFLAGS   = -I. -lm `sdl-config --libs` -lSDL_image
 
 # change these to set the proper directories where each files shoould be
 SRCDIR   = src
@@ -22,12 +22,12 @@ rm       = rm -f
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
 	@test -d $(BINDIR) || mkdir -p $(BINDIR)
-	@$(LINKER) $@ $(LFLAGS) $(OBJECTS)
+	@$(LINKER) $@ $(OBJECTS) $(LFLAGS)
 	@echo "Linking complete!"
 
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@test -d $(OBJDIR) || mkdir -p $(OBJDIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) -c $< -o $@ $(CFLAGS)
 	@echo "Compiled "$<" successfully!"
 
 .PHONEY: clean
