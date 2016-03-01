@@ -1,8 +1,19 @@
 # Snake
 
 ## Installation
+###Dépendances du projet
 `bash install.sh`   
 Ceci installera toutes les dépendances du projet.
+###Librairies cmocka`
+`cd ~/Downloads`               
+`xz -d cmocka-1.0.1.tar.xz`                                 
+`tar vxf cmocka-1.0.1.tar`               
+`cd cmocka-1.0.1`                 
+`mkdir build`                       
+`cd build`                        
+`cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..`        
+`make`                
+`sudo make install`                   
 ## Memo Git
 
 * **Clone**: récupérer le repo  
@@ -30,3 +41,4 @@ Utilisé pour le main.c lors du développement des classes sans avoir à commit 
 * [Cahier des charges](https://goo.gl/QdoBUI)
 * [Trello](https://trello.com/b/cI9Wid56/ipi-snake)
 * [Slack](https://larakis.slack.com)
+* [Cmocka tutorial](http://zhuyong.me/blog/2014/03/19/c-code-unit-testing-using-cmocka/)
