@@ -8,7 +8,9 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "snake.h"
+#define NB_TYPES 3
 
 // Headers for static functions of snake file
 static void snakeAddFirstElement(Snake *s, int posX, int posY);
@@ -64,6 +66,8 @@ Snake* snakeCreate(int size, int id)
 	s->way = Normal;
 	s->id = id;
 	s->isGhost = false;
+	srand(rand()*time(NULL)); 
+	s->type = (int)rand()%NB_TYPES;
 	int i;
 	for (i=0; i<size; i++)
 	{
@@ -330,6 +334,8 @@ void snakeDisplay(Snake *s)
 	char const* sens[] = {"normalement", "dans le sens inverse"};
 	printf("Le snake se déplace %s\n", sens[s->way]);
 	printf("L'id du snake est : %d\n", s->id);
+	char const* type[] = {"feu", "eau", "plante"};
+	printf("Le type du snake est : %s\n", type[s->type]);
 
 	Element *curseur = s->first;
 	int i=0;

@@ -14,8 +14,8 @@ Board* initGame()
 	boardDisplay(b);
 	while(1)
 	{
-		avanceSnake(b, s1);
-		avanceSnake(b, s2);
+		moveSnake(b, s1);
+		moveSnake(b, s2);
 		boardDisplay(b);
 		sleep(1);
 	}
