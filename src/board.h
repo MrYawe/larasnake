@@ -31,7 +31,7 @@ Board* boardInit(int sizeX, int sizeY);
  **************** */
 int boardGetValue(Board *b, int posx, int posy);
 void boardSetValue(Board *b, int posx, int posy, int val);
-int boardGetTaille(Board *b, Control c);
+int boardGetSize(Board *b, Control c);
 
 /* ***************
  *   Utilitary   *

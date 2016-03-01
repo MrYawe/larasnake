@@ -20,8 +20,8 @@
 struct Board
 {
   int** tab;
-  int tailleX;
-  int tailleY;
+  int sizeX;
+  int sizeY;
 };
 
 /**
@@ -41,13 +41,13 @@ Board* boardInit(int sizeX, int sizeY)
     // Allocation of tab
     b->tab = (int**) malloc(sizeY*sizeof(int*));
     int i;
-    for ( i = 0; i < sizeY; i++ )
+    for ( i = 0; i < sizeY; i++)
     {
       b->tab[i] = (int*) calloc(sizeX, sizeof(int));
     }
     // Set sizes
-    b->tailleX = sizeX;
-    b->tailleY = sizeY;
+    b->sizeX = sizeX;
+    b->sizeY = sizeY;
   }
   else
   {
@@ -68,7 +68,7 @@ Board* boardInit(int sizeX, int sizeY)
 int boardGetValue(Board *b, int posx, int posy)
 {
   // Check for out of range exceptions
-  if (posx < b->tailleX && posy < b->tailleY && posx >= 0 && posy >=0)
+  if (posx < b->sizeX && posy < b->sizeY && posx >= 0 && posy >=0)
   {
     return b->tab[posx][posy];
   }
@@ -91,7 +91,7 @@ int boardGetValue(Board *b, int posx, int posy)
 void boardSetValue(Board *b, int posx, int posy, int val)
 {
   // Check for out of range exceptions
-  if (posx < b->tailleX && posy < b->tailleY && posx >= 0 && posy >=0)
+  if (posx < b->sizeX && posy < b->sizeY && posx >= 0 && posy >=0)
   {
     b->tab[posx][posy] = val;
   }
@@ -117,11 +117,11 @@ int boardGetSize(Board *b, Control c)
   {
     if (c == Line)
     {
-      res = b->tailleX;
+      res = b->sizeX;
     }
     else if (c == Column)
     {
-      res = b->tailleY;
+      res = b->sizeY;
     }
     else
     {
@@ -139,10 +139,11 @@ int boardGetSize(Board *b, Control c)
  */
 void boardDisplay(Board *b)
 {
+  system("clear");
   int i, j;
-  for(j=0; j<b->tailleY; j++)
+  for(j=0; j<b->sizeY; j++)
   {
-    for (i=0; i<b->tailleX; i++)
+    for (i=0; i<b->sizeX; i++)
     {
       printf(" %d ", boardGetValue(b, i, j));
     }
@@ -159,7 +160,7 @@ void boardDisplay(Board *b)
 void boardFree(Board *b)
 {
   int i;
-  for ( i = 0; i < b->tailleY; i++ )
+  for ( i = 0; i < b->sizeY; i++ )
   {
     free(b->tab[i]);
   }
