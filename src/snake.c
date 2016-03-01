@@ -321,6 +321,36 @@ void snakeSetType(Snake *s, Type t)
 	s->type = t;
 }
 
+void snakeInverseWay(Snake *s)
+{
+	if (s->way == Normal)
+	{
+		s->way = Reversed;
+	}
+	else if (s->way == Reversed)
+	{
+		s->way = Normal;
+	}
+	switch(s->direction)
+	{
+		case UP:
+			s->direction = DOWN;
+		break;
+		case DOWN:
+			s->direction = UP;
+		break;
+		case LEFT:
+			s->direction = RIGHT;
+		break;
+		case RIGHT:
+			s->direction = LEFT;
+		break;
+		default:
+			printf("Error snakeInverseWay\n");
+		break;
+	}
+}
+
 /**
  * \fn snakeDisplay
  * \brief La fonction affiche le contenu du snake

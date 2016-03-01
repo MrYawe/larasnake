@@ -84,6 +84,7 @@ void snakeSetType(Snake *s, Type t);
 /* ***************
  *   Utilitary   *
  *************** */
+void snakeInverseWay(Snake *s);
 void snakeDisplay(Snake *s);
 void snakeUpdateElement(Snake *s, int posElem, int posX, int posY);
 void snakeDeleteSnake(Snake *s);
