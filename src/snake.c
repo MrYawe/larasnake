@@ -225,7 +225,32 @@ Direction snakeGetDirection(Snake *s)
 
 void snakeSetDirection(Snake *s, Direction d)
 {
-	s->direction = d;
+	bool update = true;
+	switch (s->direction)
+	{
+		case UP:
+			if (d == DOWN)
+				update = false;
+		break;
+		case DOWN:
+			if (d == UP)
+				update = false;
+		break;
+		case LEFT:
+			if (d == RIGHT)
+				update = false;
+		break;
+		case RIGHT:
+			if (d == LEFT)
+				update = false;
+		break;
+		default:
+		break;
+	}
+	if (update)
+	{
+		s->direction = d;
+	}
 }
 
 /**
