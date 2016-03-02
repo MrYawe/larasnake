@@ -11,12 +11,14 @@
 #include <time.h>
 #include "snake.h"
 #define NB_TYPES 3
+#define BOARD_SIZE 20
 
 // Headers for static functions of snake file
 static void snakeAddFirstElement(Snake *s, int posX, int posY);
 static void snakeAddLastElement(Snake *s, int posX, int posY);
 static void snakeDeleteFirstElement(Snake *s);
 static void snakeDeleteLastElement(Snake *s);
+static int mod(int a, int b);
 
 
 /**
@@ -83,6 +85,7 @@ Snake* snakeCreate(int size, int id)
 void snakeGoUp(Snake *s)
 {
 	snakeAddLastElement(s, s->last->posX, s->last->posY - 1);
+	//snakeAddLastElement(s, s->last->posX, mod(s->last->posY - 1, BOARD_SIZE));
 	snakeDeleteFirstElement(s);
 	s->direction = UP;
 }
@@ -96,6 +99,7 @@ void snakeGoUp(Snake *s)
 void snakeGoDown(Snake *s)
 {
 	snakeAddLastElement(s, s->last->posX, s->last->posY + 1);
+	//snakeAddLastElement(s, s->last->posX, mod(s->last->posY + 1, BOARD_SIZE));
 	snakeDeleteFirstElement(s);
 	s->direction = DOWN;
 }
@@ -109,6 +113,7 @@ void snakeGoDown(Snake *s)
 void snakeTurnLeft(Snake *s)
 {
 	snakeAddLastElement(s, s->last->posX - 1, s->last->posY);
+	//snakeAddLastElement(s, mod(s->last->posX - 1, BOARD_SIZE), s->last->posY);
 	snakeDeleteFirstElement(s);
 	s->direction = LEFT;
 }
@@ -122,6 +127,7 @@ void snakeTurnLeft(Snake *s)
 void snakeTurnRight(Snake *s)
 {
 	snakeAddLastElement(s, s->last->posX + 1, s->last->posY);
+	//snakeAddLastElement(s, mod(s->last->posX + 1, BOARD_SIZE), s->last->posY);
 	snakeDeleteFirstElement(s);
 	s->direction = RIGHT;
 }
@@ -471,4 +477,10 @@ static void snakeDeleteLastElement(Snake *s)
 		free(e);
 		s->size --;
 	}
+}
+
+static int mod(int a, int b)
+{
+    int r = a % b;
+    return r < 0 ? r + b : r;
 }

@@ -75,7 +75,13 @@ int nextPosCell(Snake *s, Control c)
 static bool isNextCellWall(Board *b, Snake *s)
 {
 	bool res = false;
-	if (nextPosCell(s, Line)<=-1 || nextPosCell(s, Column)<=-1 || nextPosCell(s, Line)>=boardGetSize(b, Line) || nextPosCell(s, Column)>=boardGetSize(b, Column))
+	if ((snakeGetDirection(s) == UP || snakeGetDirection(s)== DOWN) &&
+		(nextPosCell(s, Column)<0 || nextPosCell(s, Column)>boardGetSize(b, Column)-1))
+	{
+			res = true;
+	}
+	else if ((snakeGetDirection(s) == LEFT || snakeGetDirection(s) == RIGHT) && 
+		(nextPosCell(s, Line)<0 || nextPosCell(s, Line)>boardGetSize(b, Line)-1))
 	{
 		res = true;
 	}
