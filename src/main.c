@@ -84,7 +84,6 @@ int main(int argc, char *argv[])
     }
 
     freeAll();
-
     return EXIT_SUCCESS;
 }
 

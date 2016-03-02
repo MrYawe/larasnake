@@ -31,7 +31,6 @@ struct Snake
 	Element *last;
 	int size;
 	Direction direction;
-	Way way;
 	bool isGhost;
 	Type type;
 };
@@ -63,7 +62,6 @@ Snake* snakeCreate(int size, int id)
 	s->first = NULL;
 	s->last = NULL;
 	s->size = 0;
-	s->way = Normal;
 	s->id = id;
 	s->isGhost = false;
 	srand(rand()*time(NULL)); 
@@ -84,16 +82,8 @@ Snake* snakeCreate(int size, int id)
  */
 void snakeGoUp(Snake *s)
 {
-	if (s->way == Normal)
-	{
-		snakeAddLastElement(s, s->last->posX, s->last->posY - 1);
-		snakeDeleteFirstElement(s);
-	}
-	else if (s->way == Reversed)
-	{
-		snakeAddFirstElement(s, s->first->posX, s->first->posY - 1);
-		snakeDeleteLastElement(s);
-	}	
+	snakeAddLastElement(s, s->last->posX, s->last->posY - 1);
+	snakeDeleteFirstElement(s);
 	s->direction = UP;
 }
 
@@ -105,16 +95,8 @@ void snakeGoUp(Snake *s)
  */
 void snakeGoDown(Snake *s)
 {
-	if (s->way == Normal)
-	{
-		snakeAddLastElement(s, s->last->posX, s->last->posY + 1);
-		snakeDeleteFirstElement(s);
-	}
-	else if (s->way == Reversed)
-	{
-		snakeAddFirstElement(s, s->first->posX, s->first->posY + 1);
-		snakeDeleteLastElement(s);
-	}	
+	snakeAddLastElement(s, s->last->posX, s->last->posY + 1);
+	snakeDeleteFirstElement(s);
 	s->direction = DOWN;
 }
 
@@ -126,16 +108,8 @@ void snakeGoDown(Snake *s)
  */
 void snakeTurnLeft(Snake *s)
 {
-	if (s->way == Normal)
-	{
-		snakeAddLastElement(s, s->last->posX - 1, s->last->posY);
-		snakeDeleteFirstElement(s);
-	}
-	else if (s->way == Reversed)
-	{
-		snakeAddFirstElement(s, s->first->posX - 1, s->first->posY);
-		snakeDeleteLastElement(s);
-	}	
+	snakeAddLastElement(s, s->last->posX - 1, s->last->posY);
+	snakeDeleteFirstElement(s);
 	s->direction = LEFT;
 }
 
@@ -147,16 +121,8 @@ void snakeTurnLeft(Snake *s)
  */
 void snakeTurnRight(Snake *s)
 {
-	if (s->way == Normal)
-	{
-		snakeAddLastElement(s, s->last->posX + 1, s->last->posY);
-		snakeDeleteFirstElement(s);
-	}
-	else if (s->way == Reversed)
-	{
-		snakeAddFirstElement(s, s->first->posX + 1, s->first->posY);
-		snakeDeleteLastElement(s);
-	}
+	snakeAddLastElement(s, s->last->posX + 1, s->last->posY);
+	snakeDeleteFirstElement(s);
 	s->direction = RIGHT;
 }
 
@@ -170,16 +136,8 @@ void snakeTurnRight(Snake *s)
  */
 void snakeTeleportation(Snake *s, int posX, int posY)
 {
-	if (s->way == Normal)
-	{
-		snakeAddFirstElement(s, posX, posY);
-		snakeDeleteLastElement(s);
-	}
-	else if (s->way == Reversed)
-	{
-		snakeAddLastElement(s, posX, posY);
-		snakeDeleteFirstElement(s);
-	}	
+	snakeAddLastElement(s, posX, posY);
+	snakeDeleteFirstElement(s);
 }
 
 /**
@@ -253,28 +211,6 @@ void snakeSetDirection(Snake *s, Direction d)
 	}
 }
 
-/**
- * \fn snakeGetWay
- * \brief La fonction renvoie le sens du serpent
- * \details La fonction récupère le sens du serpent dans la structure
- * \param s Variable de type Snake* qui pointe vers le snake à parcourir
- */
-Way snakeGetWay(Snake *s)
-{
-	return s->way;
-}
-
-/**
- * \fn snakeGetWay
- * \brief La fonction modifie le sens du serpent
- * \details La fonction modifie le sens du serpent dans la structure par la valeur passée en paramètre
- * \param s Variable de type Snake* qui pointe vers le snake à parcourir
- * \param w Variable de type Way qui est la valeur à attribuer au snake
- */
-void snakeSetWay(Snake *s, Way w)
-{
-	s->way = w;
-}
 
 /**
  * \fn snakeGetSize
@@ -348,32 +284,21 @@ void snakeSetType(Snake *s, Type t)
 
 void snakeInverseWay(Snake *s)
 {
-	if (s->way == Normal)
+	Element *tampon = s->first;	
+	snakeDisplay(s);
+	s->first = s->last;
+
+	Element* tempElem = NULL;
+	while (tampon) 
 	{
-		s->way = Reversed;
+		Element* suivant = tampon->next;
+		tampon->next = tempElem;
+		tampon->previous = suivant;
+	 	tempElem = tampon;
+		tampon = suivant;
 	}
-	else if (s->way == Reversed)
-	{
-		s->way = Normal;
-	}
-	switch(s->direction)
-	{
-		case UP:
-			s->direction = DOWN;
-		break;
-		case DOWN:
-			s->direction = UP;
-		break;
-		case LEFT:
-			s->direction = RIGHT;
-		break;
-		case RIGHT:
-			s->direction = LEFT;
-		break;
-		default:
-			printf("Error snakeInverseWay\n");
-		break;
-	}
+	s->last = tempElem;
+	snakeDisplay(s);
 }
 
 /**
@@ -384,19 +309,18 @@ void snakeInverseWay(Snake *s)
  */
 void snakeDisplay(Snake *s)
 {
-	char const* direc[] = {"le haut", "la gauche", "la droite", "le bas", "indéfini"};
-	printf("Le snake va vers %s\n", direc[s->direction]);
-	char const* sens[] = {"normalement", "dans le sens inverse"};
-	printf("Le snake se déplace %s\n", sens[s->way]);
-	printf("L'id du snake est : %d\n", s->id);
-	char const* type[] = {"feu", "eau", "plante"};
-	printf("Le type du snake est : %s\n", type[s->type]);
-
+	// char const* direc[] = {"le haut", "la gauche", "la droite", "le bas", "indéfini"};
+	// printf("Le snake va vers %s\n", direc[s->direction]);
+	// printf("L'id du snake est : %d\n", s->id);
+	// char const* type[] = {"feu", "eau", "plante"};
+	// printf("Le type du snake est : %s\n", type[s->type]);
+printf("\n");printf("\n");
 	Element *curseur = s->first;
 	int i=0;
 	while(curseur != NULL)
 	{
-		printf("Maillon %d : [posX: %d, posY: %d]\n", i, curseur->posX, curseur->posY);
+		printf("Actuel : %p | précédent : %p | suivant %p | posX %d | posY %d\n", curseur, curseur->previous, curseur->next, curseur->posX, curseur->posY);
+		//printf("Maillon %d : [posX: %d, posY: %d]\n", i, curseur->posX, curseur->posY);
 		curseur = curseur->next;
 		i++;
 	}

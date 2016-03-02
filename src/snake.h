@@ -17,12 +17,6 @@
  * \details Contient toutes les directions possibles pour le snake
  **/
 typedef enum Direction {UP, LEFT, RIGHT, DOWN, NIL} Direction;
-/**
- * \enum Way
- * \brief Permet de gérer le sens du Snake
- * \details Contient les sens possibles pour le Snake
- **/
-typedef enum Way {Normal, Reversed} Way;
 
 /**
  * \enum Type
@@ -67,9 +61,6 @@ int snakeGetPos(Snake *s, int pos, Control c);
 
 Direction snakeGetDirection(Snake *s);
 void snakeSetDirection(Snake *s, Direction d);
-
-Way snakeGetWay(Snake *s);
-void snakeSetWay(Snake *s, Way w);
 
 int snakeGetSize(Snake *s);
 
