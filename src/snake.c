@@ -86,12 +86,12 @@ void snakeGoUp(Snake *s)
 {
 	if (s->way == Normal)
 	{
-		snakeAddLastElement(s, s->last->posX, s->last->posY + 1);
+		snakeAddLastElement(s, s->last->posX, s->last->posY - 1);
 		snakeDeleteFirstElement(s);
 	}
 	else if (s->way == Reversed)
 	{
-		snakeAddFirstElement(s, s->first->posX, s->first->posY + 1);
+		snakeAddFirstElement(s, s->first->posX, s->first->posY - 1);
 		snakeDeleteLastElement(s);
 	}	
 	s->direction = UP;
@@ -107,12 +107,12 @@ void snakeGoDown(Snake *s)
 {
 	if (s->way == Normal)
 	{
-		snakeAddLastElement(s, s->last->posX, s->last->posY - 1);
+		snakeAddLastElement(s, s->last->posX, s->last->posY + 1);
 		snakeDeleteFirstElement(s);
 	}
 	else if (s->way == Reversed)
 	{
-		snakeAddFirstElement(s, s->first->posX, s->first->posY - 1);
+		snakeAddFirstElement(s, s->first->posX, s->first->posY + 1);
 		snakeDeleteLastElement(s);
 	}	
 	s->direction = DOWN;

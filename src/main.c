@@ -40,7 +40,7 @@ void init() {
     continuer = true;
     surfaces = malloc(2*sizeof(SDL_Surface*));
     board = boardInit(sizeBoardX, sizeBoardY);
-    s1 = snakeCreate(30, 1);
+    s1 = snakeCreate(5, 1);
     s2 = snakeCreate(3, 2);
     initSnakes(board, s1, s2);
 

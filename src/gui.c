@@ -45,10 +45,10 @@ bool guiEvent(SDL_Event *event, Snake *s1) {
         case SDL_KEYDOWN:
             switch(event->key.keysym.sym) {
                 case SDLK_UP: // Flèche haut 1
-                    snakeSetDirection(s1, DOWN);
+                    snakeSetDirection(s1, UP);
                     break;
                 case SDLK_DOWN: // Flèche bas 2 
-                    snakeSetDirection(s1, UP);
+                    snakeSetDirection(s1, DOWN);    
                     break;
                 case SDLK_RIGHT: // Flèche droite 3
                     snakeSetDirection(s1, RIGHT);
