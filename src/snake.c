@@ -20,11 +20,10 @@ static void snakeDeleteFirstElement(Snake *s);
 static void snakeDeleteLastElement(Snake *s);
 static int mod(int a, int b);
 
-
 /**
  * \struct Snake
  * \brief La structure représente le snake
- * \details La structure contient un pointeur vers le début et la fin de la liste, un attribut taille de la liste, et un attribut direction qui représente la direction actuelle du snake
+ * \details La structure contient un pointeur vers la tête et la queue, un attribut taille du serpent, et un attribut direction qui représente la direction actuelle du snake
  **/
 struct Snake
 {
@@ -33,13 +32,14 @@ struct Snake
 	Element *last;
 	int size;
 	Direction direction;
-	bool isGhost;
 	Type type;
+
+	bool isGhost;
 };
 
 /**
  * \struct Element
- * \brief La structure représente un élément de la liste chainée qui contient le snake
+ * \brief La structure représente un élément de la liste chainée qui compose le snake
  * \details La structure contient 4 éléments : la position X, la position Y, l'élément suivant et précedent de la liste
  **/
 struct Element 
@@ -79,7 +79,7 @@ Snake* snakeCreate(int size, int id)
 /**
  * \fn snakeGoUp
  * \brief La fonction ajuste le snake pour que sa position monte d'une case
- * \details La fonction rajoute un élément en tête de liste et supprime le last de manière à permettre au snake de goUpr
+ * \details La fonction rajoute un élément en tête de liste (queue) et supprime le last (tête) de manière à permettre au snake de goUpr
  * \param s Variable de type Snake* qui pointe vers le snake à faire goUpr
  */
 void snakeGoUp(Snake *s)
@@ -93,7 +93,7 @@ void snakeGoUp(Snake *s)
 /**
  * \fn snakeGoDown
  * \brief La fonction ajuste le snake pour que sa position goDowne d'une case
- * \details La fonction rajoute un élément en tête de liste et supprime le last de manière à permettre au snake de goDownre
+ * \details La fonction rajoute un élément en tête de liste (queue) et supprime le last (tête) de manière à permettre au snake de goDownre
  * \param s Variable de type Snake* qui pointe vers le snake à faire goDownre
  */
 void snakeGoDown(Snake *s)
@@ -107,7 +107,7 @@ void snakeGoDown(Snake *s)
 /**
  * \fn snakeTurnLeft
  * \brief La fonction ajuste le snake pour qu'il soit déplacé vers la gauche
- * \details La fonction rajoute un élément en tête de liste et supprime le last de manière à permettre au snake de tourner à gauche
+ * \details La fonction rajoute un élément en tête de liste (queue) et supprime le last (tête) de manière à permettre au snake de tourner à gauche
  * \param s Variable de type Snake* qui pointe vers le snake à faire tourner à gauche
  */
 void snakeTurnLeft(Snake *s)
@@ -121,7 +121,7 @@ void snakeTurnLeft(Snake *s)
 /**
  * \fn snakeTurnRight
  * \brief La fonction ajuste le snake pour qu'il soit déplacé vers la droite
- * \details La fonction rajoute un élément en tête de liste et supprime le last de manière à permettre au snake de tourner à droite
+ * \details La fonction rajoute un élément en tête de liste (queue) et supprime le last (tête) de manière à permettre au snake de tourner à droite
  * \param s Variable de type Snake* qui pointe vers le snake à faire tourner à droite
  */
 void snakeTurnRight(Snake *s)
@@ -291,7 +291,6 @@ void snakeSetType(Snake *s, Type t)
 void snakeInverseWay(Snake *s)
 {
 	Element *tampon = s->first;	
-	snakeDisplay(s);
 	s->first = s->last;
 
 	Element* tempElem = NULL;
@@ -304,7 +303,6 @@ void snakeInverseWay(Snake *s)
 		tampon = suivant;
 	}
 	s->last = tempElem;
-	snakeDisplay(s);
 }
 
 /**
