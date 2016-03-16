@@ -4,7 +4,7 @@
 #include "game.h"
 
 static void checkMovement(Snake *s, Board *b);
-static bool isNextCellWall(Board *b, Snake *s);
+static bool isNextCellBorder(Board *b, Snake *s);
 
 void initGame(sizeX, sizeY)
 {
@@ -50,29 +50,41 @@ void moveSnake(Board *b, Snake *s)
 
 int nextPosCell(Snake *s, Control c)
 {
-	int res = 0;
+	int res = snakeGetPos(s, snakeGetSize(s)-1, c);
 	switch (snakeGetDirection(s))
 	{
 		case UP:
-			res = snakeGetPos(s, snakeGetSize(s)-1, c) - 1;
+			if (c == Column)
+				res -= 1;
 		break;
 		case DOWN:
-			res = snakeGetPos(s, snakeGetSize(s)-1, c) + 1;
+			if (c == Column)
+				res += 1;
 		break;
 		case LEFT:
-			res = snakeGetPos(s, snakeGetSize(s)-1, c) - 1;
+			if (c == Line)
+				res -= 1;
 		break;
 		case RIGHT:
-			res = snakeGetPos(s, snakeGetSize(s)-1, c) + 1;
+			if (c == Line)
+				res += 1;
 		break;
 		default:
-			printf("Error isNextCellWall\n");
+			printf("Error isNextCellBorder\n");
 		break;
 	}
 	return res;
 }
 
-static bool isNextCellWall(Board *b, Snake *s)
+static bool isNextCellDie(Board *b, Snake *s)
+{
+	bool res = false;
+	if (boardGetValue(b, nextPosCell(s, Line), nextPosCell(s, Column)) == 1)
+		res = true;
+	return res;
+}
+
+static bool isNextCellBorder(Board *b, Snake *s)
 {
 	bool res = false;
 	if ((snakeGetDirection(s) == UP || snakeGetDirection(s)== DOWN) &&
@@ -88,9 +100,14 @@ static bool isNextCellWall(Board *b, Snake *s)
 	return res;
 }
 
-static void checkMovement(Snake *s, Board *b)
-{
-	if (!isNextCellWall(b, s))
+static void checkMovement(Snake *s, Board *b) {
+	
+	if (isNextCellDie(b, s))
+	{
+		printf("Snake mort !\n");
+	}
+
+	if (!isNextCellBorder(b, s))
 	{
 		switch (snakeGetDirection(s))
 		{
