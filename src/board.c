@@ -70,11 +70,11 @@ int boardGetValue(Board *b, int posx, int posy)
   // Check for out of range exceptions
   if (posx < b->sizeX && posy < b->sizeY && posx >= 0 && posy >=0)
   {
-    return b->tab[posx][posy];
+    return b->tab[posy][posx];
   }
   else
   {
-    printf("boardGetValue: error out of range\n");
+    printf("boardGetValue: error out of range (%d, %d) max(%d, %d)\n", posx, posy, b->sizeX, b->sizeY);
     return -1;
   }
 }
@@ -93,7 +93,7 @@ void boardSetValue(Board *b, int posx, int posy, int val)
   // Check for out of range exceptions
   if (posx < b->sizeX && posy < b->sizeY && posx >= 0 && posy >=0)
   {
-    b->tab[posx][posy] = val;
+    b->tab[posy][posx] = val;
   }
   else
   {
@@ -113,21 +113,15 @@ void boardSetValue(Board *b, int posx, int posy, int val)
 int boardGetSize(Board *b, Control c)
 {
   int res = 0;
-  if (b != NULL)
-  {
-    if (c == Line)
-    {
+  if (b != NULL) {
+    if (c == Line) {
       res = b->sizeX;
-    }
-    else if (c == Column)
-    {
+    } else if (c == Column) {
       res = b->sizeY;
+    } else {
+      printf("boardGetSize : error enum not known\n");
     }
-    else
-    {
-      printf("boardGetTaille : error enum not known\n");
-    }
-  }  
+  }
   return res;
 }
 

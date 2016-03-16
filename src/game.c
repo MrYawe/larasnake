@@ -6,9 +6,9 @@
 static void checkMovement(Snake *s, Board *b);
 static bool isNextCellWall(Board *b, Snake *s);
 
-void initGame()
+void initGame(sizeX, sizeY)
 {
-	Board *b = boardInit(14, 14);
+	Board *b = boardInit(sizeX, sizeY);
 	Snake *s1 = snakeCreate(3, 1);
 	Snake *s2 = snakeCreate(3, 2);
 	initSnakes(b, s1, s2);
@@ -52,7 +52,7 @@ int nextPosCell(Snake *s, Control c)
 {
 	int res = 0;
 	switch (snakeGetDirection(s))
-	{ 
+	{
 		case UP:
 			res = snakeGetPos(s, snakeGetSize(s)-1, c) - 1;
 		break;
@@ -68,7 +68,7 @@ int nextPosCell(Snake *s, Control c)
 		default:
 			printf("Error isNextCellWall\n");
 		break;
-	}		
+	}
 	return res;
 }
 
@@ -80,7 +80,7 @@ static bool isNextCellWall(Board *b, Snake *s)
 	{
 			res = true;
 	}
-	else if ((snakeGetDirection(s) == LEFT || snakeGetDirection(s) == RIGHT) && 
+	else if ((snakeGetDirection(s) == LEFT || snakeGetDirection(s) == RIGHT) &&
 		(nextPosCell(s, Line)<0 || nextPosCell(s, Line)>boardGetSize(b, Line)-1))
 	{
 		res = true;
@@ -89,11 +89,11 @@ static bool isNextCellWall(Board *b, Snake *s)
 }
 
 static void checkMovement(Snake *s, Board *b)
-{	
+{
 	if (!isNextCellWall(b, s))
 	{
 		switch (snakeGetDirection(s))
-		{ 
+		{
 			case UP:
 				snakeGoUp(s);
 			break;
@@ -109,12 +109,12 @@ static void checkMovement(Snake *s, Board *b)
 			default:
 				printf("Error checkMovement\n");
 			break;
-		}	
+		}
 	}
 	else
 	{
 		switch (snakeGetDirection(s))
-		{ 
+		{
 			case UP:
 				snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1, Line), boardGetSize(b, Column)-1);
 			break;
@@ -122,7 +122,7 @@ static void checkMovement(Snake *s, Board *b)
 				snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1, Line), 0);
 			break;
 			case LEFT:
-				snakeTeleportation(s, boardGetSize(b, Column)-1, snakeGetPos(s, snakeGetSize(s)-1, Column));
+				snakeTeleportation(s, boardGetSize(b, Line)-1, snakeGetPos(s, snakeGetSize(s)-1, Column));
 			break;
 			case RIGHT:
 				snakeTeleportation(s, 0, snakeGetPos(s, snakeGetSize(s)-1, Column));
@@ -130,6 +130,6 @@ static void checkMovement(Snake *s, Board *b)
 			default:
 				printf("Error checkMovement\n");
 			break;
-		}	
+		}
 	}
 }
