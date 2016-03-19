@@ -12,8 +12,8 @@ void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces) 
     SDL_Rect cellPosition;
     cellPosition.x = 0;
     cellPosition.y = 0;
-    printf("Taille line: %d\n", boardGetSize(board, Line));
-    printf("Taille column: %d\n", boardGetSize(board, Column));
+    //printf("Taille line: %d\n", boardGetSize(board, Line));
+    //printf("Taille column: %d\n", boardGetSize(board, Column));
 
     for(y=0; y<boardGetSize(board, Column); y++) {
         for (x=0; x<boardGetSize(board, Line); x++) {

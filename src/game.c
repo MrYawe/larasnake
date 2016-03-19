@@ -76,10 +76,21 @@ int nextPosCell(Snake *s, Control c)
 	return res;
 }
 
+static bool isNextCellOutOfRange(Board *b, Snake *s)
+{
+	bool res = false;
+	if (nextPosCell(s, Line) < 0 || nextPosCell(s, Column) < 0 || 
+		nextPosCell(s, Line) > boardGetSize(b, Line)-1 || nextPosCell(s, Column) > boardGetSize(b, Column)-1)
+	{
+		res = true;
+	}		
+	return res;
+}
+
 static bool isNextCellDie(Board *b, Snake *s)
 {
 	bool res = false;
-	if (boardGetValue(b, nextPosCell(s, Line), nextPosCell(s, Column)) == 1)
+	if (!isNextCellOutOfRange(b, s) && boardGetValue(b, nextPosCell(s, Line), nextPosCell(s, Column)) == 1)
 		res = true;
 	return res;
 }
@@ -101,13 +112,41 @@ static bool isNextCellBorder(Board *b, Snake *s)
 }
 
 static void checkMovement(Snake *s, Board *b) {
-	
+	bool canTp = false;
 	if (isNextCellDie(b, s))
 	{
 		printf("Snake mort !\n");
 	}
 
-	if (!isNextCellBorder(b, s))
+	if (isNextCellBorder(b, s))
+	{
+		if (canTp)
+		{
+			switch (snakeGetDirection(s))
+			{
+				case UP:
+					snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1, Line), boardGetSize(b, Column)-1);
+				break;
+				case DOWN:
+					snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1, Line), 0);
+				break;
+				case LEFT:
+					snakeTeleportation(s, boardGetSize(b, Line)-1, snakeGetPos(s, snakeGetSize(s)-1, Column));
+				break;
+				case RIGHT:
+					snakeTeleportation(s, 0, snakeGetPos(s, snakeGetSize(s)-1, Column));
+				break;
+				default:
+					printf("Error checkMovement\n");
+				break;
+			}	
+		}	
+		else
+		{
+			printf("Le snake s'est pris une bordure !\n");
+		}		
+	}
+	else
 	{
 		switch (snakeGetDirection(s))
 		{
@@ -122,27 +161,6 @@ static void checkMovement(Snake *s, Board *b) {
 			break;
 			case RIGHT:
 				snakeTurnRight(s);
-			break;
-			default:
-				printf("Error checkMovement\n");
-			break;
-		}
-	}
-	else
-	{
-		switch (snakeGetDirection(s))
-		{
-			case UP:
-				snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1, Line), boardGetSize(b, Column)-1);
-			break;
-			case DOWN:
-				snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1, Line), 0);
-			break;
-			case LEFT:
-				snakeTeleportation(s, boardGetSize(b, Line)-1, snakeGetPos(s, snakeGetSize(s)-1, Column));
-			break;
-			case RIGHT:
-				snakeTeleportation(s, 0, snakeGetPos(s, snakeGetSize(s)-1, Column));
 			break;
 			default:
 				printf("Error checkMovement\n");

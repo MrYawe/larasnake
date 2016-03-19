@@ -37,7 +37,7 @@ void init() {
     continuer = true;
     surfaces = malloc(2*sizeof(SDL_Surface*));
     board = boardInit(sizeBoardX, sizeBoardY);
-    s1 = snakeCreate(5, 1);
+    s1 = snakeCreate(10, 1);
     s2 = snakeCreate(3, 2);
     initSnakes(board, s1, s2);
 
@@ -59,15 +59,15 @@ int main(int argc, char *argv[])
     init(sizeBoardX, sizeBoardY);
 
     while (continuer) {
-        printf("(1) Debut\n");
+        //printf("(1) Debut\n");
         startMs = SDL_GetTicks(); //when the frame starts
-        printf("(2) Clear\n");
+        //printf("(2) Clear\n");
         guiClearScreen(screen);
-        printf("(3) Event\n");
+        //printf("(3) Event\n");
 
         // Deplacement cube
         moveTimer += SDL_GetTicks() - lastMove;
-        printf("(4) Move snake\n");
+        //printf("(4) Move snake\n");
         if (moveTimer >= moveTime) {
             continuer = guiEvent(&event, s1); // intercepte un evenement si il a lieu
             moveSnake(board, s1);
@@ -75,22 +75,22 @@ int main(int argc, char *argv[])
         }
         lastMove = SDL_GetTicks();
 
-        printf("(5) Display board\n");
+        //printf("(5) Display board\n");
         guiDisplayBoard(screen, board, surfaces);
-        printf("(6) Reload screen\n");
+        //printf("(6) Reload screen\n");
         guiReloadScreen(screen);
 
         // Gestion FPS
         endMs = SDL_GetTicks(); //when the frame calculations end
-        printf("Temps: %d\n", endMs - startMs);
+        //printf("Temps: %d\n", endMs - startMs);
         delayMs = frameMs - (endMs - startMs); //how long to delay
-        printf("Temps d'attente: %d\n", delayMs);
+        //printf("Temps d'attente: %d\n", delayMs);
         if(delayMs <= 0) {
-            printf("ON A EU CHAUUUUUD !!\n");
+            //printf("ON A EU CHAUUUUUD !!\n");
         } else {
             SDL_Delay(delayMs); //delay processing
         }
-        printf("(7) Fin\n");
+        //printf("(7) Fin\n");
     }
 
     freeAll();
