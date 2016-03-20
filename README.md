@@ -5,15 +5,9 @@
 `bash install.sh`   
 Ceci installera toutes les dépendances du projet.
 ###Librairies cmocka`
-`cd ~/Downloads`               
-`xz -d cmocka-1.0.1.tar.xz`                                 
-`tar vxf cmocka-1.0.1.tar`               
-`cd cmocka-1.0.1`                 
-`mkdir build`                       
-`cd build`                        
-`cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..`        
-`make`                
-`sudo make install`                   
+Lancez le script installCMocka.sh
+Pour un tutorial d'utilisation veuillez-vous référer à :
+http://zhuyong.me/blog/2014/03/19/c-code-unit-testing-using-cmocka/
 ## Memo Git
 
 * **Clone**: récupérer le repo  
