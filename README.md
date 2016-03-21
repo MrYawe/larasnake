@@ -7,7 +7,7 @@ Ceci installera toutes les dépendances du projet.
 `make`                                     
 Ceci compilera les sources du projet pour générer l'exécutable dans le dossier bin.
 
-###Librairies cmocka`
+###Librairies cmocka
 `bash installCMocka.sh`                          
 Ceci installera la librairie cmocka                             
 `make test`                                              
