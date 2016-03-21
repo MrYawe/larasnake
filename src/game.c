@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include "game.h"
 
-static void checkMovement(Snake *s, Board *b);
+static bool checkMovement(Snake *s, Board *b);
 static bool isNextCellBorder(Board *b, Snake *s);
 
 void initGame(sizeX, sizeY)
@@ -41,11 +41,12 @@ void updateSnake(Board *b, Snake *s)
 	}
 }
 
-void moveSnake(Board *b, Snake *s)
+bool moveSnake(Board *b, Snake *s)
 {
 	boardSetValue(b, snakeGetPos(s, 0, Line), snakeGetPos(s, 0, Column), 0);
-	checkMovement(s, b);
+	bool continueGame = checkMovement(s, b);
 	boardSetValue(b, snakeGetPos(s, snakeGetSize(s)-1, Line), snakeGetPos(s, snakeGetSize(s)-1, Column), snakeGetId(s));
+	return continueGame;
 }
 
 int nextPosCell(Snake *s, Control c)
@@ -79,11 +80,11 @@ int nextPosCell(Snake *s, Control c)
 static bool isNextCellOutOfRange(Board *b, Snake *s)
 {
 	bool res = false;
-	if (nextPosCell(s, Line) < 0 || nextPosCell(s, Column) < 0 || 
+	if (nextPosCell(s, Line) < 0 || nextPosCell(s, Column) < 0 ||
 		nextPosCell(s, Line) > boardGetSize(b, Line)-1 || nextPosCell(s, Column) > boardGetSize(b, Column)-1)
 	{
 		res = true;
-	}		
+	}
 	return res;
 }
 
@@ -111,11 +112,13 @@ static bool isNextCellBorder(Board *b, Snake *s)
 	return res;
 }
 
-static void checkMovement(Snake *s, Board *b) {
+static bool checkMovement(Snake *s, Board *b) {
 	bool canTp = false;
+	bool continueGame = true;
 	if (isNextCellDie(b, s))
 	{
 		printf("Snake mort !\n");
+		continueGame = false;
 	}
 
 	if (isNextCellBorder(b, s))
@@ -139,12 +142,13 @@ static void checkMovement(Snake *s, Board *b) {
 				default:
 					printf("Error checkMovement\n");
 				break;
-			}	
-		}	
+			}
+		}
 		else
 		{
 			printf("Le snake s'est pris une bordure !\n");
-		}		
+			continueGame = false;
+		}
 	}
 	else
 	{
@@ -167,4 +171,6 @@ static void checkMovement(Snake *s, Board *b) {
 			break;
 		}
 	}
+
+	return continueGame;
 }

@@ -17,8 +17,8 @@
 static void snakeAddFirstElement(Snake *s, int posX, int posY);
 static void snakeAddLastElement(Snake *s, int posX, int posY);
 static void snakeDeleteFirstElement(Snake *s);
-static void snakeDeleteLastElement(Snake *s);
-static int mod(int a, int b);
+//static void snakeDeleteLastElement(Snake *s);
+//static int mod(int a, int b);
 
 /**
  * \struct Snake
@@ -42,7 +42,7 @@ struct Snake
  * \brief La structure représente un élément de la liste chainée qui compose le snake
  * \details La structure contient 4 éléments : la position X, la position Y, l'élément suivant et précedent de la liste
  **/
-struct Element 
+struct Element
 {
 	int posX;
 	int posY;
@@ -66,13 +66,13 @@ Snake* snakeCreate(int size, int id)
 	s->size = 0;
 	s->id = id;
 	s->isGhost = false;
-	srand(rand()*time(NULL)); 
+	srand(rand()*time(NULL));
 	s->type = (int)rand()%NB_TYPES;
 	int i;
 	for (i=0; i<size; i++)
 	{
 		snakeAddFirstElement(s, 0, 0);
-	}	
+	}
 	return s;
 }
 
@@ -177,8 +177,8 @@ int snakeGetPos(Snake *s, int pos, Control c)
 		{
 			res = e->posY;
 		}
-		
-	}		
+
+	}
 	return res;
 }
 
@@ -258,7 +258,7 @@ bool snakeIsGhost(Snake *s)
  * \brief La fonction renvoie l'id du serpent
  * \details La fonction récupère l'id dans la structure
  * \param s Variable de type Snake* qui pointe vers le snake à parcourir
- * \return Variable de type int 
+ * \return Variable de type int
  */
 int snakeGetId(Snake *s)
 {
@@ -290,11 +290,11 @@ void snakeSetType(Snake *s, Type t)
 
 void snakeInverseWay(Snake *s)
 {
-	Element *tampon = s->first;	
+	Element *tampon = s->first;
 	s->first = s->last;
 
 	Element* tempElem = NULL;
-	while (tampon) 
+	while (tampon)
 	{
 		Element* suivant = tampon->next;
 		tampon->next = tempElem;
@@ -355,7 +355,7 @@ void snakeUpdateElement(Snake *s, int posElem, int posX, int posY)
 		}
 		e->posX = posX;
 		e->posY = posY;
-	}	
+	}
 }
 
 
@@ -391,16 +391,16 @@ static void snakeAddFirstElement(Snake *s, int posX, int posY)
 	Element *e = (Element*) malloc(sizeof(Element));
 	e->posX = posX;
 	e->posY = posY;
-	e->previous = NULL;	
+	e->previous = NULL;
 	if (s->size == 0)
 	{
 		e->next = NULL;
 		s->last = e;
-	}		
+	}
 	else
 	{
 		s->first->previous = e;
-		e->next = s->first;		
+		e->next = s->first;
 	}
 	s->first = e;
 	s->size ++;
@@ -430,7 +430,7 @@ static void snakeAddLastElement(Snake *s, int posX, int posY)
 		s->last->next = e;
 		s->last = e;
 		s->size++;
-	}	
+	}
 }
 
 /**
@@ -452,7 +452,7 @@ static void snakeDeleteFirstElement(Snake *s)
 		s->first->previous = NULL;
 		free(e);
 		s->size --;
-	}	
+	}
 }
 
 /**
@@ -461,9 +461,10 @@ static void snakeDeleteFirstElement(Snake *s)
  * \details La fonction supprime le last élément de la liste et envoie un message d'erreur si la liste est vide
  * \param s Variable de type Snake* qui pointe vers le snake à modifier
  */
+/*
 static void snakeDeleteLastElement(Snake *s)
 {
-	if (s->size == 0)	
+	if (s->size == 0)
 	{
 		printf("snakeDeleteLastElement : Empty List !\n");
 	}
@@ -482,3 +483,4 @@ static int mod(int a, int b)
     int r = a % b;
     return r < 0 ? r + b : r;
 }
+*/

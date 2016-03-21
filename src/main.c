@@ -18,6 +18,8 @@ SDL_Event event; // Permet de capturer les évènements clavier/souris
 int sizeBoardX, sizeBoardY; // Taile du board en x et y
 int cellSize; // Taille d'une case (un carré)
 bool continuer; // Tant que true le jeu continue
+bool continueGameMove;
+bool continueGameQuit;
 //int frameRate = 60;
 int frameMs = 30; // Temps en milliseconde par frame. 30ms ~= 30 FPS
 Board* board;
@@ -35,6 +37,8 @@ void init() {
     sizeBoardY=25;
     cellSize=21;
     continuer = true;
+    continueGameQuit = true;
+    continueGameMove = true;
     surfaces = malloc(2*sizeof(SDL_Surface*));
     board = boardInit(sizeBoardX, sizeBoardY);
     s1 = snakeCreate(10, 1);
@@ -69,8 +73,8 @@ int main(int argc, char *argv[])
         moveTimer += SDL_GetTicks() - lastMove;
         //printf("(4) Move snake\n");
         if (moveTimer >= moveTime) {
-            continuer = guiEvent(&event, s1); // intercepte un evenement si il a lieu
-            moveSnake(board, s1);
+            continueGameQuit = guiEvent(&event, s1); // intercepte un evenement si il a lieu
+            continueGameMove = moveSnake(board, s1);
             moveTimer = 0 ;
         }
         lastMove = SDL_GetTicks();
@@ -90,6 +94,7 @@ int main(int argc, char *argv[])
         } else {
             SDL_Delay(delayMs); //delay processing
         }
+        continuer = continueGameMove && continueGameQuit;
         //printf("(7) Fin\n");
     }
 
