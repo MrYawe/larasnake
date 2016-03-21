@@ -31,14 +31,14 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@echo "Compiled "$<" successfully!"
 
 .PHONEY: test
-test: build/board.o tests/testAll.o tests/testBoard.o
-	gcc -o bin/testAll build/board.o tests/testBoard.o tests/testAll.o -l cmocka
+test: build/board.o build/testAll.o build/testBoard.o
+	gcc -o bin/testAll build/board.o build/testBoard.o build/testAll.o -l cmocka
 
-testAll.o: tests/testBoard.h
-	gcc -o tests/testAll.o -c tests/testAll.c -l cmocka
+build/testAll.o: tests/testBoard.h
+	gcc -o build/testAll.o -c tests/testAll.c -l cmocka
 
-testBoard.o: src/board.h tests/testBoard.h tests/testBoard.c
-	gcc -o tests/testBoard.o -c tests/testBoard.c -l cmocka
+build/testBoard.o: src/board.h tests/testBoard.h tests/testBoard.c
+	gcc -o build/testBoard.o -c tests/testBoard.c -l cmocka
 
 
 .PHONEY: clean
@@ -49,5 +49,5 @@ clean:
 .PHONEY: remove
 remove: clean
 	@$(rm) $(BINDIR)/$(TARGET)
-	@$(rm) $(BINDIR)/testLarasnake
+	@$(rm) $(BINDIR)/testAll
 	@echo "Executable removed!"
