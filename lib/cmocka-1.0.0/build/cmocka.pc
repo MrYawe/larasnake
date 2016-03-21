@@ -1,6 +1,0 @@
-Name: cmocka
-Description: The cmocka unit testing library
-Version: 1.0.0
-Libs: -L/usr/lib -lcmocka
-Cflags: -I/usr/include
-
