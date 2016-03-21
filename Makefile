@@ -43,7 +43,7 @@ build/testBoard.o: src/board.h tests/testBoard.h tests/testBoard.c
 
 .PHONEY: clean
 clean:
-	@$(rm) $(OBJECTS)
+	@$(rm) $(OBJDIR)/*.o
 	@echo "Cleanup complete!"
 
 .PHONEY: remove
