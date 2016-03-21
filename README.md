@@ -4,12 +4,22 @@
 ###Dépendances du projet
 `bash install.sh`   
 Ceci installera toutes les dépendances du projet.
+`make`
+Ceci compilera les sources du projet pour générer l'exécutable dans le dossier bin.
+
 ###Librairies cmocka`
-Lancez le script installCMocka.sh à partir du dossier master "snake"
+`bash installCMocka.sh` 
+Ceci installera la librairie cmocka
+`make test`
+Ceci compilera les sources de tests pour générer l'exécutable des tests.
 
-Pour un tutorial d'utilisation veuillez-vous référer à :
+## Utilisation
+###Exécuter le projet
+`./bin/larasnake `
 
-http://zhuyong.me/blog/2014/03/19/c-code-unit-testing-using-cmocka/
+###Exécuter les tests unitaires
+`./bin/testAll`
+
 ## Memo Git
 
 * **Clone**: récupérer le repo  
