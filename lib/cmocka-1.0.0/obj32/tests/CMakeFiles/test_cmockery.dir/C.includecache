@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/cmocka.h
+
+../include/cmockery/cmockery.h
+cmocka.h
+-
+
+/home/asn/workspace/projects/cmocka/tests/test_cmockery.c
+stdarg.h
+-
+stddef.h
+-
+setjmp.h
+-
+cmockery/cmockery.h
+-
+
