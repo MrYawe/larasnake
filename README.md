@@ -3,15 +3,15 @@
 ## Installation
 ###Dépendances du projet
 `bash install.sh`   
-Ceci installera toutes les dépendances du projet.
-`make`
+Ceci installera toutes les dépendances du projet.                             
+`make`                                     
 Ceci compilera les sources du projet pour générer l'exécutable dans le dossier bin.
 
 ###Librairies cmocka`
-`bash installCMocka.sh` 
-Ceci installera la librairie cmocka
-`make test`
-Ceci compilera les sources de tests pour générer l'exécutable des tests.
+`bash installCMocka.sh`                          
+Ceci installera la librairie cmocka                             
+`make test`                                              
+Ceci compilera les sources de tests pour générer l'exécutable des tests.                             
 
 ## Utilisation
 ###Exécuter le projet
