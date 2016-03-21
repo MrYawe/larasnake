@@ -30,6 +30,11 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@$(CC) -c $< -o $@ $(CFLAGS)
 	@echo "Compiled "$<" successfully!"
 
+.PHONEY: test
+test: src/board.h src/snake.h
+	gcc -o bin/test src/testGame.c -l cmocka
+
+
 .PHONEY: clean
 clean:
 	@$(rm) $(OBJECTS)
