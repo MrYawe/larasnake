@@ -15,4 +15,4 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
 make
 sudo make install
 rm cmocka-1.0.0.tar
-sudo mv ./cmocka-1.0.0 ./lib
+rm cmocka-1.0.0
