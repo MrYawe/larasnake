@@ -5,8 +5,10 @@
 `bash install.sh`   
 Ceci installera toutes les dépendances du projet.
 ###Librairies cmocka`
-Lancez le script installCMocka.sh
+Lancez le script installCMocka.sh à partir du dossier master "snake"
+
 Pour un tutorial d'utilisation veuillez-vous référer à :
+
 http://zhuyong.me/blog/2014/03/19/c-code-unit-testing-using-cmocka/
 ## Memo Git
 
