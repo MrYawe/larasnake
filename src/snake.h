@@ -64,6 +64,9 @@ void snakeSetDirection(Snake *s, Direction d);
 
 int snakeGetSize(Snake *s);
 
+int snakeGetSpeed(Snake *s);
+void snakeSetSpeed(Snake *s, int speed);
+
 void snakeSetGhost(Snake *s, bool b);
 bool snakeIsGhost(Snake *s);
 

@@ -24,7 +24,7 @@ typedef struct Board Board;
 /* ***************
  *   Init Board  *
  *************** */
-Board* boardInit(int sizeX, int sizeY);
+Board* boardInit(int sizeX, int sizeY, int sizeCell);
 
 /* ****************
  *    Accessors   *
@@ -39,7 +39,7 @@ int boardGetSize(Board *b, Control c);
 void boardDisplay(Board *b);
 void boardFree(Board *b);
 
-// TODO: bordure qui se grise 
+// TODO: bordure qui se grise
 // TODO: bordure qui se dégrise
 
 #endif

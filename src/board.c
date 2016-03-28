@@ -22,6 +22,7 @@ struct Board
   int** tab;
   int sizeX;
   int sizeY;
+  int sizeCell; // taille en pixel d'une case du board
 };
 
 /**
@@ -32,7 +33,7 @@ struct Board
  * \param sizeY Entier qui done la taille en Y du plateau créé
  * \return Variable de type Board qui contiendra le plateau
  */
-Board* boardInit(int sizeX, int sizeY)
+Board* boardInit(int sizeX, int sizeY, int sizeCell)
 {
   Board *b = (Board*) malloc(sizeof(Board));
   // Check for negative sizes
@@ -48,6 +49,7 @@ Board* boardInit(int sizeX, int sizeY)
     // Set sizes
     b->sizeX = sizeX;
     b->sizeY = sizeY;
+    b->sizeCell = sizeCell;
   }
   else
   {

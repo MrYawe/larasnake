@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "snake.h"
+#include "constants.h"
 #define NB_TYPES 3
 #define BOARD_SIZE 20
 
@@ -31,9 +32,9 @@ struct Snake
 	Element *first;
 	Element *last;
 	int size;
+	int speed;
 	Direction direction;
 	Type type;
-
 	bool isGhost;
 };
 
@@ -64,6 +65,7 @@ Snake* snakeCreate(int size, int id)
 	s->first = NULL;
 	s->last = NULL;
 	s->size = 0;
+	s->speed = SNAKE_DEFAULT_SPEED;
 	s->id = id;
 	s->isGhost = false;
 	srand(rand()*time(NULL));
@@ -227,6 +229,22 @@ void snakeSetDirection(Snake *s, Direction d)
 int snakeGetSize(Snake *s)
 {
 	return s->size;
+}
+
+/**
+ * \fn snakeGetSpeed
+ * \brief La fonction renvoie la vitesse du serpent
+ * \details La fonction récupère la vitesse dans la structure
+ * \param s Variable de type Snake* qui pointe vers le snake à parcourir
+ */
+int snakeGetSpeed(Snake *s)
+{
+	return s->speed;
+}
+
+void snakeSetSpeed(Snake *s, int speed)
+{
+	s->speed = speed;
 }
 
 /**
