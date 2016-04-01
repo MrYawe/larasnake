@@ -156,10 +156,10 @@ void snakeTeleportation(Snake *s, int posX, int posY)
  * \param pos Variable de type int qui correspond à l'emplacement voulu
  * \param c Variable de type enum Control qui correspond à ligne ou colonne suivant ce que l'on souhaite récupérer
  */
-int snakeGetPos(Snake *s, int pos, Control c)
+Coord snakeGetPos(Snake *s, int posBloc)
 {
-	int res = 0;
-	if (pos < 0 || pos >= s->size)
+	Coord res = malloc(sizeof(Coord));
+	if (posBloc < 0 || posBloc >= s->size)
 	{
 		printf("snakeGetPosition : Error pos parameter out of range\n");
 	}
@@ -167,19 +167,12 @@ int snakeGetPos(Snake *s, int pos, Control c)
 	{
 		int i;
 		Element *e = s->first;
-		for (i = 0; i < pos; i++)
+		for (i = 0; i < posBloc; i++)
 		{
 			e = e->next;
 		}
-		if (c == Line)
-		{
-			res = e->posX;
-		}
-		else if (c == Column)
-		{
-			res = e->posY;
-		}
-
+		res->x=e->posX;
+		res->y=e->posY;
 	}
 	return res;
 }

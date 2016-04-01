@@ -9,7 +9,8 @@
  * \details Toutes les entêtes de fonctions et structures necessaires à gérer le snake : création, récupération des valeurs, changer de direction, affichage et libération de la mémoire
  */
 
-#include <stdbool.h>
+#include <stdbool.h> 
+#include "coord.h"
 
 /**
  * \enum Direction
@@ -32,7 +33,7 @@ typedef enum Type {Feu, Eau, Plante} Type;
  * \brief Valeurs de gestion du snake
  * \details Contient toutes les valeurs pour la gestion du snake
  **/
-typedef enum Control {Line, Column} Control;
+//typedef enum Control {Line, Column} Control;
 #define ControlDef
 #endif
 
@@ -57,7 +58,7 @@ void snakeTeleportation(Snake *s, int posX, int posY);
 /* ****************
  *    Accessors   *
  **************** */
-int snakeGetPos(Snake *s, int pos, Control c);
+Coord snakeGetPos(Snake *s, int posBloc);
 
 Direction snakeGetDirection(Snake *s);
 void snakeSetDirection(Snake *s, Direction d);
