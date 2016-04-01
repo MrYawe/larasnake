@@ -19,10 +19,17 @@ void guiPlay()
 
     SDL_Init(SDL_INIT_VIDEO);
     // La surface finale qui sera affiché à l'écran
-    SDL_Surface *screen = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+    SDL_Surface *screen = SDL_SetVideoMode(M_SIZE_BOARD_X*M_CELL_SIZE, M_SIZE_BOARD_Y*M_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
     SDL_WM_SetCaption("Gestion des événements en SDL", NULL);
 
     if(!(surfaces[0]=IMG_Load("./images/cube.bmp")))
+        printf("%s\n", IMG_GetError());
+
+    if(!(surfaces[1]=IMG_Load("./images/background/bg-medium.png")))
+        printf("%s\n", IMG_GetError());
+
+    SDL_Surface *background;
+    if(!(background=IMG_Load("./images/background/bg-medium.png")))
         printf("%s\n", IMG_GetError());
 
     Game game = gameCreate();
@@ -34,6 +41,8 @@ void guiPlay()
         //printf("(2) Clear\n");
         guiClearScreen(screen);
         //printf("(3) Event\n");
+
+        // ia
 
         // Deplacement snake 1
         //printf("(4) Move snake 1\n");
@@ -64,6 +73,12 @@ void guiPlay()
             SDL_Delay(timer->delay); //delay processing
         }
 
+        SDL_Rect cellPosition;
+        cellPosition.x = 20;
+        cellPosition.y = 20;
+        if(SDL_BlitSurface(background, NULL, screen, &cellPosition)<0)
+            printf("%s\n", SDL_GetError());
+
         if(!continueGameMove)
             gameEnd(game);
         //printf("(7) Fin\n");
@@ -91,10 +106,10 @@ void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces) 
                 if(SDL_BlitSurface(surfaces[0], NULL, screen, &cellPosition)<0)
                     printf("%s\n", SDL_GetError());
             }
-            cellPosition.x+=N_CELL_SIZE;
+            cellPosition.x+=M_CELL_SIZE;
         }
         cellPosition.x=0;
-        cellPosition.y+=N_CELL_SIZE;
+        cellPosition.y+=M_CELL_SIZE;
     }
 }
 
@@ -108,26 +123,34 @@ void guiReloadScreen(SDL_Surface *screen) {
 }
 
 void guiSnakeEvent(SDL_Event *event, Snake *s) {
+    bool moved = false;
     while (SDL_PollEvent(event)) {
         switch(event->type) {
 
             case SDL_KEYDOWN:
-                switch(event->key.keysym.sym) {
-                    case SDLK_UP: // Flèche haut 1
-                        snakeSetDirection(s, UP);
-                        break;
-                    case SDLK_DOWN: // Flèche bas 2
-                        snakeSetDirection(s, DOWN);
-                        break;
-                    case SDLK_RIGHT: // Flèche droite 3
-                        snakeSetDirection(s, RIGHT);
-                        break;
-                    case SDLK_LEFT: // Flèche gauche 4
-                        snakeSetDirection(s, LEFT);
-                        break;
-                    default:
-                        break;
+                if (!moved) {
+                    switch(event->key.keysym.sym) {
+                        case SDLK_UP: // Flèche haut 1
+                            snakeSetDirection(s, UP);
+                            moved = true;
+                            break;
+                        case SDLK_DOWN: // Flèche bas 2
+                            snakeSetDirection(s, DOWN);
+                            moved = true;
+                            break;
+                        case SDLK_RIGHT: // Flèche droite 3
+                            snakeSetDirection(s, RIGHT);
+                            moved = true;
+                            break;
+                        case SDLK_LEFT: // Flèche gauche 4
+                            snakeSetDirection(s, LEFT);
+                            moved = true;
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
                 break;
             default:
                 break;

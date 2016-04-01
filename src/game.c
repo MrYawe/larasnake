@@ -17,14 +17,13 @@ struct Game
 		Board *board; // le board
 		Snake *snake1; // joueur 1
 		Snake *snake2; // joueur 2
-		//SDL_Surface **surfaces; // tableau des surfaces des cases
 		bool isPlaying;
 };
 
 Game gameCreate() // à faire : 3 mode de jeu différent (tiny, normal, big)
 {
 		Game g = malloc(sizeof(struct Game));
-		g->board = boardInit(N_SIZE_BOARD_X, N_SIZE_BOARD_Y, N_CELL_SIZE);
+		g->board = boardInit(M_SIZE_BOARD_X, M_SIZE_BOARD_Y, M_CELL_SIZE);
 		g->snake1 = snakeCreate(10, 1);
 		g->snake2 = snakeCreate(3, 2);
 		g->isPlaying = true;
