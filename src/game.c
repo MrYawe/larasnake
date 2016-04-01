@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "constants.h"
 #include "game.h"
+#include "coord.h"
 
 static bool checkMovement(Snake *s, Board *b);
 static bool isNextCellBorder(Board *b, Snake *s);
@@ -63,12 +64,12 @@ void initSnakes(Board *b, Snake *s1, Snake *s2)
 		int i;
 		for (i=0; i<snakeGetSize(s1); i++)
 		{
-				snakeUpdateElement(s1, snakeGetSize(s1) - i -1, boardGetSize(b, Line)/3-i, boardGetSize(b, Column)/2-1);
+				snakeUpdateElement(s1, snakeGetSize(s1) - i -1, boardGetWidth(b)/3-i, boardGetHeight(b)/2-1);
 		}
 		snakeSetDirection(s1, RIGHT);
 		for (i=0; i<snakeGetSize(s2); i++)
 		{
-				snakeUpdateElement(s2, snakeGetSize(s2) - i -1, boardGetSize(b, Line)/3*2+i, boardGetSize(b, Column)/2);
+				snakeUpdateElement(s2, snakeGetSize(s2) - i -1, boardGetWidth(b)/3*2+i, boardGetHeight(b)/2);
 		}
 		snakeSetDirection(s2, LEFT);
 		updateSnake(b, s1);
@@ -80,41 +81,37 @@ void updateSnake(Board *b, Snake *s)
 		int i;
 		for (i=0; i<snakeGetSize(s); i++)
 		{
-				boardSetValue(b, snakeGetPos(s, i, Line), snakeGetPos(s, i, Column), snakeGetId(s));
+				boardSetValue(b, snakeGetPos(s, i)->x, snakeGetPos(s, i)->y, snakeGetId(s));
 		}
 }
 
 bool moveSnake(Board *b, Snake *s)
 {
-		boardSetValue(b, snakeGetPos(s, 0, Line), snakeGetPos(s, 0, Column), 0);
+		boardSetValue(b, snakeGetPos(s, 0)->x, snakeGetPos(s, 0)->y, 0);
 		bool continueGame = checkMovement(s, b);
-		boardSetValue(b, snakeGetPos(s, snakeGetSize(s)-1, Line), snakeGetPos(s, snakeGetSize(s)-1, Column), snakeGetId(s));
+		boardSetValue(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetId(s));
 		return continueGame;
 }
 
-int nextPosCell(Snake *s, Control c)
+Coord nextPosCell(Snake *s)
 {
-		int res = snakeGetPos(s, snakeGetSize(s)-1, c);
+		Coord res = snakeGetPos(s, snakeGetSize(s)-1);
 		switch (snakeGetDirection(s))
 		{
 				case UP:
-						if (c == Column)
-						res -= 1;
+						res->y -= 1;
 						break;
 
 				case DOWN:
-						if (c == Column)
-						res += 1;
+						res->y += 1;
 						break;
 
 				case LEFT:
-						if (c == Line)
-						res -= 1;
+						res->x -= 1;
 						break;
 
 				case RIGHT:
-						if (c == Line)
-						res += 1;
+						res->x += 1;
 						break;
 
 				default:
@@ -127,8 +124,8 @@ int nextPosCell(Snake *s, Control c)
 static bool isNextCellOutOfRange(Board *b, Snake *s)
 {
 		bool res = false;
-		if (nextPosCell(s, Line) < 0 || nextPosCell(s, Column) < 0 ||
-		nextPosCell(s, Line) > boardGetSize(b, Line)-1 || nextPosCell(s, Column) > boardGetSize(b, Column)-1)
+		if (nextPosCell(s)->x < 0 || nextPosCell(s)->y < 0 ||
+		nextPosCell(s)->y > boardGetHeight(b)-1 || nextPosCell(s)->x > boardGetWidth(b)-1)
 		{
 				res = true;
 		}
@@ -138,7 +135,7 @@ static bool isNextCellOutOfRange(Board *b, Snake *s)
 static bool isNextCellDie(Board *b, Snake *s)
 {
 		bool res = false;
-		if (!isNextCellOutOfRange(b, s) && boardGetValue(b, nextPosCell(s, Line), nextPosCell(s, Column)) == 1)
+		if (!isNextCellOutOfRange(b, s) && boardGetValue(b, nextPosCell(s)->x, nextPosCell(s)->y) == 1)
 		res = true;
 		return res;
 }
@@ -147,12 +144,12 @@ static bool isNextCellBorder(Board *b, Snake *s)
 {
 		bool res = false;
 		if ((snakeGetDirection(s) == UP || snakeGetDirection(s)== DOWN) &&
-		(nextPosCell(s, Column)<0 || nextPosCell(s, Column)>boardGetSize(b, Column)-1))
+		(nextPosCell(s)->y<0 || nextPosCell(s)->y>boardGetWidth(b)-1))
 		{
 				res = true;
 		}
 		else if ((snakeGetDirection(s) == LEFT || snakeGetDirection(s) == RIGHT) &&
-		(nextPosCell(s, Line)<0 || nextPosCell(s, Line)>boardGetSize(b, Line)-1))
+		(nextPosCell(s)->x<0 || nextPosCell(s)->x>boardGetHeight(b)-1))
 		{
 				res = true;
 		}
@@ -175,19 +172,19 @@ static bool checkMovement(Snake *s, Board *b) {
 						switch (snakeGetDirection(s))
 						{
 								case UP:
-										snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1, Line), boardGetSize(b, Column)-1);
+										snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1)->y, boardGetWidth(b)-1);
 										break;
 
 								case DOWN:
-										snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1, Line), 0);
+										snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1)->y, 0);
 										break;
 
 								case LEFT:
-										snakeTeleportation(s, boardGetSize(b, Line)-1, snakeGetPos(s, snakeGetSize(s)-1, Column));
+										snakeTeleportation(s, boardGetHeight(b)-1, snakeGetPos(s, snakeGetSize(s)-1)->x);
 										break;
 
 								case RIGHT:
-										snakeTeleportation(s, 0, snakeGetPos(s, snakeGetSize(s)-1, Column));
+										snakeTeleportation(s, 0, snakeGetPos(s, snakeGetSize(s)-1)->x);
 										break;
 
 								default:

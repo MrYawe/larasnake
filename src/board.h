@@ -11,6 +11,10 @@
 
 // ifndef pour être sûr de définir l'enum Control qu'une seule fois
 #ifndef ControlDef
+
+#include <stdbool.h>
+#include "coord.h"
+ 
  /**
  * \enum Control
  * \brief Valeurs de gestion du snake
@@ -31,13 +35,16 @@ Board* boardInit(int sizeX, int sizeY, int sizeCell);
  **************** */
 int boardGetValue(Board *b, int posx, int posy);
 void boardSetValue(Board *b, int posx, int posy, int val);
-int boardGetSize(Board *b, Control c);
+
+int boardGetHeight(Board *b);
+int boardGetWidth(Board *b);
 
 /* ***************
  *   Utilitary   *
  *************** */
 void boardDisplay(Board *b);
 void boardFree(Board *b);
+bool boardInside(Board *b, Coord coord);
 
 // TODO: bordure qui se grise
 // TODO: bordure qui se dégrise

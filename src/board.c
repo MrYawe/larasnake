@@ -11,7 +11,6 @@
 #include <stdlib.h>
 #include "board.h"
 
-
 /**
  * \struct Board
  * \brief La structure représente un plateau
@@ -112,20 +111,25 @@ void boardSetValue(Board *b, int posx, int posy, int val)
  * \param c Variable de type enum Control qui correspond à ligne ou colonne suivant ce que l'on souhaite récupérer
  * \return Variable de type int qui correspond à la taille en X du tableau
  */
-int boardGetSize(Board *b, Control c)
+int boardGetHeight(Board *b)
 {
-  int res = 0;
+  int res = -1;
   if (b != NULL) {
-    if (c == Line) {
-      res = b->sizeX;
-    } else if (c == Column) {
       res = b->sizeY;
-    } else {
-      printf("boardGetSize : error enum not known\n");
-    }
   }
   return res;
 }
+
+int boardGetWidth(Board *b)
+{
+  int res = -1;
+  if (b != NULL) {
+      res = b->sizeX;
+  }
+  return res;
+}
+
+
 
 /**
  * \fn boardDisplay
@@ -162,4 +166,20 @@ void boardFree(Board *b)
   }
   free(b->tab);
   free(b);
+}
+
+/**
+ * \fn boardInside
+ * \brief La fonction vérifie si la position est dans le board
+ * \param b Variable de type Board qui correspond au tableau à effacer
+ * \param posX position X de la case à tester
+ * \param posY position Y de la case à tester 
+ */
+bool boardInside(Board *b, Coord coord) {
+  bool res = false;
+  if (coord->x < 0 || coord->y < 0 || coord->x > boardGetWidth(b)-1 || coord->y > boardGetHeight(b)-1)
+  {
+      res = true;
+  }
+  return res;
 }

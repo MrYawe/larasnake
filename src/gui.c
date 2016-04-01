@@ -7,6 +7,7 @@
 #include "gui.h"
 #include "constants.h"
 #include "game.h"
+#include "ia.h"
 
 void guiPlay()
 {
@@ -39,6 +40,7 @@ void guiPlay()
         //printf("(4) Move snake 1\n");
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(gameGetSnake(game, 1))) {
+            iaSurvive(gameGetBoard(game), gameGetSnake(game, 1));
             guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
             continueGameMove = moveSnake(gameGetBoard(game), gameGetSnake(game, 1));
             timer->snake1MoveTimer = 0 ;
@@ -85,8 +87,8 @@ void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces) 
     //printf("Taille line: %d\n", boardGetSize(board, Line));
     //printf("Taille column: %d\n", boardGetSize(board, Column));
 
-    for(y=0; y<boardGetSize(board, Column); y++) {
-        for (x=0; x<boardGetSize(board, Line); x++) {
+    for(y=0; y<boardGetHeight(board); y++) {
+        for (x=0; x<boardGetWidth(board); x++) {
             if(boardGetValue(board, x, y)==0) {
                 if(SDL_BlitSurface(surfaces[0], NULL, screen, &cellPosition)<0)
                     printf("%s\n", SDL_GetError());
