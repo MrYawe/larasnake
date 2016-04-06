@@ -45,6 +45,7 @@ int boardGetWidth(Board *b);
 void boardDisplay(Board *b);
 void boardFree(Board *b);
 bool boardInside(Board *b, Coord coord);
+bool boardIsSnake(Board *b, Coord coord);
 
 // TODO: bordure qui se grise
 // TODO: bordure qui se dégrise

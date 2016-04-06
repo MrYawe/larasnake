@@ -177,9 +177,17 @@ void boardFree(Board *b)
  */
 bool boardInside(Board *b, Coord coord) {
   bool res = false;
-  if (coord->x < 0 || coord->y < 0 || coord->x > boardGetWidth(b)-1 || coord->y > boardGetHeight(b)-1)
+  if (coord->x >= 0 && coord->y >= 0 && coord->x < boardGetWidth(b) && coord->y < boardGetHeight(b))
   {
       res = true;
+  }
+  return res;
+}
+
+bool boardIsSnake(Board *b, Coord coord) {
+  bool res=false;
+  if(boardGetValue(b, coord->x, coord->y)==1){
+    res = true;
   }
   return res;
 }

@@ -24,7 +24,7 @@ struct Game
 Game gameCreate() // à faire : 3 mode de jeu différent (tiny, normal, big)
 {
 		Game g = malloc(sizeof(struct Game));
-		g->board = boardInit(M_SIZE_BOARD_X, M_SIZE_BOARD_Y, M_CELL_SIZE);
+		g->board = boardInit(10, 10, M_CELL_SIZE);
 		g->snake1 = snakeCreate(10, 1);
 		g->snake2 = snakeCreate(3, 2);
 		g->isPlaying = true;
@@ -131,24 +131,26 @@ static bool isNextCellOutOfRange(Board *b, Snake *s)
 		return res;
 }
 
-static bool isNextCellDie(Board *b, Snake *s)
+static bool isNextCellSnake(Board *b, Snake *s)
 {
 		bool res = false;
 		if (!isNextCellOutOfRange(b, s) && boardGetValue(b, nextPosCell(s)->x, nextPosCell(s)->y) == 1)
-		res = true;
+		{
+			//res = true;
+		}
 		return res;
 }
-
+//DOUBLE OUT OF RANGE
 static bool isNextCellBorder(Board *b, Snake *s)
 {
 		bool res = false;
 		if ((snakeGetDirection(s) == UP || snakeGetDirection(s)== DOWN) &&
-		(nextPosCell(s)->y<0 || nextPosCell(s)->y>boardGetWidth(b)-1))
+		(nextPosCell(s)->y<0 || nextPosCell(s)->y>boardGetHeight(b)-1))
 		{
 				res = true;
 		}
 		else if ((snakeGetDirection(s) == LEFT || snakeGetDirection(s) == RIGHT) &&
-		(nextPosCell(s)->x<0 || nextPosCell(s)->x>boardGetHeight(b)-1))
+		(nextPosCell(s)->x<0 || nextPosCell(s)->x>boardGetWidth(b)-1))
 		{
 				res = true;
 		}
@@ -158,7 +160,7 @@ static bool isNextCellBorder(Board *b, Snake *s)
 static bool checkMovement(Snake *s, Board *b) {
 		bool canTp = false;
 		bool continueGame = true;
-		if (isNextCellDie(b, s))
+		if (isNextCellSnake(b, s))
 		{
 				printf("Snake mort !\n");
 				continueGame = false;

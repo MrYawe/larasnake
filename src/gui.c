@@ -34,6 +34,7 @@ void guiPlay()
         printf("%s\n", IMG_GetError());
 
     Game game = gameCreate();
+    Snake* snake1 = gameGetSnake(game , 1);
 
     while (gameGetIsPlaying(game)) {
 
@@ -49,8 +50,11 @@ void guiPlay()
         //printf("(4) Move snake 1\n");
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(gameGetSnake(game, 1))) {
-            iaSurvive(gameGetBoard(game), gameGetSnake(game, 1));
-            guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
+            snakeSetDirection(snake1,iaSurvive(gameGetBoard(game), snake1));
+            //guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
+            
+            printf("direction snake : %d\n", snakeGetDirection(snake1));
+            printf("position snake: %d %d\n\n",snakeGetPos(snake1, snakeGetSize(snake1)-1)->x, snakeGetPos(snake1, snakeGetSize(snake1)-1)->y);
             continueGameMove = moveSnake(gameGetBoard(game), gameGetSnake(game, 1));
             timer->snake1MoveTimer = 0 ;
             //snakeSetSpeed(gameGetSnake(game, 1), snakeGetSpeed(gameGetSnake(game, 1))-1); // fun test
