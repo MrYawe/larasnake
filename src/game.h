@@ -4,6 +4,13 @@
 #include "board.h"
 #include "snake.h"
 
+/**
+ * \enum Direction
+ * \brief Permet de gérer la direction du snake
+ * \details Contient toutes les directions possibles pour le snake
+ **/
+typedef enum BoardSize {SMALL, MEDIUM, LARGE} BoardSize;
+
 typedef struct Game *Game;
 Game gameCreate();
 

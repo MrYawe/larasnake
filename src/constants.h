@@ -1,6 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+
 /** Board values **/
 #define BONUS_SPEED 3
 #define BONUS_JAM 4 // le jambon c'est important
@@ -10,6 +11,7 @@
 
 /*** Snake ***/
 #define SNAKE_DEFAULT_SPEED 100 // en ms
+#define NB_TYPES 3
 
 
 /*** Board dimensions ***/

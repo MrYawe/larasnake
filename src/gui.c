@@ -9,7 +9,7 @@
 #include "game.h"
 #include "ia.h"
 
-void guiPlay()
+void guiPlay(BoardSize size)
 {
     SDL_Event event; // Permet de capturer les évènements clavier/souris
     //SDL_Event event2;
@@ -20,7 +20,7 @@ void guiPlay()
 
     SDL_Init(SDL_INIT_VIDEO);
     // La surface finale qui sera affiché à l'écran
-    SDL_Surface *screen = SDL_SetVideoMode(M_SIZE_BOARD_X*M_CELL_SIZE, M_SIZE_BOARD_Y*M_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+    SDL_Surface *screen = guiCreateScreen(size);
     SDL_WM_SetCaption("Gestion des événements en SDL", NULL);
 
     if(!(surfaces[0]=IMG_Load("./images/cube.bmp")))
@@ -33,7 +33,7 @@ void guiPlay()
     if(!(background=IMG_Load("./images/background/bg-medium.png")))
         printf("%s\n", IMG_GetError());
 
-    Game game = gameCreate();
+    Game game = gameCreate(size);
     Snake* snake1 = gameGetSnake(game , 1);
 
     while (gameGetIsPlaying(game)) {
@@ -52,7 +52,7 @@ void guiPlay()
         if (timer->snake1MoveTimer >= snakeGetSpeed(gameGetSnake(game, 1))) {
             snakeSetDirection(snake1,iaSurvive(gameGetBoard(game), snake1));
             //guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
-            
+
             printf("direction snake : %d\n", snakeGetDirection(snake1));
             printf("position snake: %d %d\n\n",snakeGetPos(snake1, snakeGetSize(snake1)-1)->x, snakeGetPos(snake1, snakeGetSize(snake1)-1)->y);
             continueGameMove = moveSnake(gameGetBoard(game), gameGetSnake(game, 1));
@@ -96,6 +96,25 @@ void guiPlay()
 void freeAll(SDL_Surface **surfaces) {
     SDL_FreeSurface(surfaces[0]);
     SDL_Quit();
+}
+
+SDL_Surface* guiCreateScreen(BoardSize size) {
+    SDL_Surface* screen;
+    switch (size) {
+        case SMALL:
+            screen = SDL_SetVideoMode(S_SIZE_BOARD_X*S_CELL_SIZE, S_SIZE_BOARD_Y*S_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+            break;
+
+        case MEDIUM:
+            screen = SDL_SetVideoMode(M_SIZE_BOARD_X*M_CELL_SIZE, M_SIZE_BOARD_Y*M_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+            break;
+
+        case LARGE:
+            screen = SDL_SetVideoMode(L_SIZE_BOARD_X*L_CELL_SIZE, L_SIZE_BOARD_Y*L_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+            break;
+    }
+
+    return screen;
 }
 
 void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces) {

@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-    guiPlay();
+    guiPlay(MEDIUM); // SMALL MEDIUM LARGE
 
     return EXIT_SUCCESS;
 }

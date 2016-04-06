@@ -17,9 +17,10 @@ struct Timer
 	Uint32 snake2LastMove;
 };
 
-void guiPlay();
+void guiPlay(BoardSize size);
 void freeAll(SDL_Surface **surfaces);
 void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces);
+SDL_Surface* guiCreateScreen(BoardSize size);
 void guiSnakeEvent(SDL_Event *event, Snake *s);
 void guiGeneralEvent(SDL_Event *event, Game game);
 void guiClearScreen(SDL_Surface *screen);

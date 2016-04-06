@@ -11,8 +11,6 @@
 #include <time.h>
 #include "snake.h"
 #include "constants.h"
-#define NB_TYPES 3
-#define BOARD_SIZE 20
 
 // Headers for static functions of snake file
 static void snakeAddFirstElement(Snake *s, int posX, int posY);
