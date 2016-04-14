@@ -4,10 +4,15 @@
 #include <stdint.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_rotozoom.h>
 #include "gui.h"
 #include "constants.h"
 #include "game.h"
 #include "ia.h"
+
+//Flip flags
+const int FLIP_VERTICAL = 1;
+const int FLIP_HORIZONTAL = 2;
 
 void guiPlay(BoardSize size)
 {
@@ -23,7 +28,7 @@ void guiPlay(BoardSize size)
     SDL_Surface *screen = guiCreateScreen(size);
     SDL_WM_SetCaption("Gestion des événements en SDL", NULL);
 
-    if(!(surfaces[0]=IMG_Load("./images/cube.bmp")))
+    if(!(surfaces[0]=IMG_Load("./images/snake/blue/snake-blue-body.png")))
         printf("%s\n", IMG_GetError());
 
     if(!(surfaces[1]=IMG_Load("./images/background/bg-medium.png")))
@@ -37,11 +42,10 @@ void guiPlay(BoardSize size)
     Snake* snake1 = gameGetSnake(game , 1);
 
     while (gameGetIsPlaying(game)) {
-
         //printf("(1) Debut\n");
         timer->start = SDL_GetTicks(); //when the frame starts
         //printf("(2) Clear\n");
-        guiClearScreen(screen);
+        //guiClearScreen(screen);
         //printf("(3) Event\n");
 
         // ia
@@ -50,8 +54,8 @@ void guiPlay(BoardSize size)
         //printf("(4) Move snake 1\n");
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(gameGetSnake(game, 1))) {
-            snakeSetDirection(snake1,iaSurvive(gameGetBoard(game), snake1));
-            //guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
+            //snakeSetDirection(snake1, iaSurvive(gameGetBoard(game), snake1));
+            guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
 
             printf("direction snake : %d\n", snakeGetDirection(snake1));
             printf("position snake: %d %d\n\n",snakeGetPos(snake1, snakeGetSize(snake1)-1)->x, snakeGetPos(snake1, snakeGetSize(snake1)-1)->y);
@@ -61,10 +65,18 @@ void guiPlay(BoardSize size)
         }
         timer->snake1LastMove = SDL_GetTicks();
 
-        //guiGeneralEvent(&event2, game);
+        SDL_Rect cellPosition;
+        cellPosition.x = 0;
+        cellPosition.y = 0;
+        if(SDL_BlitSurface(background, NULL, screen, &cellPosition)<0)
+            printf("%s\n", SDL_GetError());
 
+        guiDrawGame(screen, game, surfaces);
         //printf("(5) Display board\n");
-        guiDisplayBoard(screen, gameGetBoard(game), surfaces);
+        //guiDisplayBoard(screen, gameGetBoard(game), surfaces);
+
+
+
         //printf("(6) Reload screen\n");
         guiReloadScreen(screen);
 
@@ -78,12 +90,6 @@ void guiPlay(BoardSize size)
         } else {
             SDL_Delay(timer->delay); //delay processing
         }
-
-        SDL_Rect cellPosition;
-        cellPosition.x = 20;
-        cellPosition.y = 20;
-        if(SDL_BlitSurface(background, NULL, screen, &cellPosition)<0)
-            printf("%s\n", SDL_GetError());
 
         if(!continueGameMove)
             gameEnd(game);
@@ -117,6 +123,43 @@ SDL_Surface* guiCreateScreen(BoardSize size) {
     return screen;
 }
 
+void guiDrawGame(SDL_Surface *screen, Game game, SDL_Surface **surfaces) {
+    guiDrawSnake(screen, gameGetSnake(game, 1), surfaces);
+}
+
+void guiDrawSnake(SDL_Surface *screen, Snake *snake, SDL_Surface **surfaces) {
+    int i;
+    SDL_Rect cellPosition;
+    SDL_Surface *rotation = rotozoomSurface(surfaces[0], 90, 1.0, 1); //On transforme la surface image.;
+
+    for (i=0; i<snakeGetSize(snake); i++) {
+        cellPosition.x = snakeGetPos(snake, i)->x * M_CELL_SIZE;
+        cellPosition.y = snakeGetPos(snake, i)->y * M_CELL_SIZE;
+
+        if(i == 0) {
+
+        } else if (i == snakeGetSize(snake)-1) {
+
+        } else {
+            if(SDL_BlitSurface(rotation, NULL, screen, &cellPosition)<0)
+                printf("%s\n", SDL_GetError());
+        }
+    }
+}
+
+void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip) {
+    //Holds offsets
+    SDL_Rect offset;
+
+    //Get offsets
+    offset.x = x;
+    offset.y = y;
+
+    //Blit
+    if(SDL_BlitSurface(source, clip, destination, &offset) < 0)
+        printf("%s\n", SDL_GetError());
+}
+
 void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces) {
     int x, y;
     SDL_Rect cellPosition;
@@ -127,7 +170,7 @@ void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces) 
 
     for(y=0; y<boardGetHeight(board); y++) {
         for (x=0; x<boardGetWidth(board); x++) {
-            if(boardGetValue(board, x, y)==0) {
+            if(boardGetValue(board, x, y)==1) {
                 if(SDL_BlitSurface(surfaces[0], NULL, screen, &cellPosition)<0)
                     printf("%s\n", SDL_GetError());
             }

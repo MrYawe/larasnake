@@ -23,7 +23,7 @@
 // Medium
 #define M_SIZE_BOARD_X 50
 #define M_SIZE_BOARD_Y 35
-#define M_CELL_SIZE 20
+#define M_CELL_SIZE 18
 
 // Large
 #define L_SIZE_BOARD_X 65

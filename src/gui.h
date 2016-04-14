@@ -20,11 +20,17 @@ struct Timer
 void guiPlay(BoardSize size);
 void freeAll(SDL_Surface **surfaces);
 void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces);
+void guiDrawGame(SDL_Surface *screen, Game game, SDL_Surface **surfaces);
+void guiDrawSnake(SDL_Surface *screen, Snake *snake, SDL_Surface **surfaces);
 SDL_Surface* guiCreateScreen(BoardSize size);
 void guiSnakeEvent(SDL_Event *event, Snake *s);
 void guiGeneralEvent(SDL_Event *event, Game game);
 void guiClearScreen(SDL_Surface *screen);
 void guiReloadScreen(SDL_Surface *screen);
+
+Uint32 guiGetPixel32( SDL_Surface *surface, int x, int y );
+void guiSetPixel32( SDL_Surface *surface, int x, int y, Uint32 pixel );
+SDL_Surface *flip_surface( SDL_Surface *surface, int flags );
 
 
 #endif
