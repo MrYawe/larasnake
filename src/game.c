@@ -148,9 +148,9 @@ static bool isNextCellOutOfRange(Board *b, Snake *s)
 bool isNextCellSnake(Board *b, Snake *s)
 {
 		bool res = false;
-		if (!isNextCellOutOfRange(b, s) && boardGetValue(b, nextPosCell(s)->x, nextPosCell(s)->y) == 1)
+		if (!isNextCellOutOfRange(b, s) && (boardGetValue(b, nextPosCell(s)->x, nextPosCell(s)->y) == 1 || boardGetValue(b, nextPosCell(s)->x, nextPosCell(s)->y) == 2))
 		{
-			//res = true;
+			res = true;
 		}
 		return res;
 }
