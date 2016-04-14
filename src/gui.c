@@ -19,11 +19,16 @@ void guiPlay(BoardSize size)
     SDL_Event event; // Permet de capturer les évènements clavier/souris
     //SDL_Event event2;
     SDL_Surface **surfaces = malloc(2*sizeof(SDL_Surface*));
-    Timer timer = malloc(sizeof(Timer*));
-    timer->snake1MoveTimer = 0;
-    bool continueGameMove = true;
 
     SDL_Init(SDL_INIT_VIDEO);
+
+    Timer timer = guiCreateTimer();
+    /*timer->snake1LastMove = 0;
+    timer->snake2LastMove = 0;*/ // bug à corriger
+
+    bool continueGameMove1 = true;
+    bool continueGameMove2 = true;
+
     // La surface finale qui sera affiché à l'écran
     SDL_Surface *screen = guiCreateScreen(size);
     SDL_WM_SetCaption("Gestion des événements en SDL", NULL);
@@ -34,36 +39,41 @@ void guiPlay(BoardSize size)
     if(!(surfaces[1]=IMG_Load("./images/background/bg-medium.png")))
         printf("%s\n", IMG_GetError());
 
+
     SDL_Surface *background;
     if(!(background=IMG_Load("./images/background/bg-medium.png")))
         printf("%s\n", IMG_GetError());
 
     Game game = gameCreate(size);
-    Snake* snake1 = gameGetSnake(game , 1);
+    /*Snake* snake1 = gameGetSnake(game , 1);
+    Snake* snake2 = gameGetSnake(game , 2);*/
 
     while (gameGetIsPlaying(game)) {
-        //printf("(1) Debut\n");
+        printf("(1) Debut\n");
+
         timer->start = SDL_GetTicks(); //when the frame starts
-        //printf("(2) Clear\n");
-        //guiClearScreen(screen);
-        //printf("(3) Event\n");
 
-        // ia
-
-        // Deplacement snake 1
-        //printf("(4) Move snake 1\n");
+        // Deplacement snake 1 (joueur)
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(gameGetSnake(game, 1))) {
-            //snakeSetDirection(snake1, iaSurvive(gameGetBoard(game), snake1));
             guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
-
-            printf("direction snake : %d\n", snakeGetDirection(snake1));
-            printf("position snake: %d %d\n\n",snakeGetPos(snake1, snakeGetSize(snake1)-1)->x, snakeGetPos(snake1, snakeGetSize(snake1)-1)->y);
-            continueGameMove = moveSnake(gameGetBoard(game), gameGetSnake(game, 1));
+            continueGameMove1 = moveSnake(gameGetBoard(game), gameGetSnake(game, 1));
             timer->snake1MoveTimer = 0 ;
             //snakeSetSpeed(gameGetSnake(game, 1), snakeGetSpeed(gameGetSnake(game, 1))-1); // fun test
         }
         timer->snake1LastMove = SDL_GetTicks();
+        // Fin Deplacement snake 1
+
+        // Deplacement snake 2 (IA)
+        timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
+        if (timer->snake2MoveTimer >= snakeGetSpeed(gameGetSnake(game, 2))) {
+            snakeSetDirection(gameGetSnake(game, 2), iaSurvive(gameGetBoard(game), gameGetSnake(game, 2)));
+            continueGameMove2 = moveSnake(gameGetBoard(game), gameGetSnake(game, 2));
+            timer->snake2MoveTimer = 0 ;
+            //snakeSetSpeed(gameGetSnake(game, 2), snakeGetSpeed(gameGetSnake(game, 2))-1); // fun test
+        }
+        timer->snake2LastMove = SDL_GetTicks();
+        // Fin Deplacement snake 2
 
         SDL_Rect cellPosition;
         cellPosition.x = 0;
@@ -72,6 +82,7 @@ void guiPlay(BoardSize size)
             printf("%s\n", SDL_GetError());
 
         guiDrawGame(screen, game, surfaces);
+        //boardDisplay(gameGetBoard(game));
         //printf("(5) Display board\n");
         //guiDisplayBoard(screen, gameGetBoard(game), surfaces);
 
@@ -91,12 +102,13 @@ void guiPlay(BoardSize size)
             SDL_Delay(timer->delay); //delay processing
         }
 
-        if(!continueGameMove)
+
+        if(!continueGameMove1 || !continueGameMove2)
             gameEnd(game);
         //printf("(7) Fin\n");
     }
 
-    freeAll(surfaces);
+    //freeAll(surfaces);
 }
 
 void freeAll(SDL_Surface **surfaces) {
@@ -125,6 +137,7 @@ SDL_Surface* guiCreateScreen(BoardSize size) {
 
 void guiDrawGame(SDL_Surface *screen, Game game, SDL_Surface **surfaces) {
     guiDrawSnake(screen, gameGetSnake(game, 1), surfaces);
+    guiDrawSnake(screen, gameGetSnake(game, 2), surfaces);
 }
 
 void guiDrawSnake(SDL_Surface *screen, Snake *snake, SDL_Surface **surfaces) {
@@ -179,6 +192,19 @@ void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces) 
         cellPosition.x=0;
         cellPosition.y+=M_CELL_SIZE;
     }
+}
+
+Timer guiCreateTimer() {
+    Timer timer = malloc(sizeof(Timer*));
+    timer->snake1MoveTimer = 0;
+    timer->snake2MoveTimer = 0;
+
+    //timer->snake1LastMove = 0;
+    //timer->snake2LastMove = 0;
+    printf("%d\n", timer->snake1LastMove);
+    printf("%d\n", timer->snake2LastMove);
+
+    return timer;
 }
 
 void guiClearScreen(SDL_Surface *screen) {

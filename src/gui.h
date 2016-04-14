@@ -27,6 +27,7 @@ void guiSnakeEvent(SDL_Event *event, Snake *s);
 void guiGeneralEvent(SDL_Event *event, Game game);
 void guiClearScreen(SDL_Surface *screen);
 void guiReloadScreen(SDL_Surface *screen);
+Timer guiCreateTimer();
 
 Uint32 guiGetPixel32( SDL_Surface *surface, int x, int y );
 void guiSetPixel32( SDL_Surface *surface, int x, int y, Uint32 pixel );

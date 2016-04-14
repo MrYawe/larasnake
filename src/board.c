@@ -186,7 +186,7 @@ bool boardInside(Board *b, Coord coord) {
 
 bool boardIsSnake(Board *b, Coord coord) {
   bool res=false;
-  if(boardGetValue(b, coord->x, coord->y)==1){
+  if(boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2){
     res = true;
   }
   return res;
