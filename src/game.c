@@ -38,8 +38,8 @@ Game gameCreate(BoardSize size) // à faire : 3 mode de jeu différent (tiny, no
 						break;
 		}
 
-		g->snake1 = snakeCreate(10, 1);
-		g->snake2 = snakeCreate(3, 2);
+		g->snake1 = snakeCreate(7, 1);
+		g->snake2 = snakeCreate(7, 2);
 		g->isPlaying = true;
 
     initSnakes(g->board, g->snake1, g->snake2);
@@ -67,7 +67,8 @@ bool gameGetIsPlaying(Game g)
 // termine la partie
 void gameEnd(Game g)
 {
-		g->isPlaying = false;
+	boardFree(g->board);
+	g->isPlaying = false;
 }
 
 

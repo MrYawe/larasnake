@@ -16,7 +16,8 @@ void guiPlay(BoardSize size)
     SDL_Surface **surfaces = malloc(2*sizeof(SDL_Surface*));
     Timer timer = malloc(sizeof(Timer*));
     timer->snake1MoveTimer = 0;
-    bool continueGameMove = true;
+    bool continueGameMove1 = true;
+    bool continueGameMove2 = true;
 
     SDL_Init(SDL_INIT_VIDEO);
     // La surface finale qui sera affiché à l'écran
@@ -35,6 +36,7 @@ void guiPlay(BoardSize size)
 
     Game game = gameCreate(size);
     Snake* snake1 = gameGetSnake(game , 1);
+    Snake* snake2 = gameGetSnake(game , 2);
 
     while (gameGetIsPlaying(game)) {
 
@@ -50,12 +52,12 @@ void guiPlay(BoardSize size)
         //printf("(4) Move snake 1\n");
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(gameGetSnake(game, 1))) {
-            snakeSetDirection(snake1,iaSurvive(gameGetBoard(game), snake1));
-            //guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
+            snakeSetDirection(snake2,iaSurvive(gameGetBoard(game), snake2));
+            guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
 
-            printf("direction snake : %d\n", snakeGetDirection(snake1));
-            printf("position snake: %d %d\n\n",snakeGetPos(snake1, snakeGetSize(snake1)-1)->x, snakeGetPos(snake1, snakeGetSize(snake1)-1)->y);
-            continueGameMove = moveSnake(gameGetBoard(game), gameGetSnake(game, 1));
+            continueGameMove1 = moveSnake(gameGetBoard(game), gameGetSnake(game, 1));
+            continueGameMove2 = moveSnake(gameGetBoard(game), gameGetSnake(game, 2));
+            boardDisplay(gameGetBoard(game));
             timer->snake1MoveTimer = 0 ;
             //snakeSetSpeed(gameGetSnake(game, 1), snakeGetSpeed(gameGetSnake(game, 1))-1); // fun test
         }
@@ -85,7 +87,7 @@ void guiPlay(BoardSize size)
         if(SDL_BlitSurface(background, NULL, screen, &cellPosition)<0)
             printf("%s\n", SDL_GetError());
 
-        if(!continueGameMove)
+        if(!continueGameMove1 || !continueGameMove2)
             gameEnd(game);
         //printf("(7) Fin\n");
     }
