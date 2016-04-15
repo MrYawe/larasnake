@@ -191,3 +191,15 @@ bool boardIsSnake(Board *b, Coord coord) {
   }
   return res;
 }
+
+void boardFeed(Board *b) {
+  int x = rand()%b->sizeX;
+  int y = rand()%b->sizeY;
+  /*while(boardGetValue(b, x, y)!=0){
+    x = rand()%b->sizeX;
+    y = rand()%b->sizeY;
+  }*/
+  //boardSetValue(b, x, y, 9);
+
+  printf("x: %d, y: %d \n", x, y);
+}
