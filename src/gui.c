@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <time.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_rotozoom.h>
@@ -26,6 +27,8 @@ void guiPlay(BoardSize size)
 
     Timer timer = guiCreateTimer();
 
+    srand(time(NULL));
+
     bool continueGameMove1 = true;
     bool continueGameMove2 = true;
 
@@ -44,11 +47,11 @@ void guiPlay(BoardSize size)
     Game game = gameCreate(size);
     /*Snake* snake1 = gameGetSnake(game , 1);
     Snake* snake2 = gameGetSnake(game , 2);*/
+    boardFeed(gameGetBoard(game));
 
     while (gameGetIsPlaying(game)) {
 
         timer->start = SDL_GetTicks(); //when the frame starts
-
         // Deplacement snake 1 (joueur)
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(gameGetSnake(game, 1))) {
