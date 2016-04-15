@@ -17,12 +17,32 @@ struct Timer
 	Uint32 snake2LastMove;
 };
 
+typedef struct SnakeAssets *SnakeAssets;
+struct SnakeAssets
+{
+	SDL_Surface **head;
+	SDL_Surface **body;
+	SDL_Surface **tail;
+};
+
+typedef struct Assets *Assets;
+struct Assets
+{
+	SnakeAssets snakeBlue;
+	SnakeAssets snakeRed;
+	SnakeAssets snakeGreen;
+	SDL_Surface *board;
+};
+
 void guiPlay(BoardSize size);
 void freeAll(SDL_Surface **surfaces);
 void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces);
-void guiDrawGame(SDL_Surface *screen, Game game, SDL_Surface **surfaces);
-void guiDrawSnake(SDL_Surface *screen, Snake *snake, SDL_Surface **surfaces);
+Assets guiLoadGame();
+SnakeAssets guiLoadSnake(SnakeType type);
+void guiDrawGame(SDL_Surface *screen, Game game, Assets assets);
+void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets);
 SDL_Surface* guiCreateScreen(BoardSize size);
+void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
 void guiSnakeEvent(SDL_Event *event, Snake *s);
 void guiGeneralEvent(SDL_Event *event, Game game);
 void guiClearScreen(SDL_Surface *screen);

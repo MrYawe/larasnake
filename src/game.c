@@ -38,8 +38,8 @@ Game gameCreate(BoardSize size) // à faire : 3 mode de jeu différent (tiny, no
 						break;
 		}
 
-		g->snake1 = snakeCreate(7, 1);
-		g->snake2 = snakeCreate(7, 2);
+		g->snake1 = snakeCreate(7, 1, RIGHT);
+		g->snake2 = snakeCreate(7, 2, LEFT);
 		g->isPlaying = true;
 
     initSnakes(g->board, g->snake1, g->snake2);
@@ -79,14 +79,12 @@ void initSnakes(Board *b, Snake *s1, Snake *s2)
 		{
 				snakeUpdateElement(s1, snakeGetSize(s1) - i -1, boardGetWidth(b)/3-i, boardGetHeight(b)/2-1);
 		}
-		snakeSetDirection(s1, RIGHT);
 		for (i=0; i<snakeGetSize(s2); i++)
 		{
 				snakeUpdateElement(s2, snakeGetSize(s2) - i -1, boardGetWidth(b)/3*2+i, boardGetHeight(b)/2);
 		}
-		snakeSetDirection(s2, LEFT);
 		updateSnake(b, s1);
-		// updateSnake(b, s2);
+		updateSnake(b, s2);
 }
 
 void updateSnake(Board *b, Snake *s)

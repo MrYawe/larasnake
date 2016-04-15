@@ -18,7 +18,7 @@
 // Small
 #define S_SIZE_BOARD_X 35
 #define S_SIZE_BOARD_Y 25
-#define S_CELL_SIZE 20
+#define S_CELL_SIZE 18
 
 // Medium
 #define M_SIZE_BOARD_X 50
@@ -28,7 +28,7 @@
 // Large
 #define L_SIZE_BOARD_X 65
 #define L_SIZE_BOARD_Y 35
-#define L_CELL_SIZE 20
+#define L_CELL_SIZE 18
 
 /***  ***/
 

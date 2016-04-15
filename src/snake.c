@@ -13,8 +13,8 @@
 #include "constants.h"
 
 // Headers for static functions of snake file
-static void snakeAddFirstElement(Snake *s, int posX, int posY);
-static void snakeAddLastElement(Snake *s, int posX, int posY);
+static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orientation);
+static void snakeAddLastElement(Snake *s, int posX, int posY, Direction orientation);
 static void snakeDeleteFirstElement(Snake *s);
 //static void snakeDeleteLastElement(Snake *s);
 //static int mod(int a, int b);
@@ -32,7 +32,7 @@ struct Snake
 	int size;
 	int speed;
 	Direction direction;
-	Type type;
+	SnakeType type;
 	bool isGhost;
 };
 
@@ -47,6 +47,7 @@ struct Element
 	int posY;
 	Element *next;
 	Element *previous;
+	Direction orientation;
 };
 
 /**
@@ -57,7 +58,7 @@ struct Element
  * \param id Entier qui correspond à l'id du snake
  * \return Variable de type Snake qui contiendra un snake
  */
-Snake* snakeCreate(int size, int id)
+Snake* snakeCreate(int size, int id, Direction d)
 {
 	Snake *s = malloc(sizeof(Snake));
 	s->first = NULL;
@@ -65,13 +66,14 @@ Snake* snakeCreate(int size, int id)
 	s->size = 0;
 	s->speed = SNAKE_DEFAULT_SPEED;
 	s->id = id;
+	s->direction = d;
 	s->isGhost = false;
 	srand(rand()*time(NULL));
 	s->type = (int)rand()%NB_TYPES;
 	int i;
 	for (i=0; i<size; i++)
 	{
-		snakeAddFirstElement(s, 0, 0);
+		snakeAddFirstElement(s, 0, 0, s->direction);
 	}
 	return s;
 }
@@ -84,7 +86,7 @@ Snake* snakeCreate(int size, int id)
  */
 void snakeGoUp(Snake *s)
 {
-	snakeAddLastElement(s, s->last->posX, s->last->posY - 1);
+	snakeAddLastElement(s, s->last->posX, s->last->posY - 1, s->direction);
 	//snakeAddLastElement(s, s->last->posX, mod(s->last->posY - 1, BOARD_SIZE));
 	snakeDeleteFirstElement(s);
 	s->direction = UP;
@@ -98,7 +100,7 @@ void snakeGoUp(Snake *s)
  */
 void snakeGoDown(Snake *s)
 {
-	snakeAddLastElement(s, s->last->posX, s->last->posY + 1);
+	snakeAddLastElement(s, s->last->posX, s->last->posY + 1, s->direction);
 	//snakeAddLastElement(s, s->last->posX, mod(s->last->posY + 1, BOARD_SIZE));
 	snakeDeleteFirstElement(s);
 	s->direction = DOWN;
@@ -112,7 +114,7 @@ void snakeGoDown(Snake *s)
  */
 void snakeTurnLeft(Snake *s)
 {
-	snakeAddLastElement(s, s->last->posX - 1, s->last->posY);
+	snakeAddLastElement(s, s->last->posX - 1, s->last->posY, s->direction);
 	//snakeAddLastElement(s, mod(s->last->posX - 1, BOARD_SIZE), s->last->posY);
 	snakeDeleteFirstElement(s);
 	s->direction = LEFT;
@@ -126,7 +128,7 @@ void snakeTurnLeft(Snake *s)
  */
 void snakeTurnRight(Snake *s)
 {
-	snakeAddLastElement(s, s->last->posX + 1, s->last->posY);
+	snakeAddLastElement(s, s->last->posX + 1, s->last->posY, s->direction);
 	//snakeAddLastElement(s, mod(s->last->posX + 1, BOARD_SIZE), s->last->posY);
 	snakeDeleteFirstElement(s);
 	s->direction = RIGHT;
@@ -142,7 +144,7 @@ void snakeTurnRight(Snake *s)
  */
 void snakeTeleportation(Snake *s, int posX, int posY)
 {
-	snakeAddLastElement(s, posX, posY);
+	snakeAddLastElement(s, posX, posY, s->direction);
 	snakeDeleteFirstElement(s);
 }
 
@@ -238,6 +240,45 @@ void snakeSetSpeed(Snake *s, int speed)
 	s->speed = speed;
 }
 
+Direction snakeElementGetOrientation(Snake *s, int posElem)
+{
+	Direction res = 0;
+	if (posElem < 0 || posElem >= s->size)
+	{
+		printf("snakeElementGetOrientation : Error posElem parameter out of range\n");
+	}
+	else
+	{
+		int i;
+		Element *e = s->first;
+		for (i = 0; i < posElem; i++)
+		{
+			e = e->next;
+		}
+		res = e->orientation;
+	}
+	return res;
+}
+
+void snakeElementSetOrientation(Snake *s, int posElem, Direction d)
+{
+	if (posElem < 0 || posElem >= s->size)
+	{
+		printf("snakeElementSetOrientation : Error posElem parameter out of range\n");
+	}
+	else
+	{
+		int i;
+		Element *e = s->first;
+		for (i = 0; i < posElem; i++)
+		{
+			e = e->next;
+		}
+		e->orientation = d;
+	}
+}
+
+
 /**
  * \fn snakeSetGhost
  * \brief La fonction modifie le serpent pour le passer ou non en fantôme
@@ -280,7 +321,7 @@ int snakeGetId(Snake *s)
  * \details La fonction récupère le type du serpent dans la structure
  * \param s Variable de type Snake* qui pointe vers le snake à parcourir
  */
-Type snakeGetType(Snake *s)
+SnakeType snakeGetType(Snake *s)
 {
 	return s->type;
 }
@@ -292,7 +333,7 @@ Type snakeGetType(Snake *s)
  * \param s Variable de type Snake* qui pointe vers le snake à parcourir
  * \param t Variable de type Type qui est la valeur à attribuer au snake
  */
-void snakeSetType(Snake *s, Type t)
+void snakeSetType(Snake *s, SnakeType t)
 {
 	s->type = t;
 }
@@ -395,11 +436,12 @@ void snakeDelete(Snake *s)
  * \param posX Variable de type int qui correspond à la valeur à rajouter pour la position X
  * \param posY Variable de type int qui correspond à la valeur à rajouter pour la position Y
  */
-static void snakeAddFirstElement(Snake *s, int posX, int posY)
+static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orientation)
 {
 	Element *e = (Element*) malloc(sizeof(Element));
 	e->posX = posX;
 	e->posY = posY;
+	e->orientation = orientation;
 	e->previous = NULL;
 	if (s->size == 0)
 	{
@@ -423,17 +465,18 @@ static void snakeAddFirstElement(Snake *s, int posX, int posY)
  * \param posX Variable de type int qui correspond à la valeur à rajouter pour la position X
  * \param posY Variable de type int qui correspond à la valeur à rajouter pour la position Y
  */
-static void snakeAddLastElement(Snake *s, int posX, int posY)
+static void snakeAddLastElement(Snake *s, int posX, int posY, Direction orientation)
 {
 	if (s->size == 0)
 	{
-		snakeAddFirstElement(s, posX, posY);
+		snakeAddFirstElement(s, posX, posY, orientation);
 	}
 	else
 	{
 		Element *e = (Element*) malloc(sizeof(Element));
 		e->posX = posX;
 		e->posY = posY;
+		e->orientation = orientation;
 		e->previous = s->last;
 		e->next = NULL;
 		s->last->next = e;

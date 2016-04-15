@@ -9,7 +9,7 @@
  * \details Toutes les entêtes de fonctions et structures necessaires à gérer le snake : création, récupération des valeurs, changer de direction, affichage et libération de la mémoire
  */
 
-#include <stdbool.h> 
+#include <stdbool.h>
 #include "coord.h"
 
 /**
@@ -24,7 +24,7 @@ typedef enum Direction {UP, LEFT, RIGHT, DOWN, NIL} Direction;
  * \brief Permet de gérer le type du snake
  * \details Contient tous les types possibles pour le snake
  **/
-typedef enum Type {Feu, Eau, Plante} Type;
+typedef enum SnakeType {FIRE, WATER, GRASS} SnakeType;
 
 // ifndef pour être sûr de définir l'enum Control qu'une seule fois
 #ifndef ControlDef
@@ -44,7 +44,7 @@ typedef struct Snake Snake;
 /* ***************
  *   Init Snake  *
  *************** */
-Snake* snakeCreate(int size, int id);
+Snake* snakeCreate(int size, int id, Direction d);
 
 /* ***************
  *   Move Snake  *
@@ -73,8 +73,8 @@ bool snakeIsGhost(Snake *s);
 
 int snakeGetId(Snake *s);
 
-Type snakeGetType(Snake *s);
-void snakeSetType(Snake *s, Type t);
+SnakeType snakeGetType(Snake *s);
+void snakeSetType(Snake *s, SnakeType t);
 
 /* ***************
  *   Utilitary   *
@@ -83,6 +83,9 @@ void snakeInverseWay(Snake *s);
 void snakeDisplay(Snake *s);
 void snakeUpdateElement(Snake *s, int posElem, int posX, int posY);
 void snakeDeleteSnake(Snake *s);
+
+Direction snakeElementGetOrientation(Snake *s, int posElem);
+void snakeElementSetOrientation(Snake *s, int posElem, Direction d);
 
 // TODO: Augmenter la taille de X elements
 // TODO: Diminuer la taille de X elements
