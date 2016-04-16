@@ -108,7 +108,7 @@ Coord boardGetJambon(Board *b)
   return b->jambon;
 }
 
-Coord boardSetJambon(Board *b, int x, int y)
+void boardSetJambon(Board *b, int x, int y)
 {
   printf("SET\n");
   b->jambon->x=x;

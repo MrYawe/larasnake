@@ -41,7 +41,7 @@ int boardGetHeight(Board *b);
 int boardGetWidth(Board *b);
 
 Coord boardGetJambon(Board *b);
-Coord boardSetJambon(Board *b, int x, int y);
+void boardSetJambon(Board *b, int x, int y);
 
 /* ***************
  *   Utilitary   *
@@ -52,7 +52,7 @@ bool boardInside(Board *b, Coord coord);
 bool boardIsSnake(Board *b, Coord coord);
 void boardFeed(Board *b);
 
-Coord boardnextPosCell(int x, int y, Direction dir);
+Coord boardNextPosCell(int x, int y, Direction dir);
 bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir);
 bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir);
 
