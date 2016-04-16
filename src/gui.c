@@ -55,7 +55,7 @@ void guiPlay(BoardSize size)
         /***** Deplacement snake 2 (IA) *****/
         timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
         if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {
-            snakeSetDirection(snake2, iaSurvive(board, snake2));
+            snakeSetDirection(snake2, iaJambon(board, snake2));
             continueGameMove2 = moveSnake(board, snake2);
             timer->snake2MoveTimer = 0 ;
         }

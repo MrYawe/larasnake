@@ -35,7 +35,7 @@ struct Board
  */
 Board* boardInit(int sizeX, int sizeY, int sizeCell)
 {
-  Board *b = (Board*) malloc(sizeof(Board));
+  Board *b = (Board*) malloc(sizeof(struct Board));
   // Check for negative sizes
   if (sizeX >= 0 && sizeY >=0)
   {
@@ -213,18 +213,14 @@ void boardFeed(Board *b) {
     y = rand()%b->sizeY;
   }
   boardSetValue(b, x, y, 9);
-  Coord jb = malloc(sizeof(Coord));
-  jb->x=x;
-  jb->y=y;
+  Coord jb = coordNew(x, y);
   b->jambon=jb;
   printf("x: %d, y: %d \n", x, y);
 }
 
 Coord boardNextPosCell(int x, int y, Direction dir)
 {
-  Coord res = malloc(sizeof(Coord));
-  res->x=x;
-  res->y=y;
+  Coord res = coordNew(x, y);
     switch (dir)
     {
         case UP:

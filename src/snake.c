@@ -60,7 +60,7 @@ struct Element
  */
 Snake* snakeCreate(int size, int id, Direction d)
 {
-	Snake *s = malloc(sizeof(Snake));
+	Snake *s = malloc(sizeof(struct Snake));
 	s->first = NULL;
 	s->last = NULL;
 	s->size = 0;
@@ -158,7 +158,7 @@ void snakeTeleportation(Snake *s, int posX, int posY)
  */
 Coord snakeGetPos(Snake *s, int posBloc)
 {
-	Coord res = malloc(sizeof(Coord));
+	Coord res = coordNew(0,0);
 	if (posBloc < 0 || posBloc >= s->size)
 	{
 		printf("snakeGetPosition : Error pos parameter out of range\n");
@@ -438,7 +438,7 @@ void snakeDelete(Snake *s)
  */
 static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orientation)
 {
-	Element *e = (Element*) malloc(sizeof(Element));
+	Element *e = (Element*) malloc(sizeof(struct Element));
 	e->posX = posX;
 	e->posY = posY;
 	e->orientation = orientation;
@@ -473,7 +473,7 @@ static void snakeAddLastElement(Snake *s, int posX, int posY, Direction orientat
 	}
 	else
 	{
-		Element *e = (Element*) malloc(sizeof(Element));
+		Element *e = (Element*) malloc(sizeof(struct Element));
 		e->posX = posX;
 		e->posY = posY;
 		e->orientation = orientation;

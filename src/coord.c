@@ -3,7 +3,7 @@
 #include "coord.h"
 
 Coord coordNew(int x, int y) {
-	Coord res = malloc(sizeof(Coord));
+	Coord res = malloc(sizeof(struct Coord));
 	res->x=x;
 	res->y=y;
 	return res;
