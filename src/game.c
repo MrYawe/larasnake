@@ -38,7 +38,7 @@ Game gameCreate(BoardSize size) // à faire : 3 mode de jeu différent (tiny, no
 						break;
 		}
 
-		g->snake1 = snakeCreate(60, 1, RIGHT);
+		g->snake1 = snakeCreate(SNAKE_DEFAULT_LENGTH, 1, RIGHT);
 		g->snake2 = snakeCreate(SNAKE_DEFAULT_LENGTH, 2, LEFT);
 		g->isPlaying = true;
 

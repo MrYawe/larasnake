@@ -37,6 +37,7 @@ void guiPlay(BoardSize size)
 
     boardFeed(gameGetBoard(game));
 
+
     while (gameGetIsPlaying(game)) {
 
         timer->start = SDL_GetTicks(); // Debut de la frame courante
@@ -172,6 +173,7 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
     guiApplySurface(0, 0, assets->background, screen, NULL); // dessine le background
     guiDrawSnake(screen, gameGetSnake(game, 1), assets->snakeBlue);
     guiDrawSnake(screen, gameGetSnake(game, 2), assets->snakeBlue);
+    guiApplySurface(boardGetJambon(gameGetBoard(game))->x*M_CELL_SIZE, M_CELL_SIZE*boardGetJambon(gameGetBoard(game))->y, IMG_Load("./images/cube.bmp"), screen, NULL);
 }
 
 void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {
@@ -215,7 +217,7 @@ void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {
     }
 }
 
-void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip) {
+void guiApplySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip) {
     //Holds offsets
     SDL_Rect offset;
 

@@ -21,7 +21,7 @@
 #define S_SIZE_BOARD_Y 25
 #define S_CELL_SIZE 18
 
-// Medium ERROR MOTHAFUCKA
+// Medium
 #define M_SIZE_BOARD_X 50
 #define M_SIZE_BOARD_Y 35
 #define M_CELL_SIZE 18

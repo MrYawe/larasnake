@@ -22,6 +22,7 @@ struct Board
   int sizeX;
   int sizeY;
   int sizeCell; // taille en pixel d'une case du board
+  Coord jambon;
 };
 
 /**
@@ -100,6 +101,18 @@ void boardSetValue(Board *b, int posx, int posy, int val)
   {
     printf("boardSetValue: error out of range\n");
   }
+}
+
+Coord boardGetJambon(Board *b)
+{
+  return b->jambon;
+}
+
+Coord boardSetJambon(Board *b, int x, int y)
+{
+  printf("SET\n");
+  b->jambon->x=x;
+  b->jambon->y=y;
 }
 
 
@@ -195,11 +208,73 @@ bool boardIsSnake(Board *b, Coord coord) {
 void boardFeed(Board *b) {
   int x = rand()%b->sizeX;
   int y = rand()%b->sizeY;
-  /*while(boardGetValue(b, x, y)!=0){
+  while(boardGetValue(b, x, y)!=0){
     x = rand()%b->sizeX;
     y = rand()%b->sizeY;
-  }*/
-  //boardSetValue(b, x, y, 9);
-
+  }
+  boardSetValue(b, x, y, 9);
+  Coord jb = malloc(sizeof(Coord));
+  jb->x=x;
+  jb->y=y;
+  b->jambon=jb;
   printf("x: %d, y: %d \n", x, y);
+}
+
+Coord boardNextPosCell(int x, int y, Direction dir)
+{
+  Coord res = malloc(sizeof(Coord));
+  res->x=x;
+  res->y=y;
+    switch (dir)
+    {
+        case UP:
+            res->y -= 1;
+            break;
+
+        case DOWN:
+            res->y += 1;
+            break;
+
+        case LEFT:
+            res->x -= 1;
+            break;
+
+        case RIGHT:
+            res->x += 1;
+            break;
+
+        default:
+          printf("Error isNextCellBorder\n");
+          break;
+    }
+    return res;
+}
+
+bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
+{
+    bool res = false;
+    Coord nextPos = boardNextPosCell(x, y, dir);
+    if (!boardIsNextCellBorder(b,x,y,dir) && (boardGetValue(b, nextPos->x, nextPos->y) == 1 || boardGetValue(b, nextPos->x, nextPos->y) == 2))
+    {
+      res = true;
+    }
+    return res;
+}
+//DOUBLE OUT OF RANGE
+bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
+{
+    bool res = false;
+    Coord nextPos = boardNextPosCell(x, y, dir);
+
+    if ((dir == UP || dir== DOWN) &&
+    (nextPos->y<0 || nextPos->y>boardGetHeight(b)-1))
+    {
+        res = true;
+    }
+    else if ((dir == LEFT || dir == RIGHT) &&
+    (nextPos->x<0 || nextPos->x>boardGetWidth(b)-1))
+    {
+        res = true;
+    }
+    return res;
 }
