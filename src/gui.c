@@ -17,97 +17,66 @@ const int FLIP_HORIZONTAL = 2;
 
 void guiPlay(BoardSize size)
 {
-    SDL_Event event; // Permet de capturer les évènements clavier/souris
-    //SDL_Event event2;
-    SDL_Surface **surfaces = malloc(2*sizeof(SDL_Surface*));
-
-    Assets assets = guiLoadGame();
-
     SDL_Init(SDL_INIT_VIDEO);
+    SDL_WM_SetCaption("Larasnake", NULL);
 
+    SDL_Event event; // Permet de capturer les évènements clavier/souris
+    Assets assets = guiLoadAssets();
     Timer timer = guiCreateTimer();
-
-    srand(time(NULL));
+    SDL_Surface *screen = guiCreateScreen(size); // La surface finale qui sera affiché à l'écran
 
     bool continueGameMove1 = true;
     bool continueGameMove2 = true;
+    srand(time(NULL));
 
-    // La surface finale qui sera affiché à l'écran
-    SDL_Surface *screen = guiCreateScreen(size);
-    SDL_WM_SetCaption("Gestion des événements en SDL", NULL);
-
-    if(!(surfaces[1]=IMG_Load("./images/background/bg-medium.png")))
-        printf("%s\n", IMG_GetError());
-
-
-    SDL_Surface *background;
-    if(!(background=IMG_Load("./images/background/bg-medium.png")))
-        printf("%s\n", IMG_GetError());
-
+    /***** Variable de jeu *****/
     Game game = gameCreate(size);
-    /*Snake* snake1 = gameGetSnake(game , 1);
-    Snake* snake2 = gameGetSnake(game , 2);*/
+    Board* board = gameGetBoard(game);
+    Snake* snake1 = gameGetSnake(game , 1);
+    Snake* snake2 = gameGetSnake(game , 2);
+
     boardFeed(gameGetBoard(game));
 
     while (gameGetIsPlaying(game)) {
 
-        timer->start = SDL_GetTicks(); //when the frame starts
-        // Deplacement snake 1 (joueur)
+        timer->start = SDL_GetTicks(); // Debut de la frame courante
+
+        /***** Deplacement du snake 1 (joueur) *****/
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
-        if (timer->snake1MoveTimer >= snakeGetSpeed(gameGetSnake(game, 1))) {
-            guiSnakeEvent(&event, gameGetSnake(game, 1)); // intercepte un evenement si il a lieu
-            continueGameMove1 = moveSnake(gameGetBoard(game), gameGetSnake(game, 1));
+        if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {
+            guiSnakeEvent(&event, snake1); // intercepte un evenement si il a lieu
+            continueGameMove1 = moveSnake(board, snake1);
             timer->snake1MoveTimer = 0;
-            //snakeSetSpeed(gameGetSnake(game, 1), snakeGetSpeed(gameGetSnake(game, 1))-1); // fun test
         }
         timer->snake1LastMove = SDL_GetTicks();
-        // Fin Deplacement snake 1
+        /******************************************/
 
-        // Deplacement snake 2 (IA)
+        /***** Deplacement snake 2 (IA) *****/
         timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
-        if (timer->snake2MoveTimer >= snakeGetSpeed(gameGetSnake(game, 2))) {
-            snakeSetDirection(gameGetSnake(game, 2), iaSurvive(gameGetBoard(game), gameGetSnake(game, 2)));
-            continueGameMove2 = moveSnake(gameGetBoard(game), gameGetSnake(game, 2));
+        if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {
+            snakeSetDirection(snake2, iaSurvive(board, snake2));
+            continueGameMove2 = moveSnake(board, snake2);
             timer->snake2MoveTimer = 0 ;
-            //snakeSetSpeed(gameGetSnake(game, 2), snakeGetSpeed(gameGetSnake(game, 2))-1); // fun test
         }
         timer->snake2LastMove = SDL_GetTicks();
-        // Fin Deplacement snake 2
-
-        SDL_Rect cellPosition;
-        cellPosition.x = 0;
-        cellPosition.y = 0;
-        if(SDL_BlitSurface(background, NULL, screen, &cellPosition)<0)
-            printf("%s\n", SDL_GetError());
-
-        guiDrawGame(screen, game, assets);
-        //boardDisplay(gameGetBoard(game));
-        //printf("(5) Display board\n");
-        //guiDisplayBoard(screen, gameGetBoard(game), surfaces);
-
-
-
-        //printf("(6) Reload screen\n");
-        guiReloadScreen(screen);
-
-        // Gestion FPS
-        timer->end = SDL_GetTicks(); //when the frame calculations end
-        //printf("Temps: %d\n", endMs - startMs);
-        timer->delay = FRAME_MS - (timer->end - timer->start); //how long to delay
-        //printf("Temps d'attente: %d\n", delayMs);
-        if(timer->delay <= 0) {
-            //printf("ON A EU CHAUUUUUD !!\n");
-        } else {
-            SDL_Delay(timer->delay); //delay processing
-        }
-
+        /***********************************/
 
         if(!continueGameMove1 || !continueGameMove2)
             gameEnd(game);
-        //printf("(7) Fin\n");
+
+        guiDrawGame(screen, game, assets);
+        //boardDisplay(gameGetBoard(game));
+        guiReloadScreen(screen);
+
+        /***** Gestion des FPS *****/
+        timer->end = SDL_GetTicks(); //when the frame calculations end
+        timer->delay = FRAME_MS - (timer->end - timer->start); //how long to delay
+        if(timer->delay > 0) {
+            SDL_Delay(timer->delay); //delay processing
+        }
     }
 
-    //freeAll(surfaces);
+    //freeAll(game);
 }
 
 void freeAll(SDL_Surface **surfaces) {
@@ -134,31 +103,45 @@ SDL_Surface* guiCreateScreen(BoardSize size) {
     return screen;
 }
 
-Assets guiLoadGame() {
-    Assets assets = malloc(sizeof(struct Assets));
-    assets->snakeBlue = guiLoadSnake(WATER);
+SDL_Surface* guiLoadImage(char* path) {
+    SDL_Surface *s;
+    if(!(s = IMG_Load(path)))
+        printf("%s\n", IMG_GetError());
 
+    return s;
+}
+
+Assets guiLoadAssets() {
+    Assets assets = malloc(sizeof(struct Assets));
+    assets->background = guiLoadImage("./images/background/bg-medium.png");
+    assets->snakeBlue = guiLoadSnake(WATER);
     return assets;
+}
+
+void guiFreeAssets(Assets assets) {
+    free(assets->background);
+    free(assets->snakeBlue);
+    free(assets);
 }
 
 SnakeAssets guiLoadSnake(SnakeType type) {
     SnakeAssets snakeAssets = malloc(sizeof(struct SnakeAssets));
     snakeAssets->head = malloc(4*sizeof(SDL_Surface*));
     snakeAssets->body = malloc(4*sizeof(SDL_Surface*));
+    snakeAssets->corner = malloc(4*sizeof(SDL_Surface*));
     snakeAssets->tail = malloc(4*sizeof(SDL_Surface*));
     //char *color = malloc(50*sizeof(char));
     SDL_Surface *head;
     SDL_Surface *body;
+    SDL_Surface *corner;
     SDL_Surface *tail;
 
     switch (type) {
         case WATER:
-            if(!(head=IMG_Load("./images/snake/blue/snake-head.png")))
-                printf("%s\n", IMG_GetError());
-            if(!(body=IMG_Load("./images/snake/blue/snake-body.png")))
-                printf("%s\n", IMG_GetError());
-            if(!(tail=IMG_Load("./images/snake/blue/snake-tail.png")))
-                printf("%s\n", IMG_GetError());
+            head=guiLoadImage("./images/snake/blue/snake-head.png");
+            body=guiLoadImage("./images/snake/blue/snake-body.png");
+            corner=guiLoadImage("./images/snake/blue/snake-corner.png");
+            tail=guiLoadImage("./images/snake/blue/snake-tail.png");
             break;
     }
 
@@ -168,9 +151,14 @@ SnakeAssets guiLoadSnake(SnakeType type) {
     snakeAssets->head[DOWN]=rotozoomSurface(head, 270, 1.0, 1);
 
     snakeAssets->body[RIGHT]=body;
+    snakeAssets->body[LEFT]=body;
     snakeAssets->body[DOWN]=rotozoomSurface(body, 90, 1.0, 1);
-    snakeAssets->body[LEFT]=rotozoomSurface(body, 180, 1.0, 1);
-    snakeAssets->body[UP]=rotozoomSurface(body, 270, 1.0, 1);
+    snakeAssets->body[UP]=rotozoomSurface(body, 90, 1.0, 1);
+
+    snakeAssets->corner[RIGHT]=corner;
+    snakeAssets->corner[UP]=rotozoomSurface(corner, 90, 1.0, 1);
+    snakeAssets->corner[LEFT]=rotozoomSurface(corner, 180, 1.0, 1);
+    snakeAssets->corner[DOWN]=rotozoomSurface(corner, 270, 1.0, 1);
 
     snakeAssets->tail[LEFT]=tail;
     snakeAssets->tail[DOWN]=rotozoomSurface(tail, 90, 1.0, 1);
@@ -181,6 +169,7 @@ SnakeAssets guiLoadSnake(SnakeType type) {
 }
 
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
+    guiApplySurface(0, 0, assets->background, screen, NULL); // dessine le background
     guiDrawSnake(screen, gameGetSnake(game, 1), assets->snakeBlue);
     guiDrawSnake(screen, gameGetSnake(game, 2), assets->snakeBlue);
 }
@@ -188,19 +177,40 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
 void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {
     int i;
     int x, y;
+    Direction currentDirection;
+    Direction nextDirection;
 
     for (i=0; i<snakeGetSize(snake); i++) {
         x = snakeGetPos(snake, i)->x * M_CELL_SIZE;
         y = snakeGetPos(snake, i)->y * M_CELL_SIZE;
 
-        Direction d = snakeElementGetOrientation(snake, i);
+        currentDirection = snakeElementGetOrientation(snake, i);
 
         if(i == 0) { // tail
-            guiApplySurface(x, y, snakeAssets->tail[d], screen, NULL);
+            guiApplySurface(x, y, snakeAssets->tail[currentDirection], screen, NULL);
         } else if (i == snakeGetSize(snake)-1) { // head
-            guiApplySurface(x, y, snakeAssets->head[d], screen, NULL);
+            guiApplySurface(x, y, snakeAssets->head[currentDirection], screen, NULL);
         } else {
-            guiApplySurface(x, y, snakeAssets->body[d], screen, NULL);
+            nextDirection = snakeElementGetOrientation(snake, i+1);
+            if(currentDirection==RIGHT && nextDirection==UP) {
+                guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
+            } else if(currentDirection==RIGHT && nextDirection==DOWN) {
+                guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
+            } else if(currentDirection==UP && nextDirection==RIGHT) {
+                guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
+            } else if(currentDirection==UP && nextDirection==LEFT) {
+                guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
+            } else if(currentDirection==DOWN && nextDirection==RIGHT) {
+                guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
+            } else if(currentDirection==DOWN && nextDirection==LEFT) {
+                guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
+            } else if(currentDirection==LEFT && nextDirection==UP) {
+                guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
+            } else if(currentDirection==LEFT && nextDirection==DOWN) {
+                guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
+            } else {
+                guiApplySurface(x, y, snakeAssets->body[currentDirection], screen, NULL);
+            }
         }
     }
 }
@@ -218,27 +228,6 @@ void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destinatio
         printf("%s\n", SDL_GetError());
 }
 
-void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces) {
-    int x, y;
-    SDL_Rect cellPosition;
-    cellPosition.x = 0;
-    cellPosition.y = 0;
-    //printf("Taille line: %d\n", boardGetSize(board, Line));
-    //printf("Taille column: %d\n", boardGetSize(board, Column));
-
-    for(y=0; y<boardGetHeight(board); y++) {
-        for (x=0; x<boardGetWidth(board); x++) {
-            if(boardGetValue(board, x, y)==1) {
-                if(SDL_BlitSurface(surfaces[0], NULL, screen, &cellPosition)<0)
-                    printf("%s\n", SDL_GetError());
-            }
-            cellPosition.x+=M_CELL_SIZE;
-        }
-        cellPosition.x=0;
-        cellPosition.y+=M_CELL_SIZE;
-    }
-}
-
 Timer guiCreateTimer() {
     Timer timer = malloc(sizeof(struct Timer));
     timer->snake1MoveTimer = SNAKE_DEFAULT_SPEED; // pour être certain que les deux snake bouge des le début
@@ -248,11 +237,6 @@ Timer guiCreateTimer() {
     timer->snake2LastMove = 0;
 
     return timer;
-}
-
-void guiClearScreen(SDL_Surface *screen) {
-    if(SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255))<0)
-        printf("%s\n", SDL_GetError());
 }
 
 void guiReloadScreen(SDL_Surface *screen) {

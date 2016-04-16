@@ -22,6 +22,7 @@ struct SnakeAssets
 {
 	SDL_Surface **head;
 	SDL_Surface **body;
+	SDL_Surface **corner;
 	SDL_Surface **tail;
 };
 
@@ -31,27 +32,33 @@ struct Assets
 	SnakeAssets snakeBlue;
 	SnakeAssets snakeRed;
 	SnakeAssets snakeGreen;
-	SDL_Surface *board;
+	SDL_Surface *background;
 };
 
+/**** General ****/
 void guiPlay(BoardSize size);
+Timer guiCreateTimer();
 void freeAll(SDL_Surface **surfaces);
-void guiDisplayBoard(SDL_Surface *screen, Board *board, SDL_Surface **surfaces);
-Assets guiLoadGame();
+
+/**** Screen ****/
+SDL_Surface* guiCreateScreen(BoardSize size);
+void guiReloadScreen(SDL_Surface *screen);
+void guiClearScreen(SDL_Surface *screen);
+
+/**** Assets ****/
+Assets guiLoadAssets();
 SnakeAssets guiLoadSnake(SnakeType type);
+SDL_Surface* guiLoadImage(char* path);
+void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
+void guiFreeAssets(Assets assets);
+
+/**** Draw ****/
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets);
 void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets);
-SDL_Surface* guiCreateScreen(BoardSize size);
-void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
+
+/**** Events ****/
 void guiSnakeEvent(SDL_Event *event, Snake *s);
 void guiGeneralEvent(SDL_Event *event, Game game);
-void guiClearScreen(SDL_Surface *screen);
-void guiReloadScreen(SDL_Surface *screen);
-Timer guiCreateTimer();
-
-Uint32 guiGetPixel32( SDL_Surface *surface, int x, int y );
-void guiSetPixel32( SDL_Surface *surface, int x, int y, Uint32 pixel );
-SDL_Surface *flip_surface( SDL_Surface *surface, int flags );
 
 
 #endif
