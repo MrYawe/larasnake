@@ -62,12 +62,12 @@ void guiPlay(BoardSize size)
         timer->snake2LastMove = SDL_GetTicks();
         /***********************************/
 
-        if(!continueGameMove1 || !continueGameMove2)
-            gameEnd(game);
-
         guiDrawGame(screen, game, assets);
         //boardDisplay(gameGetBoard(game));
         guiReloadScreen(screen);
+
+        if(!continueGameMove1 || !continueGameMove2)
+            gameEnd(game);
 
         /***** Gestion des FPS *****/
         timer->end = SDL_GetTicks(); //when the frame calculations end
