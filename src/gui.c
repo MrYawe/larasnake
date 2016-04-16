@@ -47,7 +47,9 @@ void guiPlay(BoardSize size)
     Game game = gameCreate(size);
     /*Snake* snake1 = gameGetSnake(game , 1);
     Snake* snake2 = gameGetSnake(game , 2);*/
+    
     boardFeed(gameGetBoard(game));
+    
 
     while (gameGetIsPlaying(game)) {
 
@@ -66,7 +68,7 @@ void guiPlay(BoardSize size)
         // Deplacement snake 2 (IA)
         timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
         if (timer->snake2MoveTimer >= snakeGetSpeed(gameGetSnake(game, 2))) {
-            snakeSetDirection(gameGetSnake(game, 2), iaSurvive(gameGetBoard(game), gameGetSnake(game, 2)));
+            snakeSetDirection(gameGetSnake(game, 2), iaJambon(gameGetBoard(game), gameGetSnake(game, 2)));
             continueGameMove2 = moveSnake(gameGetBoard(game), gameGetSnake(game, 2));
             timer->snake2MoveTimer = 0 ;
             //snakeSetSpeed(gameGetSnake(game, 2), snakeGetSpeed(gameGetSnake(game, 2))-1); // fun test
@@ -183,6 +185,7 @@ SnakeAssets guiLoadSnake(SnakeType type) {
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
     guiDrawSnake(screen, gameGetSnake(game, 1), assets->snakeBlue);
     guiDrawSnake(screen, gameGetSnake(game, 2), assets->snakeBlue);
+    guiApplySurface(boardGetJambon(gameGetBoard(game))->x*M_CELL_SIZE, M_CELL_SIZE*boardGetJambon(gameGetBoard(game))->y, IMG_Load("./images/cube.bmp"), screen, NULL);
 }
 
 void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {
@@ -205,7 +208,7 @@ void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {
     }
 }
 
-void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip) {
+void guiApplySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip) {
     //Holds offsets
     SDL_Rect offset;
 

@@ -8,57 +8,82 @@
 
 Direction iaSurvive (Board *board, Snake *snake) {
 	Direction dir = snakeGetDirection(snake);
-	//boardDisplay(board);
+	Coord pos = snakeGetPos(snake, snakeGetSize(snake)-1);
+
+	if(isNextCellBorder(board, snake) || isNextCellSnake(board, snake)) {
+		if(dir==UP || dir==DOWN) 
+		{
+			if(!boardIsNextCellSnake(board, pos->x, pos->y, RIGHT) && !boardIsNextCellBorder(board, pos->x, pos->y, RIGHT))
+			{
+				dir=RIGHT;
+			} 
+			else if(!boardIsNextCellSnake(board, pos->x, pos->y, LEFT) && !boardIsNextCellBorder(board, pos->x, pos->y, LEFT))
+			{
+				dir=LEFT;
+			}
+
+		}
+		else if(dir==RIGHT || dir==LEFT)
+		{
+			if(!boardIsNextCellSnake(board, pos->x, pos->y, UP) && !boardIsNextCellBorder(board, pos->x, pos->y, UP))
+			{
+				dir=UP;
+			} 
+			else if(!boardIsNextCellSnake(board, pos->x, pos->y, DOWN) && !boardIsNextCellBorder(board, pos->x, pos->y, DOWN))
+			{
+				dir=DOWN;
+			}
+		}
+	}
+	return dir;
+}
+
+Direction iaJambon (Board *board, Snake *snake) {
+	Direction dir = snakeGetDirection(snake);
 
 	Coord pos = snakeGetPos(snake, snakeGetSize(snake)-1);
-	if(isNextCellBorder(board, snake) || isNextCellSnake(board, snake)) {
+	Coord posJambon = boardGetJambon(board);
+	if(boardGetJambon(board)->x != 0 && boardGetJambon(board)->y != 0){
 		if(dir==UP || dir==DOWN) {
-			//testing right case
-			pos->x++;
-			if(boardInside(board, pos) && !boardIsSnake(board, pos)) {
-				printf("DROITE\n");
-				dir=RIGHT;
+			if (pos->x < posJambon->x)
+			{
+				//Aller à droite
+				if(!boardIsNextCellSnake(board, pos->x, pos->y, RIGHT) && !boardIsNextCellBorder(board, pos->x, pos->y, RIGHT)){
+					dir=RIGHT;
+				}
 			}
-			else {
-				//testing left case
-				pos->x-=2;
-				if(boardInside(board, pos) && !boardIsSnake(board, pos)) {
-					printf("GAUCHE\n");
+			else if(pos->x > posJambon->x) 
+			{
+				//aller à gauche
+				if(!boardIsNextCellSnake(board, pos->x, pos->y, LEFT) && !boardIsNextCellBorder(board, pos->x, pos->y, LEFT)){
 					dir=LEFT;
 				}
 			}
-		}
-		else if(dir==RIGHT||dir==LEFT){
-			//testing upper case
-			pos->y--;
-			if(boardInside(board, pos) && !boardIsSnake(board, pos)) {
-				printf("HAUT\n");
-				dir=UP;
-			} else {
-				//testing down case
-				pos->y+=2;
-				if(boardInside(board, pos) && !boardIsSnake(board, pos)) {
+		} 
+		else if(dir==RIGHT || dir==LEFT)
+		{
+			if(pos->y > posJambon->y)
+			{
+				//aller en haut
+				if(!boardIsNextCellSnake(board, pos->x, pos->y, UP) && !boardIsNextCellBorder(board, pos->x, pos->y, UP)){
+					dir=UP;
+				}
+			}
+			else if(pos->y < posJambon->y)
+			{
+				//aller en bas
+				if(!boardIsNextCellSnake(board, pos->x, pos->y, DOWN) && !boardIsNextCellBorder(board, pos->x, pos->y, DOWN)){
 					dir=DOWN;
-					printf("BAS\n");
 				}
 			}
 		}
-	}
-	/*
-	int count = 0;
-	int i, j;
-	for(j=0; j<boardGetHeight(board); j++)
+	} 
+	else 
 	{
-		for (i=0; i<boardGetWidth(board); i++)
-		{
-		  if(!boardGetValue(board, i, j)) {
-		  	count++;
-		  }
-		}
-		printf("\n");
+		dir = iaSurvive(board, snake);
 	}
-	printf("Cases disponibles : %d\n", count);
-*/
-
+	if(coordEquals(boardNextPosCell(pos->x, pos->y, dir),posJambon)) {
+		boardSetJambon(board, 0, 0);
+	}
 	return dir;
 }
