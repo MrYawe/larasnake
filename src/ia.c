@@ -43,7 +43,7 @@ Direction iaJambon (Board *board, Snake *snake) {
 
 	Coord pos = snakeGetPos(snake, snakeGetSize(snake)-1);
 	Coord posJambon = boardGetJambon(board);
-	if(boardGetJambon(board)->x != 0 && boardGetJambon(board)->y != 0){
+	if(!(boardGetJambon(board)->x == 0 && boardGetJambon(board)->y == 0)){
 		if(dir==UP || dir==DOWN) {
 			if (pos->x < posJambon->x)
 			{
@@ -58,6 +58,9 @@ Direction iaJambon (Board *board, Snake *snake) {
 				if(!boardIsNextCellSnake(board, pos->x, pos->y, LEFT) && !boardIsNextCellBorder(board, pos->x, pos->y, LEFT)){
 					dir=LEFT;
 				}
+			}
+			if(boardIsNextCellSnake(board, pos->x, pos->y, dir) || boardIsNextCellBorder(board, pos->x, pos->y, dir)){
+				dir = iaSurvive(board, snake);
 			}
 		} 
 		else if(dir==RIGHT || dir==LEFT)
@@ -75,6 +78,9 @@ Direction iaJambon (Board *board, Snake *snake) {
 				if(!boardIsNextCellSnake(board, pos->x, pos->y, DOWN) && !boardIsNextCellBorder(board, pos->x, pos->y, DOWN)){
 					dir=DOWN;
 				}
+			}
+			if(boardIsNextCellSnake(board, pos->x, pos->y, dir) || boardIsNextCellBorder(board, pos->x, pos->y, dir)){
+				dir = iaSurvive(board, snake);
 			}
 		}
 	} 
