@@ -29,9 +29,7 @@ struct SnakeAssets
 typedef struct Assets *Assets;
 struct Assets
 {
-	SnakeAssets snakeBlue;
-	SnakeAssets snakeRed;
-	SnakeAssets snakeGreen;
+	SnakeAssets *snakesAssets;
 	SDL_Surface *background;
 };
 
@@ -47,7 +45,7 @@ void guiClearScreen(SDL_Surface *screen);
 
 /**** Assets ****/
 Assets guiLoadAssets();
-SnakeAssets guiLoadSnake(SnakeType type);
+SnakeAssets guiLoadSnake(SnakeType type, char* color);
 SDL_Surface* guiLoadImage(char* path);
 void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
 void guiFreeAssets(Assets assets);

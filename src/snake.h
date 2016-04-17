@@ -17,14 +17,14 @@
  * \brief Permet de gérer la direction du snake
  * \details Contient toutes les directions possibles pour le snake
  **/
-typedef enum Direction {UP, LEFT, RIGHT, DOWN, NIL} Direction;
+typedef enum Direction {UP, RIGHT, DOWN, LEFT} Direction;
 
 /**
  * \enum Type
  * \brief Permet de gérer le type du snake
  * \details Contient tous les types possibles pour le snake
  **/
-typedef enum SnakeType {FIRE, WATER, GRASS} SnakeType;
+typedef enum SnakeType {WATER, FIRE, GRASS} SnakeType;
 
 // ifndef pour être sûr de définir l'enum Control qu'une seule fois
 #ifndef ControlDef

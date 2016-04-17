@@ -115,64 +115,60 @@ SDL_Surface* guiLoadImage(char* path) {
 Assets guiLoadAssets() {
     Assets assets = malloc(sizeof(struct Assets));
     assets->background = guiLoadImage("./images/background/bg-medium.png");
-    assets->snakeBlue = guiLoadSnake(WATER);
+
+    char *colors[3] = {"blue", "green", "red"};
+
+    assets->snakesAssets = malloc(3*sizeof(SnakeAssets));
+    int i;
+    for (i = 0; i < 1; i++) { // mettre à i < 3 si 3 couleurs chargé
+        assets->snakesAssets[i] = guiLoadSnake(i, colors[i]); // WATER=0, FIRE=1, GRASS=2
+    }
+
     return assets;
 }
 
 void guiFreeAssets(Assets assets) {
     free(assets->background);
-    free(assets->snakeBlue);
+    //free(assets->snakeBlue);
     free(assets);
 }
 
-SnakeAssets guiLoadSnake(SnakeType type) {
+SnakeAssets guiLoadSnake(SnakeType type, char* color) {
+    char *path = malloc(100*sizeof(char));
     SnakeAssets snakeAssets = malloc(sizeof(struct SnakeAssets));
     snakeAssets->head = malloc(4*sizeof(SDL_Surface*));
     snakeAssets->body = malloc(4*sizeof(SDL_Surface*));
     snakeAssets->corner = malloc(4*sizeof(SDL_Surface*));
     snakeAssets->tail = malloc(4*sizeof(SDL_Surface*));
-    //char *color = malloc(50*sizeof(char));
-    SDL_Surface *head;
-    SDL_Surface *body;
-    SDL_Surface *corner;
-    SDL_Surface *tail;
 
-    switch (type) {
-        case WATER:
-            head=guiLoadImage("./images/snake/blue/snake-head.png");
-            body=guiLoadImage("./images/snake/blue/snake-body.png");
-            corner=guiLoadImage("./images/snake/blue/snake-corner.png");
-            tail=guiLoadImage("./images/snake/blue/snake-tail.png");
-            break;
+    char sDirection[4];
+    sDirection[0] = 'U';
+    sDirection[1] = 'R';
+    sDirection[2] = 'D';
+    sDirection[3] = 'L';
+
+    int direction; // UP=0, RIGHT=1, DOWN=2, LEFT=3
+    for (direction = 0; direction < 4; direction++) {
+        sprintf(path, "./images/snake/%s/head/%c.png", color, sDirection[direction]);
+        snakeAssets->head[direction] = guiLoadImage(path);
+        sprintf(path, "./images/snake/%s/corner/%c.png", color, sDirection[direction]);
+        snakeAssets->corner[direction] = guiLoadImage(path);
+        sprintf(path, "./images/snake/%s/tail/%c.png", color, sDirection[direction]);
+        snakeAssets->tail[direction] = guiLoadImage(path);
+        sprintf(path, "./images/snake/%s/body/%c.png", color, sDirection[direction]);
+        snakeAssets->body[direction] = guiLoadImage(path);
     }
-
-    snakeAssets->head[RIGHT]=head;
-    snakeAssets->head[UP]=rotozoomSurface(head, 90, 1.0, 1);
-    snakeAssets->head[LEFT]=rotozoomSurface(head, 180, 1.0, 1);
-    snakeAssets->head[DOWN]=rotozoomSurface(head, 270, 1.0, 1);
-
-    snakeAssets->body[RIGHT]=body;
-    snakeAssets->body[LEFT]=body;
-    snakeAssets->body[DOWN]=rotozoomSurface(body, 90, 1.0, 1);
-    snakeAssets->body[UP]=rotozoomSurface(body, 90, 1.0, 1);
-
-    snakeAssets->corner[RIGHT]=corner;
-    snakeAssets->corner[UP]=rotozoomSurface(corner, 90, 1.0, 1);
-    snakeAssets->corner[LEFT]=rotozoomSurface(corner, 180, 1.0, 1);
-    snakeAssets->corner[DOWN]=rotozoomSurface(corner, 270, 1.0, 1);
-
-    snakeAssets->tail[LEFT]=tail;
-    snakeAssets->tail[DOWN]=rotozoomSurface(tail, 90, 1.0, 1);
-    snakeAssets->tail[RIGHT]=rotozoomSurface(tail, 180, 1.0, 1);
-    snakeAssets->tail[UP]=rotozoomSurface(tail, 270, 1.0, 1);
 
     return snakeAssets;
 }
 
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
+    Snake *snake1 = gameGetSnake(game, 1);
+    Snake *snake2 = gameGetSnake(game, 2);
+
     guiApplySurface(0, 0, assets->background, screen, NULL); // dessine le background
-    guiDrawSnake(screen, gameGetSnake(game, 1), assets->snakeBlue);
-    guiDrawSnake(screen, gameGetSnake(game, 2), assets->snakeBlue);
+    guiDrawSnake(screen, snake1, assets->snakesAssets[snakeGetType(snake1)]);
+    guiDrawSnake(screen, snake2, assets->snakesAssets[snakeGetType(snake2)]);
     guiApplySurface(boardGetJambon(gameGetBoard(game))->x*M_CELL_SIZE, M_CELL_SIZE*boardGetJambon(gameGetBoard(game))->y, IMG_Load("./images/cube.bmp"), screen, NULL);
 }
 
@@ -188,28 +184,49 @@ void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {
 
         currentDirection = snakeElementGetOrientation(snake, i);
 
-        if(i == 0) { // tail
-            guiApplySurface(x, y, snakeAssets->tail[currentDirection], screen, NULL);
-        } else if (i == snakeGetSize(snake)-1) { // head
-            guiApplySurface(x, y, snakeAssets->head[currentDirection], screen, NULL);
-        } else {
+
+        if(i == 0) // tail
+        {
             nextDirection = snakeElementGetOrientation(snake, i+1);
-            if(currentDirection==RIGHT && nextDirection==UP) {
-                guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
-            } else if(currentDirection==RIGHT && nextDirection==DOWN) {
-                guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
-            } else if(currentDirection==UP && nextDirection==RIGHT) {
-                guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
-            } else if(currentDirection==UP && nextDirection==LEFT) {
-                guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
-            } else if(currentDirection==DOWN && nextDirection==RIGHT) {
-                guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
-            } else if(currentDirection==DOWN && nextDirection==LEFT) {
-                guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
-            } else if(currentDirection==LEFT && nextDirection==UP) {
-                guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
-            } else if(currentDirection==LEFT && nextDirection==DOWN) {
-                guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
+            if(currentDirection != nextDirection) {
+                guiApplySurface(x, y, snakeAssets->tail[nextDirection], screen, NULL);
+            } else {
+                guiApplySurface(x, y, snakeAssets->tail[currentDirection], screen, NULL);
+            }
+        }
+        else if (i == snakeGetSize(snake)-1) // head
+        {
+            guiApplySurface(x, y, snakeAssets->head[currentDirection], screen, NULL);
+        }
+        else // body
+        {
+            nextDirection = snakeElementGetOrientation(snake, i+1);
+            if(currentDirection != nextDirection) {
+                if(currentDirection == RIGHT) {
+                    if(nextDirection == UP) {
+                        guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
+                    } else { // DOWN
+                        guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
+                    }
+                } else if(currentDirection == UP) {
+                    if(nextDirection == RIGHT) {
+                        guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
+                    } else { // LEFT
+                        guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
+                    }
+                } else if(currentDirection == DOWN) {
+                    if(nextDirection == RIGHT) {
+                        guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
+                    } else { // LEFT
+                        guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
+                    }
+                } else if(currentDirection == LEFT) {
+                    if(nextDirection == UP) {
+                        guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
+                    } else { // DOWN
+                        guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
+                    }
+                }
             } else {
                 guiApplySurface(x, y, snakeAssets->body[currentDirection], screen, NULL);
             }
