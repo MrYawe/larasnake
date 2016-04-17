@@ -212,8 +212,8 @@ void boardFeed(Board *b) {
     x = rand()%b->sizeX;
     y = rand()%b->sizeY;
   }
-  x=45;
-  y=17;
+  //x=45;
+  //y=17;
   //x=0;
   //y=10;
   boardSetValue(b, x, y, 9);
