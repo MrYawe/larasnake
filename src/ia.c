@@ -23,7 +23,8 @@ Direction iaSurvive (Board* board, Snake* snake) {
 	Direction snakeDir = snakeGetDirection(snake);
 	Coord snakePos = snakeGetPos(snake, snakeGetSize(snake)-1);
 
-	if(isNextCellBorder(board, snake) || isNextCellSnake(board, snake))//Checking if the next Cell in front of the snake would make him die
+	if(boardIsNextCellBorder(board, snakeGetPos(snake, snakeGetSize(snake)-1)->x, snakeGetPos(snake, snakeGetSize(snake)-1)->y, snakeGetDirection(snake)) 
+	|| boardIsNextCellSnake(board, snakeGetPos(snake, snakeGetSize(snake)-1)->x, snakeGetPos(snake, snakeGetSize(snake)-1)->y, snakeGetDirection(snake)))//Checking if the next Cell in front of the snake would make him die
 	{
 		if(snakeDir==UP || snakeDir==DOWN)//Checking if the snake is going up or down
 		{

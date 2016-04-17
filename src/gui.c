@@ -74,7 +74,7 @@ void guiPlay(BoardSize size)
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {
             guiSnakeEvent(&event, snake1);                      // intercepte un evenement si il a lieu
-            continueGameMove1 = moveSnake(board, snake1);       //
+            continueGameMove1 = gameMoveSnake(board, snake1);       //
             timer->snake1MoveTimer = 0;                         //
         }
         timer->snake1LastMove = SDL_GetTicks();
@@ -84,7 +84,7 @@ void guiPlay(BoardSize size)
         timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
         if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {
             snakeSetDirection(snake2, iaJambon(board, snake2)); //
-            continueGameMove2 = moveSnake(board, snake2);       //
+            continueGameMove2 = gameMoveSnake(board, snake2);       //
             timer->snake2MoveTimer = 0 ;                        //
         }
         timer->snake2LastMove = SDL_GetTicks();

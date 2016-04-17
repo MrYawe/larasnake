@@ -5,7 +5,8 @@
 #include "game.h"
 #include "coord.h"
 
-static bool checkMovement(Snake *s, Board *b);
+// Static function
+static bool gameCheckMovement(Snake *s, Board *b);
 
 /**
  * \struct Game
@@ -20,8 +21,9 @@ struct Game
 		bool isPlaying;
 };
 
-Game gameCreate(BoardSize size) // à faire : 3 mode de jeu différent (tiny, normal, big)
+Game gameCreate(BoardSize size) 
 {
+		// TODO: 3 mode de jeu différent (tiny, normal, big)
 		Game g = malloc(sizeof(struct Game));
 
 		switch (size) {
@@ -42,7 +44,7 @@ Game gameCreate(BoardSize size) // à faire : 3 mode de jeu différent (tiny, no
 		g->snake2 = snakeCreate(7, 2, LEFT);
 		g->isPlaying = true;
 
-    initSnakes(g->board, g->snake1, g->snake2);
+    	gameInitSnakes(g->board, g->snake1, g->snake2);
 
 		return g;
 }
@@ -64,15 +66,15 @@ bool gameGetIsPlaying(Game g)
 		return g->isPlaying;
 }
 
-// termine la partie
+
 void gameEnd(Game g)
 {
-	boardFree(g->board);
-	g->isPlaying = false;
+		boardFree(g->board);
+		g->isPlaying = false;
 }
 
 
-void initSnakes(Board *b, Snake *s1, Snake *s2)
+void gameInitSnakes(Board *b, Snake *s1, Snake *s2)
 {
 		int i;
 		for (i=0; i<snakeGetSize(s1); i++)
@@ -83,11 +85,11 @@ void initSnakes(Board *b, Snake *s1, Snake *s2)
 		{
 				snakeUpdateElement(s2, snakeGetSize(s2) - i -1, boardGetWidth(b)/3*2+i, boardGetHeight(b)/2);
 		}
-		updateSnake(b, s1);
-		updateSnake(b, s2);
+		gameUpdateSnake(b, s1);
+		gameUpdateSnake(b, s2);
 }
 
-void updateSnake(Board *b, Snake *s)
+void gameUpdateSnake(Board *b, Snake *s)
 {
 		int i;
 		for (i=0; i<snakeGetSize(s); i++)
@@ -96,89 +98,25 @@ void updateSnake(Board *b, Snake *s)
 		}
 }
 
-bool moveSnake(Board *b, Snake *s)
+bool gameMoveSnake(Board *b, Snake *s)
 {
 		boardSetValue(b, snakeGetPos(s, 0)->x, snakeGetPos(s, 0)->y, 0);
-		bool continueGame = checkMovement(s, b);
+		bool continueGame = gameCheckMovement(s, b);
 		boardSetValue(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetId(s));
 		return continueGame;
 }
 
-Coord nextPosCell(Snake *s)
-{
-		Coord res = snakeGetPos(s, snakeGetSize(s)-1);
-		switch (snakeGetDirection(s))
-		{
-				case UP:
-						res->y -= 1;
-						break;
 
-				case DOWN:
-						res->y += 1;
-						break;
-
-				case LEFT:
-						res->x -= 1;
-						break;
-
-				case RIGHT:
-						res->x += 1;
-						break;
-
-				default:
-					printf("Error isNextCellBorder\n");
-					break;
-		}
-		return res;
-}
-
-static bool isNextCellOutOfRange(Board *b, Snake *s)
-{
-		bool res = false;
-		if (nextPosCell(s)->x < 0 || nextPosCell(s)->y < 0 ||
-		nextPosCell(s)->y > boardGetHeight(b)-1 || nextPosCell(s)->x > boardGetWidth(b)-1)
-		{
-				res = true;
-		}
-		return res;
-}
-
-bool isNextCellSnake(Board *b, Snake *s)
-{
-		bool res = false;
-		if (!isNextCellOutOfRange(b, s) && (boardGetValue(b, nextPosCell(s)->x, nextPosCell(s)->y) == 1 || boardGetValue(b, nextPosCell(s)->x, nextPosCell(s)->y) == 2))
-		{
-			res = true;
-		}
-		return res;
-}
-//DOUBLE OUT OF RANGE
-bool isNextCellBorder(Board *b, Snake *s)
-{
-		bool res = false;
-		if ((snakeGetDirection(s) == UP || snakeGetDirection(s)== DOWN) &&
-		(nextPosCell(s)->y<0 || nextPosCell(s)->y>boardGetHeight(b)-1))
-		{
-				res = true;
-		}
-		else if ((snakeGetDirection(s) == LEFT || snakeGetDirection(s) == RIGHT) &&
-		(nextPosCell(s)->x<0 || nextPosCell(s)->x>boardGetWidth(b)-1))
-		{
-				res = true;
-		}
-		return res;
-}
-
-static bool checkMovement(Snake *s, Board *b) {
+static bool gameCheckMovement(Snake *s, Board *b) {
 		bool canTp = false;
 		bool continueGame = true;
-		if (isNextCellSnake(b, s))
+		if (boardIsNextCellSnake(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetDirection(s)))
 		{
 				printf("Snake mort !\n");
 				continueGame = false;
 		}
 
-		if (isNextCellBorder(b, s))
+		if (boardIsNextCellBorder(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetDirection(s)))
 		{
 				if (canTp)
 				{

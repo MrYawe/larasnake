@@ -12,7 +12,8 @@
 typedef enum BoardSize {SMALL, MEDIUM, LARGE} BoardSize;
 
 typedef struct Game *Game;
-Game gameCreate();
+
+Game gameCreate(BoardSize size);
 
 // Get
 Board* gameGetBoard(Game g);
@@ -22,13 +23,8 @@ bool gameGetIsPlaying(Game g);
 // Set
 void gameEnd(Game g);
 
-
-void initSnakes(Board *b, Snake *s1, Snake *s2);
-void updateSnake(Board *b, Snake *s);
-bool moveSnake(Board *b, Snake *s);
-
-bool isNextCellSnake(Board *b, Snake *s);
-bool isNextCellBorder(Board *b, Snake *s);
-
+void gameInitSnakes(Board *b, Snake *s1, Snake *s2);
+void gameUpdateSnake(Board *b, Snake *s);
+bool gameMoveSnake(Board *b, Snake *s);
 
 #endif

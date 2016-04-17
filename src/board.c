@@ -260,7 +260,7 @@ bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
     }
     return res;
 }
-//DOUBLE OUT OF RANGE
+
 bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
 {
     bool res = false;
