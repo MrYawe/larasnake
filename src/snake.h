@@ -26,17 +26,6 @@ typedef enum Direction {UP, RIGHT, DOWN, LEFT} Direction;
  **/
 typedef enum SnakeType {WATER, FIRE, GRASS} SnakeType;
 
-// ifndef pour être sûr de définir l'enum Control qu'une seule fois
-#ifndef ControlDef
- /**
- * \enum Control
- * \brief Valeurs de gestion du snake
- * \details Contient toutes les valeurs pour la gestion du snake
- **/
-//typedef enum Control {Line, Column} Control;
-#define ControlDef
-#endif
-
 typedef struct Element Element;
 typedef struct Snake Snake;
 
@@ -68,6 +57,9 @@ int snakeGetSize(Snake *s);
 int snakeGetSpeed(Snake *s);
 void snakeSetSpeed(Snake *s, int speed);
 
+Direction snakeElementGetOrientation(Snake *s, int posElem);
+void snakeElementSetOrientation(Snake *s, int posElem, Direction d);
+
 void snakeSetGhost(Snake *s, bool b);
 bool snakeIsGhost(Snake *s);
 
@@ -83,9 +75,6 @@ void snakeInverseWay(Snake *s);
 void snakeDisplay(Snake *s);
 void snakeUpdateElement(Snake *s, int posElem, int posX, int posY);
 void snakeDeleteSnake(Snake *s);
-
-Direction snakeElementGetOrientation(Snake *s, int posElem);
-void snakeElementSetOrientation(Snake *s, int posElem, Direction d);
 
 // TODO: Augmenter la taille de X elements
 // TODO: Diminuer la taille de X elements

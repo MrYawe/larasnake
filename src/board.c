@@ -212,6 +212,10 @@ void boardFeed(Board *b) {
     x = rand()%b->sizeX;
     y = rand()%b->sizeY;
   }
+  //x=45;
+  //y=17;
+  //x=0;
+  //y=10;
   boardSetValue(b, x, y, 9);
   Coord jb = coordNew(x, y);
   b->jambon=jb;
@@ -256,7 +260,7 @@ bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
     }
     return res;
 }
-//DOUBLE OUT OF RANGE
+
 bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
 {
     bool res = false;

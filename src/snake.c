@@ -68,7 +68,7 @@ Snake* snakeCreate(int size, int id, Direction d)
 	s->id = id;
 	s->direction = d;
 	s->isGhost = false;
-	srand(rand()*time(NULL));
+	//srand(rand()*time(NULL));
 	//s->type = (int)rand()%NB_TYPES;
 	s->type = WATER;
 	int i;

@@ -17,27 +17,55 @@ const int FLIP_HORIZONTAL = 2;
 
 void guiPlay(BoardSize size)
 {
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_WM_SetCaption("Larasnake", NULL);
+	  /*******************/
+	 /**   VARIABLES   **/
+	/*******************/
 
-    SDL_Event event; // Permet de capturer les évènements clavier/souris
-    Assets assets = guiLoadAssets();
-    Timer timer = guiCreateTimer();
-    SDL_Surface *screen = guiCreateScreen(size); // La surface finale qui sera affiché à l'écran
+	/***** SDL Variables *****/
+    SDL_Event event;	//Variable to capture mouse/keyboard events
+    SDL_Surface* screen;//Buffer that will contain the pixels to render on the screen
 
-    bool continueGameMove1 = true;
-    bool continueGameMove2 = true;
-    srand(time(NULL));
+    /***** General Variables *****/
+	Assets assets;	//Variable that will contain all the assets used in the game
+    Timer timer;	//Variable used to control the actions based on the time
 
-    /***** Variable de jeu *****/
-    Game game = gameCreate(size);
-    Board* board = gameGetBoard(game);
-    Snake* snake1 = gameGetSnake(game , 1);
-    Snake* snake2 = gameGetSnake(game , 2);
+    /***** Structure Variables *****/
+    bool continueGameMove1;	//Variable used to check if the snake 1 is dead
+    bool continueGameMove2;	//Variable used to check if the snake 2 is dead
+    
+    Game game;		//Variable to access the game
+    Board* board;	//Variable to access the board
+    Snake* snake1;	//Variable to access the first snake
+    Snake* snake2;	//Variable to access the first snake
 
-    boardFeed(gameGetBoard(game));
+	  /************************/
+	 /**   INITIALIZATION   **/
+	/************************/
 
+	/***** SDL Initialization *****/
+    SDL_Init(SDL_INIT_VIDEO);				//Initialization of the SDL Library
+    SDL_WM_SetCaption("Larasnake", NULL);	//Set the title and icon name of the displayed window
+    screen = guiCreateScreen(size);
 
+	/***** General Variables *****/
+	srand(time(NULL));	//Initialization of the random function
+    timer = guiCreateTimer();
+    assets = guiLoadAssets();
+
+    /***** Structure Variables *****/
+    continueGameMove1 = true;
+    continueGameMove2 = true;
+
+    game = gameCreate(size);            
+    board = gameGetBoard(game);
+    snake1 = gameGetSnake(game, 1);
+    snake2 = gameGetSnake(game, 2);
+
+    boardFeed(gameGetBoard(game));	//Function called to feed the snakes with ham
+
+   	  /************************/
+	 /**	  GAME LOOP		**/
+	/************************/
     while (gameGetIsPlaying(game)) {
 
         timer->start = SDL_GetTicks(); // Debut de la frame courante
@@ -45,9 +73,9 @@ void guiPlay(BoardSize size)
         /***** Deplacement du snake 1 (joueur) *****/
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {
-            guiSnakeEvent(&event, snake1); // intercepte un evenement si il a lieu
-            continueGameMove1 = moveSnake(board, snake1);
-            timer->snake1MoveTimer = 0;
+            guiSnakeEvent(&event, snake1);                      // intercepte un evenement si il a lieu
+            continueGameMove1 = gameMoveSnake(board, snake1);       //
+            timer->snake1MoveTimer = 0;                         //
         }
         timer->snake1LastMove = SDL_GetTicks();
         /******************************************/
@@ -55,25 +83,24 @@ void guiPlay(BoardSize size)
         /***** Deplacement snake 2 (IA) *****/
         timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
         if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {
-            snakeSetDirection(snake2, iaJambon(board, snake2));
-            continueGameMove2 = moveSnake(board, snake2);
-            timer->snake2MoveTimer = 0 ;
+            snakeSetDirection(snake2, iaJambon(board, snake2)); //
+            continueGameMove2 = gameMoveSnake(board, snake2);       //
+            timer->snake2MoveTimer = 0 ;                        //
         }
         timer->snake2LastMove = SDL_GetTicks();
         /***********************************/
 
-        guiDrawGame(screen, game, assets);
-        //boardDisplay(gameGetBoard(game));
-        guiReloadScreen(screen);
+        guiDrawGame(screen, game, assets);  //
+        guiReloadScreen(screen);            //
 
-        if(!continueGameMove1 || !continueGameMove2)
+        if(!continueGameMove1 || !continueGameMove2)        
             gameEnd(game);
 
         /***** Gestion des FPS *****/
-        timer->end = SDL_GetTicks(); //when the frame calculations end
-        timer->delay = FRAME_MS - (timer->end - timer->start); //how long to delay
+        timer->end = SDL_GetTicks();                           //Get the time after the calculations
+        timer->delay = FRAME_MS - (timer->end - timer->start); //Calculate how long to delay should be
         if(timer->delay > 0) {
-            SDL_Delay(timer->delay); //delay processing
+            SDL_Delay(timer->delay);                           //Delay processing
         }
     }
 
