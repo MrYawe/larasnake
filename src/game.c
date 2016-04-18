@@ -10,8 +10,8 @@ static bool gameCheckMovement(Snake *s, Board *b);
 
 /**
  * \struct Game
- * \brief La structure représente une partie
- * \details La structure contient
+ * \brief The game structure
+ * \details The structure contains a board, the two snakes and a boolean to know if the game is currently playing
  **/
 struct Game
 {
@@ -21,9 +21,15 @@ struct Game
 		bool isPlaying;
 };
 
-Game gameCreate(BoardSize size) 
+/**
+ * \fn gameCreate
+ * \brief The function creates the game
+ * \details The function store the game in the memory and initialize the snakes
+ * \param size BoardSize: the type of the board to init
+ * \return Returns Game pointer to the crated game
+ */
+Game gameCreate(BoardSize size)
 {
-		// TODO: 3 mode de jeu différent (tiny, normal, big)
 		Game g = malloc(sizeof(struct Game));
 
 		switch (size) {
@@ -40,8 +46,8 @@ Game gameCreate(BoardSize size)
 						break;
 		}
 
-		g->snake1 = snakeCreate(15, 1, RIGHT);
-		g->snake2 = snakeCreate(15, 2, LEFT);
+		g->snake1 = snakeCreate(15, 1, RIGHT, WATER);
+		g->snake2 = snakeCreate(15, 2, LEFT, FIRE);
 		g->isPlaying = true;
 
     	gameInitSnakes(g->board, g->snake1, g->snake2);
@@ -49,11 +55,26 @@ Game gameCreate(BoardSize size)
 		return g;
 }
 
+/**
+ * \fn gameGetBoard
+ * \brief Accessor to the board of the game structure
+ * \details The function returns the board of the game
+ * \param g Game: The game to access
+ * \return Returns Board pointer
+ */
 Board* gameGetBoard(Game g)
 {
 		return g->board;
 }
 
+/**
+ * \fn gameGetSnake
+ * \brief Accessor to the snake of the game structure
+ * \details The function returns the snake of the game
+ * \param g Game: The game to access
+ * \param player Int: The player number
+ * \return Returns Snake pointer
+ */
 Snake* gameGetSnake(Game g, int player)
 {
 		if (player == 1)
@@ -61,19 +82,38 @@ Snake* gameGetSnake(Game g, int player)
 		return g->snake2;
 }
 
+/**
+ * \fn gameGetIsPlaying
+ * \brief Accessor to the isPlaying boolean of the game structure
+ * \details The function returns the isPlaying of the game
+ * \param g Game: The game to access
+ * \return Bool: Returns isPlaying
+ */
 bool gameGetIsPlaying(Game g)
 {
 		return g->isPlaying;
 }
 
-
+/**
+ * \fn gameEnd
+ * \brief End the game
+ * \details The function put false to the isPlaying bool and free all structures
+ * \param g Game: The game to end
+ */
 void gameEnd(Game g)
 {
 		boardFree(g->board);
 		g->isPlaying = false;
 }
 
-
+/**
+ * \fn gameInitSnakes
+ * \brief Initialize the snakes of the game
+ * \details The function put the snakes on the board at the beggining of the game
+ * \param b Board: where to put the snakes on
+ * \param s1 Snake: First snake to put on the board
+ * \param s2 Snake: Second snake to put on the board
+ */
 void gameInitSnakes(Board *b, Snake *s1, Snake *s2)
 {
 		int i;
@@ -89,6 +129,13 @@ void gameInitSnakes(Board *b, Snake *s1, Snake *s2)
 		gameUpdateSnake(b, s2);
 }
 
+/**
+ * \fn gameUpdateSnake
+ * \brief Update the board with the position of the snake
+ * \details The function iterates on Snake's Elements and put them on the board
+ * \param b Board: where to update the snake
+ * \param s Snake to put on the board
+ */
 void gameUpdateSnake(Board *b, Snake *s)
 {
 		int i;
@@ -98,6 +145,13 @@ void gameUpdateSnake(Board *b, Snake *s)
 		}
 }
 
+/**
+ * \fn gameMoveSnake
+ * \brief Update the board with the snake movement
+ * \details Update the board without iterating on elements
+ * \param b Board: where to move the snake
+ * \param s Snake to move on the board
+ */
 bool gameMoveSnake(Board *b, Snake *s)
 {
 		boardSetValue(b, snakeGetPos(s, 0)->x, snakeGetPos(s, 0)->y, 0);
@@ -106,7 +160,13 @@ bool gameMoveSnake(Board *b, Snake *s)
 		return continueGame;
 }
 
-
+/**
+ * \fn gameCheckMovement
+ * \brief Check collisions
+ * \details Check if the next cell doesn't contains a snake or isn't a border
+ * \param b Board: where to check
+ * \param s Snake to move
+ */
 static bool gameCheckMovement(Snake *s, Board *b) {
 		bool canTp = false;
 		bool continueGame = true;

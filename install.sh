@@ -8,8 +8,8 @@ sudo apt-get install libsdl1.2-dev -y --force-yes
 sudo apt-get install libsdl-image1.2 -y --force-yes
 sudo apt-get install libsdl-image1.2-dev -y --force-yes
 
-sudo apt-get install libsdl-gfx1.2 -y --force-yes
-sudo apt-get install libsdl-gfx1.2-dev -y --force-yes
+#sudo apt-get install libsdl-gfx1.2 -y --force-yes
+#sudo apt-get install libsdl-gfx1.2-dev -y --force-yes
 
 sudo apt-get update
 

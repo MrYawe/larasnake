@@ -3,8 +3,8 @@
  * \author groupe Larakis
  * \version 1
  * \date 20/02/2016
- * \brief Contrôle la gestion du plateau
- * \details Toutes les fonctions necessaires à gérer le plateau : création, récupérer des valeurs, les modifier, afficher le plateau et libérer la mémoire
+ * \brief Everything about the board class
+ * \details Contains all functions to create, edit, delete and acess the board
  */
 
 #include <stdio.h>
@@ -13,25 +13,26 @@
 
 /**
  * \struct Board
- * \brief La structure représente un plateau
- * \details La structure contient un tableau à deux dimensions contenant les valeurs du plateau, un entier pour la taille X et un entier pour la taille Y
+ * \brief The structure of the board
+ * \details The struture contains a double dimensions array, the size; the size of cells and the position of the food
  **/
 struct Board
 {
   int** tab;
   int sizeX;
   int sizeY;
-  int sizeCell; // taille en pixel d'une case du board
+  int sizeCell; // size by pixels of a cell
   Coord jambon;
 };
 
 /**
  * \fn boardInit
- * \brief La fonction crée le plateau
- * \details La fonction alloue la mémoire necessaire au plateau et remplit les éléments de la structure
- * \param sizeX Entier qui done la taille en X du plateau créé
- * \param sizeY Entier qui done la taille en Y du plateau créé
- * \return Variable de type Board qui contiendra le plateau
+ * \brief The function creates an instance of the board
+ * \details The function store the board in the memory and initialize it
+ * \param sizeX Int Represents the size X of the board to create
+ * \param sizeY Int Represents the size Y of the board to create
+ * \param sizeCell Int Represents the size of the cells of the board when it will be printed
+ * \return Returns a pointer to the created board
  */
 Board* boardInit(int sizeX, int sizeY, int sizeCell)
 {
@@ -60,12 +61,12 @@ Board* boardInit(int sizeX, int sizeY, int sizeCell)
 
 /**
  * \fn boardGetValue
- * \brief La fonction renvoie la valeur d'un emplacement du plateau
- * \details La fonction teste si les paramètres sont corrects et renvoie, le cas échéant, la valeur correspondante
- * \param b Variable de type Board qui correspond au tableau à parcourir pour trouver la valeur
- * \param posx Variable de type Int qui correpond à l'emplacement X de la valeur à récupérer
- * \param posy Variable de type Int qui correpond à l'emplacement Y de la valeur à récupérer
- * \return Variable de type int qui correspond à l'entier situé l'emplacement voulu sur le plateau
+ * \brief The function allow to get a value in the board
+ * \details The function tests if the parameters are correct and if it's the case, it returns the value
+ * \param b Board : Represents the board to access
+ * \param posx Int : The X position to access 
+ * \param posy Int : The Y position to access 
+ * \return Returns int which correspond to the correct value / -1 if out of range
  */
 int boardGetValue(Board *b, int posx, int posy)
 {
@@ -83,12 +84,12 @@ int boardGetValue(Board *b, int posx, int posy)
 
 /**
  * \fn boardSetValue
- * \brief La fonction attribue une valeur à un emplacement du plateau
- * \details La fonction teste si les paramètres sont corrects et attribue, le cas échéant, la valeur correspondante au bon emplacement du plateau
- * \param b Variable de type Board qui correspond au tableau à parcourir pour attribuer la valeur
- * \param posx Variable de type Int qui correpond à l'emplacement X de la valeur à attriber
- * \param posy Variable de type Int qui correpond à l'emplacement Y de la valeur à attribuer
- * \param val Variable de type Int qui correpond à la valeur à attribuer
+ * \brief The function allow to set a value in the board
+ * \details The function test if the parameters are correct and if it's the case, it puts the value in the board
+ * \param b Board : Represents the board to set
+ * \param posx Int : The X position to set 
+ * \param posy Int : The Y position to set 
+ * \param val Int : The value to set in the board
  */
 void boardSetValue(Board *b, int posx, int posy, int val)
 {
@@ -103,25 +104,44 @@ void boardSetValue(Board *b, int posx, int posy, int val)
   }
 }
 
+/**
+ * \fn boardGetJambon
+ * \brief The function allow to get the coordinates of the jambon
+ * \details The function returns the coordinates attributes of the jambon
+ * \param b Board : Represents the board to access
+ * \return Returns Coor which correspond to the coordinates of the jambon
+ */
 Coord boardGetJambon(Board *b)
 {
   return b->jambon;
 }
 
+
+/**
+ * \fn boardSetJambon
+ * \brief The function allow to set a value in the structure board
+ * \details The function test if the parameters are correct and if it's the case, it puts the value in the board structure
+ * \param b Board : Represents the board to set
+ * \param posx Int : The X position to set 
+ * \param posy Int : The Y position to set 
+ */
 void boardSetJambon(Board *b, int x, int y)
 {
-  b->jambon->x=x;
-  b->jambon->y=y;
+  if (x>=0 && y>=0 && x<b->sizeX && y<b->sizeY)
+  {
+    //printf("SET\n");
+    b->jambon->x=x;
+    b->jambon->y=y;
+  }
 }
 
 
 /**
- * \fn boardGetSize
- * \brief La fonction renvoie la taille du plateau
- * \details La fonction renvoie la valeur correspondante à la taille en X du tableau
- * \param b Variable de type Board qui correspond au tableau en question
- * \param c Variable de type enum Control qui correspond à ligne ou colonne suivant ce que l'on souhaite récupérer
- * \return Variable de type int qui correspond à la taille en X du tableau
+ * \fn boardGetHeight
+ * \brief The function returns the value of the height of the board
+ * \details The function returns the value of sizeY of the structure board
+ * \param b Board : The board to access
+ * \return Returns int which correspond to the height of the current board
  */
 int boardGetHeight(Board *b)
 {
@@ -132,6 +152,13 @@ int boardGetHeight(Board *b)
   return res;
 }
 
+/**
+ * \fn boardGetWidth
+ * \brief The function returns the value of the width of the board
+ * \details The function returns the value of sizeX of the structure board
+ * \param b Board : The board to access
+ * \return Returns int which correspond to the width of the current board
+ */
 int boardGetWidth(Board *b)
 {
   int res = -1;
@@ -141,13 +168,11 @@ int boardGetWidth(Board *b)
   return res;
 }
 
-
-
 /**
  * \fn boardDisplay
- * \brief La fonction affiche le plateau dans la console
- * \details La fonction affiche pour chaque case du plateau sa valeur dans la console
- * \param b Variable de type Board qui correspond au tableau à afficher
+ * \brief The function allow to print the board in the console
+ * \details The console display all cells of the board in the console
+ * \param b Board : The board to print
  */
 void boardDisplay(Board *b)
 {
@@ -165,9 +190,9 @@ void boardDisplay(Board *b)
 
 /**
  * \fn boardFree
- * \brief La fonction libère la mémoire du plateau
- * \details La fonction libère entièrement le tableau à deux dimensions de la mémoire
- * \param b Variable de type Board qui correspond au tableau à effacer
+ * \brief The function free the board 
+ * \details The function free the board of the memory
+ * \param b Board : The board to free
  */
 void boardFree(Board *b)
 {
@@ -196,6 +221,14 @@ bool boardInside(Board *b, Coord coord) {
   return res;
 }
 
+/**
+ * \fn boardIsSnake
+ * \brief The function allow to know if a cell is a part of a snake
+ * \details The function returns a boolean to know if the cell of the coordinates passed in arguments is a part of a snake
+ * \param b Board : The board to access
+ * \param coord Coord : Coordinates of the cell to test
+ * \return Returns boolean which say if the cell is a snake
+ */
 bool boardIsSnake(Board *b, Coord coord) {
   bool res=false;
   if(boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2){
@@ -204,6 +237,12 @@ bool boardIsSnake(Board *b, Coord coord) {
   return res;
 }
 
+/**
+ * \fn boardFeed
+ * \brief The function puts a food in the board
+ * \details The function set a food coodinates in the board structure
+ * \param b Board : The board to edit
+ */
 void boardFeed(Board *b) {
   int x = rand()%b->sizeX;
   int y = rand()%b->sizeY;
@@ -221,6 +260,15 @@ void boardFeed(Board *b) {
   printf("x: %d, y: %d \n", x, y);
 }
 
+/**
+ * \fn boardNextPosCell
+ * \brief The function allow to get the next cell
+ * \details The function allow to get the next cell from a position and a direction
+ * \param x Int: the x coordinate of the current position
+ * \param y Int: the y coordinate of the current position
+ * \param dir Direction: the direction to go
+ * \return Returns Coord which correspond to the next cell
+ */
 Coord boardNextPosCell(int x, int y, Direction dir)
 {
   Coord res = coordNew(x, y);
@@ -249,17 +297,32 @@ Coord boardNextPosCell(int x, int y, Direction dir)
     return res;
 }
 
+/**
+ * \fn boardIsNextCellSnake
+ * \brief The function allow to know if the next cell is a part of a snake
+ * \details The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a snake
+ * \param b Board : The board to access
+ * \param x Board : The actual X position 
+ * \param y Board : The actual Y position
+ * \param dir Direction : Direction to go
+ * \return Returns boolean which say if the next cell is a snake
+ */
 bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
 {
-    bool res = false;
     Coord nextPos = boardNextPosCell(x, y, dir);
-    if (!boardIsNextCellBorder(b,x,y,dir) && (boardGetValue(b, nextPos->x, nextPos->y) == 1 || boardGetValue(b, nextPos->x, nextPos->y) == 2))
-    {
-      res = true;
-    }
-    return res;
+    return boardIsSnake(b, nextPos);
 }
 
+/**
+ * \fn boardIsNextCellBorder
+ * \brief The function allow to know if the next cell is a part of a border
+ * \details The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a border
+ * \param b Board : The board to access
+ * \param x Board : The actual X position 
+ * \param y Board : The actual Y position
+ * \param dir Direction : Direction to go
+ * \return Returns boolean which say if the next cell is a border
+ */
 bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
 {
     bool res = false;

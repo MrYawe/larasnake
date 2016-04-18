@@ -5,15 +5,11 @@
 #include <time.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include <SDL/SDL_rotozoom.h>
 #include "gui.h"
 #include "constants.h"
 #include "game.h"
 #include "ia.h"
 
-//Flip flags
-const int FLIP_VERTICAL = 1;
-const int FLIP_HORIZONTAL = 2;
 
 void guiPlay(BoardSize size)
 {
@@ -32,7 +28,7 @@ void guiPlay(BoardSize size)
     /***** Structure Variables *****/
     bool continueGameMove1;	//Variable used to check if the snake 1 is dead
     bool continueGameMove2;	//Variable used to check if the snake 2 is dead
-    
+
     Game game;		//Variable to access the game
     Board* board;	//Variable to access the board
     Snake* snake1;	//Variable to access the first snake
@@ -56,7 +52,7 @@ void guiPlay(BoardSize size)
     continueGameMove1 = true;
     continueGameMove2 = true;
 
-    game = gameCreate(size);            
+    game = gameCreate(size);
     board = gameGetBoard(game);
     snake1 = gameGetSnake(game, 1);
     snake2 = gameGetSnake(game, 2);
@@ -93,7 +89,7 @@ void guiPlay(BoardSize size)
         guiDrawGame(screen, game, assets);  //
         guiReloadScreen(screen);            //
 
-        if(!continueGameMove1 || !continueGameMove2)        
+        if(!continueGameMove1 || !continueGameMove2)
             gameEnd(game);
 
         /***** Gestion des FPS *****/
@@ -143,11 +139,11 @@ Assets guiLoadAssets() {
     Assets assets = malloc(sizeof(struct Assets));
     assets->background = guiLoadImage("./images/background/bg-medium.png");
 
-    char *colors[3] = {"blue", "green", "red"};
+    char *colors[3] = {"blue", "red", "green"};
 
     assets->snakesAssets = malloc(3*sizeof(SnakeAssets));
     int i;
-    for (i = 0; i < 1; i++) { // mettre à i < 3 si 3 couleurs chargé
+    for (i = 0; i < 3; i++) { // mettre à i < 3 si 3 couleurs chargé
         assets->snakesAssets[i] = guiLoadSnake(i, colors[i]); // WATER=0, FIRE=1, GRASS=2
     }
 
@@ -225,37 +221,37 @@ void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {
         else // body
         {
             nextDirection = snakeElementGetOrientation(snake, i+1);
-            if(currentDirection != nextDirection) 
+            if(currentDirection != nextDirection)
             {
-                if(currentDirection == RIGHT) 
+                if(currentDirection == RIGHT)
                 {
                     if(nextDirection == UP)
                         guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
                     else // DOWN
                         guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
-                } 
-                else if(currentDirection == UP) 
+                }
+                else if(currentDirection == UP)
                 {
                     if(nextDirection == RIGHT)
                         guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
                     else // LEFT
                         guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
-                } 
-                else if(currentDirection == DOWN) 
+                }
+                else if(currentDirection == DOWN)
                 {
                     if(nextDirection == RIGHT)
                         guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
                     else // LEFT
                         guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
-                } 
-                else if(currentDirection == LEFT) 
+                }
+                else if(currentDirection == LEFT)
                 {
                     if(nextDirection == UP)
                         guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
                     else // DOWN
                         guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
                 }
-            } 
+            }
             else
                 guiApplySurface(x, y, snakeAssets->body[currentDirection], screen, NULL);
         }
