@@ -15,15 +15,16 @@
  * \fn iaSurvive
  * \brief Function used to get a direction for the snake to follow to not die
  * \details Function that checks if the snake can go forward. If not, it tries to go right then left.
- * \param <Board> Variable representing the board
- * \param <Snake> Variable representing the snake
+ * \param board Variable representing the board
+ * \param snake Variable representing the snake
  * \return <Direction> used to change the snake direction
  */
 Direction iaSurvive (Board* board, Snake* snake) {
 	Direction snakeDir = snakeGetDirection(snake);
 	Coord snakePos = snakeGetPos(snake, snakeGetSize(snake)-1);
 
-	if(boardIsNextCellBorder(board, snakePos->x, snakePos->y, snakeDir) || boardIsNextCellSnake(board, snakePos->x, snakePos->y, snakeDir))//Checking if the next Cell in front of the snake would make him die
+	//Checking if the next Cell in front of the snake would make him die
+	if(boardIsNextCellBorder(board, snakePos->x, snakePos->y, snakeDir) || boardIsNextCellSnake(board, snakePos->x, snakePos->y, snakeDir))
 	{
 		if(snakeDir==UP || snakeDir==DOWN)//Checking if the snake is going up or down
 		{
@@ -53,8 +54,8 @@ Direction iaSurvive (Board* board, Snake* snake) {
  * \fn iaJambon
  * \brief Function used to chase the given bonus without dying
  * \details Function that goes to the given bonus and that is calling iaSurvive to not die
- * \param <Board> Variable representing the board
- * \param <Snake> Variable representing the snake
+ * \param board Variable representing the board
+ * \param snake Variable representing the snake
  * \return <Direction> used to change the snake direction
  */
 Direction iaJambon (Board *board, Snake *snake) {
@@ -132,4 +133,20 @@ Direction iaJambon (Board *board, Snake *snake) {
 		boardSetJambon(board, 0, 0);
 	
 	return snakeDir;
+}
+
+
+int iaFront(Board *board, int x, int y, Direction dir) 
+{
+	int res = 0;
+	Coord nextPos;
+	while(!boardIsNextCellSnake(board, x, y, dir) && !boardIsNextCellBorder(board, x, y, dir)) 
+	{
+		res++;
+		nextPos = boardNextPosCell(x, y, dir);
+		x=nextPos->x;
+		y=nextPos->y;
+	}
+	//free(nextPos);
+	return res;
 }
