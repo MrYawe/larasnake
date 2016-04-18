@@ -46,6 +46,8 @@ Coord boardNextPosCell(int x, int y, Direction dir);
 bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir);
 bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir);
 
+Board* boardCopy(Board* b);
+
 // TODO: bordure qui se grise
 // TODO: bordure qui se dégrise
 

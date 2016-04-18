@@ -194,11 +194,12 @@ void boardDisplay(Board *b)
 void boardFree(Board *b)
 {
   int i;
-  for ( i = 0; i < b->sizeY; i++ )
+  for ( i = 0; i < b->sizeY; i++)
   {
     free(b->tab[i]);
   }
   free(b->tab);
+  free(b->jambon);
   free(b);
 }
 
@@ -228,7 +229,7 @@ bool boardInside(Board *b, Coord coord) {
  */
 bool boardIsSnake(Board *b, Coord coord) {
   bool res=false;
-  if(boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2){
+  if(boardInside(b, coord) && (boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2)){
     res = true;
   }
   return res;
