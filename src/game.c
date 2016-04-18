@@ -281,8 +281,6 @@ void gameFeed(Game game) {
   Item food = itemCreate(x, y, FOOD);
   game->food=food;
   boardSetValue(b, x, y, food->value);
-
-  boardDisplay(b);
 }
 
 /**
@@ -368,4 +366,9 @@ bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
 
 Item gameGetFood(Game game) {
 	return game->food;
+}
+
+Item gameSetFood(Game game, int x , int y) {
+	game->food->posX=x;
+	game->food->posY=y;
 }

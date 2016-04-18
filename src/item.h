@@ -2,7 +2,6 @@
 #define ITEM_H
 
 #include "enum.h"
-#include "game.h"
 
 typedef struct Item* Item;
 /**
@@ -15,7 +14,7 @@ struct Item
     int posX;
     int posY;
     BoardValue value;
-    //void (*onCollision)(int idSnake); // idSnake:id du snake qui a touché l'object
+    void (*onCollision)(int idSnake); // idSnake:id du snake qui a touché l'object
 };
 
 /*** Object ***/

@@ -9,7 +9,6 @@
 #include <stdlib.h>
 #include "ia.h"
 #include "coord.h"
-#include "game.h"
 
 /**
  * \fn iaSurvive
@@ -57,13 +56,15 @@ Direction iaSurvive (Board* board, Snake* snake) {
  * \param snake Variable representing the snake
  * \return <Direction> used to change the snake direction
  */
-Direction iaJambon (Board *board, Snake *snake) {
+Direction iaJambon (Game game, Snake *snake) {
 
 	Direction snakeDir = snakeGetDirection(snake);
-	/*Coord snakePos = snakeGetPos(snake, snakeGetSize(snake)-1);
-	Coord posBonus = boardGetJambon(board);
+	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
+	Item food = gameGetFood(game);
+	Coord posBonus = coordNew(food->posX, food->posY);
+	Board* board = gameGetBoard(game);
 
-	if(!(boardGetJambon(board)->x == 0 && boardGetJambon(board)->y == 0))//Checking if there is a bonus to chase
+	if(!(posBonus->x == 0 && posBonus->y == 0))//Checking if there is a bonus to chase
 	{
 		if(snakeDir==UP || snakeDir==DOWN)//Checking if the snake is going UP or DOWN
 		{
@@ -79,9 +80,9 @@ Direction iaJambon (Board *board, Snake *snake) {
 				if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, LEFT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, LEFT))
 					snakeDir=LEFT;
 			}
-			else if(snakePos->x == posBonus->x) //Checking if the snake is on the right x
+			else if(posSnake->x == posBonus->x) //Checking if the snake is on the right x
 			{
-				if((snakeDir==UP && snakePos->y < posBonus->y) || (snakeDir==DOWN && snakePos->y > posBonus->y))//Checking if the snake is in the good direction
+				if((snakeDir==UP && posSnake->y < posBonus->y) || (snakeDir==DOWN && posSnake->y > posBonus->y))//Checking if the snake is in the good direction
 				{
 					//Checking if the snake can go to the right without dying
 					if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, RIGHT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, RIGHT))
@@ -126,12 +127,12 @@ Direction iaJambon (Board *board, Snake *snake) {
 	{
 		snakeDir = iaSurvive(board, snake);
 	}
-*/
-	/* /!\ Just to test out with the jambon /!\ */
-	/*if(coordEquals(boardNextPosCell(snakePos->x, snakePos->y, snakeDir),posBonus))
-		boardSetJambon(board, 0, 0);
 
-	free(posSnake);*/
+	/* /!\ Just to test out with the jambon /!\ */
+	if(coordEquals(boardNextPosCell(posSnake->x, posSnake->y, snakeDir),posBonus))
+		gameSetFood(game, 0, 0);
+
+	free(posSnake);
 	//free(posBonus);
 	return snakeDir;
 }

@@ -10,7 +10,7 @@ void itemOnCollisionFood(int idSnake) {
 
 Item itemCreate(int x, int y, BoardValue value) {
     Item item = malloc(sizeof(struct Item));
-    /*item->posX = x;
+    item->posX = x;
     item->posY = y;
     item->value = value;
 
@@ -19,7 +19,7 @@ Item itemCreate(int x, int y, BoardValue value) {
             item->onCollision = itemOnCollisionFood;
             break;
     }
-*/
+
     return item;
 }
 void itemFree(Item item) {
