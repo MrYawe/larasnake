@@ -1,5 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
+
 /**
  * \file board.h
  * \author groupe Larakis
@@ -12,7 +13,6 @@
 #include <stdbool.h>
 #include "coord.h"
 #include "snake.h"
-#include "item.h"
 
 typedef struct Board Board;
 
@@ -38,13 +38,9 @@ int boardGetWidth(Board *b);
  *************** */
 void boardDisplay(Board *b);
 void boardFree(Board *b);
-bool boardInside(Board *b, Coord coord);
-bool boardIsSnake(Board *b, Coord coord);
-//void boardFeed(Board *b);
 
-Coord boardNextPosCell(int x, int y, Direction dir);
-bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir);
-bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir);
+
+
 
 Board* boardCopy(Board* b);
 

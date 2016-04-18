@@ -3,23 +3,14 @@
 #include <unistd.h>
 #include "item.h"
 #include "constants.h"
-#include "board.h"
 
-
-
-
-void itemOnCollisionFood(int idSnake, Game game) {
-    /*printf("COLLISION JAMBON\n");
-    Item food = boardGetFood(gameGetBoard(game));
-    free(food);
-
-    boardFeed(gameGetBoard(game));*/
+void itemOnCollisionFood(int idSnake) {
+    printf("COLLISION JAMBON\n");
 }
-
 
 Item itemCreate(int x, int y, BoardValue value) {
     Item item = malloc(sizeof(struct Item));
-    item->posX = x;
+    /*item->posX = x;
     item->posY = y;
     item->value = value;
 
@@ -28,7 +19,7 @@ Item itemCreate(int x, int y, BoardValue value) {
             item->onCollision = itemOnCollisionFood;
             break;
     }
-
+*/
     return item;
 }
 void itemFree(Item item) {

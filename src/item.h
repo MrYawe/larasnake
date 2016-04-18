@@ -1,11 +1,10 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-#include "snake.h"
+#include "enum.h"
 #include "game.h"
 
-
-typedef struct Item *Item;
+typedef struct Item* Item;
 /**
  * \struct Item
  * \brief The item structure
@@ -16,7 +15,7 @@ struct Item
     int posX;
     int posY;
     BoardValue value;
-    void (*onCollision)(int idSnake, Game game); // idSnake:id du snake qui a touché l'object
+    //void (*onCollision)(int idSnake); // idSnake:id du snake qui a touché l'object
 };
 
 /*** Object ***/
@@ -24,6 +23,6 @@ Item itemCreate(int x, int y, BoardValue value);
 
 
 /*** Collisions ***/
-void itemOnCollisionFood(int idSnake, Game game);
+void itemOnCollisionFood(int idSnake);
 
 #endif

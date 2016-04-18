@@ -3,6 +3,8 @@
 
 #include "board.h"
 #include "snake.h"
+#include "item.h"
+#include "enum.h"
 
 /**
  * \enum Direction
@@ -10,7 +12,6 @@
  * \details Contient toutes les directions possibles pour le snake
  **/
 typedef enum BoardSize {SMALL, MEDIUM, LARGE} BoardSize;
-typedef enum BoardValue {EMPTY, SNAKE1, SNAKE2, FOOD} BoardValue;
 
 typedef struct Game *Game;
 
@@ -27,5 +28,16 @@ void gameEnd(Game g);
 void gameInitSnakes(Board *b, Snake *s1, Snake *s2);
 void gameUpdateSnake(Board *b, Snake *s);
 bool gameMoveSnake(Board *b, Snake *s);
+
+
+Item gameGetFood(Game game);
+
+Coord boardNextPosCell(int x, int y, Direction dir);
+bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir);
+bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir);
+
+bool boardInside(Board *b, Coord coord);
+bool boardIsSnake(Board *b, Coord coord);
+void gameFeed(Game game);
 
 #endif

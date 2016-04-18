@@ -58,7 +58,7 @@ void guiPlay(BoardSize size)
     snake1 = gameGetSnake(game, 1);
     snake2 = gameGetSnake(game, 2);
 
-    //boardFeed(board);	//Function called to feed the snakes with ham
+    gameFeed(game);//Function called to put some food on the board
 
    	  /************************/
 	 /**	  GAME LOOP		**/
@@ -193,7 +193,7 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
     guiApplySurface(0, 0, assets->background, screen, NULL); // dessine le background
     guiDrawSnake(screen, snake1, assets->snakesAssets[snakeGetType(snake1)]);
     guiDrawSnake(screen, snake2, assets->snakesAssets[snakeGetType(snake2)]);
-    //guiApplySurface(boardGetJambon(gameGetBoard(game))->x*M_CELL_SIZE, M_CELL_SIZE*boardGetJambon(gameGetBoard(game))->y, IMG_Load("./images/cube.bmp"), screen, NULL);
+    guiApplySurface(gameGetFood(game)->posX*M_CELL_SIZE, M_CELL_SIZE*gameGetFood(game)->posY, IMG_Load("./images/cube.bmp"), screen, NULL);
 }
 
 void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {

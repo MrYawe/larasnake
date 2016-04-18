@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include "constants.h"
 #include "game.h"
-#include "coord.h"
 
 // Static function
 static bool gameCheckMovement(Snake *s, Board *b);
@@ -19,6 +18,7 @@ struct Game
 		Snake *snake1; // joueur 1
 		Snake *snake2; // joueur 2
 		bool isPlaying;
+		Item food;
 };
 
 /**
@@ -230,4 +230,142 @@ static bool gameCheckMovement(Snake *s, Board *b) {
 		}
 
 		return continueGame;
+}
+
+/**
+ * \fn boardInside
+ * \brief La fonction vérifie si la position est dans le board
+ * \param b Variable de type Board qui correspond au tableau à effacer
+ * \param posX position X de la case à tester
+ * \param posY position Y de la case à tester
+ */
+bool boardInside(Board *b, Coord coord) {
+  bool res = false;
+  if (coord->x >= 0 && coord->y >= 0 && coord->x < boardGetWidth(b) && coord->y < boardGetHeight(b))
+  {
+      res = true;
+  }
+  return res;
+}
+
+/**
+ * \fn boardIsSnake
+ * \brief The function allow to know if a cell is a part of a snake
+ * \details The function returns a boolean to know if the cell of the coordinates passed in arguments is a part of a snake
+ * \param b Board : The board to access
+ * \param coord Coord : Coordinates of the cell to test
+ * \return Returns boolean which say if the cell is a snake
+ */
+bool boardIsSnake(Board *b, Coord coord) {
+  bool res=false;
+  if(boardInside(b, coord) && (boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2)){
+    res = true;
+  }
+  return res;
+}
+
+/**
+ * \fn boardFeed
+ * \brief The function puts a food in the board
+ * \details The function set a food coodinates in the board structure
+ * \param b Board : The board to edit
+ */
+void gameFeed(Game game) {
+	Board* b = gameGetBoard(game);
+  int x = rand()%boardGetWidth(b);
+  int y = rand()%boardGetHeight(b);
+  while(boardGetValue(b, x, y)!=0){
+	x = rand()%boardGetWidth(b);
+  	y = rand()%boardGetHeight(b);
+  }
+  Item food = itemCreate(x, y, FOOD);
+  game->food=food;
+  boardSetValue(b, x, y, food->value);
+
+  boardDisplay(b);
+}
+
+/**
+ * \fn boardNextPosCell
+ * \brief The function allow to get the next cell
+ * \details The function allow to get the next cell from a position and a direction
+ * \param x Int: the x coordinate of the current position
+ * \param y Int: the y coordinate of the current position
+ * \param dir Direction: the direction to go
+ * \return Returns Coord which correspond to the next cell
+ */
+Coord boardNextPosCell(int x, int y, Direction dir)
+{
+  Coord res = coordNew(x, y);
+    switch (dir)
+    {
+        case UP:
+            res->y -= 1;
+            break;
+
+        case DOWN:
+            res->y += 1;
+            break;
+
+        case LEFT:
+            res->x -= 1;
+            break;
+
+        case RIGHT:
+            res->x += 1;
+            break;
+
+        default:
+          printf("Error isNextCellBorder\n");
+          break;
+    }
+    return res;
+}
+
+/**
+ * \fn boardIsNextCellSnake
+ * \brief The function allow to know if the next cell is a part of a snake
+ * \details The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a snake
+ * \param b Board : The board to access
+ * \param x Board : The actual X position
+ * \param y Board : The actual Y position
+ * \param dir Direction : Direction to go
+ * \return Returns boolean which say if the next cell is a snake
+ */
+bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
+{
+    Coord nextPos = boardNextPosCell(x, y, dir);
+    return boardIsSnake(b, nextPos);
+}
+
+/**
+ * \fn boardIsNextCellBorder
+ * \brief The function allow to know if the next cell is a part of a border
+ * \details The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a border
+ * \param b Board : The board to access
+ * \param x Board : The actual X position
+ * \param y Board : The actual Y position
+ * \param dir Direction : Direction to go
+ * \return Returns boolean which say if the next cell is a border
+ */
+bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
+{
+    bool res = false;
+    Coord nextPos = boardNextPosCell(x, y, dir);
+
+    if ((dir == UP || dir== DOWN) &&
+    (nextPos->y<0 || nextPos->y>boardGetHeight(b)-1))
+    {
+        res = true;
+    }
+    else if ((dir == LEFT || dir == RIGHT) &&
+    (nextPos->x<0 || nextPos->x>boardGetWidth(b)-1))
+    {
+        res = true;
+    }
+    return res;
+}
+
+Item gameGetFood(Game game) {
+	return game->food;
 }
