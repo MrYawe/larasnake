@@ -309,7 +309,6 @@ Coord boardNextPosCell(int x, int y, Direction dir)
  */
 bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
 {
-    bool res = false;
     Coord nextPos = boardNextPosCell(x, y, dir);
     return boardIsSnake(b, nextPos);
 }
