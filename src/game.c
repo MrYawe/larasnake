@@ -40,8 +40,8 @@ Game gameCreate(BoardSize size)
 						break;
 		}
 
-		g->snake1 = snakeCreate(7, 1, RIGHT);
-		g->snake2 = snakeCreate(7, 2, LEFT);
+		g->snake1 = snakeCreate(15, 1, RIGHT);
+		g->snake2 = snakeCreate(15, 2, LEFT);
 		g->isPlaying = true;
 
     	gameInitSnakes(g->board, g->snake1, g->snake2);

@@ -110,7 +110,6 @@ Coord boardGetJambon(Board *b)
 
 void boardSetJambon(Board *b, int x, int y)
 {
-  printf("SET\n");
   b->jambon->x=x;
   b->jambon->y=y;
 }

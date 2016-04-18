@@ -215,48 +215,49 @@ void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {
         if(i == 0) // tail
         {
             nextDirection = snakeElementGetOrientation(snake, i+1);
-            if(currentDirection != nextDirection) {
+            if(currentDirection != nextDirection)
                 guiApplySurface(x, y, snakeAssets->tail[nextDirection], screen, NULL);
-            } else {
+            else
                 guiApplySurface(x, y, snakeAssets->tail[currentDirection], screen, NULL);
-            }
         }
         else if (i == snakeGetSize(snake)-1) // head
-        {
             guiApplySurface(x, y, snakeAssets->head[currentDirection], screen, NULL);
-        }
         else // body
         {
             nextDirection = snakeElementGetOrientation(snake, i+1);
-            if(currentDirection != nextDirection) {
-                if(currentDirection == RIGHT) {
-                    if(nextDirection == UP) {
+            if(currentDirection != nextDirection) 
+            {
+                if(currentDirection == RIGHT) 
+                {
+                    if(nextDirection == UP)
                         guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
-                    } else { // DOWN
+                    else // DOWN
                         guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
-                    }
-                } else if(currentDirection == UP) {
-                    if(nextDirection == RIGHT) {
+                } 
+                else if(currentDirection == UP) 
+                {
+                    if(nextDirection == RIGHT)
                         guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
-                    } else { // LEFT
+                    else // LEFT
                         guiApplySurface(x, y, snakeAssets->corner[DOWN], screen, NULL);
-                    }
-                } else if(currentDirection == DOWN) {
-                    if(nextDirection == RIGHT) {
+                } 
+                else if(currentDirection == DOWN) 
+                {
+                    if(nextDirection == RIGHT)
                         guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
-                    } else { // LEFT
+                    else // LEFT
                         guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
-                    }
-                } else if(currentDirection == LEFT) {
-                    if(nextDirection == UP) {
+                } 
+                else if(currentDirection == LEFT) 
+                {
+                    if(nextDirection == UP)
                         guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
-                    } else { // DOWN
+                    else // DOWN
                         guiApplySurface(x, y, snakeAssets->corner[RIGHT], screen, NULL);
-                    }
                 }
-            } else {
+            } 
+            else
                 guiApplySurface(x, y, snakeAssets->body[currentDirection], screen, NULL);
-            }
         }
     }
 }
