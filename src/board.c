@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "board.h"
+//#include "item.h"
 
 /**
  * \struct Board
@@ -22,7 +23,7 @@ struct Board
   int sizeX;
   int sizeY;
   int sizeCell; // size by pixels of a cell
-  Coord jambon;
+  Item food;
 };
 
 /**
@@ -64,8 +65,8 @@ Board* boardInit(int sizeX, int sizeY, int sizeCell)
  * \brief The function allow to get a value in the board
  * \details The function tests if the parameters are correct and if it's the case, it returns the value
  * \param b Board : Represents the board to access
- * \param posx Int : The X position to access 
- * \param posy Int : The Y position to access 
+ * \param posx Int : The X position to access
+ * \param posy Int : The Y position to access
  * \return Returns int which correspond to the correct value / -1 if out of range
  */
 int boardGetValue(Board *b, int posx, int posy)
@@ -87,8 +88,8 @@ int boardGetValue(Board *b, int posx, int posy)
  * \brief The function allow to set a value in the board
  * \details The function test if the parameters are correct and if it's the case, it puts the value in the board
  * \param b Board : Represents the board to set
- * \param posx Int : The X position to set 
- * \param posy Int : The Y position to set 
+ * \param posx Int : The X position to set
+ * \param posy Int : The Y position to set
  * \param val Int : The value to set in the board
  */
 void boardSetValue(Board *b, int posx, int posy, int val)
@@ -111,10 +112,11 @@ void boardSetValue(Board *b, int posx, int posy, int val)
  * \param b Board : Represents the board to access
  * \return Returns Coor which correspond to the coordinates of the jambon
  */
-Coord boardGetJambon(Board *b)
+ /*
+Item boardGetFood(Board *b)
 {
-  return b->jambon;
-}
+  return b->food;
+}*/
 
 
 /**
@@ -122,18 +124,13 @@ Coord boardGetJambon(Board *b)
  * \brief The function allow to set a value in the structure board
  * \details The function test if the parameters are correct and if it's the case, it puts the value in the board structure
  * \param b Board : Represents the board to set
- * \param posx Int : The X position to set 
- * \param posy Int : The Y position to set 
+ * \param posx Int : The X position to set
+ * \param posy Int : The Y position to set
  */
-void boardSetJambon(Board *b, int x, int y)
+/*void boardSetFood(Board *b, Item food)
 {
-  if (x>=0 && y>=0 && x<b->sizeX && y<b->sizeY)
-  {
-    //printf("SET\n");
-    b->jambon->x=x;
-    b->jambon->y=y;
-  }
-}
+    b->food = food;
+}*/
 
 
 /**
@@ -190,7 +187,7 @@ void boardDisplay(Board *b)
 
 /**
  * \fn boardFree
- * \brief The function free the board 
+ * \brief The function free the board
  * \details The function free the board of the memory
  * \param b Board : The board to free
  */
@@ -210,7 +207,7 @@ void boardFree(Board *b)
  * \brief La fonction vérifie si la position est dans le board
  * \param b Variable de type Board qui correspond au tableau à effacer
  * \param posX position X de la case à tester
- * \param posY position Y de la case à tester 
+ * \param posY position Y de la case à tester
  */
 bool boardInside(Board *b, Coord coord) {
   bool res = false;
@@ -242,7 +239,7 @@ bool boardIsSnake(Board *b, Coord coord) {
  * \brief The function puts a food in the board
  * \details The function set a food coodinates in the board structure
  * \param b Board : The board to edit
- */
+ *//*
 void boardFeed(Board *b) {
   int x = rand()%b->sizeX;
   int y = rand()%b->sizeY;
@@ -254,11 +251,10 @@ void boardFeed(Board *b) {
   //y=17;
   //x=0;
   //y=10;
-  boardSetValue(b, x, y, 9);
-  Coord jb = coordNew(x, y);
-  b->jambon=jb;
-  printf("x: %d, y: %d \n", x, y);
-}
+  Item food = itemCreate(x, y, FOOD);
+  boardSetFood(b, food);
+  boardSetValue(b, x, y, food->value);
+}*/
 
 /**
  * \fn boardNextPosCell
@@ -302,7 +298,7 @@ Coord boardNextPosCell(int x, int y, Direction dir)
  * \brief The function allow to know if the next cell is a part of a snake
  * \details The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a snake
  * \param b Board : The board to access
- * \param x Board : The actual X position 
+ * \param x Board : The actual X position
  * \param y Board : The actual Y position
  * \param dir Direction : Direction to go
  * \return Returns boolean which say if the next cell is a snake
@@ -318,7 +314,7 @@ bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
  * \brief The function allow to know if the next cell is a part of a border
  * \details The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a border
  * \param b Board : The board to access
- * \param x Board : The actual X position 
+ * \param x Board : The actual X position
  * \param y Board : The actual Y position
  * \param dir Direction : Direction to go
  * \return Returns boolean which say if the next cell is a border

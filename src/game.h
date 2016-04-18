@@ -10,6 +10,7 @@
  * \details Contient toutes les directions possibles pour le snake
  **/
 typedef enum BoardSize {SMALL, MEDIUM, LARGE} BoardSize;
+typedef enum BoardValue {EMPTY, SNAKE1, SNAKE2, FOOD} BoardValue;
 
 typedef struct Game *Game;
 

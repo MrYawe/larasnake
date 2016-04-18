@@ -272,7 +272,7 @@ void snakeSetSpeed(Snake *s, int speed)
  * \details The function returns the orientation of the posElem number Element of the snake
  * \param s Snake to access
  * \param posElem Int: number of the Element to access
- * \return Direction: Direction of the Element 
+ * \return Direction: Direction of the Element
  */
 Direction snakeElementGetOrientation(Snake *s, int posElem)
 {
@@ -300,7 +300,7 @@ Direction snakeElementGetOrientation(Snake *s, int posElem)
  * \details The function sets the orientation of the posElem number Element of the snake
  * \param s Snake to access
  * \param posElem Int: number of the Element to access
- * \param d Direction: Direction to set to the Element to access 
+ * \param d Direction: Direction to set to the Element to access
  */
 void snakeElementSetOrientation(Snake *s, int posElem, Direction d)
 {

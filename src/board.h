@@ -12,7 +12,8 @@
 #include <stdbool.h>
 #include "coord.h"
 #include "snake.h"
- 
+#include "item.h"
+
 typedef struct Board Board;
 
 /* ***************
@@ -26,8 +27,8 @@ Board* boardInit(int sizeX, int sizeY, int sizeCell);
 int boardGetValue(Board *b, int posx, int posy);
 void boardSetValue(Board *b, int posx, int posy, int val);
 
-Coord boardGetJambon(Board *b);
-void boardSetJambon(Board *b, int x, int y);
+//Item boardGetFood(Board *b);
+//void boardSetFood(Board *b, Item food);
 
 int boardGetHeight(Board *b);
 int boardGetWidth(Board *b);
@@ -39,7 +40,7 @@ void boardDisplay(Board *b);
 void boardFree(Board *b);
 bool boardInside(Board *b, Coord coord);
 bool boardIsSnake(Board *b, Coord coord);
-void boardFeed(Board *b);
+//void boardFeed(Board *b);
 
 Coord boardNextPosCell(int x, int y, Direction dir);
 bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir);
