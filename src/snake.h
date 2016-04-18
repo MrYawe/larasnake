@@ -33,7 +33,7 @@ typedef struct Snake Snake;
 /* ***************
  *   Init Snake  *
  *************** */
-Snake* snakeCreate(int size, int id, Direction d);
+Snake* snakeCreate(int size, int id, Direction d, SnakeType type);
 
 /* ***************
  *   Move Snake  *

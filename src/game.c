@@ -21,9 +21,8 @@ struct Game
 		bool isPlaying;
 };
 
-Game gameCreate(BoardSize size) 
+Game gameCreate(BoardSize size)
 {
-		// TODO: 3 mode de jeu différent (tiny, normal, big)
 		Game g = malloc(sizeof(struct Game));
 
 		switch (size) {
@@ -40,8 +39,8 @@ Game gameCreate(BoardSize size)
 						break;
 		}
 
-		g->snake1 = snakeCreate(15, 1, RIGHT);
-		g->snake2 = snakeCreate(15, 2, LEFT);
+		g->snake1 = snakeCreate(15, 1, RIGHT, WATER);
+		g->snake2 = snakeCreate(15, 2, LEFT, FIRE);
 		g->isPlaying = true;
 
     	gameInitSnakes(g->board, g->snake1, g->snake2);

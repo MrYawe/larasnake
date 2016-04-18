@@ -58,7 +58,7 @@ struct Element
  * \param id Entier qui correspond à l'id du snake
  * \return Variable de type Snake qui contiendra un snake
  */
-Snake* snakeCreate(int size, int id, Direction d)
+Snake* snakeCreate(int size, int id, Direction d, SnakeType type)
 {
 	Snake *s = malloc(sizeof(struct Snake));
 	s->first = NULL;
@@ -70,7 +70,7 @@ Snake* snakeCreate(int size, int id, Direction d)
 	s->isGhost = false;
 	//srand(rand()*time(NULL));
 	//s->type = (int)rand()%NB_TYPES;
-	s->type = WATER;
+	s->type = type;
 	int i;
 	for (i=0; i<size; i++)
 	{
