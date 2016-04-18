@@ -11,7 +11,7 @@
 #include "coord.h"
 
 /**
- * \fn iaSurvive
+ * \fn Direction iaSurvive (Board* board, Snake* snake)
  * \brief Function used to get a direction for the snake to follow to not die
  * \details Function that checks if the snake can go forward. If not, it tries to go right then left.
  * \param board Variable representing the board
@@ -49,7 +49,7 @@ Direction iaSurvive (Board* board, Snake* snake) {
 }
 
 /**
- * \fn iaJambon
+ * \fn Direction iaJambon (Game game, Snake *snake)
  * \brief Function used to chase the given bonus without dying
  * \details Function that goes to the given bonus and that is calling iaSurvive to not die
  * \param board Variable representing the board
@@ -135,20 +135,4 @@ Direction iaJambon (Game game, Snake *snake) {
 	free(posSnake);
 	//free(posBonus);
 	return snakeDir;
-}
-
-//TODO WORK IN PROGRESS
-int iaFront(Board *board, int x, int y, Direction dir)
-{
-	int res = 0;
-	Coord nextPos;
-	while(!boardIsNextCellSnake(board, x, y, dir) && !boardIsNextCellBorder(board, x, y, dir))
-	{
-		res++;
-		nextPos = boardNextPosCell(x, y, dir);
-		x=nextPos->x;
-		y=nextPos->y;
-	}
-	//free(nextPos);
-	return res;
 }
