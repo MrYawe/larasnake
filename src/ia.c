@@ -48,8 +48,6 @@ Direction iaSurvive (Board* board, Snake* snake) {
 	return snakeDir;
 }
 
-//TO MODIFY WHEN THERE WILL BE A LIST OF BONUS
-
 /**
  * \fn iaJambon
  * \brief Function used to chase the given bonus without dying
@@ -135,7 +133,7 @@ Direction iaJambon (Board *board, Snake *snake) {
 	return snakeDir;
 }
 
-
+//TODO WORK IN PROGRESS
 int iaFront(Board *board, int x, int y, Direction dir) 
 {
 	int res = 0;

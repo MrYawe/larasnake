@@ -26,13 +26,13 @@ struct Board
 };
 
 /**
- * \fn boardInit
- * \brief The function creates an instance of the board
- * \details The function store the board in the memory and initialize it
- * \param sizeX Int Represents the size X of the board to create
- * \param sizeY Int Represents the size Y of the board to create
- * \param sizeCell Int Represents the size of the cells of the board when it will be printed
- * \return Returns a pointer to the created board
+ * @fn boardInit
+ * @brief The function creates an instance of the board
+ * @details The function store the board in the memory and initialize it
+ * @param sizeX Int Represents the size X of the board to create
+ * @param sizeY Int Represents the size Y of the board to create
+ * @param sizeCell Int Represents the size of the cells of the board when it will be printed
+ * @return Returns a pointer to the created board
  */
 Board* boardInit(int sizeX, int sizeY, int sizeCell)
 {
@@ -231,7 +231,7 @@ bool boardInside(Board *b, Coord coord) {
  */
 bool boardIsSnake(Board *b, Coord coord) {
   bool res=false;
-  if(boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2){
+  if(boardInside(b, coord) && (boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2)){
     res = true;
   }
   return res;
@@ -318,7 +318,7 @@ bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
  * \brief The function allow to know if the next cell is a part of a border
  * \details The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a border
  * \param b Board : The board to access
- * \param x Board : The actual X position 
+ * \param x Board : The actual X position
  * \param y Board : The actual Y position
  * \param dir Direction : Direction to go
  * \return Returns boolean which say if the next cell is a border
