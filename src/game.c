@@ -367,8 +367,3 @@ bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
 Item gameGetFood(Game game) {
 	return game->food;
 }
-
-Item gameSetFood(Game game, int x , int y) {
-	game->food->posX=x;
-	game->food->posY=y;
-}

@@ -130,7 +130,11 @@ Direction iaJambon (Game game, Snake *snake) {
 
 	/* /!\ Just to test out with the jambon /!\ */
 	if(coordEquals(boardNextPosCell(posSnake->x, posSnake->y, snakeDir),posBonus))
-		gameSetFood(game, 0, 0);
+	{
+		free(gameGetFood(game));
+		gameFeed(game);
+	}	
+
 
 	free(posSnake);
 	//free(posBonus);

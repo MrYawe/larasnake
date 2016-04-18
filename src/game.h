@@ -31,7 +31,6 @@ bool gameMoveSnake(Board *b, Snake *s);
 
 
 Item gameGetFood(Game game);
-Item gameSetFood(Game game, int x, int y);
 
 Coord boardNextPosCell(int x, int y, Direction dir);
 bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir);
