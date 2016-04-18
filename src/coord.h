@@ -3,6 +3,11 @@
 
 #include <stdbool.h>
 
+/**
+ * \struct Coord
+ * \brief Coordinates structure
+ * \details Structure representing a two dimensional coordinate 
+ **/
 typedef struct Coord *Coord;
 struct Coord
 {

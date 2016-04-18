@@ -3,7 +3,7 @@
 #include "coord.h"
 
 /**
- * \fn coordNew
+ * \fn Coord coordNew(int x, int y)
  * \brief The function creates a new Coord
  * \details The function store the Coord on the memory
  * \param x Int which correspond to the X value
@@ -18,7 +18,7 @@ Coord coordNew(int x, int y) {
 }
 
 /**
- * \fn coordEquals
+ * \fn bool coordEquals(Coord c1, Coord c2)
  * \brief The function check if 2 coord are equals
  * \details The function check if X and Y of the 2 coord are the same
  * \param c1 Coord: First coordonate to compare

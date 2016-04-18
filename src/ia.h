@@ -5,7 +5,6 @@
 #include "snake.h"
 #include "game.h"
 
-
 Direction iaSurvive (Board *board, Snake *snake);
 Direction iaJambon (Game game, Snake *snake);
 
