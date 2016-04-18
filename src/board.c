@@ -127,7 +127,7 @@ Coord boardGetJambon(Board *b)
  */
 void boardSetJambon(Board *b, int x, int y)
 {
-  if (x>0 && y>0 && x<b->sizeX && y<b->sizeY)
+  if (x>=0 && y>=0 && x<b->sizeX && y<b->sizeY)
   {
     //printf("SET\n");
     b->jambon->x=x;
