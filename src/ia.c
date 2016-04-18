@@ -79,6 +79,18 @@ Direction iaJambon (Board *board, Snake *snake) {
 				//Checking if the snake can go to the right without dying
 				if(!boardIsNextCellSnake(board, snakePos->x, snakePos->y, LEFT) && !boardIsNextCellBorder(board, snakePos->x, snakePos->y, LEFT))
 					snakeDir=LEFT;
+			} 
+			else if(snakePos->x == posBonus->x) //Checking if the snake is on the right x
+			{
+				if((snakeDir==UP && snakePos->y < posBonus->y) || (snakeDir==DOWN && snakePos->y > posBonus->y))//Checking if the snake is in the good direction 
+				{
+					//Checking if the snake can go to the right without dying
+					if(!boardIsNextCellSnake(board, snakePos->x, snakePos->y, RIGHT) && !boardIsNextCellBorder(board, snakePos->x, snakePos->y, RIGHT))
+						snakeDir=RIGHT;
+					//Checking if the snake can go to the right without dying
+					if(!boardIsNextCellSnake(board, snakePos->x, snakePos->y, LEFT) && !boardIsNextCellBorder(board, snakePos->x, snakePos->y, LEFT))
+						snakeDir=LEFT;
+				}
 			}
 		} 
 		else if(snakeDir==RIGHT || snakeDir==LEFT)//Checking if the snake is going RIGHT or LEFT
@@ -94,6 +106,17 @@ Direction iaJambon (Board *board, Snake *snake) {
 				//Checking if the snake can go down without dying
 				if(!boardIsNextCellSnake(board, snakePos->x, snakePos->y, DOWN) && !boardIsNextCellBorder(board, snakePos->x, snakePos->y, DOWN))
 					snakeDir=DOWN;
+			}
+			else if(snakePos->y == posBonus->y) { //Checking if the snake is on the right y
+				if((snakeDir==RIGHT && snakePos->x > posBonus->x) || (snakeDir==LEFT && snakePos->x < posBonus->x)) //Checking if the direction is wrong
+				{
+					//Checking if the snake can go to the right without dying
+					if(!boardIsNextCellSnake(board, snakePos->x, snakePos->y, DOWN) && !boardIsNextCellBorder(board, snakePos->x, snakePos->y, DOWN))
+						snakeDir=DOWN;
+					//Checking if the snake can go to the right without dying
+					if(!boardIsNextCellSnake(board, snakePos->x, snakePos->y, UP) && !boardIsNextCellBorder(board, snakePos->x, snakePos->y, UP))
+						snakeDir=UP;
+				}
 			}
 		}
 		//Checking if the chosen direction won't kill the snake (used when the snake is on the right x snakePosition)
