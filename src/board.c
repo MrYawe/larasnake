@@ -26,13 +26,13 @@ struct Board
 };
 
 /**
- * @fn boardInit
- * @brief The function creates an instance of the board
- * @details The function store the board in the memory and initialize it
- * @param sizeX Int Represents the size X of the board to create
- * @param sizeY Int Represents the size Y of the board to create
- * @param sizeCell Int Represents the size of the cells of the board when it will be printed
- * @return Returns a pointer to the created board
+ * \fn boardInit
+ * \brief The function creates an instance of the board
+ * \details The function store the board in the memory and initialize it
+ * \param sizeX Int Represents the size X of the board to create
+ * \param sizeY Int Represents the size Y of the board to create
+ * \param sizeCell Int Represents the size of the cells of the board when it will be printed
+ * \return Returns a pointer to the created board
  */
 Board* boardInit(int sizeX, int sizeY, int sizeCell)
 {
@@ -197,11 +197,12 @@ void boardDisplay(Board *b)
 void boardFree(Board *b)
 {
   int i;
-  for ( i = 0; i < b->sizeY; i++ )
+  for ( i = 0; i < b->sizeY; i++)
   {
     free(b->tab[i]);
   }
   free(b->tab);
+  free(b->jambon);
   free(b);
 }
 
@@ -339,29 +340,4 @@ bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
         res = true;
     }
     return res;
-}
-
-/**
- * \fn boardCopy
- * \brief The function returns a copy of the board
- * \details The function copy everything of the board and put it in an other variable
- * \param b Board : The board to access
- * \return Returns Board which point to the new copied board
- */
-Board* boardCopy(Board* b)
-{
-  if (b == NULL)
-  {
-    return NULL;
-  }
-  Board* res = boardInit(b->sizeX, b->sizeY, b->sizeCell);
-  int j, i;
-  for(j=0; j<b->sizeY; j++)
-  {
-    for (i=0; i<b->sizeX; i++)
-    {
-      boardSetValue(res, i, j, boardGetValue(b, i, j));
-    }
-  }
-  return res;
 }
