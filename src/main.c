@@ -1,3 +1,12 @@
+/**
+ * \file main.c
+ * \author groupe Larakis
+ * \version 1
+ * \date 20/02/2016
+ * \brief Represents the program
+ * \details All the actions of the program
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

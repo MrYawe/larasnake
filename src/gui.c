@@ -1,3 +1,12 @@
+/**
+ * \file gui.c
+ * \author groupe Larakis
+ * \version 1
+ * \date 19/04/2016
+ * \brief Everything about the gui class
+ * \details Contains all functions to manage the gui and interract with the user
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

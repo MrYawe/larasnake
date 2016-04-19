@@ -1,3 +1,12 @@
+/**
+ * \file game.c
+ * \author groupe Larakis
+ * \version 1
+ * \date 19/04/2016
+ * \brief Everything about the game class
+ * \details Contains all functions to manage the game
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
