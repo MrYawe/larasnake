@@ -22,7 +22,7 @@ struct Game
 };
 
 /**
- * \fn gameCreate
+ * \fn Game gameCreate(BoardSize size)
  * \brief The function creates the game
  * \details The function store the game in the memory and initialize the snakes
  * \param size BoardSize: the type of the board to init
@@ -56,7 +56,7 @@ Game gameCreate(BoardSize size)
 }
 
 /**
- * \fn gameGetBoard
+ * \fn Board* gameGetBoard(Game g)
  * \brief Accessor to the board of the game structure
  * \details The function returns the board of the game
  * \param g Game: The game to access
@@ -68,7 +68,7 @@ Board* gameGetBoard(Game g)
 }
 
 /**
- * \fn gameGetSnake
+ * \fn Snake* gameGetSnake(Game g, int player)
  * \brief Accessor to the snake of the game structure
  * \details The function returns the snake of the game
  * \param g Game: The game to access
@@ -83,7 +83,7 @@ Snake* gameGetSnake(Game g, int player)
 }
 
 /**
- * \fn gameGetIsPlaying
+ * \fn bool gameGetIsPlaying(Game g)
  * \brief Accessor to the isPlaying boolean of the game structure
  * \details The function returns the isPlaying of the game
  * \param g Game: The game to access
@@ -95,7 +95,7 @@ bool gameGetIsPlaying(Game g)
 }
 
 /**
- * \fn gameEnd
+ * \fn void gameEnd(Game g)
  * \brief End the game
  * \details The function put false to the isPlaying bool and free all structures
  * \param g Game: The game to end
@@ -107,7 +107,7 @@ void gameEnd(Game g)
 }
 
 /**
- * \fn gameInitSnakes
+ * \fn void gameInitSnakes(Board *b, Snake *s1, Snake *s2)
  * \brief Initialize the snakes of the game
  * \details The function put the snakes on the board at the beggining of the game
  * \param b Board: where to put the snakes on
@@ -130,7 +130,7 @@ void gameInitSnakes(Board *b, Snake *s1, Snake *s2)
 }
 
 /**
- * \fn gameUpdateSnake
+ * \fn void gameUpdateSnake(Board *b, Snake *s)
  * \brief Update the board with the position of the snake
  * \details The function iterates on Snake's Elements and put them on the board
  * \param b Board: where to update the snake
@@ -146,7 +146,7 @@ void gameUpdateSnake(Board *b, Snake *s)
 }
 
 /**
- * \fn gameMoveSnake
+ * \fn bool gameMoveSnake(Board *b, Snake *s)
  * \brief Update the board with the snake movement
  * \details Update the board without iterating on elements
  * \param b Board: where to move the snake
@@ -161,13 +161,14 @@ bool gameMoveSnake(Board *b, Snake *s)
 }
 
 /**
- * \fn gameCheckMovement
+ * \fn static bool gameCheckMovement(Snake *s, Board *b)
  * \brief Check collisions
  * \details Check if the next cell doesn't contains a snake or isn't a border
  * \param b Board: where to check
  * \param s Snake to move
  */
-static bool gameCheckMovement(Snake *s, Board *b) {
+static bool gameCheckMovement(Snake *s, Board *b) 
+{
 		bool canTp = false;
 		bool continueGame = true;
 		if (boardIsNextCellSnake(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetDirection(s)))
@@ -233,13 +234,14 @@ static bool gameCheckMovement(Snake *s, Board *b) {
 }
 
 /**
- * \fn boardInside
+ * \fn bool boardInside(Board *b, Coord coord)
  * \brief La fonction vérifie si la position est dans le board
  * \param b Variable de type Board qui correspond au tableau à effacer
  * \param posX position X de la case à tester
  * \param posY position Y de la case à tester
  */
-bool boardInside(Board *b, Coord coord) {
+bool boardInside(Board *b, Coord coord) 
+{
   bool res = false;
   if (coord->x >= 0 && coord->y >= 0 && coord->x < boardGetWidth(b) && coord->y < boardGetHeight(b))
   {
@@ -249,14 +251,15 @@ bool boardInside(Board *b, Coord coord) {
 }
 
 /**
- * \fn boardIsSnake
+ * \fn bool boardIsSnake(Board *b, Coord coord)
  * \brief The function allow to know if a cell is a part of a snake
  * \details The function returns a boolean to know if the cell of the coordinates passed in arguments is a part of a snake
  * \param b Board : The board to access
  * \param coord Coord : Coordinates of the cell to test
  * \return Returns boolean which say if the cell is a snake
  */
-bool boardIsSnake(Board *b, Coord coord) {
+bool boardIsSnake(Board *b, Coord coord)
+{
   bool res=false;
   if(boardInside(b, coord) && (boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2)){
     res = true;
@@ -265,12 +268,13 @@ bool boardIsSnake(Board *b, Coord coord) {
 }
 
 /**
- * \fn boardFeed
+ * \fn void gameFeed(Game game)
  * \brief The function puts a food in the board
  * \details The function set a food coodinates in the board structure
  * \param b Board : The board to edit
  */
-void gameFeed(Game game) {
+void gameFeed(Game game) 
+{
 	Board* b = gameGetBoard(game);
   int x = rand()%boardGetWidth(b);
   int y = rand()%boardGetHeight(b);
@@ -284,7 +288,7 @@ void gameFeed(Game game) {
 }
 
 /**
- * \fn boardNextPosCell
+ * \fn Coord boardNextPosCell(int x, int y, Direction dir)
  * \brief The function allow to get the next cell
  * \details The function allow to get the next cell from a position and a direction
  * \param x Int: the x coordinate of the current position
@@ -321,7 +325,7 @@ Coord boardNextPosCell(int x, int y, Direction dir)
 }
 
 /**
- * \fn boardIsNextCellSnake
+ * \fn bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
  * \brief The function allow to know if the next cell is a part of a snake
  * \details The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a snake
  * \param b Board : The board to access
@@ -337,7 +341,7 @@ bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir)
 }
 
 /**
- * \fn boardIsNextCellBorder
+ * \fn bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
  * \brief The function allow to know if the next cell is a part of a border
  * \details The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a border
  * \param b Board : The board to access
@@ -364,7 +368,15 @@ bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
     return res;
 }
 
-Item gameGetFood(Game game) {
+/*
+ * \fn Item gameGetFood(Game game)
+ * \brief The function allow to get the food from the game structure
+ * \details The function returns the food attribute 
+ * \param game Game: The game which to acess
+ * \return Item: The item in the struct game
+ */
+Item gameGetFood(Game game) 
+{
 	return game->food;
 }
 

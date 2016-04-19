@@ -51,7 +51,7 @@ struct Element
 };
 
 /**
- * \fn snakeCreate
+ * \fn Snake* snakeCreate(int size, int id, Direction d, SnakeType type)
  * \brief The function creates and returns a pointer to the snake
  * \details The function store a snake structure in the memory, initialize it and returns a pointer to this structure
  * \param size Int which correspond to the size of the created snake
@@ -81,7 +81,7 @@ Snake* snakeCreate(int size, int id, Direction d, SnakeType type)
 }
 
 /**
- * \fn snakeGoUp
+ * \fn void snakeGoUp(Snake *s)
  * \brief The function edit the snake to move it to the upper cell
  * \details The function add an element and delete the tail of the snake to make it go UP
  * \param s Snake to edit
@@ -95,7 +95,7 @@ void snakeGoUp(Snake *s)
 }
 
 /**
- * \fn snakeGoDown
+ * \fn void snakeGoDown(Snake *s)
  * \brief The function edit the snake to move it to the lower cell
  * \details The function add an element and delete the tail of the snake to make it go DOWN
  * \param s Snake to edit
@@ -109,7 +109,7 @@ void snakeGoDown(Snake *s)
 }
 
 /**
- * \fn snakeGoLeft
+ * \fn void snakeTurnLeft(Snake *s)
  * \brief The function edit the snake to move it to the left cell
  * \details The function add an element and delete the tail of the snake to make it go LEFT
  * \param s Snake to edit
@@ -123,7 +123,7 @@ void snakeTurnLeft(Snake *s)
 }
 
 /**
- * \fn snakeGoRight
+ * \fn void snakeTurnRight(Snake *s)
  * \brief The function edit the snake to move it to the right cell
  * \details The function add an element and delete the tail of the snake to make it go RIGHT
  * \param s Snake to edit
@@ -137,7 +137,7 @@ void snakeTurnRight(Snake *s)
 }
 
 /**
- * \fn snakeTeleportation
+ * \fn void snakeTeleportation(Snake *s, int posX, int posY)
  * \brief The function allow the snake to teleport himself to an other cell
  * \details The function move the head of the snake to an other cell of the board
  * \param s Snake to edit
@@ -151,7 +151,7 @@ void snakeTeleportation(Snake *s, int posX, int posY)
 }
 
 /**
- * \fn snakeGetPos
+ * \fn Coord snakeGetPos(Snake *s, int posBloc)
  * \brief The function returns the coordinates of a bloc
  * \details The function iterates on the snake blocs and returns the correct position
  * \param s Snake to get
@@ -180,7 +180,7 @@ Coord snakeGetPos(Snake *s, int posBloc)
 }
 
 /**
- * \fn snakeGetDirection
+ * \fn Direction snakeGetDirection(Snake *s)
  * \brief The function returns the value of the direction of the snake
  * \details The function returns the value of direction of the structure snake
  * \param s Snake : The snake to access
@@ -192,7 +192,7 @@ Direction snakeGetDirection(Snake *s)
 }
 
 /**
- * \fn snakeSetDirection
+ * \fn void snakeSetDirection(Snake *s, Direction d)
  * \brief The function allow to set a value in the structure snake
  * \details The function test if the snake can't go backward and put the value in the snake structure
  * \param s Snake : Represents the snake to set
@@ -230,7 +230,7 @@ void snakeSetDirection(Snake *s, Direction d)
 
 
 /**
- * \fn snakeGetSize
+ * \fn int snakeGetSize(Snake *s)
  * \brief The function returns the size of the snake
  * \details The function returns the attribute "size" of the snake
  * \param s Snake to access
@@ -242,7 +242,7 @@ int snakeGetSize(Snake *s)
 }
 
 /**
- * \fn snakeGetSpeed
+ * \fn int snakeGetSpeed(Snake *s)
  * \brief The function returns the speed of the snake
  * \details The function returns the attribute "speed" of the snake
  * \param s Snake to access
@@ -254,7 +254,7 @@ int snakeGetSpeed(Snake *s)
 }
 
 /**
- * \fn snakeSetSpeed
+ * \fn void snakeSetSpeed(Snake *s, int speed)
  * \brief The function sets the speed of the snake
  * \details The function sets a value to the attribute "speed" of the snake
  * \param s Snake to access
@@ -267,7 +267,7 @@ void snakeSetSpeed(Snake *s, int speed)
 
 
 /**
- * \fn snakeElementGetOrientation
+ * \fn Direction snakeElementGetOrientation(Snake *s, int posElem)
  * \brief The function returns the orientation of an Element of the snake
  * \details The function returns the orientation of the posElem number Element of the snake
  * \param s Snake to access
@@ -295,7 +295,7 @@ Direction snakeElementGetOrientation(Snake *s, int posElem)
 }
 
 /**
- * \fn snakeElementSetOrientation
+ * \fn void snakeElementSetOrientation(Snake *s, int posElem, Direction d)
  * \brief The function sets the orientation of an Element of the snake
  * \details The function sets the orientation of the posElem number Element of the snake
  * \param s Snake to access
@@ -322,7 +322,7 @@ void snakeElementSetOrientation(Snake *s, int posElem, Direction d)
 
 
 /**
- * \fn snakeSetGhost
+ * \fn void snakeSetGhost(Snake *s, bool b)
  * \brief The function manage the ghost attribute to the snake
  * \details The function allows to edit the ghost attritute
  * \param s Snake to access
@@ -335,7 +335,7 @@ void snakeSetGhost(Snake *s, bool b)
 
 
 /**
- * \fn snakeIsGhost
+ * \fn bool snakeIsGhost(Snake *s)
  * \brief Accessor of the ghost attribute of the snake
  * \details The function allows to get the value of the ghost attritute
  * \param s Snake to access
@@ -347,7 +347,7 @@ bool snakeIsGhost(Snake *s)
 }
 
 /**
- * \fn snakeGetId
+ * \fn int snakeGetId(Snake *s)
  * \brief Accessor of the id attribute of the snake
  * \details The function allows to get the value of the id attritute
  * \param s Snake to access
@@ -359,7 +359,7 @@ int snakeGetId(Snake *s)
 }
 
 /**
- * \fn snakeGetType
+ * \fn SnakeType snakeGetType(Snake *s)
  * \brief Accessor of the type attribute of the snake
  * \details The function allows to get the value of the type attritute
  * \param s Snake to access
@@ -371,7 +371,7 @@ SnakeType snakeGetType(Snake *s)
 }
 
 /**
- * \fn snakeSetType
+ * \fn void snakeSetType(Snake *s, SnakeType t)
  * \brief The function manage the type attribute to the snake
  * \details The function allows to edit the type attritute
  * \param s Snake to access
@@ -383,7 +383,7 @@ void snakeSetType(Snake *s, SnakeType t)
 }
 
 /**
- * \fn snakeInverseWay
+ * \fn void snakeInverseWay(Snake *s)
  * \brief The function allow the snake to inverse himself
  * \details The function inverse the list of the snake
  * \param s Snake to edit
@@ -406,7 +406,7 @@ void snakeInverseWay(Snake *s)
 }
 
 /**
- * \fn snakeDisplay
+ * \fn void snakeDisplay(Snake *s)
  * \brief The function allow to print the snake in the console
  * \details The console display all blocs of the snake in the console
  * \param s Snake : The snake to print
@@ -431,7 +431,7 @@ void snakeDisplay(Snake *s)
 }
 
 /**
- * \fn snakeUpdateElement
+ * \fn void snakeUpdateElement(Snake *s, int posElem, int posX, int posY)
  * \brief The function update values of an element of the snake
  * \details The function iterates on the list of the elements of the snake and set a value
  * \param s Snake to edit
@@ -460,7 +460,7 @@ void snakeUpdateElement(Snake *s, int posElem, int posX, int posY)
 
 
 /**
- * \fn snakeDelete
+ * \fn void snakeDelete(Snake *s)
  * \brief The function free the memory of the snake
  * \details The function free all the list of Elements of the memory
  * \param s Snake to free from memory
@@ -479,7 +479,7 @@ void snakeDelete(Snake *s)
 
 
 /**
- * \fn snakeAddFirstElement
+ * \fn static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orientation)
  * \brief The function add an element at the beginning of the chained list
  * \details The function add an element and set it the correct values and then put this element into the snake
  * \param s Snake to edit
@@ -509,7 +509,7 @@ static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orienta
 }
 
 /**
- * \fn snakeAddLastElement
+ * \fn static void snakeAddLastElement(Snake *s, int posX, int posY, Direction orientation)
  * \brief The function add an element at the end of the chained list
  * \details The function add an element and set it the correct values and then put this element into the snake
  * \param s Snake to edit
@@ -538,7 +538,7 @@ static void snakeAddLastElement(Snake *s, int posX, int posY, Direction orientat
 }
 
 /**
- * \fn snakeDeleteFirstElement
+ * \fn static void snakeDeleteFirstElement(Snake *s)
  * \brief The function delete an element at the beggining of the chained list
  * \details The function delete an element from the snake
  * \param s Snake to edit
@@ -560,7 +560,7 @@ static void snakeDeleteFirstElement(Snake *s)
 }
 
 /**
- * \fn snakeDeleteLastElement
+ * \fn static void snakeDeleteLastElement(Snake *s)
  * \brief The function delete an element at the end of the chained list
  * \details The function delete an element from the snake
  * \param s Snake to edit
@@ -584,7 +584,7 @@ static void snakeDeleteLastElement(Snake *s)
 */
 
 /**
- * \fn mod
+ * \fn static int mod(int a, int b)
  * \brief Mod function
  * \details The function makes a correct modular (negative numbers are correctedly modded)
  * \param a Int: number to mod

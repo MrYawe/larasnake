@@ -25,7 +25,7 @@ struct Board
 };
 
 /**
- * \fn boardInit
+ * \fn Board* boardInit(int sizeX, int sizeY, int sizeCell)
  * \brief The function creates an instance of the board
  * \details The function store the board in the memory and initialize it
  * \param sizeX Int Represents the size X of the board to create
@@ -59,7 +59,7 @@ Board* boardInit(int sizeX, int sizeY, int sizeCell)
 }
 
 /**
- * \fn boardGetValue
+ * \fn int boardGetValue(Board *b, int posx, int posy)
  * \brief The function allow to get a value in the board
  * \details The function tests if the parameters are correct and if it's the case, it returns the value
  * \param b Board : Represents the board to access
@@ -82,7 +82,7 @@ int boardGetValue(Board *b, int posx, int posy)
 }
 
 /**
- * \fn boardSetValue
+ * \fn void boardSetValue(Board *b, int posx, int posy, int val)
  * \brief The function allow to set a value in the board
  * \details The function test if the parameters are correct and if it's the case, it puts the value in the board
  * \param b Board : Represents the board to set
@@ -104,7 +104,7 @@ void boardSetValue(Board *b, int posx, int posy, int val)
 }
 
 /**
- * \fn boardGetJambon
+ * \fn Item boardGetFood(Board *b)
  * \brief The function allow to get the coordinates of the jambon
  * \details The function returns the coordinates attributes of the jambon
  * \param b Board : Represents the board to access
@@ -118,7 +118,7 @@ Item boardGetFood(Board *b)
 
 
 /**
- * \fn boardSetJambon
+ * \fn void boardSetFood(Board *b, Item food)
  * \brief The function allow to set a value in the structure board
  * \details The function test if the parameters are correct and if it's the case, it puts the value in the board structure
  * \param b Board : Represents the board to set
@@ -132,7 +132,7 @@ Item boardGetFood(Board *b)
 
 
 /**
- * \fn boardGetHeight
+ * \fn int boardGetHeight(Board *b)
  * \brief The function returns the value of the height of the board
  * \details The function returns the value of sizeY of the structure board
  * \param b Board : The board to access
@@ -148,7 +148,7 @@ int boardGetHeight(Board *b)
 }
 
 /**
- * \fn boardGetWidth
+ * \fn int boardGetWidth(Board *b)
  * \brief The function returns the value of the width of the board
  * \details The function returns the value of sizeX of the structure board
  * \param b Board : The board to access
@@ -164,7 +164,7 @@ int boardGetWidth(Board *b)
 }
 
 /**
- * \fn boardDisplay
+ * \fn void boardDisplay(Board *b)
  * \brief The function allow to print the board in the console
  * \details The console display all cells of the board in the console
  * \param b Board : The board to print
@@ -184,7 +184,7 @@ void boardDisplay(Board *b)
 }
 
 /**
- * \fn boardFree
+ * \fn void boardFree(Board *b)
  * \brief The function free the board
  * \details The function free the board of the memory
  * \param b Board : The board to free
