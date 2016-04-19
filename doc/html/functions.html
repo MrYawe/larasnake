@@ -86,13 +86,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_f"><span>f</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
-      <li><a href="#index_j"><span>j</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
       <li><a href="#index_n"><span>n</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
       <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_t"><span>t</span></a></li>
+      <li><a href="#index_v"><span>v</span></a></li>
       <li><a href="#index_x"><span>x</span></a></li>
       <li class="current"><a href="#index_y"><span>y</span></a></li>
     </ul>
@@ -170,6 +170,10 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>first
 : <a class="el" href="struct_snake.html#a3c31eaaf8ac69953255c924f43bce166">Snake</a>
 </li>
+<li>food
+: <a class="el" href="struct_assets.html#a4930425562b5dd3ae23e522982d7c24e">Assets</a>
+, <a class="el" href="struct_game.html#ac42eeec4245acc3b3124c36fdf639b39">Game</a>
+</li>
 </ul>
 
 
@@ -193,13 +197,6 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </ul>
 
 
-<h3><a class="anchor" id="index_j"></a>- j -</h3><ul>
-<li>jambon
-: <a class="el" href="struct_board.html#a4f8c9800b53dffa40bd95f91067c6156">Board</a>
-</li>
-</ul>
-
-
 <h3><a class="anchor" id="index_l"></a>- l -</h3><ul>
 <li>last
 : <a class="el" href="struct_snake.html#a075da34cf55b9b4c699e017d3a0a0e17">Snake</a>
@@ -215,6 +212,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 
 
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
+<li>onCollision
+: <a class="el" href="struct_item.html#a8610178c9afe6f9c9577ae316a688f60">Item</a>
+</li>
 <li>orientation
 : <a class="el" href="struct_element.html#ae6e65f915026335a4c8417bf1ab552de">Element</a>
 </li>
@@ -224,9 +224,11 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>posX
 : <a class="el" href="struct_element.html#ab34f89ef94db9dd6d3a04425dd6d9c9d">Element</a>
+, <a class="el" href="struct_item.html#ab34f89ef94db9dd6d3a04425dd6d9c9d">Item</a>
 </li>
 <li>posY
 : <a class="el" href="struct_element.html#a65ab2de052c17234c8a1db3fd3b868a9">Element</a>
+, <a class="el" href="struct_item.html#a65ab2de052c17234c8a1db3fd3b868a9">Item</a>
 </li>
 <li>previous
 : <a class="el" href="struct_element.html#a665eb77c56fcf7b51dbc01952cd0e461">Element</a>
@@ -290,6 +292,13 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </ul>
 
 
+<h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
+<li>value
+: <a class="el" href="struct_item.html#abf36ad63c6cbefb455bb8dbb0f07ba33">Item</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_x"></a>- x -</h3><ul>
 <li>x
 : <a class="el" href="struct_coord.html#a6150e0515f7202e2fb518f7206ed97dc">Coord</a>
@@ -307,7 +316,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Apr 18 2016 19:33:44 for Larakis by
+    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

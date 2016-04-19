@@ -16,10 +16,10 @@ var snake_8h =
       [ "GRASS", "snake_8h.html#adb268df8cc4344486327fd4063e2f505adbed8401e35adba25dab2e1729ee55fa", null ]
     ] ],
     [ "snakeCreate", "snake_8h.html#ae65c465ae2895548a024458f0494876e", null ],
-    [ "snakeDeleteSnake", "snake_8h.html#ab5df418369774858071534eb6b84557d", null ],
     [ "snakeDisplay", "snake_8h.html#a8510f461f6df3f883248c2d19b5ff778", null ],
     [ "snakeElementGetOrientation", "snake_8h.html#a92018ab7cc4a60a660a4be33d545397e", null ],
     [ "snakeElementSetOrientation", "snake_8h.html#a36faafaafe98f02620cecd82beff36cc", null ],
+    [ "snakeFree", "snake_8h.html#a38c45657da29c3172f67910d40f3e722", null ],
     [ "snakeGetDirection", "snake_8h.html#ab6609df2727f951706c52cce4cc58289", null ],
     [ "snakeGetId", "snake_8h.html#ab1e262c3b0739ba70c6837f1057585aa", null ],
     [ "snakeGetPos", "snake_8h.html#a922002ccd57783a4a6c5ec61b21cc2b2", null ],

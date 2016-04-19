@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jambon',['jambon',['../struct_board.html#a4f8c9800b53dffa40bd95f91067c6156',1,'Board']]]
+  ['last',['last',['../struct_snake.html#a075da34cf55b9b4c699e017d3a0a0e17',1,'Snake']]]
 ];

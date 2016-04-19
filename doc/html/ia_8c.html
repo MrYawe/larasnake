@@ -30,7 +30,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Larakis
-   &#160;<span id="projectnumber">1.0</span>
    </div>
   </td>
  </tr>
@@ -91,7 +90,7 @@ $(document).ready(function(){initNavTree('ia_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -110,21 +109,18 @@ $(document).ready(function(){initNavTree('ia_8c.html','');});
 
 <p>Intelligence Artificielle.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;ia.h&quot;</code><br/>
-<code>#include &quot;coord.h&quot;</code><br/>
-<code>#include &quot;game.h&quot;</code><br/>
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="ia_8h_source.html">ia.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="coord_8h_source.html">coord.h</a>&quot;</code><br/>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aaa3bdfe7e200b4fed9b86532efeb848f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa3bdfe7e200b4fed9b86532efeb848f"></a>
-<a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><b>iaSurvive</b> (<a class="el" href="struct_board.html">Board</a> *board, <a class="el" href="struct_snake.html">Snake</a> *snake)</td></tr>
+<tr class="memitem:aaa3bdfe7e200b4fed9b86532efeb848f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8c.html#aaa3bdfe7e200b4fed9b86532efeb848f">iaSurvive</a> (<a class="el" href="struct_board.html">Board</a> *board, <a class="el" href="struct_snake.html">Snake</a> *snake)</td></tr>
+<tr class="memdesc:aaa3bdfe7e200b4fed9b86532efeb848f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to get a direction for the snake to follow to not die.  <a href="#aaa3bdfe7e200b4fed9b86532efeb848f">More...</a><br/></td></tr>
 <tr class="separator:aaa3bdfe7e200b4fed9b86532efeb848f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01558d4f8ebd4158f6d7b68e992c92f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a01558d4f8ebd4158f6d7b68e992c92f7"></a>
-<a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><b>iaJambon</b> (<a class="el" href="struct_board.html">Board</a> *board, <a class="el" href="struct_snake.html">Snake</a> *snake)</td></tr>
-<tr class="separator:a01558d4f8ebd4158f6d7b68e992c92f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c181c5d98ecbb94983a7268e5f312da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c181c5d98ecbb94983a7268e5f312da"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>iaFront</b> (<a class="el" href="struct_board.html">Board</a> *board, int x, int y, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
-<tr class="separator:a0c181c5d98ecbb94983a7268e5f312da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae488b60bfa6d0935c506194be93edd72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8c.html#ae488b60bfa6d0935c506194be93edd72">iaJambon</a> (<a class="el" href="struct_game.html">Game</a> game, <a class="el" href="struct_snake.html">Snake</a> *snake)</td></tr>
+<tr class="memdesc:ae488b60bfa6d0935c506194be93edd72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to chase the given bonus without dying.  <a href="#ae488b60bfa6d0935c506194be93edd72">More...</a><br/></td></tr>
+<tr class="separator:ae488b60bfa6d0935c506194be93edd72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Intelligence Artificielle. </p>
@@ -132,13 +128,88 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>iaFront</b> (<a class=
 <dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>17/04/2016</dd></dl>
 <p>Fichier regroupant les différentes Intelligences Artificielles. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ae488b60bfa6d0935c506194be93edd72"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> iaJambon </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_game.html">Game</a>&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>snake</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function used to chase the given bonus without dying. </p>
+<p>Function that goes to the given bonus and that is calling iaSurvive to not die </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">board</td><td>Variable representing the board </td></tr>
+    <tr><td class="paramname">snake</td><td>Variable representing the snake </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>&lt;Direction&gt; used to change the snake direction </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aaa3bdfe7e200b4fed9b86532efeb848f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> iaSurvive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramname"><em>board</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>snake</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function used to get a direction for the snake to follow to not die. </p>
+<p>Function that checks if the snake can go forward. If not, it tries to go right then left. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">board</td><td>Variable representing the board </td></tr>
+    <tr><td class="paramname">snake</td><td>Variable representing the snake </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>&lt;Direction&gt; used to change the snake direction </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="ia_8c.html">ia.c</a></li>
-    <li class="footer">Generated on Mon Apr 18 2016 19:53:58 for Larakis by
+    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

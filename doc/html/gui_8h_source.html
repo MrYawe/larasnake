@@ -30,7 +30,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Larakis
-   &#160;<span id="projectnumber">1.0</span>
    </div>
   </td>
  </tr>
@@ -91,7 +90,7 @@ $(document).ready(function(){initNavTree('gui_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -105,82 +104,116 @@ $(document).ready(function(){initNavTree('gui_8h_source.html','');});
 <div class="title">gui.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GUI_H</span></div>
+<a href="gui_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GUI_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GUI_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="board_8h.html">board.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="snake_8h.html">snake.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;game.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="game_8h.html">game.h</a>&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_timer.html">Timer</a> *<a class="code" href="struct_timer.html">Timer</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="gui_8h.html#a72342995cfb101300d5fb48f0e7733eb">    8</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_timer.html">Timer</a> *<a class="code" href="gui_8h.html#a72342995cfb101300d5fb48f0e7733eb">Timer</a>;</div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="struct_timer.html">    9</a></span>&#160;<span class="keyword">struct </span>Timer</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    Uint32 start; <span class="comment">// départ de la boucle de jeu</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    Uint32 end; <span class="comment">// fin de la boucle de jeu</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">int</span> delay; <span class="comment">// temps à attendre à chaque tour</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">int</span> snake1MoveTimer; <span class="comment">// le temps en ms depuis que le snake 1 a bougé</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> snake2MoveTimer;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    Uint32 snake1LastMove; <span class="comment">// la dernière fois que le snake 1 a bougé</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    Uint32 snake2LastMove;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="struct_timer.html#a2182b4f4175ea78bf91a9b7a78fa1c0a">   11</a></span>&#160;    Uint32 <a class="code" href="struct_timer.html#a2182b4f4175ea78bf91a9b7a78fa1c0a">start</a>; <span class="comment">// départ de la boucle de jeu</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct_timer.html#aa376f8ee14caaba574361c9690d3773d">   12</a></span>&#160;    Uint32 <a class="code" href="struct_timer.html#aa376f8ee14caaba574361c9690d3773d">end</a>; <span class="comment">// fin de la boucle de jeu</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="struct_timer.html#a6f1be1f780ff54ec75b41451cd4d90bd">   13</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_timer.html#a6f1be1f780ff54ec75b41451cd4d90bd">delay</a>; <span class="comment">// temps à attendre à chaque tour</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="struct_timer.html#ae24c71d1d6fbbcc9f679b28a2a162dae">   14</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_timer.html#ae24c71d1d6fbbcc9f679b28a2a162dae">snake1MoveTimer</a>; <span class="comment">// le temps en ms depuis que le snake 1 a bougé</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="struct_timer.html#a483d444f78e58a82260659a88fe41a79">   15</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_timer.html#a483d444f78e58a82260659a88fe41a79">snake2MoveTimer</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="struct_timer.html#a0b14f4154ad70526bfde65ed2c6ea1fd">   16</a></span>&#160;    Uint32 <a class="code" href="struct_timer.html#a0b14f4154ad70526bfde65ed2c6ea1fd">snake1LastMove</a>; <span class="comment">// la dernière fois que le snake 1 a bougé</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="struct_timer.html#ac487a8912076b2d72896b5b2c9b3db5d">   17</a></span>&#160;    Uint32 <a class="code" href="struct_timer.html#ac487a8912076b2d72896b5b2c9b3db5d">snake2LastMove</a>;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_snake_assets.html">SnakeAssets</a> *<a class="code" href="struct_snake_assets.html">SnakeAssets</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="gui_8h.html#ad20ba344cf84e057e90c8ab12c6fa1da">   20</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_snake_assets.html">SnakeAssets</a> *<a class="code" href="gui_8h.html#ad20ba344cf84e057e90c8ab12c6fa1da">SnakeAssets</a>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="struct_snake_assets.html">   21</a></span>&#160;<span class="keyword">struct </span>SnakeAssets</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    SDL_Surface **head;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    SDL_Surface **body;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    SDL_Surface **corner;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    SDL_Surface **tail;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="struct_snake_assets.html#a17fd5a519e5c67b17e3b4f9df388c772">   23</a></span>&#160;    SDL_Surface **<a class="code" href="struct_snake_assets.html#a17fd5a519e5c67b17e3b4f9df388c772">head</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="struct_snake_assets.html#a1e53ba4f6b13a7867191e2b1e715980a">   24</a></span>&#160;    SDL_Surface **<a class="code" href="struct_snake_assets.html#a1e53ba4f6b13a7867191e2b1e715980a">body</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="struct_snake_assets.html#a42255cacb0b4794a4e617c449ed25935">   25</a></span>&#160;    SDL_Surface **<a class="code" href="struct_snake_assets.html#a42255cacb0b4794a4e617c449ed25935">corner</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="struct_snake_assets.html#a8b0bcf2582e3743af8b48308624034d8">   26</a></span>&#160;    SDL_Surface **<a class="code" href="struct_snake_assets.html#a8b0bcf2582e3743af8b48308624034d8">tail</a>;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_assets.html">Assets</a> *<a class="code" href="struct_assets.html">Assets</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="gui_8h.html#a21b9d094c50ea67590a3fc15647df247">   29</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_assets.html">Assets</a> *<a class="code" href="gui_8h.html#a21b9d094c50ea67590a3fc15647df247">Assets</a>;</div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="struct_assets.html">   30</a></span>&#160;<span class="keyword">struct </span>Assets</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    SnakeAssets *snakesAssets;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    SDL_Surface *background;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/**** General ****/</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> guiPlay(BoardSize size);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;Timer guiCreateTimer();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">void</span> freeAll(SDL_Surface **surfaces);</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="struct_assets.html#ad5b86c487e81d971972627f049fc9956">   32</a></span>&#160;    SnakeAssets *<a class="code" href="struct_assets.html#ad5b86c487e81d971972627f049fc9956">snakesAssets</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="struct_assets.html#a68389876c2746622931d187c587f9c4d">   33</a></span>&#160;    SDL_Surface *<a class="code" href="struct_assets.html#a68389876c2746622931d187c587f9c4d">background</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="struct_assets.html#a4930425562b5dd3ae23e522982d7c24e">   34</a></span>&#160;    SDL_Surface *<a class="code" href="struct_assets.html#a4930425562b5dd3ae23e522982d7c24e">food</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/**** General ****/</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a7c12cb51e84e0fcbb24119534d2c5a61">guiPlay</a>(<a class="code" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a> size);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;Timer <a class="code" href="gui_8h.html#afd7848bf08abd59985064325c56d32a5">guiCreateTimer</a>();</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/**** Screen ****/</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;SDL_Surface* guiCreateScreen(BoardSize size);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> guiReloadScreen(SDL_Surface *screen);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> guiClearScreen(SDL_Surface *screen);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;SDL_Surface* <a class="code" href="gui_8h.html#a26387b68d2af1b878fb04debd11faa49">guiCreateScreen</a>(<a class="code" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a> size);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a4861851d945a3d836212abead0ae337c">guiReloadScreen</a>(SDL_Surface *screen);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a390cd0569db7d40b23da8f70167acf5d">guiClearScreen</a>(SDL_Surface *screen);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/**** Assets ****/</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;Assets guiLoadAssets();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;SnakeAssets guiLoadSnake(SnakeType type, <span class="keywordtype">char</span>* color);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;SDL_Surface* guiLoadImage(<span class="keywordtype">char</span>* path);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> guiApplySurface( <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> guiFreeAssets(Assets assets);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;Assets <a class="code" href="gui_8h.html#aebf6bbf49167d49c500bd8364b17ef89">guiLoadAssets</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;SnakeAssets <a class="code" href="gui_8h.html#a6d5905958b8c128a317923761057001a">guiLoadSnake</a>(<a class="code" href="snake_8h.html#adb268df8cc4344486327fd4063e2f505">SnakeType</a> type, <span class="keywordtype">char</span>* color);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;SDL_Surface* <a class="code" href="gui_8h.html#ad72d73083b7e89dc72e58b46f97040e9">guiLoadImage</a>(<span class="keywordtype">char</span>* path);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a5e82f0e328c206e037d0fc84e67962fc">guiApplySurface</a>( <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a09d3a0ead424da04a844fd0d917cd47a">guiFreeAssets</a>(Assets assets);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/**** Draw ****/</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> guiDrawGame(SDL_Surface *screen, <a class="code" href="struct_game.html">Game</a> game, Assets assets);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> guiDrawSnake(SDL_Surface *screen, <a class="code" href="struct_snake.html">Snake</a> *snake, SnakeAssets snakeAssets);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a7ffeb7dc049916cab4a298ec7548840b">guiDrawGame</a>(SDL_Surface *screen, <a class="code" href="struct_game.html">Game</a> game, Assets assets);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a88b4fedbd636cccc6058767ecc4c52a4">guiDrawSnake</a>(SDL_Surface *screen, <a class="code" href="struct_snake.html">Snake</a> *snake, SnakeAssets snakeAssets);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/**** Events ****/</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> guiSnakeEvent(SDL_Event *event, <a class="code" href="struct_snake.html">Snake</a> *s);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> guiGeneralEvent(SDL_Event *event, <a class="code" href="struct_game.html">Game</a> game);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a59f8c590e870708382e7d140ab33d4c6">guiSnakeEvent</a>(SDL_Event *event, <a class="code" href="struct_snake.html">Snake</a> *s);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#abacfe49d75c1ce43ded4b6f4d242095d">guiGeneralEvent</a>(SDL_Event *event, <a class="code" href="struct_game.html">Game</a> game);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="struct_game_html"><div class="ttname"><a href="struct_game.html">Game</a></div><div class="ttdoc">The game structure. </div><div class="ttdef"><b>Definition:</b> game.c:16</div></div>
+<div class="ttc" id="struct_game_html"><div class="ttname"><a href="struct_game.html">Game</a></div><div class="ttdoc">The game structure. </div><div class="ttdef"><b>Definition:</b> game.c:15</div></div>
+<div class="ttc" id="struct_timer_html_a483d444f78e58a82260659a88fe41a79"><div class="ttname"><a href="struct_timer.html#a483d444f78e58a82260659a88fe41a79">Timer::snake2MoveTimer</a></div><div class="ttdeci">int snake2MoveTimer</div><div class="ttdef"><b>Definition:</b> gui.h:15</div></div>
 <div class="ttc" id="struct_snake_assets_html"><div class="ttname"><a href="struct_snake_assets.html">SnakeAssets</a></div><div class="ttdef"><b>Definition:</b> gui.h:21</div></div>
+<div class="ttc" id="gui_8h_html_a4861851d945a3d836212abead0ae337c"><div class="ttname"><a href="gui_8h.html#a4861851d945a3d836212abead0ae337c">guiReloadScreen</a></div><div class="ttdeci">void guiReloadScreen(SDL_Surface *screen)</div><div class="ttdoc">Reload the entire screen. </div><div class="ttdef"><b>Definition:</b> gui.c:368</div></div>
+<div class="ttc" id="struct_timer_html_ae24c71d1d6fbbcc9f679b28a2a162dae"><div class="ttname"><a href="struct_timer.html#ae24c71d1d6fbbcc9f679b28a2a162dae">Timer::snake1MoveTimer</a></div><div class="ttdeci">int snake1MoveTimer</div><div class="ttdef"><b>Definition:</b> gui.h:14</div></div>
+<div class="ttc" id="gui_8h_html_abacfe49d75c1ce43ded4b6f4d242095d"><div class="ttname"><a href="gui_8h.html#abacfe49d75c1ce43ded4b6f4d242095d">guiGeneralEvent</a></div><div class="ttdeci">void guiGeneralEvent(SDL_Event *event, Game game)</div><div class="ttdoc">Catch all player input. </div><div class="ttdef"><b>Definition:</b> gui.c:422</div></div>
+<div class="ttc" id="struct_snake_assets_html_a42255cacb0b4794a4e617c449ed25935"><div class="ttname"><a href="struct_snake_assets.html#a42255cacb0b4794a4e617c449ed25935">SnakeAssets::corner</a></div><div class="ttdeci">SDL_Surface ** corner</div><div class="ttdef"><b>Definition:</b> gui.h:25</div></div>
+<div class="ttc" id="struct_timer_html_a2182b4f4175ea78bf91a9b7a78fa1c0a"><div class="ttname"><a href="struct_timer.html#a2182b4f4175ea78bf91a9b7a78fa1c0a">Timer::start</a></div><div class="ttdeci">Uint32 start</div><div class="ttdef"><b>Definition:</b> gui.h:11</div></div>
+<div class="ttc" id="game_8h_html"><div class="ttname"><a href="game_8h.html">game.h</a></div></div>
+<div class="ttc" id="gui_8h_html_a88b4fedbd636cccc6058767ecc4c52a4"><div class="ttname"><a href="gui_8h.html#a88b4fedbd636cccc6058767ecc4c52a4">guiDrawSnake</a></div><div class="ttdeci">void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets)</div><div class="ttdoc">Draw one snake on the screen. </div><div class="ttdef"><b>Definition:</b> gui.c:259</div></div>
+<div class="ttc" id="struct_assets_html_a68389876c2746622931d187c587f9c4d"><div class="ttname"><a href="struct_assets.html#a68389876c2746622931d187c587f9c4d">Assets::background</a></div><div class="ttdeci">SDL_Surface * background</div><div class="ttdef"><b>Definition:</b> gui.h:33</div></div>
 <div class="ttc" id="struct_timer_html"><div class="ttname"><a href="struct_timer.html">Timer</a></div><div class="ttdef"><b>Definition:</b> gui.h:9</div></div>
+<div class="ttc" id="struct_timer_html_a6f1be1f780ff54ec75b41451cd4d90bd"><div class="ttname"><a href="struct_timer.html#a6f1be1f780ff54ec75b41451cd4d90bd">Timer::delay</a></div><div class="ttdeci">int delay</div><div class="ttdef"><b>Definition:</b> gui.h:13</div></div>
+<div class="ttc" id="gui_8h_html_aebf6bbf49167d49c500bd8364b17ef89"><div class="ttname"><a href="gui_8h.html#aebf6bbf49167d49c500bd8364b17ef89">guiLoadAssets</a></div><div class="ttdeci">Assets guiLoadAssets()</div><div class="ttdoc">The function load all assets of the game. </div><div class="ttdef"><b>Definition:</b> gui.c:162</div></div>
+<div class="ttc" id="gui_8h_html_a390cd0569db7d40b23da8f70167acf5d"><div class="ttname"><a href="gui_8h.html#a390cd0569db7d40b23da8f70167acf5d">guiClearScreen</a></div><div class="ttdeci">void guiClearScreen(SDL_Surface *screen)</div></div>
+<div class="ttc" id="gui_8h_html_a26387b68d2af1b878fb04debd11faa49"><div class="ttname"><a href="gui_8h.html#a26387b68d2af1b878fb04debd11faa49">guiCreateScreen</a></div><div class="ttdeci">SDL_Surface * guiCreateScreen(BoardSize size)</div><div class="ttdoc">The function creates the screen. </div><div class="ttdef"><b>Definition:</b> gui.c:122</div></div>
+<div class="ttc" id="gui_8h_html_a5e82f0e328c206e037d0fc84e67962fc"><div class="ttname"><a href="gui_8h.html#a5e82f0e328c206e037d0fc84e67962fc">guiApplySurface</a></div><div class="ttdeci">void guiApplySurface(int x, int y, SDL_Surface *source, SDL_Surface *destination, SDL_Rect *clip)</div><div class="ttdoc">Draw one surface on the screen. </div><div class="ttdef"><b>Definition:</b> gui.c:332</div></div>
+<div class="ttc" id="struct_timer_html_ac487a8912076b2d72896b5b2c9b3db5d"><div class="ttname"><a href="struct_timer.html#ac487a8912076b2d72896b5b2c9b3db5d">Timer::snake2LastMove</a></div><div class="ttdeci">Uint32 snake2LastMove</div><div class="ttdef"><b>Definition:</b> gui.h:17</div></div>
+<div class="ttc" id="gui_8h_html_ad20ba344cf84e057e90c8ab12c6fa1da"><div class="ttname"><a href="gui_8h.html#ad20ba344cf84e057e90c8ab12c6fa1da">SnakeAssets</a></div><div class="ttdeci">struct SnakeAssets * SnakeAssets</div><div class="ttdef"><b>Definition:</b> gui.h:20</div></div>
+<div class="ttc" id="gui_8h_html_afd7848bf08abd59985064325c56d32a5"><div class="ttname"><a href="gui_8h.html#afd7848bf08abd59985064325c56d32a5">guiCreateTimer</a></div><div class="ttdeci">Timer guiCreateTimer()</div><div class="ttdoc">Create the Timer struct. </div><div class="ttdef"><b>Definition:</b> gui.c:351</div></div>
+<div class="ttc" id="snake_8h_html_adb268df8cc4344486327fd4063e2f505"><div class="ttname"><a href="snake_8h.html#adb268df8cc4344486327fd4063e2f505">SnakeType</a></div><div class="ttdeci">SnakeType</div><div class="ttdef"><b>Definition:</b> snake.h:27</div></div>
+<div class="ttc" id="struct_timer_html_a0b14f4154ad70526bfde65ed2c6ea1fd"><div class="ttname"><a href="struct_timer.html#a0b14f4154ad70526bfde65ed2c6ea1fd">Timer::snake1LastMove</a></div><div class="ttdeci">Uint32 snake1LastMove</div><div class="ttdef"><b>Definition:</b> gui.h:16</div></div>
+<div class="ttc" id="struct_snake_assets_html_a8b0bcf2582e3743af8b48308624034d8"><div class="ttname"><a href="struct_snake_assets.html#a8b0bcf2582e3743af8b48308624034d8">SnakeAssets::tail</a></div><div class="ttdeci">SDL_Surface ** tail</div><div class="ttdef"><b>Definition:</b> gui.h:26</div></div>
+<div class="ttc" id="struct_assets_html_ad5b86c487e81d971972627f049fc9956"><div class="ttname"><a href="struct_assets.html#ad5b86c487e81d971972627f049fc9956">Assets::snakesAssets</a></div><div class="ttdeci">SnakeAssets * snakesAssets</div><div class="ttdef"><b>Definition:</b> gui.h:32</div></div>
+<div class="ttc" id="struct_snake_assets_html_a1e53ba4f6b13a7867191e2b1e715980a"><div class="ttname"><a href="struct_snake_assets.html#a1e53ba4f6b13a7867191e2b1e715980a">SnakeAssets::body</a></div><div class="ttdeci">SDL_Surface ** body</div><div class="ttdef"><b>Definition:</b> gui.h:24</div></div>
+<div class="ttc" id="gui_8h_html_ad72d73083b7e89dc72e58b46f97040e9"><div class="ttname"><a href="gui_8h.html#ad72d73083b7e89dc72e58b46f97040e9">guiLoadImage</a></div><div class="ttdeci">SDL_Surface * guiLoadImage(char *path)</div><div class="ttdoc">The function load the image given in parameter. </div><div class="ttdef"><b>Definition:</b> gui.c:148</div></div>
+<div class="ttc" id="struct_snake_assets_html_a17fd5a519e5c67b17e3b4f9df388c772"><div class="ttname"><a href="struct_snake_assets.html#a17fd5a519e5c67b17e3b4f9df388c772">SnakeAssets::head</a></div><div class="ttdeci">SDL_Surface ** head</div><div class="ttdef"><b>Definition:</b> gui.h:23</div></div>
+<div class="ttc" id="gui_8h_html_a6d5905958b8c128a317923761057001a"><div class="ttname"><a href="gui_8h.html#a6d5905958b8c128a317923761057001a">guiLoadSnake</a></div><div class="ttdeci">SnakeAssets guiLoadSnake(SnakeType type, char *color)</div><div class="ttdoc">The function load a SnakeAssets. </div><div class="ttdef"><b>Definition:</b> gui.c:203</div></div>
 <div class="ttc" id="struct_snake_html"><div class="ttname"><a href="struct_snake.html">Snake</a></div><div class="ttdoc">The snake structure. </div><div class="ttdef"><b>Definition:</b> snake.c:27</div></div>
+<div class="ttc" id="gui_8h_html_a7c12cb51e84e0fcbb24119534d2c5a61"><div class="ttname"><a href="gui_8h.html#a7c12cb51e84e0fcbb24119534d2c5a61">guiPlay</a></div><div class="ttdeci">void guiPlay(BoardSize size)</div><div class="ttdoc">This function is the main game loop. </div><div class="ttdef"><b>Definition:</b> gui.c:19</div></div>
+<div class="ttc" id="gui_8h_html_a21b9d094c50ea67590a3fc15647df247"><div class="ttname"><a href="gui_8h.html#a21b9d094c50ea67590a3fc15647df247">Assets</a></div><div class="ttdeci">struct Assets * Assets</div><div class="ttdef"><b>Definition:</b> gui.h:29</div></div>
+<div class="ttc" id="game_8h_html_a42eef434283eb2b097a6bf3d3115e5e5"><div class="ttname"><a href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a></div><div class="ttdeci">BoardSize</div><div class="ttdef"><b>Definition:</b> game.h:14</div></div>
+<div class="ttc" id="gui_8h_html_a59f8c590e870708382e7d140ab33d4c6"><div class="ttname"><a href="gui_8h.html#a59f8c590e870708382e7d140ab33d4c6">guiSnakeEvent</a></div><div class="ttdeci">void guiSnakeEvent(SDL_Event *event, Snake *s)</div><div class="ttdoc">Catch all player input. </div><div class="ttdef"><b>Definition:</b> gui.c:379</div></div>
 <div class="ttc" id="struct_assets_html"><div class="ttname"><a href="struct_assets.html">Assets</a></div><div class="ttdef"><b>Definition:</b> gui.h:30</div></div>
+<div class="ttc" id="struct_timer_html_aa376f8ee14caaba574361c9690d3773d"><div class="ttname"><a href="struct_timer.html#aa376f8ee14caaba574361c9690d3773d">Timer::end</a></div><div class="ttdeci">Uint32 end</div><div class="ttdef"><b>Definition:</b> gui.h:12</div></div>
+<div class="ttc" id="gui_8h_html_a72342995cfb101300d5fb48f0e7733eb"><div class="ttname"><a href="gui_8h.html#a72342995cfb101300d5fb48f0e7733eb">Timer</a></div><div class="ttdeci">struct Timer * Timer</div><div class="ttdef"><b>Definition:</b> gui.h:8</div></div>
 <div class="ttc" id="board_8h_html"><div class="ttname"><a href="board_8h.html">board.h</a></div><div class="ttdoc">Entêtes des fonctions et structure pour la gestion du plateau. </div></div>
 <div class="ttc" id="snake_8h_html"><div class="ttname"><a href="snake_8h.html">snake.h</a></div><div class="ttdoc">Entêtes des fonctions et structures pour la gestion du snake. </div></div>
+<div class="ttc" id="struct_assets_html_a4930425562b5dd3ae23e522982d7c24e"><div class="ttname"><a href="struct_assets.html#a4930425562b5dd3ae23e522982d7c24e">Assets::food</a></div><div class="ttdeci">SDL_Surface * food</div><div class="ttdef"><b>Definition:</b> gui.h:34</div></div>
+<div class="ttc" id="gui_8h_html_a7ffeb7dc049916cab4a298ec7548840b"><div class="ttname"><a href="gui_8h.html#a7ffeb7dc049916cab4a298ec7548840b">guiDrawGame</a></div><div class="ttdeci">void guiDrawGame(SDL_Surface *screen, Game game, Assets assets)</div><div class="ttdoc">Draw the entire game on the screen. </div><div class="ttdef"><b>Definition:</b> gui.c:241</div></div>
+<div class="ttc" id="gui_8h_html_a09d3a0ead424da04a844fd0d917cd47a"><div class="ttname"><a href="gui_8h.html#a09d3a0ead424da04a844fd0d917cd47a">guiFreeAssets</a></div><div class="ttdeci">void guiFreeAssets(Assets assets)</div><div class="ttdoc">The function free the struct Assets. </div><div class="ttdef"><b>Definition:</b> gui.c:184</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>gui.h</b></li>
-    <li class="footer">Generated on Mon Apr 18 2016 19:53:58 for Larakis by
+    <li class="navelem"><a class="el" href="gui_8h.html">gui.h</a></li>
+    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

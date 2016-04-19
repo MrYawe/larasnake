@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['l_5fcell_5fsize',['L_CELL_SIZE',['../constants_8h.html#ac23b60cfc6b40ed9dec8cf7da7fe0198',1,'constants.h']]],
-  ['l_5fsize_5fboard_5fx',['L_SIZE_BOARD_X',['../constants_8h.html#a1733c4d28a2c85c6836fc81f15805e0e',1,'constants.h']]],
-  ['l_5fsize_5fboard_5fy',['L_SIZE_BOARD_Y',['../constants_8h.html#a5966f827f69cd5b3a04aace16d642a43',1,'constants.h']]],
-  ['large',['LARGE',['../game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5a716db5c72140446e5badac4683610310',1,'game.h']]],
-  ['last',['last',['../struct_snake.html#a075da34cf55b9b4c699e017d3a0a0e17',1,'Snake']]],
-  ['left',['LEFT',['../snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aaadb45120aafd37a973140edee24708065',1,'snake.h']]]
+  ['m_5fcell_5fsize',['M_CELL_SIZE',['../constants_8h.html#a0c07203c4c7a5ba6bb09c23911571132',1,'constants.h']]],
+  ['m_5fsize_5fboard_5fx',['M_SIZE_BOARD_X',['../constants_8h.html#a5d1b156c0e797d53eaf81db9fabfd5b7',1,'constants.h']]],
+  ['m_5fsize_5fboard_5fy',['M_SIZE_BOARD_Y',['../constants_8h.html#acddf319b7233843d47ca17ca540c8dee',1,'constants.h']]],
+  ['main',['main',['../main_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.c']]],
+  ['main_2ec',['main.c',['../main_8c.html',1,'']]],
+  ['medium',['MEDIUM',['../game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5a5340ec7ecef6cc3886684a3bd3450d64',1,'game.h']]]
 ];

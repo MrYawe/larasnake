@@ -30,7 +30,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Larakis
-   &#160;<span id="projectnumber">1.0</span>
    </div>
   </td>
  </tr>
@@ -91,7 +90,7 @@ $(document).ready(function(){initNavTree('board_8h.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -112,64 +111,41 @@ $(document).ready(function(){initNavTree('board_8h.html','');});
 <p>Entêtes des fonctions et structure pour la gestion du plateau.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br/>
-<code>#include &quot;coord.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="coord_8h_source.html">coord.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="snake_8h_source.html">snake.h</a>&quot;</code><br/>
 </div>
 <p><a href="board_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a23ebcc73fdb69bb37ce7dc92a2a3d008"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23ebcc73fdb69bb37ce7dc92a2a3d008"></a>
-typedef struct <a class="el" href="struct_board.html">Board</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Board</b></td></tr>
+<tr class="memitem:a23ebcc73fdb69bb37ce7dc92a2a3d008"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_board.html">Board</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a23ebcc73fdb69bb37ce7dc92a2a3d008">Board</a></td></tr>
 <tr class="separator:a23ebcc73fdb69bb37ce7dc92a2a3d008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae0663ba599c578ff5ffa1f185d14af8b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0663ba599c578ff5ffa1f185d14af8b"></a>
-<a class="el" href="struct_board.html">Board</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>boardInit</b> (int sizeX, int sizeY, int sizeCell)</td></tr>
+<tr class="memitem:ae0663ba599c578ff5ffa1f185d14af8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_board.html">Board</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#ae0663ba599c578ff5ffa1f185d14af8b">boardInit</a> (int sizeX, int sizeY, int sizeCell)</td></tr>
+<tr class="memdesc:ae0663ba599c578ff5ffa1f185d14af8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function creates an instance of the board.  <a href="#ae0663ba599c578ff5ffa1f185d14af8b">More...</a><br/></td></tr>
 <tr class="separator:ae0663ba599c578ff5ffa1f185d14af8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8b2a49d3b0d3387a4f7788fe66e734c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8b2a49d3b0d3387a4f7788fe66e734c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>boardGetValue</b> (<a class="el" href="struct_board.html">Board</a> *b, int posx, int posy)</td></tr>
+<tr class="memitem:af8b2a49d3b0d3387a4f7788fe66e734c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#af8b2a49d3b0d3387a4f7788fe66e734c">boardGetValue</a> (<a class="el" href="struct_board.html">Board</a> *b, int posx, int posy)</td></tr>
+<tr class="memdesc:af8b2a49d3b0d3387a4f7788fe66e734c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow to get a value in the board.  <a href="#af8b2a49d3b0d3387a4f7788fe66e734c">More...</a><br/></td></tr>
 <tr class="separator:af8b2a49d3b0d3387a4f7788fe66e734c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fd367f8ddad361a09ae4be6ba45b537"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7fd367f8ddad361a09ae4be6ba45b537"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>boardSetValue</b> (<a class="el" href="struct_board.html">Board</a> *b, int posx, int posy, int val)</td></tr>
+<tr class="memitem:a7fd367f8ddad361a09ae4be6ba45b537"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a7fd367f8ddad361a09ae4be6ba45b537">boardSetValue</a> (<a class="el" href="struct_board.html">Board</a> *b, int posx, int posy, int val)</td></tr>
+<tr class="memdesc:a7fd367f8ddad361a09ae4be6ba45b537"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow to set a value in the board.  <a href="#a7fd367f8ddad361a09ae4be6ba45b537">More...</a><br/></td></tr>
 <tr class="separator:a7fd367f8ddad361a09ae4be6ba45b537"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a1256d180443bcbf76ec872b4a833bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a1256d180443bcbf76ec872b4a833bf"></a>
-<a class="el" href="struct_coord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boardGetJambon</b> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
-<tr class="separator:a3a1256d180443bcbf76ec872b4a833bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3885fbf6109b190e948f28cd10cf43e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3885fbf6109b190e948f28cd10cf43e6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>boardSetJambon</b> (<a class="el" href="struct_board.html">Board</a> *b, int x, int y)</td></tr>
-<tr class="separator:a3885fbf6109b190e948f28cd10cf43e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a315cb6cbc9f8122088ace138835270f5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a315cb6cbc9f8122088ace138835270f5"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>boardGetHeight</b> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
+<tr class="memitem:a315cb6cbc9f8122088ace138835270f5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a315cb6cbc9f8122088ace138835270f5">boardGetHeight</a> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
+<tr class="memdesc:a315cb6cbc9f8122088ace138835270f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the value of the height of the board.  <a href="#a315cb6cbc9f8122088ace138835270f5">More...</a><br/></td></tr>
 <tr class="separator:a315cb6cbc9f8122088ace138835270f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad14d5b9cbf47e4b1da303a7763844c3e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad14d5b9cbf47e4b1da303a7763844c3e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>boardGetWidth</b> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
+<tr class="memitem:ad14d5b9cbf47e4b1da303a7763844c3e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#ad14d5b9cbf47e4b1da303a7763844c3e">boardGetWidth</a> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
+<tr class="memdesc:ad14d5b9cbf47e4b1da303a7763844c3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the value of the width of the board.  <a href="#ad14d5b9cbf47e4b1da303a7763844c3e">More...</a><br/></td></tr>
 <tr class="separator:ad14d5b9cbf47e4b1da303a7763844c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b294b406d139d689156663a3800e022"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b294b406d139d689156663a3800e022"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>boardDisplay</b> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
+<tr class="memitem:a4b294b406d139d689156663a3800e022"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a4b294b406d139d689156663a3800e022">boardDisplay</a> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
+<tr class="memdesc:a4b294b406d139d689156663a3800e022"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow to print the board in the console.  <a href="#a4b294b406d139d689156663a3800e022">More...</a><br/></td></tr>
 <tr class="separator:a4b294b406d139d689156663a3800e022"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2073a6830f5f017593d7d52e3a9500e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2073a6830f5f017593d7d52e3a9500e2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>boardFree</b> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
+<tr class="memitem:a2073a6830f5f017593d7d52e3a9500e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a2073a6830f5f017593d7d52e3a9500e2">boardFree</a> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
+<tr class="memdesc:a2073a6830f5f017593d7d52e3a9500e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function free the board.  <a href="#a2073a6830f5f017593d7d52e3a9500e2">More...</a><br/></td></tr>
 <tr class="separator:a2073a6830f5f017593d7d52e3a9500e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab179988afbcfa7c5d170546953f0a69a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab179988afbcfa7c5d170546953f0a69a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>boardInside</b> (<a class="el" href="struct_board.html">Board</a> *b, <a class="el" href="struct_coord.html">Coord</a> coord)</td></tr>
-<tr class="separator:ab179988afbcfa7c5d170546953f0a69a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa129db908daf1dcf226fb576204253a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa129db908daf1dcf226fb576204253a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>boardIsSnake</b> (<a class="el" href="struct_board.html">Board</a> *b, <a class="el" href="struct_coord.html">Coord</a> coord)</td></tr>
-<tr class="separator:afa129db908daf1dcf226fb576204253a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42af1f926adc74a096286961c729e553"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42af1f926adc74a096286961c729e553"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>boardFeed</b> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
-<tr class="separator:a42af1f926adc74a096286961c729e553"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00c18f10b8f569e55d4800741e5c134d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00c18f10b8f569e55d4800741e5c134d"></a>
-<a class="el" href="struct_coord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boardNextPosCell</b> (int x, int y, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
-<tr class="separator:a00c18f10b8f569e55d4800741e5c134d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92483958610c33749bfac22378207e85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a92483958610c33749bfac22378207e85"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>boardIsNextCellSnake</b> (<a class="el" href="struct_board.html">Board</a> *b, int x, int y, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
-<tr class="separator:a92483958610c33749bfac22378207e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad736b4fe5326474eec4453b1b0aebda7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad736b4fe5326474eec4453b1b0aebda7"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>boardIsNextCellBorder</b> (<a class="el" href="struct_board.html">Board</a> *b, int x, int y, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
-<tr class="separator:ad736b4fe5326474eec4453b1b0aebda7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c32c19a704130c5195bbc9e01b5070"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_board.html">Board</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a99c32c19a704130c5195bbc9e01b5070">boardCopy</a> (<a class="el" href="struct_board.html">Board</a> *b)</td></tr>
+<tr class="separator:a99c32c19a704130c5195bbc9e01b5070"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Entêtes des fonctions et structure pour la gestion du plateau. </p>
@@ -177,13 +153,283 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>boardIsNextCellBorder
 <dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>20/02/2016</dd></dl>
 <p>Toutes les entêtes de fonctions et structure necessaires à gérer le plateau : création, récupérer des valeurs, les modifier, afficher le plateau et libérer la mémoire </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a class="anchor" id="a23ebcc73fdb69bb37ce7dc92a2a3d008"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_board.html">Board</a> <a class="el" href="struct_board.html">Board</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a99c32c19a704130c5195bbc9e01b5070"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_board.html">Board</a>* boardCopy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4b294b406d139d689156663a3800e022"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void boardDisplay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function allow to print the board in the console. </p>
+<p>The console display all cells of the board in the console </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The board to print </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a2073a6830f5f017593d7d52e3a9500e2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void boardFree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function free the board. </p>
+<p>The function free the board of the memory </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The board to free </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a315cb6cbc9f8122088ace138835270f5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int boardGetHeight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function returns the value of the height of the board. </p>
+<p>The function returns the value of sizeY of the structure board </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The board to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns int which correspond to the height of the current board </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af8b2a49d3b0d3387a4f7788fe66e734c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int boardGetValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posy</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function allow to get a value in the board. </p>
+<p>The function tests if the parameters are correct and if it's the case, it returns the value </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : Represents the board to access </td></tr>
+    <tr><td class="paramname">posx</td><td>Int : The X position to access </td></tr>
+    <tr><td class="paramname">posy</td><td>Int : The Y position to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns int which correspond to the correct value / -1 if out of range </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad14d5b9cbf47e4b1da303a7763844c3e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int boardGetWidth </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function returns the value of the width of the board. </p>
+<p>The function returns the value of sizeX of the structure board </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The board to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns int which correspond to the width of the current board </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae0663ba599c578ff5ffa1f185d14af8b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_board.html">Board</a>* boardInit </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeCell</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function creates an instance of the board. </p>
+<p>The function store the board in the memory and initialize it </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sizeX</td><td>Int Represents the size X of the board to create </td></tr>
+    <tr><td class="paramname">sizeY</td><td>Int Represents the size Y of the board to create </td></tr>
+    <tr><td class="paramname">sizeCell</td><td>Int Represents the size of the cells of the board when it will be printed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a pointer to the created board </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7fd367f8ddad361a09ae4be6ba45b537"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void boardSetValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function allow to set a value in the board. </p>
+<p>The function test if the parameters are correct and if it's the case, it puts the value in the board </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : Represents the board to set </td></tr>
+    <tr><td class="paramname">posx</td><td>Int : The X position to set </td></tr>
+    <tr><td class="paramname">posy</td><td>Int : The Y position to set </td></tr>
+    <tr><td class="paramname">val</td><td>Int : The value to set in the board </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="board_8h.html">board.h</a></li>
-    <li class="footer">Generated on Mon Apr 18 2016 19:53:58 for Larakis by
+    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

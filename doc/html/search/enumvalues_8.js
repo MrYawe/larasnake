@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['water',['WATER',['../snake_8h.html#adb268df8cc4344486327fd4063e2f505a9ac7d5e5851d7a2bc186a1c3341589f6',1,'snake.h']]]
+  ['up',['UP',['../snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aaaba595d8bca8bc5e67c37c0a9d89becfa',1,'snake.h']]]
 ];

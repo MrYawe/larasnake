@@ -6,7 +6,6 @@ var gui_8h =
     [ "Assets", "gui_8h.html#a21b9d094c50ea67590a3fc15647df247", null ],
     [ "SnakeAssets", "gui_8h.html#ad20ba344cf84e057e90c8ab12c6fa1da", null ],
     [ "Timer", "gui_8h.html#a72342995cfb101300d5fb48f0e7733eb", null ],
-    [ "freeAll", "gui_8h.html#a5bf1bc85846de2d22d9475348f113579", null ],
     [ "guiApplySurface", "gui_8h.html#a5e82f0e328c206e037d0fc84e67962fc", null ],
     [ "guiClearScreen", "gui_8h.html#a390cd0569db7d40b23da8f70167acf5d", null ],
     [ "guiCreateScreen", "gui_8h.html#a26387b68d2af1b878fb04debd11faa49", null ],

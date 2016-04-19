@@ -30,7 +30,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Larakis
-   &#160;<span id="projectnumber">1.0</span>
    </div>
   </td>
  </tr>
@@ -91,7 +90,7 @@ $(document).ready(function(){initNavTree('ia_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -105,17 +104,21 @@ $(document).ready(function(){initNavTree('ia_8h_source.html','');});
 <div class="title">ia.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef IA_H</span></div>
+<a href="ia_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef IA_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define IA_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="board_8h.html">board.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="snake_8h.html">snake.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<a class="code" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> iaSurvive (<a class="code" href="struct_board.html">Board</a> *board, <a class="code" href="struct_snake.html">Snake</a> *snake);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<a class="code" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> iaJambon (<a class="code" href="struct_board.html">Board</a> *board, <a class="code" href="struct_snake.html">Snake</a> *snake);</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">int</span> iaFront(<a class="code" href="struct_board.html">Board</a> *board, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <a class="code" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir);</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="game_8h.html">game.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<a class="code" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> <a class="code" href="ia_8h.html#aaa3bdfe7e200b4fed9b86532efeb848f">iaSurvive</a> (<a class="code" href="struct_board.html">Board</a> *board, <a class="code" href="struct_snake.html">Snake</a> *snake);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<a class="code" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> <a class="code" href="ia_8h.html#ae488b60bfa6d0935c506194be93edd72">iaJambon</a> (<a class="code" href="struct_game.html">Game</a> game, <a class="code" href="struct_snake.html">Snake</a> *snake);</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="struct_game_html"><div class="ttname"><a href="struct_game.html">Game</a></div><div class="ttdoc">The game structure. </div><div class="ttdef"><b>Definition:</b> game.c:15</div></div>
+<div class="ttc" id="game_8h_html"><div class="ttname"><a href="game_8h.html">game.h</a></div></div>
+<div class="ttc" id="ia_8h_html_ae488b60bfa6d0935c506194be93edd72"><div class="ttname"><a href="ia_8h.html#ae488b60bfa6d0935c506194be93edd72">iaJambon</a></div><div class="ttdeci">Direction iaJambon(Game game, Snake *snake)</div><div class="ttdoc">Function used to chase the given bonus without dying. </div><div class="ttdef"><b>Definition:</b> ia.c:59</div></div>
+<div class="ttc" id="ia_8h_html_aaa3bdfe7e200b4fed9b86532efeb848f"><div class="ttname"><a href="ia_8h.html#aaa3bdfe7e200b4fed9b86532efeb848f">iaSurvive</a></div><div class="ttdeci">Direction iaSurvive(Board *board, Snake *snake)</div><div class="ttdoc">Function used to get a direction for the snake to follow to not die. </div><div class="ttdef"><b>Definition:</b> ia.c:21</div></div>
 <div class="ttc" id="struct_board_html"><div class="ttname"><a href="struct_board.html">Board</a></div><div class="ttdoc">The structure of the board. </div><div class="ttdef"><b>Definition:</b> board.c:19</div></div>
 <div class="ttc" id="struct_snake_html"><div class="ttname"><a href="struct_snake.html">Snake</a></div><div class="ttdoc">The snake structure. </div><div class="ttdef"><b>Definition:</b> snake.c:27</div></div>
 <div class="ttc" id="snake_8h_html_a224b9163917ac32fc95a60d8c1eec3aa"><div class="ttname"><a href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a></div><div class="ttdeci">Direction</div><div class="ttdoc">Permet de gérer la direction du snake. </div><div class="ttdef"><b>Definition:</b> snake.h:20</div></div>
@@ -126,8 +129,8 @@ $(document).ready(function(){initNavTree('ia_8h_source.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>ia.h</b></li>
-    <li class="footer">Generated on Mon Apr 18 2016 19:53:58 for Larakis by
+    <li class="navelem"><a class="el" href="ia_8h.html">ia.h</a></li>
+    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

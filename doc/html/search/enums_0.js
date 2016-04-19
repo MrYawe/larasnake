@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['direction',['Direction',['../snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa',1,'snake.h']]]
+  ['boardsize',['BoardSize',['../game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5',1,'game.h']]],
+  ['boardvalue',['BoardValue',['../enum_8h.html#a2dacfc71b564278029e3ad9693430e87',1,'enum.h']]]
 ];

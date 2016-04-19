@@ -30,7 +30,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Larakis
-   &#160;<span id="projectnumber">1.0</span>
    </div>
   </td>
  </tr>
@@ -91,7 +90,7 @@ $(document).ready(function(){initNavTree('snake_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -115,7 +114,7 @@ $(document).ready(function(){initNavTree('snake_8c.html','');});
 <code>#include &lt;stdlib.h&gt;</code><br/>
 <code>#include &lt;time.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="snake_8h_source.html">snake.h</a>&quot;</code><br/>
-<code>#include &quot;constants.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br/>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
@@ -128,84 +127,75 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a874828b75994b5585cc28f53ef85e77e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a874828b75994b5585cc28f53ef85e77e"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeAddFirstElement</b> (<a class="el" href="struct_snake.html">Snake</a> *s, int posX, int posY, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> orientation)</td></tr>
-<tr class="separator:a874828b75994b5585cc28f53ef85e77e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0774cd1a957394f430e7f97b3d0ca327"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0774cd1a957394f430e7f97b3d0ca327"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeAddLastElement</b> (<a class="el" href="struct_snake.html">Snake</a> *s, int posX, int posY, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> orientation)</td></tr>
-<tr class="separator:a0774cd1a957394f430e7f97b3d0ca327"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82a071c04a7330338a9b668d2ac6bff6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82a071c04a7330338a9b668d2ac6bff6"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeDeleteFirstElement</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
-<tr class="separator:a82a071c04a7330338a9b668d2ac6bff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae65c465ae2895548a024458f0494876e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae65c465ae2895548a024458f0494876e"></a>
-<a class="el" href="struct_snake.html">Snake</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>snakeCreate</b> (int size, int id, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> d, SnakeType type)</td></tr>
-<tr class="separator:ae65c465ae2895548a024458f0494876e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9adb0f9cda07c82d9fb1bddf57ad7395"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9adb0f9cda07c82d9fb1bddf57ad7395"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeGoUp</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:aeb35d1d22bbbe36bcfb40c7796691bba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#aeb35d1d22bbbe36bcfb40c7796691bba">snakeCreate</a> (int size, int id, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> d, <a class="el" href="snake_8h.html#adb268df8cc4344486327fd4063e2f505">SnakeType</a> type)</td></tr>
+<tr class="memdesc:aeb35d1d22bbbe36bcfb40c7796691bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function creates and returns a pointer to the snake.  <a href="#aeb35d1d22bbbe36bcfb40c7796691bba">More...</a><br/></td></tr>
+<tr class="separator:aeb35d1d22bbbe36bcfb40c7796691bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9adb0f9cda07c82d9fb1bddf57ad7395"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a9adb0f9cda07c82d9fb1bddf57ad7395">snakeGoUp</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a9adb0f9cda07c82d9fb1bddf57ad7395"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function edit the snake to move it to the upper cell.  <a href="#a9adb0f9cda07c82d9fb1bddf57ad7395">More...</a><br/></td></tr>
 <tr class="separator:a9adb0f9cda07c82d9fb1bddf57ad7395"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72c0f2c3f52fbc33cf39f964a4f2090b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72c0f2c3f52fbc33cf39f964a4f2090b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeGoDown</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:a72c0f2c3f52fbc33cf39f964a4f2090b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a72c0f2c3f52fbc33cf39f964a4f2090b">snakeGoDown</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a72c0f2c3f52fbc33cf39f964a4f2090b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function edit the snake to move it to the lower cell.  <a href="#a72c0f2c3f52fbc33cf39f964a4f2090b">More...</a><br/></td></tr>
 <tr class="separator:a72c0f2c3f52fbc33cf39f964a4f2090b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae829c380b989f57a2640743e961a3df5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae829c380b989f57a2640743e961a3df5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeTurnLeft</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:ae829c380b989f57a2640743e961a3df5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#ae829c380b989f57a2640743e961a3df5">snakeTurnLeft</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:ae829c380b989f57a2640743e961a3df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function edit the snake to move it to the left cell.  <a href="#ae829c380b989f57a2640743e961a3df5">More...</a><br/></td></tr>
 <tr class="separator:ae829c380b989f57a2640743e961a3df5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39bd22814d3694e458c8243c9887ecca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a39bd22814d3694e458c8243c9887ecca"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeTurnRight</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:a39bd22814d3694e458c8243c9887ecca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a39bd22814d3694e458c8243c9887ecca">snakeTurnRight</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a39bd22814d3694e458c8243c9887ecca"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function edit the snake to move it to the right cell.  <a href="#a39bd22814d3694e458c8243c9887ecca">More...</a><br/></td></tr>
 <tr class="separator:a39bd22814d3694e458c8243c9887ecca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4482eb3037fdadc7b6dfc827a2ddf58f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4482eb3037fdadc7b6dfc827a2ddf58f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeTeleportation</b> (<a class="el" href="struct_snake.html">Snake</a> *s, int posX, int posY)</td></tr>
+<tr class="memitem:a4482eb3037fdadc7b6dfc827a2ddf58f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a4482eb3037fdadc7b6dfc827a2ddf58f">snakeTeleportation</a> (<a class="el" href="struct_snake.html">Snake</a> *s, int posX, int posY)</td></tr>
+<tr class="memdesc:a4482eb3037fdadc7b6dfc827a2ddf58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow the snake to teleport himself to an other cell.  <a href="#a4482eb3037fdadc7b6dfc827a2ddf58f">More...</a><br/></td></tr>
 <tr class="separator:a4482eb3037fdadc7b6dfc827a2ddf58f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a922002ccd57783a4a6c5ec61b21cc2b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a922002ccd57783a4a6c5ec61b21cc2b2"></a>
-<a class="el" href="struct_coord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><b>snakeGetPos</b> (<a class="el" href="struct_snake.html">Snake</a> *s, int posBloc)</td></tr>
+<tr class="memitem:a922002ccd57783a4a6c5ec61b21cc2b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_coord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a922002ccd57783a4a6c5ec61b21cc2b2">snakeGetPos</a> (<a class="el" href="struct_snake.html">Snake</a> *s, int posBloc)</td></tr>
+<tr class="memdesc:a922002ccd57783a4a6c5ec61b21cc2b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the coordinates of a bloc.  <a href="#a922002ccd57783a4a6c5ec61b21cc2b2">More...</a><br/></td></tr>
 <tr class="separator:a922002ccd57783a4a6c5ec61b21cc2b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6609df2727f951706c52cce4cc58289"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab6609df2727f951706c52cce4cc58289"></a>
-<a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><b>snakeGetDirection</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:ab6609df2727f951706c52cce4cc58289"><td class="memItemLeft" align="right" valign="top"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#ab6609df2727f951706c52cce4cc58289">snakeGetDirection</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:ab6609df2727f951706c52cce4cc58289"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the value of the direction of the snake.  <a href="#ab6609df2727f951706c52cce4cc58289">More...</a><br/></td></tr>
 <tr class="separator:ab6609df2727f951706c52cce4cc58289"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a05f1a4f549eeca027b6605558b8efc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6a05f1a4f549eeca027b6605558b8efc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeSetDirection</b> (<a class="el" href="struct_snake.html">Snake</a> *s, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> d)</td></tr>
+<tr class="memitem:a6a05f1a4f549eeca027b6605558b8efc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a6a05f1a4f549eeca027b6605558b8efc">snakeSetDirection</a> (<a class="el" href="struct_snake.html">Snake</a> *s, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> d)</td></tr>
+<tr class="memdesc:a6a05f1a4f549eeca027b6605558b8efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow to set a value in the structure snake.  <a href="#a6a05f1a4f549eeca027b6605558b8efc">More...</a><br/></td></tr>
 <tr class="separator:a6a05f1a4f549eeca027b6605558b8efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a378891cc9873b6fb9f6371553a779e8c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a378891cc9873b6fb9f6371553a779e8c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>snakeGetSize</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:a378891cc9873b6fb9f6371553a779e8c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a378891cc9873b6fb9f6371553a779e8c">snakeGetSize</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a378891cc9873b6fb9f6371553a779e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the size of the snake.  <a href="#a378891cc9873b6fb9f6371553a779e8c">More...</a><br/></td></tr>
 <tr class="separator:a378891cc9873b6fb9f6371553a779e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6747d9bb761db5ed22ed6ee29d2f3c4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6747d9bb761db5ed22ed6ee29d2f3c4"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>snakeGetSpeed</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:aa6747d9bb761db5ed22ed6ee29d2f3c4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#aa6747d9bb761db5ed22ed6ee29d2f3c4">snakeGetSpeed</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:aa6747d9bb761db5ed22ed6ee29d2f3c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the speed of the snake.  <a href="#aa6747d9bb761db5ed22ed6ee29d2f3c4">More...</a><br/></td></tr>
 <tr class="separator:aa6747d9bb761db5ed22ed6ee29d2f3c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf68f4c86a4cddc0e00879e94339250f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf68f4c86a4cddc0e00879e94339250f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeSetSpeed</b> (<a class="el" href="struct_snake.html">Snake</a> *s, int speed)</td></tr>
+<tr class="memitem:abf68f4c86a4cddc0e00879e94339250f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#abf68f4c86a4cddc0e00879e94339250f">snakeSetSpeed</a> (<a class="el" href="struct_snake.html">Snake</a> *s, int speed)</td></tr>
+<tr class="memdesc:abf68f4c86a4cddc0e00879e94339250f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function sets the speed of the snake.  <a href="#abf68f4c86a4cddc0e00879e94339250f">More...</a><br/></td></tr>
 <tr class="separator:abf68f4c86a4cddc0e00879e94339250f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92018ab7cc4a60a660a4be33d545397e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a92018ab7cc4a60a660a4be33d545397e"></a>
-<a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><b>snakeElementGetOrientation</b> (<a class="el" href="struct_snake.html">Snake</a> *s, int posElem)</td></tr>
+<tr class="memitem:a92018ab7cc4a60a660a4be33d545397e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a92018ab7cc4a60a660a4be33d545397e">snakeElementGetOrientation</a> (<a class="el" href="struct_snake.html">Snake</a> *s, int posElem)</td></tr>
+<tr class="memdesc:a92018ab7cc4a60a660a4be33d545397e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the orientation of an <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> of the snake.  <a href="#a92018ab7cc4a60a660a4be33d545397e">More...</a><br/></td></tr>
 <tr class="separator:a92018ab7cc4a60a660a4be33d545397e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36faafaafe98f02620cecd82beff36cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36faafaafe98f02620cecd82beff36cc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeElementSetOrientation</b> (<a class="el" href="struct_snake.html">Snake</a> *s, int posElem, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> d)</td></tr>
+<tr class="memitem:a36faafaafe98f02620cecd82beff36cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a36faafaafe98f02620cecd82beff36cc">snakeElementSetOrientation</a> (<a class="el" href="struct_snake.html">Snake</a> *s, int posElem, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> d)</td></tr>
+<tr class="memdesc:a36faafaafe98f02620cecd82beff36cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function sets the orientation of an <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> of the snake.  <a href="#a36faafaafe98f02620cecd82beff36cc">More...</a><br/></td></tr>
 <tr class="separator:a36faafaafe98f02620cecd82beff36cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46b9bdbf3818ed8a5db88cbe058f932d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46b9bdbf3818ed8a5db88cbe058f932d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeSetGhost</b> (<a class="el" href="struct_snake.html">Snake</a> *s, bool b)</td></tr>
+<tr class="memitem:a46b9bdbf3818ed8a5db88cbe058f932d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a46b9bdbf3818ed8a5db88cbe058f932d">snakeSetGhost</a> (<a class="el" href="struct_snake.html">Snake</a> *s, bool b)</td></tr>
+<tr class="memdesc:a46b9bdbf3818ed8a5db88cbe058f932d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function manage the ghost attribute to the snake.  <a href="#a46b9bdbf3818ed8a5db88cbe058f932d">More...</a><br/></td></tr>
 <tr class="separator:a46b9bdbf3818ed8a5db88cbe058f932d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a849c801a867552dfd8acd9962f0d20ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a849c801a867552dfd8acd9962f0d20ba"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>snakeIsGhost</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:a849c801a867552dfd8acd9962f0d20ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a849c801a867552dfd8acd9962f0d20ba">snakeIsGhost</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a849c801a867552dfd8acd9962f0d20ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor of the ghost attribute of the snake.  <a href="#a849c801a867552dfd8acd9962f0d20ba">More...</a><br/></td></tr>
 <tr class="separator:a849c801a867552dfd8acd9962f0d20ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1e262c3b0739ba70c6837f1057585aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1e262c3b0739ba70c6837f1057585aa"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>snakeGetId</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:ab1e262c3b0739ba70c6837f1057585aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#ab1e262c3b0739ba70c6837f1057585aa">snakeGetId</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:ab1e262c3b0739ba70c6837f1057585aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor of the id attribute of the snake.  <a href="#ab1e262c3b0739ba70c6837f1057585aa">More...</a><br/></td></tr>
 <tr class="separator:ab1e262c3b0739ba70c6837f1057585aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27ae97a2d5c12a622695dbfdd7d2190c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27ae97a2d5c12a622695dbfdd7d2190c"></a>
-SnakeType&#160;</td><td class="memItemRight" valign="bottom"><b>snakeGetType</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:a27ae97a2d5c12a622695dbfdd7d2190c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="snake_8h.html#adb268df8cc4344486327fd4063e2f505">SnakeType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a27ae97a2d5c12a622695dbfdd7d2190c">snakeGetType</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a27ae97a2d5c12a622695dbfdd7d2190c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor of the type attribute of the snake.  <a href="#a27ae97a2d5c12a622695dbfdd7d2190c">More...</a><br/></td></tr>
 <tr class="separator:a27ae97a2d5c12a622695dbfdd7d2190c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f9884103754d474b992cfb46603ddc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9f9884103754d474b992cfb46603ddc8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeSetType</b> (<a class="el" href="struct_snake.html">Snake</a> *s, SnakeType t)</td></tr>
+<tr class="memitem:a9f9884103754d474b992cfb46603ddc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a9f9884103754d474b992cfb46603ddc8">snakeSetType</a> (<a class="el" href="struct_snake.html">Snake</a> *s, <a class="el" href="snake_8h.html#adb268df8cc4344486327fd4063e2f505">SnakeType</a> t)</td></tr>
+<tr class="memdesc:a9f9884103754d474b992cfb46603ddc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function manage the type attribute to the snake.  <a href="#a9f9884103754d474b992cfb46603ddc8">More...</a><br/></td></tr>
 <tr class="separator:a9f9884103754d474b992cfb46603ddc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a969f933387bfe2b6fe5d8ba7ea544a08"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a969f933387bfe2b6fe5d8ba7ea544a08"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeInverseWay</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:a969f933387bfe2b6fe5d8ba7ea544a08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a969f933387bfe2b6fe5d8ba7ea544a08">snakeInverseWay</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a969f933387bfe2b6fe5d8ba7ea544a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow the snake to inverse himself.  <a href="#a969f933387bfe2b6fe5d8ba7ea544a08">More...</a><br/></td></tr>
 <tr class="separator:a969f933387bfe2b6fe5d8ba7ea544a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8510f461f6df3f883248c2d19b5ff778"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8510f461f6df3f883248c2d19b5ff778"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeDisplay</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memitem:a8510f461f6df3f883248c2d19b5ff778"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a8510f461f6df3f883248c2d19b5ff778">snakeDisplay</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a8510f461f6df3f883248c2d19b5ff778"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow to print the snake in the console.  <a href="#a8510f461f6df3f883248c2d19b5ff778">More...</a><br/></td></tr>
 <tr class="separator:a8510f461f6df3f883248c2d19b5ff778"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8092919c5daa42d599a4a5a6e16c3ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8092919c5daa42d599a4a5a6e16c3ff"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeUpdateElement</b> (<a class="el" href="struct_snake.html">Snake</a> *s, int posElem, int posX, int posY)</td></tr>
+<tr class="memitem:ae8092919c5daa42d599a4a5a6e16c3ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#ae8092919c5daa42d599a4a5a6e16c3ff">snakeUpdateElement</a> (<a class="el" href="struct_snake.html">Snake</a> *s, int posElem, int posX, int posY)</td></tr>
+<tr class="memdesc:ae8092919c5daa42d599a4a5a6e16c3ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function update values of an element of the snake.  <a href="#ae8092919c5daa42d599a4a5a6e16c3ff">More...</a><br/></td></tr>
 <tr class="separator:ae8092919c5daa42d599a4a5a6e16c3ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a126f8a7d335ba928948569c0b8295308"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a126f8a7d335ba928948569c0b8295308"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeDelete</b> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
-<tr class="separator:a126f8a7d335ba928948569c0b8295308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38c45657da29c3172f67910d40f3e722"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a38c45657da29c3172f67910d40f3e722">snakeFree</a> (<a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a38c45657da29c3172f67910d40f3e722"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function free the memory of the snake.  <a href="#a38c45657da29c3172f67910d40f3e722">More...</a><br/></td></tr>
+<tr class="separator:a38c45657da29c3172f67910d40f3e722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Everything about the snake class. </p>
@@ -213,13 +203,749 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>snakeDelete</b> (<a c
 <dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>21/02/2016</dd></dl>
 <p>Contains all functions to manage the snake </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aeb35d1d22bbbe36bcfb40c7796691bba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_snake.html">Snake</a> * snakeCreate </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="snake_8h.html#adb268df8cc4344486327fd4063e2f505">SnakeType</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function creates and returns a pointer to the snake. </p>
+<p>The function store a snake structure in the memory, initialize it and returns a pointer to this structure </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Int which correspond to the size of the created snake </td></tr>
+    <tr><td class="paramname">id</td><td>Int which represents the id to set to the created snake </td></tr>
+    <tr><td class="paramname">d</td><td>Direction initial of the snake </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the created snake </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8510f461f6df3f883248c2d19b5ff778"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeDisplay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function allow to print the snake in the console. </p>
+<p>The console display all blocs of the snake in the console </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> : The snake to print </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a92018ab7cc4a60a660a4be33d545397e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> snakeElementGetOrientation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posElem</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function returns the orientation of an <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> of the snake. </p>
+<p>The function returns the orientation of the posElem number <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> of the snake </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+    <tr><td class="paramname">posElem</td><td>Int: number of the <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Direction: Direction of the <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a36faafaafe98f02620cecd82beff36cc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeElementSetOrientation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posElem</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function sets the orientation of an <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> of the snake. </p>
+<p>The function sets the orientation of the posElem number <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> of the snake </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+    <tr><td class="paramname">posElem</td><td>Int: number of the <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> to access </td></tr>
+    <tr><td class="paramname">d</td><td>Direction: Direction to set to the <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> to access </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a38c45657da29c3172f67910d40f3e722"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeFree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function free the memory of the snake. </p>
+<p>The function free all the list of Elements of the memory </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to free from memory </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ab6609df2727f951706c52cce4cc58289"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> snakeGetDirection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function returns the value of the direction of the snake. </p>
+<p>The function returns the value of direction of the structure snake </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> : The snake to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns Direction which correspond to the direction of the current snake </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab1e262c3b0739ba70c6837f1057585aa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int snakeGetId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accessor of the id attribute of the snake. </p>
+<p>The function allows to get the value of the id attritute </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Int: value of the id attribute </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a922002ccd57783a4a6c5ec61b21cc2b2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_coord.html">Coord</a> snakeGetPos </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posBloc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function returns the coordinates of a bloc. </p>
+<p>The function iterates on the snake blocs and returns the correct position </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to get </td></tr>
+    <tr><td class="paramname">posBloc</td><td>Int which is the number of the bloc to get </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the <a class="el" href="struct_coord.html" title="Coordinates structure. ">Coord</a> of the bloc </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a378891cc9873b6fb9f6371553a779e8c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int snakeGetSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function returns the size of the snake. </p>
+<p>The function returns the attribute "size" of the snake </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Int: size of the snake </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa6747d9bb761db5ed22ed6ee29d2f3c4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int snakeGetSpeed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function returns the speed of the snake. </p>
+<p>The function returns the attribute "speed" of the snake </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Int: speed of the snake </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a27ae97a2d5c12a622695dbfdd7d2190c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="snake_8h.html#adb268df8cc4344486327fd4063e2f505">SnakeType</a> snakeGetType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accessor of the type attribute of the snake. </p>
+<p>The function allows to get the value of the type attritute </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Int: value of the type attribute </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a72c0f2c3f52fbc33cf39f964a4f2090b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeGoDown </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function edit the snake to move it to the lower cell. </p>
+<p>The function add an element and delete the tail of the snake to make it go DOWN </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to edit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9adb0f9cda07c82d9fb1bddf57ad7395"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeGoUp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function edit the snake to move it to the upper cell. </p>
+<p>The function add an element and delete the tail of the snake to make it go UP </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to edit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a969f933387bfe2b6fe5d8ba7ea544a08"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeInverseWay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function allow the snake to inverse himself. </p>
+<p>The function inverse the list of the snake </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to edit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a849c801a867552dfd8acd9962f0d20ba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool snakeIsGhost </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accessor of the ghost attribute of the snake. </p>
+<p>The function allows to get the value of the ghost attritute </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Bool: value of the ghost attribute </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6a05f1a4f549eeca027b6605558b8efc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeSetDirection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function allow to set a value in the structure snake. </p>
+<p>The function test if the snake can't go backward and put the value in the snake structure </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> : Represents the snake to set </td></tr>
+    <tr><td class="paramname">d</td><td>Direction : Represents the direction to set to the snake </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a46b9bdbf3818ed8a5db88cbe058f932d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeSetGhost </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function manage the ghost attribute to the snake. </p>
+<p>The function allows to edit the ghost attritute </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+    <tr><td class="paramname">b</td><td>Bool: value of the ghost attribute </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abf68f4c86a4cddc0e00879e94339250f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeSetSpeed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>speed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function sets the speed of the snake. </p>
+<p>The function sets a value to the attribute "speed" of the snake </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+    <tr><td class="paramname">speed</td><td>Int: speed to set </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9f9884103754d474b992cfb46603ddc8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeSetType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="snake_8h.html#adb268df8cc4344486327fd4063e2f505">SnakeType</a>&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function manage the type attribute to the snake. </p>
+<p>The function allows to edit the type attritute </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to access </td></tr>
+    <tr><td class="paramname">b</td><td>Bool: value of the type attribute </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4482eb3037fdadc7b6dfc827a2ddf58f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeTeleportation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posY</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function allow the snake to teleport himself to an other cell. </p>
+<p>The function move the head of the snake to an other cell of the board </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to edit </td></tr>
+    <tr><td class="paramname">posX</td><td>Int: X Position which is the target cell </td></tr>
+    <tr><td class="paramname">posY</td><td>Int: Y Position which is the target cell </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae829c380b989f57a2640743e961a3df5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeTurnLeft </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function edit the snake to move it to the left cell. </p>
+<p>The function add an element and delete the tail of the snake to make it go LEFT </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to edit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a39bd22814d3694e458c8243c9887ecca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeTurnRight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function edit the snake to move it to the right cell. </p>
+<p>The function add an element and delete the tail of the snake to make it go RIGHT </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to edit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae8092919c5daa42d599a4a5a6e16c3ff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void snakeUpdateElement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posElem</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posY</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function update values of an element of the snake. </p>
+<p>The function iterates on the list of the elements of the snake and set a value </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to edit </td></tr>
+    <tr><td class="paramname">posElem</td><td>Int which is the number of the bloc to get </td></tr>
+    <tr><td class="paramname">posX</td><td>X value to set to the <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> </td></tr>
+    <tr><td class="paramname">posY</td><td>Y value to set to the <a class="el" href="struct_element.html" title="The whole body of the snake. ">Element</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="snake_8c.html">snake.c</a></li>
-    <li class="footer">Generated on Mon Apr 18 2016 19:53:58 for Larakis by
+    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
