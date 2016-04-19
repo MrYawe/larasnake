@@ -43,8 +43,8 @@ build/testBoard.o: src/board.h tests/testBoard.h tests/testBoard.c
 build/testSnake.o: src/snake.h tests/testSnake.h tests/testSnake.c
 	gcc -o build/testSnake.o -c tests/testSnake.c -l cmocka
 
-build/testia.o: src/ia.h tests/testia.h tests/testia.c
-	gcc -o build/testia.o -c tests/testia.c -l cmocka
+build/testIa.o: src/ia.h tests/testIa.h tests/testIa.c
+	gcc -o build/testIa.o -c tests/testIa.c -l cmocka
 
 
 .PHONEY: clean

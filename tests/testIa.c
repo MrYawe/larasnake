@@ -7,6 +7,7 @@
 #include <cmocka.h>
 
 #include "../src/ia.h"
+#include "testIa.h"
 
 void testIaJambon(void **state) {
 

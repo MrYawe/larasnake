@@ -8,7 +8,7 @@
 
 #include "testBoard.h"
 #include "testSnake.h"
-#include "testia.h"
+#include "testIa.h"
 
 int main () {
 	const struct CMUnitTest tests[] = {
