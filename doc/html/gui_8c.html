@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Larakis: src/gui.c File Reference</title>
+<title>Larakis: gui.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -117,62 +117,50 @@ $(document).ready(function(){initNavTree('gui_8c.html','');});
 <code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="game_8h_source.html">game.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="ia_8h_source.html">ia.h</a>&quot;</code><br/>
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for gui.c:</div>
-<div class="dyncontent">
-<div class="center"><img src="gui_8c__incl.png" border="0" usemap="#src_2gui_8c" alt=""/></div>
-<map name="src_2gui_8c" id="src_2gui_8c">
-</map>
-</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7c12cb51e84e0fcbb24119534d2c5a61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a7c12cb51e84e0fcbb24119534d2c5a61">guiPlay</a> (<a class="el" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a> size)</td></tr>
-<tr class="separator:a7c12cb51e84e0fcbb24119534d2c5a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bf1bc85846de2d22d9475348f113579"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a5bf1bc85846de2d22d9475348f113579">freeAll</a> (SDL_Surface **surfaces)</td></tr>
-<tr class="separator:a5bf1bc85846de2d22d9475348f113579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26387b68d2af1b878fb04debd11faa49"><td class="memItemLeft" align="right" valign="top">SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a26387b68d2af1b878fb04debd11faa49">guiCreateScreen</a> (<a class="el" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a> size)</td></tr>
-<tr class="separator:a26387b68d2af1b878fb04debd11faa49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad72d73083b7e89dc72e58b46f97040e9"><td class="memItemLeft" align="right" valign="top">SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#ad72d73083b7e89dc72e58b46f97040e9">guiLoadImage</a> (char *path)</td></tr>
-<tr class="separator:ad72d73083b7e89dc72e58b46f97040e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d52f3559e19a0c3ec47e33ab0089e9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a6d52f3559e19a0c3ec47e33ab0089e9a">guiPlay</a> (<a class="el" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a> size)</td></tr>
+<tr class="memdesc:a6d52f3559e19a0c3ec47e33ab0089e9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is the main game loop.  <a href="#a6d52f3559e19a0c3ec47e33ab0089e9a">More...</a><br/></td></tr>
+<tr class="separator:a6d52f3559e19a0c3ec47e33ab0089e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b454e0e1e2a8e2ffe0cd774cb6763d0"><td class="memItemLeft" align="right" valign="top">SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a2b454e0e1e2a8e2ffe0cd774cb6763d0">guiCreateScreen</a> (<a class="el" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a> size)</td></tr>
+<tr class="memdesc:a2b454e0e1e2a8e2ffe0cd774cb6763d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function creates the screen.  <a href="#a2b454e0e1e2a8e2ffe0cd774cb6763d0">More...</a><br/></td></tr>
+<tr class="separator:a2b454e0e1e2a8e2ffe0cd774cb6763d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac423f78886c5fe504f74a7709407691b"><td class="memItemLeft" align="right" valign="top">SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#ac423f78886c5fe504f74a7709407691b">guiLoadImage</a> (char *path)</td></tr>
+<tr class="memdesc:ac423f78886c5fe504f74a7709407691b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function load the image given in parameter.  <a href="#ac423f78886c5fe504f74a7709407691b">More...</a><br/></td></tr>
+<tr class="separator:ac423f78886c5fe504f74a7709407691b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebf6bbf49167d49c500bd8364b17ef89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_assets.html">Assets</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#aebf6bbf49167d49c500bd8364b17ef89">guiLoadAssets</a> ()</td></tr>
+<tr class="memdesc:aebf6bbf49167d49c500bd8364b17ef89"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function load all assets of the game.  <a href="#aebf6bbf49167d49c500bd8364b17ef89">More...</a><br/></td></tr>
 <tr class="separator:aebf6bbf49167d49c500bd8364b17ef89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09d3a0ead424da04a844fd0d917cd47a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a09d3a0ead424da04a844fd0d917cd47a">guiFreeAssets</a> (<a class="el" href="struct_assets.html">Assets</a> assets)</td></tr>
+<tr class="memdesc:a09d3a0ead424da04a844fd0d917cd47a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function free the struct <a class="el" href="struct_assets.html">Assets</a>.  <a href="#a09d3a0ead424da04a844fd0d917cd47a">More...</a><br/></td></tr>
 <tr class="separator:a09d3a0ead424da04a844fd0d917cd47a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d5905958b8c128a317923761057001a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_snake_assets.html">SnakeAssets</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a6d5905958b8c128a317923761057001a">guiLoadSnake</a> (<a class="el" href="snake_8h.html#adb268df8cc4344486327fd4063e2f505">SnakeType</a> type, char *color)</td></tr>
+<tr class="memdesc:a6d5905958b8c128a317923761057001a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function load a <a class="el" href="struct_snake_assets.html">SnakeAssets</a>.  <a href="#a6d5905958b8c128a317923761057001a">More...</a><br/></td></tr>
 <tr class="separator:a6d5905958b8c128a317923761057001a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ffeb7dc049916cab4a298ec7548840b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a7ffeb7dc049916cab4a298ec7548840b">guiDrawGame</a> (SDL_Surface *screen, <a class="el" href="struct_game.html">Game</a> game, <a class="el" href="struct_assets.html">Assets</a> assets)</td></tr>
+<tr class="memdesc:a7ffeb7dc049916cab4a298ec7548840b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the entire game on the screen.  <a href="#a7ffeb7dc049916cab4a298ec7548840b">More...</a><br/></td></tr>
 <tr class="separator:a7ffeb7dc049916cab4a298ec7548840b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88b4fedbd636cccc6058767ecc4c52a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a88b4fedbd636cccc6058767ecc4c52a4">guiDrawSnake</a> (SDL_Surface *screen, <a class="el" href="struct_snake.html">Snake</a> *snake, <a class="el" href="struct_snake_assets.html">SnakeAssets</a> snakeAssets)</td></tr>
+<tr class="memdesc:a88b4fedbd636cccc6058767ecc4c52a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw one snake on the screen.  <a href="#a88b4fedbd636cccc6058767ecc4c52a4">More...</a><br/></td></tr>
 <tr class="separator:a88b4fedbd636cccc6058767ecc4c52a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e82f0e328c206e037d0fc84e67962fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a5e82f0e328c206e037d0fc84e67962fc">guiApplySurface</a> (int x, int y, SDL_Surface *source, SDL_Surface *destination, SDL_Rect *clip)</td></tr>
+<tr class="memdesc:a5e82f0e328c206e037d0fc84e67962fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw one surface on the screen.  <a href="#a5e82f0e328c206e037d0fc84e67962fc">More...</a><br/></td></tr>
 <tr class="separator:a5e82f0e328c206e037d0fc84e67962fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd7848bf08abd59985064325c56d32a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_timer.html">Timer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#afd7848bf08abd59985064325c56d32a5">guiCreateTimer</a> ()</td></tr>
-<tr class="separator:afd7848bf08abd59985064325c56d32a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7836fef1e9ff5956c018f5d1e5f58774"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_timer.html">Timer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a7836fef1e9ff5956c018f5d1e5f58774">guiCreateTimer</a> ()</td></tr>
+<tr class="memdesc:a7836fef1e9ff5956c018f5d1e5f58774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the <a class="el" href="struct_timer.html">Timer</a> struct.  <a href="#a7836fef1e9ff5956c018f5d1e5f58774">More...</a><br/></td></tr>
+<tr class="separator:a7836fef1e9ff5956c018f5d1e5f58774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4861851d945a3d836212abead0ae337c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a4861851d945a3d836212abead0ae337c">guiReloadScreen</a> (SDL_Surface *screen)</td></tr>
+<tr class="memdesc:a4861851d945a3d836212abead0ae337c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reload the entire screen.  <a href="#a4861851d945a3d836212abead0ae337c">More...</a><br/></td></tr>
 <tr class="separator:a4861851d945a3d836212abead0ae337c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59f8c590e870708382e7d140ab33d4c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a59f8c590e870708382e7d140ab33d4c6">guiSnakeEvent</a> (SDL_Event *event, <a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
+<tr class="memdesc:a59f8c590e870708382e7d140ab33d4c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Catch all player input.  <a href="#a59f8c590e870708382e7d140ab33d4c6">More...</a><br/></td></tr>
 <tr class="separator:a59f8c590e870708382e7d140ab33d4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abacfe49d75c1ce43ded4b6f4d242095d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#abacfe49d75c1ce43ded4b6f4d242095d">guiGeneralEvent</a> (SDL_Event *event, <a class="el" href="struct_game.html">Game</a> game)</td></tr>
+<tr class="memdesc:abacfe49d75c1ce43ded4b6f4d242095d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Catch all player input.  <a href="#abacfe49d75c1ce43ded4b6f4d242095d">More...</a><br/></td></tr>
 <tr class="separator:abacfe49d75c1ce43ded4b6f4d242095d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a5bf1bc85846de2d22d9475348f113579"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void freeAll </td>
-          <td>(</td>
-          <td class="paramtype">SDL_Surface **&#160;</td>
-          <td class="paramname"><em>surfaces</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a5e82f0e328c206e037d0fc84e67962fc"></a>
 <div class="memitem">
 <div class="memproto">
@@ -215,14 +203,27 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Draw one surface on the screen. </p>
+<p>Draw one surface on the screen at the position x, y with a SDL_BlitSurface call </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x position </td></tr>
+    <tr><td class="paramname">y</td><td>The y position </td></tr>
+    <tr><td class="paramname">source</td><td>The surface to draw </td></tr>
+    <tr><td class="paramname">destination</td><td>The surface to draw on </td></tr>
+    <tr><td class="paramname">clip</td><td>The rectangle representing the area of source to draw (NULL = all the source surface) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a class="anchor" id="a26387b68d2af1b878fb04debd11faa49"></a>
+<a class="anchor" id="a2b454e0e1e2a8e2ffe0cd774cb6763d0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">SDL_Surface* guiCreateScreen </td>
+          <td class="memname">SDL_Surface * guiCreateScreen </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a>&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
@@ -231,20 +232,34 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The function creates the screen. </p>
+<p>The function creates the screen depending on the size in parameter </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>BoardSize: the type of the board (Small, Medium, Large) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The SDL_Surface* of the screen </dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="afd7848bf08abd59985064325c56d32a5"></a>
+<a class="anchor" id="a7836fef1e9ff5956c018f5d1e5f58774"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_timer.html">Timer</a> guiCreateTimer </td>
+          <td class="memname">guiCreateTimer </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Create the <a class="el" href="struct_timer.html">Timer</a> struct. </p>
+<p>Create the <a class="el" href="struct_timer.html">Timer</a> struct </p>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="struct_timer.html">Timer</a> struct created </dd></dl>
 
 </div>
 </div>
@@ -278,6 +293,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Draw the entire game on the screen. </p>
+<p>Draw each element of the game on the screen with SDL </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">screen</td><td>The screen to draw on </td></tr>
+    <tr><td class="paramname">game</td><td>The game struct containing all elements of the game </td></tr>
+    <tr><td class="paramname">assets</td><td>The <a class="el" href="struct_assets.html">Assets</a> struct containing all assets of the game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="struct_snake_assets.html">SnakeAssets</a> struct of the loaded snake </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a88b4fedbd636cccc6058767ecc4c52a4"></a>
@@ -310,6 +337,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Draw one snake on the screen. </p>
+<p>Draw one snake on the screen </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">screen</td><td>The screen to draw on </td></tr>
+    <tr><td class="paramname">snake</td><td>The snake to draw </td></tr>
+    <tr><td class="paramname">snakeAssets</td><td>The skin to associate to the snake </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a09d3a0ead424da04a844fd0d917cd47a"></a>
@@ -325,6 +363,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The function free the struct <a class="el" href="struct_assets.html">Assets</a>. </p>
+<p>The function free the struct <a class="el" href="struct_assets.html">Assets</a> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">assets</td><td>The <a class="el" href="struct_assets.html">Assets</a> struct to free </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -352,6 +399,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Catch all player input. </p>
+<p>Catch all player input and quit the game on SDL_QUIT </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>The event struct to listen </td></tr>
+    <tr><td class="paramname">game</td><td>The game to end on quit </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="aebf6bbf49167d49c500bd8364b17ef89"></a>
@@ -367,14 +424,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The function load all assets of the game. </p>
+<p>The function load all assets of the game </p>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="struct_assets.html">Assets</a> struct with all assets loaded </dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="ad72d73083b7e89dc72e58b46f97040e9"></a>
+<a class="anchor" id="ac423f78886c5fe504f74a7709407691b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">SDL_Surface* guiLoadImage </td>
+          <td class="memname">SDL_Surface * guiLoadImage </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -382,6 +443,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The function load the image given in parameter. </p>
+<p>The function load the image given in parameter </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>the path of the image relative to the root folder </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The SDL_Surface* of the image </dd></dl>
 
 </div>
 </div>
@@ -409,14 +480,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The function load a <a class="el" href="struct_snake_assets.html">SnakeAssets</a>. </p>
+<p>The function load all assets needed to draw a snake (head, body, corner, tail) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The snake type (WATER, FIRE, GRASS) </td></tr>
+    <tr><td class="paramname">color</td><td>The color of the snake </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="struct_snake_assets.html">SnakeAssets</a> struct of the loaded snake </dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="a7c12cb51e84e0fcbb24119534d2c5a61"></a>
+<a class="anchor" id="a6d52f3559e19a0c3ec47e33ab0089e9a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void guiPlay </td>
+          <td class="memname">guiPlay </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a>&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
@@ -424,6 +506,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This function is the main game loop. </p>
+<p>Function that create a new game, perform the game loop and display the game with SDL </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Variable representing the size of the <a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> (Small, Medium or Large) </td></tr>
+  </table>
+  </dd>
+</dl>
 <p>VARIABLES</p>
 <p>INITIALIZATION</p>
 <p>GAME LOOP </p>
@@ -443,6 +534,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reload the entire screen. </p>
+<p>Reload the entire screen with a SDL_Flip call </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">screen</td><td>The screen surface to reload </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -470,6 +570,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Catch all player input. </p>
+<p>Catch all player input and set the snake direction </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>The event struct to listen </td></tr>
+    <tr><td class="paramname">s</td><td>The snake to be oriented </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -477,8 +587,8 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="gui_8c.html">gui.c</a></li>
-    <li class="footer">Generated on Mon Apr 18 2016 19:33:44 for Larakis by
+    <li class="navelem"><a class="el" href="gui_8c.html">gui.c</a></li>
+    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

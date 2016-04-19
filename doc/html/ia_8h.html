@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Larakis: src/ia.h File Reference</title>
+<title>Larakis: ia.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -108,80 +108,29 @@ $(document).ready(function(){initNavTree('ia_8h.html','');});
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="board_8h_source.html">board.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="snake_8h_source.html">snake.h</a>&quot;</code><br/>
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for ia.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="ia_8h__incl.png" border="0" usemap="#src_2ia_8h" alt=""/></div>
-<map name="src_2ia_8h" id="src_2ia_8h">
-</map>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="ia_8h__dep__incl.png" border="0" usemap="#src_2ia_8hdep" alt=""/></div>
-<map name="src_2ia_8hdep" id="src_2ia_8hdep">
-</map>
-</div>
+<code>#include &quot;<a class="el" href="game_8h_source.html">game.h</a>&quot;</code><br/>
 </div>
 <p><a href="ia_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aaa3bdfe7e200b4fed9b86532efeb848f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#aaa3bdfe7e200b4fed9b86532efeb848f">iaSurvive</a> (<a class="el" href="struct_board.html">Board</a> *board, <a class="el" href="struct_snake.html">Snake</a> *snake)</td></tr>
+<tr class="memdesc:aaa3bdfe7e200b4fed9b86532efeb848f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to get a direction for the snake to follow to not die.  <a href="#aaa3bdfe7e200b4fed9b86532efeb848f">More...</a><br/></td></tr>
 <tr class="separator:aaa3bdfe7e200b4fed9b86532efeb848f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01558d4f8ebd4158f6d7b68e992c92f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#a01558d4f8ebd4158f6d7b68e992c92f7">iaJambon</a> (<a class="el" href="struct_board.html">Board</a> *board, <a class="el" href="struct_snake.html">Snake</a> *snake)</td></tr>
-<tr class="separator:a01558d4f8ebd4158f6d7b68e992c92f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c181c5d98ecbb94983a7268e5f312da"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#a0c181c5d98ecbb94983a7268e5f312da">iaFront</a> (<a class="el" href="struct_board.html">Board</a> *board, int x, int y, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
-<tr class="separator:a0c181c5d98ecbb94983a7268e5f312da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae488b60bfa6d0935c506194be93edd72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#ae488b60bfa6d0935c506194be93edd72">iaJambon</a> (<a class="el" href="struct_game.html">Game</a> game, <a class="el" href="struct_snake.html">Snake</a> *snake)</td></tr>
+<tr class="memdesc:ae488b60bfa6d0935c506194be93edd72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to chase the given bonus without dying.  <a href="#ae488b60bfa6d0935c506194be93edd72">More...</a><br/></td></tr>
+<tr class="separator:ae488b60bfa6d0935c506194be93edd72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a0c181c5d98ecbb94983a7268e5f312da"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int iaFront </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
-          <td class="paramname"><em>board</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
-          <td class="paramname"><em>dir</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a01558d4f8ebd4158f6d7b68e992c92f7"></a>
+<a class="anchor" id="ae488b60bfa6d0935c506194be93edd72"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> iaJambon </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
-          <td class="paramname"><em>board</em>, </td>
+          <td class="paramtype"><a class="el" href="struct_game.html">Game</a>&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -196,6 +145,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Function used to chase the given bonus without dying. </p>
+<p>Function that goes to the given bonus and that is calling iaSurvive to not die </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">board</td><td>Variable representing the board </td></tr>
+    <tr><td class="paramname">snake</td><td>Variable representing the snake </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>&lt;Direction&gt; used to change the snake direction </dd></dl>
 
 </div>
 </div>
@@ -223,6 +183,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Function used to get a direction for the snake to follow to not die. </p>
+<p>Function that checks if the snake can go forward. If not, it tries to go right then left. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">board</td><td>Variable representing the board </td></tr>
+    <tr><td class="paramname">snake</td><td>Variable representing the snake </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>&lt;Direction&gt; used to change the snake direction </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -230,8 +201,8 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="ia_8h.html">ia.h</a></li>
-    <li class="footer">Generated on Mon Apr 18 2016 19:33:44 for Larakis by
+    <li class="navelem"><a class="el" href="ia_8h.html">ia.h</a></li>
+    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

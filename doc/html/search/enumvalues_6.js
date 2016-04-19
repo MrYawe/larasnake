@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['small',['SMALL',['../game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5aea5e596a553757a677cb4da4c8a1f935',1,'game.h']]]
+  ['right',['RIGHT',['../snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aaaec8379af7490bb9eaaf579cf17876f38',1,'snake.h']]]
 ];

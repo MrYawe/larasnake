@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['timer',['Timer',['../struct_timer.html',1,'']]]
+  ['snake',['Snake',['../struct_snake.html',1,'']]],
+  ['snakeassets',['SnakeAssets',['../struct_snake_assets.html',1,'']]]
 ];

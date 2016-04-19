@@ -30,7 +30,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Larakis
-   &#160;<span id="projectnumber">1.0</span>
    </div>
   </td>
  </tr>
@@ -69,6 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Data&#160;Fields</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('struct_board.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -113,26 +113,68 @@ $(document).ready(function(){initNavTree('struct_board.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:ad49bf24c5f929d1ed8e22fee5935834b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad49bf24c5f929d1ed8e22fee5935834b"></a>
-int **&#160;</td><td class="memItemRight" valign="bottom"><b>tab</b></td></tr>
+<tr class="memitem:ad49bf24c5f929d1ed8e22fee5935834b"><td class="memItemLeft" align="right" valign="top">int **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_board.html#ad49bf24c5f929d1ed8e22fee5935834b">tab</a></td></tr>
 <tr class="separator:ad49bf24c5f929d1ed8e22fee5935834b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29ac7b4365d59fd2d7f07a033201e000"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29ac7b4365d59fd2d7f07a033201e000"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sizeX</b></td></tr>
+<tr class="memitem:a29ac7b4365d59fd2d7f07a033201e000"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_board.html#a29ac7b4365d59fd2d7f07a033201e000">sizeX</a></td></tr>
 <tr class="separator:a29ac7b4365d59fd2d7f07a033201e000"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a712574e8e7c34c809f1320b647e8e497"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a712574e8e7c34c809f1320b647e8e497"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sizeY</b></td></tr>
+<tr class="memitem:a712574e8e7c34c809f1320b647e8e497"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_board.html#a712574e8e7c34c809f1320b647e8e497">sizeY</a></td></tr>
 <tr class="separator:a712574e8e7c34c809f1320b647e8e497"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03c07e4d857cee58ffbd4f98a98fd57d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03c07e4d857cee58ffbd4f98a98fd57d"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sizeCell</b></td></tr>
+<tr class="memitem:a03c07e4d857cee58ffbd4f98a98fd57d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_board.html#a03c07e4d857cee58ffbd4f98a98fd57d">sizeCell</a></td></tr>
 <tr class="separator:a03c07e4d857cee58ffbd4f98a98fd57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f8c9800b53dffa40bd95f91067c6156"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f8c9800b53dffa40bd95f91067c6156"></a>
-<a class="el" href="struct_coord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><b>jambon</b></td></tr>
-<tr class="separator:a4f8c9800b53dffa40bd95f91067c6156"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The structure of the board. </p>
 <p>The struture contains a double dimensions array, the size; the size of cells and the position of the food </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a class="anchor" id="a03c07e4d857cee58ffbd4f98a98fd57d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sizeCell</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a29ac7b4365d59fd2d7f07a033201e000"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sizeX</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a712574e8e7c34c809f1320b647e8e497"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sizeY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad49bf24c5f929d1ed8e22fee5935834b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int** tab</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="board_8c.html">board.c</a></li>
 </ul>
 </div><!-- contents -->
@@ -141,7 +183,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sizeCell</b></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="struct_board.html">Board</a></li>
-    <li class="footer">Generated on Mon Apr 18 2016 19:53:58 for Larakis by
+    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
