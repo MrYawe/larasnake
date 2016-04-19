@@ -4,5 +4,6 @@
 void testBoardInit(void **state);
 void testBoardValue(void **state);
 void testBoardSize(void **state);
+void testBoardCopy(void **state);
 
 #endif
