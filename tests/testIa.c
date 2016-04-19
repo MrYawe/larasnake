@@ -10,9 +10,5 @@
 #include "testIa.h"
 
 void testIaJambon(void **state) {
-
-}
-
-void testIaJambon(void **state) {
-
+	
 }
