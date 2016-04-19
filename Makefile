@@ -20,8 +20,19 @@ INCLUDES := $(wildcard $(SRCDIR)/*.h)
 OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 rm       = rm -f
 
+OBJBASIC = $(filter-out build/main.o, $(OBJECTS))
+
+T_DIR = tests
+T_SOURCES  := $(wildcard $(T_DIR)/*.c)
+T_OBJECTS  := $(T_SOURCES:$(T_DIR)/%.c=$(OBJDIR)/%.o)
+
+
+####################################################################
+
 all: $(BINDIR)/$(TARGET) 
 test: $(BINDIR)/$(T_TARGET)
+
+####################################################################
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
 	@test -d $(BINDIR) || mkdir -p $(BINDIR)
@@ -36,13 +47,9 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 
 #####################################################################
 
-OBJBASIC = $(filter-out build/main.o, $(OBJECTS))
 
-T_DIR = tests
-T_SOURCES  := $(wildcard $(T_DIR)/*.c)
-T_OBJECTS  := $(T_SOURCES:$(T_DIR)/%.c=$(OBJDIR)/%.o)
 
-$(BINDIR)/$(T_TARGET): $(OBJECTS) $(T_OBJECTS)
+$(BINDIR)/$(T_TARGET): $(OBJBASIC) $(T_OBJECTS)
 	@test -d $(BINDIR) || mkdir -p $(BINDIR)
 	@$(LINKER) $@ $(OBJBASIC) $(T_OBJECTS) $(LFLAGS) -l cmocka
 	@echo "Linking complete!"
