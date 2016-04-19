@@ -1,3 +1,12 @@
+/**
+ * \file item.c
+ * \author groupe Larakis
+ * \version 1
+ * \date 19/04/2016
+ * \brief Everything about the item class
+ * \details Contains all functions to create, edit, delete and acess the items of the game
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

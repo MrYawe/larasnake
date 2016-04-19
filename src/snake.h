@@ -4,9 +4,9 @@
  * \file snake.h
  * \author groupe Larakis
  * \version 1
- * \date 21/02/2016
- * \brief Entêtes des fonctions et structures pour la gestion du snake
- * \details Toutes les entêtes de fonctions et structures necessaires à gérer le snake : création, récupération des valeurs, changer de direction, affichage et libération de la mémoire
+ * \date 20/02/2016
+ * \brief Headers of snake file
+ * \details All header of the snake file functions
  */
 
 #include <stdbool.h>

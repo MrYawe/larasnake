@@ -1,6 +1,15 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+/**
+ * \file item.h
+ * \author groupe Larakis
+ * \version 1
+ * \date 20/02/2016
+ * \brief Headers of item file
+ * \details All header of the item file functions
+ */
+
 #include "enum.h"
 
 typedef struct Item* Item;

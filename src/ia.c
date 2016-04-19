@@ -3,8 +3,8 @@
  * \author groupe Larakis
  * \version 1
  * \date 17/04/2016
- * \brief Intelligence Artificielle
- * \details Fichier regroupant les différentes Intelligences Artificielles.
+ * \brief Artificial Intelligence
+ * \details File managing the artificial intelligence
  */
 #include <stdlib.h>
 #include "ia.h"

@@ -1,6 +1,16 @@
 #ifndef COORD_H
 #define COORD_H
 
+/**
+ * \file coord.h
+ * \author groupe Larakis
+ * \version 1
+ * \date 20/02/2016
+ * \brief Headers of coord file
+ * \details All header of the coord file functions
+ */
+
+
 #include <stdbool.h>
 
 /**

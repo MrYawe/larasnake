@@ -1,6 +1,15 @@
 #ifndef GAME_H
 #define GAME_H
 
+/**
+ * \file game.h
+ * \author groupe Larakis
+ * \version 1
+ * \date 20/02/2016
+ * \brief Headers of game file
+ * \details All header of the game file functions
+ */
+
 #include "board.h"
 #include "snake.h"
 #include "item.h"

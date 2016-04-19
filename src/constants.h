@@ -1,6 +1,14 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+/**
+ * \file contant.h
+ * \author groupe Larakis
+ * \version 1
+ * \date 20/02/2016
+ * \brief The constants for the program
+ * \details All constants defined, used in the program
+ */
 
 /** Board values **/
 #define BONUS_SPEED 3

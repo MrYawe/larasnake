@@ -1,3 +1,12 @@
+/**
+ * \file coord.c
+ * \author groupe Larakis
+ * \version 1
+ * \date 19/04/2016
+ * \brief Everything about the coord class
+ * \details Contains all functions to use coordinates
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "coord.h"
