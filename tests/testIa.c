@@ -13,6 +13,3 @@ void testIaJambon(void **state) {
 
 }
 
-void testIaJambon(void **state) {
-
-}
