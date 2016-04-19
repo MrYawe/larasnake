@@ -1,5 +1,5 @@
-#ifndef TEST_SNAKE_H
-#define TEST_SNAKE_H
+#ifndef TEST_IA_H
+#define TEST_IA_H
 
 //void testBoardInit(void **state);
 

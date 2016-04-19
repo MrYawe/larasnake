@@ -15,7 +15,7 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-#include "../src/snake.h"
+#include "../src/ia.h"
 
 
 /**
