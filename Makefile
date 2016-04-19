@@ -34,7 +34,7 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 test: build/board.o build/testAll.o build/testBoard.o
 	gcc -o bin/testAll build/board.o build/testBoard.o build/testAll.o -l cmocka
 
-build/testAll.o: tests/*.h
+build/testAll.o: build/testBoard.o build/testSnake.o build/testIa.o
 	gcc -o build/testAll.o -c tests/testAll.c -l cmocka
 
 build/testBoard.o: src/board.h tests/testBoard.h tests/testBoard.c
