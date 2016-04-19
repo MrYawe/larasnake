@@ -56,6 +56,20 @@ Game gameCreate(BoardSize size)
 }
 
 /**
+ * \fn void gameFree(Game game)
+ * \brief Free the struct game
+ * \details  Free the struct game
+ * \param game The game struct to free
+ */
+void gameFree(Game game) {
+	boardFree(game->board);
+	snakeFree(game->snake1);
+	snakeFree(game->snake2);
+	itemFree(game->food);
+	free(game);
+}
+
+/**
  * \fn Board* gameGetBoard(Game g)
  * \brief Accessor to the board of the game structure
  * \details The function returns the board of the game
@@ -97,12 +111,11 @@ bool gameGetIsPlaying(Game g)
 /**
  * \fn void gameEnd(Game g)
  * \brief End the game
- * \details The function put false to the isPlaying bool and free all structures
+ * \details The function put false to the isPlaying bool
  * \param g Game: The game to end
  */
 void gameEnd(Game g)
 {
-		boardFree(g->board);
 		g->isPlaying = false;
 }
 
@@ -167,7 +180,7 @@ bool gameMoveSnake(Board *b, Snake *s)
  * \param b Board: where to check
  * \param s Snake to move
  */
-static bool gameCheckMovement(Snake *s, Board *b) 
+static bool gameCheckMovement(Snake *s, Board *b)
 {
 		bool canTp = false;
 		bool continueGame = true;
@@ -240,7 +253,7 @@ static bool gameCheckMovement(Snake *s, Board *b)
  * \param posX position X de la case à tester
  * \param posY position Y de la case à tester
  */
-bool boardInside(Board *b, Coord coord) 
+bool boardInside(Board *b, Coord coord)
 {
   bool res = false;
   if (coord->x >= 0 && coord->y >= 0 && coord->x < boardGetWidth(b) && coord->y < boardGetHeight(b))
@@ -273,7 +286,7 @@ bool boardIsSnake(Board *b, Coord coord)
  * \details The function set a food coodinates in the board structure
  * \param b Board : The board to edit
  */
-void gameFeed(Game game) 
+void gameFeed(Game game)
 {
 	Board* b = gameGetBoard(game);
   int x = rand()%boardGetWidth(b);
@@ -371,11 +384,11 @@ bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir)
 /*
  * \fn Item gameGetFood(Game game)
  * \brief The function allow to get the food from the game structure
- * \details The function returns the food attribute 
+ * \details The function returns the food attribute
  * \param game Game: The game which to acess
  * \return Item: The item in the struct game
  */
-Item gameGetFood(Game game) 
+Item gameGetFood(Game game)
 {
 	return game->food;
 }

@@ -74,7 +74,7 @@ void snakeSetType(Snake *s, SnakeType t);
 void snakeInverseWay(Snake *s);
 void snakeDisplay(Snake *s);
 void snakeUpdateElement(Snake *s, int posElem, int posX, int posY);
-void snakeDeleteSnake(Snake *s);
+void snakeFree(Snake *s);
 
 // TODO: Augmenter la taille de X elements
 // TODO: Diminuer la taille de X elements

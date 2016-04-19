@@ -19,6 +19,7 @@ struct Item
 
 /*** Object ***/
 Item itemCreate(int x, int y, BoardValue value);
+void itemFree(Item item);
 
 
 /*** Collisions ***/

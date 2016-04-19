@@ -199,4 +199,3 @@ void boardFree(Board *b)
   free(b->tab);
   free(b);
 }
-

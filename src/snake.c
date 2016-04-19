@@ -460,12 +460,12 @@ void snakeUpdateElement(Snake *s, int posElem, int posX, int posY)
 
 
 /**
- * \fn void snakeDelete(Snake *s)
+ * \fn void snakeFree(Snake *s)
  * \brief The function free the memory of the snake
  * \details The function free all the list of Elements of the memory
  * \param s Snake to free from memory
  */
-void snakeDelete(Snake *s)
+void snakeFree(Snake *s)
 {
 	Element *curs = s->first;
 	Element *curssuiv;
