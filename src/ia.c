@@ -10,6 +10,9 @@
 #include "ia.h"
 #include "coord.h"
 
+
+
+
 /**
  * \fn Direction iaSurvive (Board* board, Snake* snake)
  * \brief Function used to get a direction for the snake to follow to not die
