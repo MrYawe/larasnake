@@ -8,6 +8,14 @@ void itemOnCollisionFood(int idSnake) {
     printf("COLLISION JAMBON\n");
 }
 
+/**
+ * \fn Item itemCreate(int x, int y, BoardValue value)
+ * \brief The function create the item struct
+ * \details The function create the item struct
+ * \param x The x postion
+ * \param y The y postion
+ * \param value The value of the item in the board
+ */
 Item itemCreate(int x, int y, BoardValue value) {
     Item item = malloc(sizeof(struct Item));
     item->posX = x;
@@ -24,6 +32,13 @@ Item itemCreate(int x, int y, BoardValue value) {
 
     return item;
 }
+
+/**
+ * \fn void itemFree(Item item)
+ * \brief The function free the memory of the item
+ * \details The function free the memory of the item
+ * \param item Item to free from memory
+ */
 void itemFree(Item item) {
     free(item);
 }

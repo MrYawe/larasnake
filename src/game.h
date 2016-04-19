@@ -16,6 +16,7 @@ typedef enum BoardSize {SMALL, MEDIUM, LARGE} BoardSize;
 typedef struct Game *Game;
 
 Game gameCreate(BoardSize size);
+void gameFree(Game game);
 
 // Get
 Board* gameGetBoard(Game g);

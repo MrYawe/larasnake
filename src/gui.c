@@ -106,6 +106,8 @@ void guiPlay(BoardSize size)
     }
 
     /***** Free *****/
+    gameFree(game);
+    guiFreeAssets(assets);
     SDL_Quit();
 }
 
@@ -181,7 +183,12 @@ Assets guiLoadAssets() {
  */
 void guiFreeAssets(Assets assets) {
     free(assets->background);
-    //free(assets->snakeBlue);
+    free(assets->food);
+    int i;
+    for (i = 0; i < 3; i++) { // mettre à i < 3 si 3 couleurs chargé
+        free(assets->snakesAssets[i]); // WATER=0, FIRE=1, GRASS=2
+    }
+
     free(assets);
 }
 
