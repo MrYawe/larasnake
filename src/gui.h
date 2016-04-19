@@ -31,12 +31,12 @@ struct Assets
 {
 	SnakeAssets *snakesAssets;
 	SDL_Surface *background;
+	SDL_Surface *food;
 };
 
 /**** General ****/
 void guiPlay(BoardSize size);
 Timer guiCreateTimer();
-void freeAll(SDL_Surface **surfaces);
 
 /**** Screen ****/
 SDL_Surface* guiCreateScreen(BoardSize size);

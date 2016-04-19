@@ -18,6 +18,8 @@ Item itemCreate(int x, int y, BoardValue value) {
         case FOOD:
             item->onCollision = itemOnCollisionFood;
             break;
+        default:
+            printf("Item non implemented\n");
     }
 
     return item;
