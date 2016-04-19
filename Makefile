@@ -34,11 +34,17 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 test: build/board.o build/testAll.o build/testBoard.o
 	gcc -o bin/testAll build/board.o build/testBoard.o build/testAll.o -l cmocka
 
-build/testAll.o: tests/testBoard.h
+build/testAll.o: tests/*.h
 	gcc -o build/testAll.o -c tests/testAll.c -l cmocka
 
 build/testBoard.o: src/board.h tests/testBoard.h tests/testBoard.c
 	gcc -o build/testBoard.o -c tests/testBoard.c -l cmocka
+
+build/testSnake.o: src/snake.h tests/testSnake.h tests/testSnake.c
+	gcc -o build/testSnake.o -c tests/testSnake.c -l cmocka
+
+build/testia.o: src/ia.h tests/testia.h tests/testia.c
+	gcc -o build/testia.o -c tests/testia.c -l cmocka
 
 
 .PHONEY: clean

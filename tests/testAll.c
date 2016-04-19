@@ -7,6 +7,8 @@
 #include <cmocka.h>
 
 #include "testBoard.h"
+#include "testSnake.h"
+#include "testia.h"
 
 int main () {
 	const struct CMUnitTest tests[] = {
@@ -18,11 +20,11 @@ int main () {
         /** End Test Board **/
 
         /** Start Test Snake **/
-        //cmocka_unit_test(),
+        
         /** End Test Snake **/
 
         /** Start Test IA **/
-        //cmocka_unit_test(),
+        
         /** End Test IA **/
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
