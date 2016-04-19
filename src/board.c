@@ -200,3 +200,27 @@ void boardFree(Board *b)
   free(b);
 }
 
+/*
+ * \fn boardCopy
+ * \brief The function returns a copy of the board
+ * \details The function copy everything of the board and put it in an other variable
+ * \param b Board : The board to access
+ * \return Returns Board which point to the new copied board
+ */
+Board* boardCopy(Board* b)
+{
+  if (b == NULL)
+  {
+    return NULL;
+  }
+  Board* res = boardInit(b->sizeX, b->sizeY, b->sizeCell);
+  int j, i;
+  for(j=0; j<b->sizeY; j++)
+  {
+    for (i=0; i<b->sizeX; i++)
+    {
+      boardSetValue(res, i, j, boardGetValue(b, i, j));
+    }
+  }
+  return res;
+}
