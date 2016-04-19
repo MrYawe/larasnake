@@ -3,14 +3,24 @@
  * \author groupe Larakis
  * \version 1
  * \date 17/04/2016
- * \brief Artificial Intelligence
- * \details File managing the artificial intelligence
+ * \brief Intelligence Artificielle
+ * \details Fichier regroupant les différentes Intelligences Artificielles.
  */
 #include <stdlib.h>
 #include "ia.h"
 #include "coord.h"
 
+int* iaDirectionsAvailable(Board* board, Snake* snake) {
+	int *res = malloc(4 * sizeof(int));
+	int dir;
+	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
 
+	for(dir=UP;dir<=LEFT;dir++) {
+		if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, dir) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, dir))
+			res[dir]=1;
+	}
+	return res;
+}
 
 
 /**
