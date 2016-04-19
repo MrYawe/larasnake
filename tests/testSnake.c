@@ -26,5 +26,5 @@
  */
 void testSnakeInit(void **state)
 {
-    
+    assert_int_equal(1, 1);
 }

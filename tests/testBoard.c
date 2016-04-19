@@ -16,6 +16,7 @@
 #include <cmocka.h>
 
 #include "../src/board.h"
+#include "testBoard.h"
 
 #define SIZE_X 32
 #define SIZE_Y 16

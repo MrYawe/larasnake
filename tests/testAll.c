@@ -10,23 +10,32 @@
 #include "testSnake.h"
 #include "testIa.h"
 
-int main () {
-	const struct CMUnitTest tests[] = {
-        /** Start Test Board **/
+int main () 
+{
+	const struct CMUnitTest board[] = {
         cmocka_unit_test(testBoardInit),
         cmocka_unit_test(testBoardValue),
         cmocka_unit_test(testBoardSize),
 		cmocka_unit_test(testBoardCopy),
-        /** End Test Board **/
-
-        /** Start Test Snake **/
-        
-        /** End Test Snake **/
-
-        /** Start Test IA **/
-        cmocka_unit_test(testSnakeInit),
-        /** End Test IA **/
     };
-    return cmocka_run_group_tests(tests, NULL, NULL);
+    
+
+    const struct CMUnitTest snake[] = {
+        cmocka_unit_test(testSnakeInit),
+    };
+    
+
+    const struct CMUnitTest ia[] = {
+
+    };
+
+
+    cmocka_run_group_tests(board, NULL, NULL);
+    printf("\n\n");
+    cmocka_run_group_tests(snake, NULL, NULL);
+    printf("\n\n");
+    cmocka_run_group_tests(ia, NULL, NULL);
+
+    return 0;
 }
  
