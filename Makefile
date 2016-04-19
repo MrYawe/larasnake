@@ -1,5 +1,6 @@
 # project name (generate executable with this name)
 TARGET   = larasnake
+T_TARGET = testAll
 
 CC       = gcc
 # compiling flags here
@@ -19,6 +20,8 @@ INCLUDES := $(wildcard $(SRCDIR)/*.h)
 OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 rm       = rm -f
 
+all: $(BINDIR)/$(TARGET) 
+test: $(BINDIR)/$(T_TARGET)
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
 	@test -d $(BINDIR) || mkdir -p $(BINDIR)
@@ -30,21 +33,27 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@$(CC) -c $< -o $@ $(CFLAGS)
 	@echo "Compiled "$<" successfully!"
 
-.PHONEY: test
-test: build/board.o build/testAll.o build/testBoard.o
-	gcc -o bin/testAll build/board.o build/testBoard.o build/testAll.o -l cmocka
 
-build/testAll.o: build/testBoard.o build/testSnake.o build/testIa.o
-	gcc -o build/testAll.o -c tests/testAll.c -l cmocka
+#####################################################################
 
-build/testBoard.o: src/board.h tests/testBoard.h tests/testBoard.c
-	gcc -o build/testBoard.o -c tests/testBoard.c -l cmocka
+OBJBASIC = $(filter-out build/main.o, $(OBJECTS))
 
-build/testSnake.o: src/snake.h tests/testSnake.h tests/testSnake.c
-	gcc -o build/testSnake.o -c tests/testSnake.c -l cmocka
+T_DIR = tests
+T_SOURCES  := $(wildcard $(T_DIR)/*.c)
+T_OBJECTS  := $(T_SOURCES:$(T_DIR)/%.c=$(OBJDIR)/%.o)
 
-build/testIa.o: src/ia.h tests/testIa.h tests/testIa.c
-	gcc -o build/testIa.o -c tests/testIa.c -l cmocka
+$(BINDIR)/$(T_TARGET): $(OBJECTS) $(T_OBJECTS)
+	@test -d $(BINDIR) || mkdir -p $(BINDIR)
+	@$(LINKER) $@ $(OBJBASIC) $(T_OBJECTS) $(LFLAGS) -l cmocka
+	@echo "Linking complete!"
+
+$(T_OBJECTS): $(OBJDIR)/%.o : $(T_DIR)/%.c
+	@test -d $() || mkdir -p $(OBJDIR)
+	@$(CC) -c $< -o $@ $(CFLAGS) -l cmocka
+	@echo "Compiled "$<" successfully!"
+
+
+#####################################################################
 
 
 .PHONEY: clean

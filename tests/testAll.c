@@ -24,7 +24,7 @@ int main () {
         /** End Test Snake **/
 
         /** Start Test IA **/
-        
+        cmocka_unit_test(testSnakeInit),
         /** End Test IA **/
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
