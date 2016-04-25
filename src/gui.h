@@ -52,10 +52,10 @@ void guiFreeAssets(Assets assets);
 
 /**** Draw ****/
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets);
-void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets);
+void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets);
 
 /**** Events ****/
-void guiSnakeEvent(SDL_Event *event, Snake *s);
+void guiSnakeEvent(SDL_Event *event, Snake s);
 void guiGeneralEvent(SDL_Event *event, Game game);
 
 

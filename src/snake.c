@@ -13,10 +13,10 @@
 #include "constants.h"
 
 // Headers for static functions of snake file
-static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orientation);
-static void snakeAddLastElement(Snake *s, int posX, int posY, Direction orientation);
-static void snakeDeleteFirstElement(Snake *s);
-//static void snakeDeleteLastElement(Snake *s);
+static void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation);
+static void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation);
+static void snakeDeleteFirstElement(Snake s);
+//static void snakeDeleteLastElement(Snake s);
 //static int mod(int a, int b);
 
 /**
@@ -51,7 +51,7 @@ struct Element
 };
 
 /**
- * \fn Snake* snakeCreate(int size, int id, Direction d, SnakeType type)
+ * \fn Snake snakeCreate(int size, int id, Direction d, SnakeType type)
  * \brief The function creates and returns a pointer to the snake
  * \details The function store a snake structure in the memory, initialize it and returns a pointer to this structure
  * \param size Int which correspond to the size of the created snake
@@ -59,9 +59,9 @@ struct Element
  * \param d Direction initial of the snake
  * \return Pointer to the created snake
  */
-Snake* snakeCreate(int size, int id, Direction d, SnakeType type)
+Snake snakeCreate(int size, int id, Direction d, SnakeType type)
 {
-	Snake *s = malloc(sizeof(struct Snake));
+	Snake s = malloc(sizeof(struct Snake));
 	s->first = NULL;
 	s->last = NULL;
 	s->size = 0;
@@ -81,12 +81,12 @@ Snake* snakeCreate(int size, int id, Direction d, SnakeType type)
 }
 
 /**
- * \fn void snakeGoUp(Snake *s)
+ * \fn void snakeGoUp(Snake s)
  * \brief The function edit the snake to move it to the upper cell
  * \details The function add an element and delete the tail of the snake to make it go UP
  * \param s Snake to edit
  */
-void snakeGoUp(Snake *s)
+void snakeGoUp(Snake s)
 {
 	snakeAddLastElement(s, s->last->posX, s->last->posY - 1, s->direction);
 	//snakeAddLastElement(s, s->last->posX, mod(s->last->posY - 1, BOARD_SIZE));
@@ -95,12 +95,12 @@ void snakeGoUp(Snake *s)
 }
 
 /**
- * \fn void snakeGoDown(Snake *s)
+ * \fn void snakeGoDown(Snake s)
  * \brief The function edit the snake to move it to the lower cell
  * \details The function add an element and delete the tail of the snake to make it go DOWN
  * \param s Snake to edit
  */
-void snakeGoDown(Snake *s)
+void snakeGoDown(Snake s)
 {
 	snakeAddLastElement(s, s->last->posX, s->last->posY + 1, s->direction);
 	//snakeAddLastElement(s, s->last->posX, mod(s->last->posY + 1, BOARD_SIZE));
@@ -109,12 +109,12 @@ void snakeGoDown(Snake *s)
 }
 
 /**
- * \fn void snakeTurnLeft(Snake *s)
+ * \fn void snakeTurnLeft(Snake s)
  * \brief The function edit the snake to move it to the left cell
  * \details The function add an element and delete the tail of the snake to make it go LEFT
  * \param s Snake to edit
  */
-void snakeTurnLeft(Snake *s)
+void snakeTurnLeft(Snake s)
 {
 	snakeAddLastElement(s, s->last->posX - 1, s->last->posY, s->direction);
 	//snakeAddLastElement(s, mod(s->last->posX - 1, BOARD_SIZE), s->last->posY);
@@ -123,12 +123,12 @@ void snakeTurnLeft(Snake *s)
 }
 
 /**
- * \fn void snakeTurnRight(Snake *s)
+ * \fn void snakeTurnRight(Snake s)
  * \brief The function edit the snake to move it to the right cell
  * \details The function add an element and delete the tail of the snake to make it go RIGHT
  * \param s Snake to edit
  */
-void snakeTurnRight(Snake *s)
+void snakeTurnRight(Snake s)
 {
 	snakeAddLastElement(s, s->last->posX + 1, s->last->posY, s->direction);
 	//snakeAddLastElement(s, mod(s->last->posX + 1, BOARD_SIZE), s->last->posY);
@@ -137,28 +137,28 @@ void snakeTurnRight(Snake *s)
 }
 
 /**
- * \fn void snakeTeleportation(Snake *s, int posX, int posY)
+ * \fn void snakeTeleportation(Snake s, int posX, int posY)
  * \brief The function allow the snake to teleport himself to an other cell
  * \details The function move the head of the snake to an other cell of the board
  * \param s Snake to edit
  * \param posX Int: X Position which is the target cell
  * \param posY Int: Y Position which is the target cell
  */
-void snakeTeleportation(Snake *s, int posX, int posY)
+void snakeTeleportation(Snake s, int posX, int posY)
 {
 	snakeAddLastElement(s, posX, posY, s->direction);
 	snakeDeleteFirstElement(s);
 }
 
 /**
- * \fn Coord snakeGetPos(Snake *s, int posBloc)
+ * \fn Coord snakeGetPos(Snake s, int posBloc)
  * \brief The function returns the coordinates of a bloc
  * \details The function iterates on the snake blocs and returns the correct position
  * \param s Snake to get
  * \param posBloc Int which is the number of the bloc to get
  * \return Returns the Coord of the bloc
  */
-Coord snakeGetPos(Snake *s, int posBloc)
+Coord snakeGetPos(Snake s, int posBloc)
 {
 	Coord res = coordNew(0,0);
 	if (posBloc < 0 || posBloc >= s->size)
@@ -180,25 +180,25 @@ Coord snakeGetPos(Snake *s, int posBloc)
 }
 
 /**
- * \fn Direction snakeGetDirection(Snake *s)
+ * \fn Direction snakeGetDirection(Snake s)
  * \brief The function returns the value of the direction of the snake
  * \details The function returns the value of direction of the structure snake
  * \param s Snake : The snake to access
  * \return Returns Direction which correspond to the direction of the current snake
  */
-Direction snakeGetDirection(Snake *s)
+Direction snakeGetDirection(Snake s)
 {
 	return s->direction;
 }
 
 /**
- * \fn void snakeSetDirection(Snake *s, Direction d)
+ * \fn void snakeSetDirection(Snake s, Direction d)
  * \brief The function allow to set a value in the structure snake
  * \details The function test if the snake can't go backward and put the value in the snake structure
  * \param s Snake : Represents the snake to set
  * \param d Direction : Represents the direction to set to the snake
  */
-void snakeSetDirection(Snake *s, Direction d)
+void snakeSetDirection(Snake s, Direction d)
 {
 	bool update = true;
 	switch (s->direction)
@@ -230,51 +230,51 @@ void snakeSetDirection(Snake *s, Direction d)
 
 
 /**
- * \fn int snakeGetSize(Snake *s)
+ * \fn int snakeGetSize(Snake s)
  * \brief The function returns the size of the snake
  * \details The function returns the attribute "size" of the snake
  * \param s Snake to access
  * \return Int: size of the snake
  */
-int snakeGetSize(Snake *s)
+int snakeGetSize(Snake s)
 {
 	return s->size;
 }
 
 /**
- * \fn int snakeGetSpeed(Snake *s)
+ * \fn int snakeGetSpeed(Snake s)
  * \brief The function returns the speed of the snake
  * \details The function returns the attribute "speed" of the snake
  * \param s Snake to access
  * \return Int: speed of the snake
  */
-int snakeGetSpeed(Snake *s)
+int snakeGetSpeed(Snake s)
 {
 	return s->speed;
 }
 
 /**
- * \fn void snakeSetSpeed(Snake *s, int speed)
+ * \fn void snakeSetSpeed(Snake s, int speed)
  * \brief The function sets the speed of the snake
  * \details The function sets a value to the attribute "speed" of the snake
  * \param s Snake to access
  * \param speed Int: speed to set
  */
-void snakeSetSpeed(Snake *s, int speed)
+void snakeSetSpeed(Snake s, int speed)
 {
 	s->speed = speed;
 }
 
 
 /**
- * \fn Direction snakeElementGetOrientation(Snake *s, int posElem)
+ * \fn Direction snakeElementGetOrientation(Snake s, int posElem)
  * \brief The function returns the orientation of an Element of the snake
  * \details The function returns the orientation of the posElem number Element of the snake
  * \param s Snake to access
  * \param posElem Int: number of the Element to access
  * \return Direction: Direction of the Element
  */
-Direction snakeElementGetOrientation(Snake *s, int posElem)
+Direction snakeElementGetOrientation(Snake s, int posElem)
 {
 	Direction res = 0;
 	if (posElem < 0 || posElem >= s->size)
@@ -295,14 +295,14 @@ Direction snakeElementGetOrientation(Snake *s, int posElem)
 }
 
 /**
- * \fn void snakeElementSetOrientation(Snake *s, int posElem, Direction d)
+ * \fn void snakeElementSetOrientation(Snake s, int posElem, Direction d)
  * \brief The function sets the orientation of an Element of the snake
  * \details The function sets the orientation of the posElem number Element of the snake
  * \param s Snake to access
  * \param posElem Int: number of the Element to access
  * \param d Direction: Direction to set to the Element to access
  */
-void snakeElementSetOrientation(Snake *s, int posElem, Direction d)
+void snakeElementSetOrientation(Snake s, int posElem, Direction d)
 {
 	if (posElem < 0 || posElem >= s->size)
 	{
@@ -322,73 +322,73 @@ void snakeElementSetOrientation(Snake *s, int posElem, Direction d)
 
 
 /**
- * \fn void snakeSetGhost(Snake *s, bool b)
+ * \fn void snakeSetGhost(Snake s, bool b)
  * \brief The function manage the ghost attribute to the snake
  * \details The function allows to edit the ghost attritute
  * \param s Snake to access
  * \param b Bool: value of the ghost attribute
  */
-void snakeSetGhost(Snake *s, bool b)
+void snakeSetGhost(Snake s, bool b)
 {
 	s->isGhost = b;
 }
 
 
 /**
- * \fn bool snakeIsGhost(Snake *s)
+ * \fn bool snakeIsGhost(Snake s)
  * \brief Accessor of the ghost attribute of the snake
  * \details The function allows to get the value of the ghost attritute
  * \param s Snake to access
  * \return Bool: value of the ghost attribute
  */
-bool snakeIsGhost(Snake *s)
+bool snakeIsGhost(Snake s)
 {
 	return s->isGhost;
 }
 
 /**
- * \fn int snakeGetId(Snake *s)
+ * \fn int snakeGetId(Snake s)
  * \brief Accessor of the id attribute of the snake
  * \details The function allows to get the value of the id attritute
  * \param s Snake to access
  * \return Int: value of the id attribute
  */
-int snakeGetId(Snake *s)
+int snakeGetId(Snake s)
 {
 	return s->id;
 }
 
 /**
- * \fn SnakeType snakeGetType(Snake *s)
+ * \fn SnakeType snakeGetType(Snake s)
  * \brief Accessor of the type attribute of the snake
  * \details The function allows to get the value of the type attritute
  * \param s Snake to access
  * \return Int: value of the type attribute
  */
-SnakeType snakeGetType(Snake *s)
+SnakeType snakeGetType(Snake s)
 {
 	return s->type;
 }
 
 /**
- * \fn void snakeSetType(Snake *s, SnakeType t)
+ * \fn void snakeSetType(Snake s, SnakeType t)
  * \brief The function manage the type attribute to the snake
  * \details The function allows to edit the type attritute
  * \param s Snake to access
  * \param b Bool: value of the type attribute
  */
-void snakeSetType(Snake *s, SnakeType t)
+void snakeSetType(Snake s, SnakeType t)
 {
 	s->type = t;
 }
 
 /**
- * \fn void snakeInverseWay(Snake *s)
+ * \fn void snakeInverseWay(Snake s)
  * \brief The function allow the snake to inverse himself
  * \details The function inverse the list of the snake
  * \param s Snake to edit
  */
-void snakeInverseWay(Snake *s)
+void snakeInverseWay(Snake s)
 {
 	Element *tampon = s->first;
 	s->first = s->last;
@@ -406,12 +406,12 @@ void snakeInverseWay(Snake *s)
 }
 
 /**
- * \fn void snakeDisplay(Snake *s)
+ * \fn void snakeDisplay(Snake s)
  * \brief The function allow to print the snake in the console
  * \details The console display all blocs of the snake in the console
  * \param s Snake : The snake to print
  */
-void snakeDisplay(Snake *s)
+void snakeDisplay(Snake s)
 {
 	// char const* direc[] = {"le haut", "la gauche", "la droite", "le bas", "indéfini"};
 	// printf("Le snake va vers %s\n", direc[s->direction]);
@@ -431,7 +431,7 @@ void snakeDisplay(Snake *s)
 }
 
 /**
- * \fn void snakeUpdateElement(Snake *s, int posElem, int posX, int posY)
+ * \fn void snakeUpdateElement(Snake s, int posElem, int posX, int posY)
  * \brief The function update values of an element of the snake
  * \details The function iterates on the list of the elements of the snake and set a value
  * \param s Snake to edit
@@ -439,7 +439,7 @@ void snakeDisplay(Snake *s)
  * \param posX X value to set to the Element
  * \param posY Y value to set to the Element
  */
-void snakeUpdateElement(Snake *s, int posElem, int posX, int posY)
+void snakeUpdateElement(Snake s, int posElem, int posX, int posY)
 {
 	if (posElem < 0 || posElem >= s->size)
 	{
@@ -460,12 +460,12 @@ void snakeUpdateElement(Snake *s, int posElem, int posX, int posY)
 
 
 /**
- * \fn void snakeFree(Snake *s)
+ * \fn void snakeFree(Snake s)
  * \brief The function free the memory of the snake
  * \details The function free all the list of Elements of the memory
  * \param s Snake to free from memory
  */
-void snakeFree(Snake *s)
+void snakeFree(Snake s)
 {
 	Element *curs = s->first;
 	Element *curssuiv;
@@ -479,7 +479,7 @@ void snakeFree(Snake *s)
 
 
 /**
- * \fn static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orientation)
+ * \fn static void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation)
  * \brief The function add an element at the beginning of the chained list
  * \details The function add an element and set it the correct values and then put this element into the snake
  * \param s Snake to edit
@@ -487,7 +487,7 @@ void snakeFree(Snake *s)
  * \param posY Int: value to set to the element
  * \param orientation Direction to set to the element
  */
-static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orientation)
+static void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation)
 {
 	Element *e = (Element*) malloc(sizeof(struct Element));
 	e->posX = posX;
@@ -509,7 +509,7 @@ static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orienta
 }
 
 /**
- * \fn static void snakeAddLastElement(Snake *s, int posX, int posY, Direction orientation)
+ * \fn static void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation)
  * \brief The function add an element at the end of the chained list
  * \details The function add an element and set it the correct values and then put this element into the snake
  * \param s Snake to edit
@@ -517,7 +517,7 @@ static void snakeAddFirstElement(Snake *s, int posX, int posY, Direction orienta
  * \param posY Int: value to set to the element
  * \param orientation Direction to set to the element
  */
-static void snakeAddLastElement(Snake *s, int posX, int posY, Direction orientation)
+static void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation)
 {
 	if (s->size == 0)
 	{
@@ -538,12 +538,12 @@ static void snakeAddLastElement(Snake *s, int posX, int posY, Direction orientat
 }
 
 /**
- * \fn static void snakeDeleteFirstElement(Snake *s)
+ * \fn static void snakeDeleteFirstElement(Snake s)
  * \brief The function delete an element at the beggining of the chained list
  * \details The function delete an element from the snake
  * \param s Snake to edit
  */
-static void snakeDeleteFirstElement(Snake *s)
+static void snakeDeleteFirstElement(Snake s)
 {
 	if (s->size == 0)
 	{
@@ -560,13 +560,13 @@ static void snakeDeleteFirstElement(Snake *s)
 }
 
 /**
- * \fn static void snakeDeleteLastElement(Snake *s)
+ * \fn static void snakeDeleteLastElement(Snake s)
  * \brief The function delete an element at the end of the chained list
  * \details The function delete an element from the snake
  * \param s Snake to edit
  */
  /*
-static void snakeDeleteLastElement(Snake *s)
+static void snakeDeleteLastElement(Snake s)
 {
 	if (s->size == 0)
 	{

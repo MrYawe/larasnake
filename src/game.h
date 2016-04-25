@@ -22,32 +22,43 @@
  **/
 typedef enum BoardSize {SMALL, MEDIUM, LARGE} BoardSize;
 
+//////////////////////////////////////////
+//				STRUCTURE				//
+//////////////////////////////////////////
 typedef struct Game *Game;
 
+//////////////////////////////////////////
+//		INIT/CONSTRUCTOR/DESTRUCTOR		//
+//////////////////////////////////////////
 Game gameCreate(BoardSize size);
 void gameFree(Game game);
 
-// Get
-Board* gameGetBoard(Game g);
-Snake* gameGetSnake(Game g, int player);
-bool gameGetIsPlaying(Game g);
+void gameInitSnakes(Board b, Snake s1, Snake s2);
 
-// Set
-void gameEnd(Game g);
+//////////////////////////////////////////
+//				ACCESSORS				//
+//////////////////////////////////////////
+Board gameGetBoard(Game g);
+Snake gameGetSnake(Game g, int player);
+//getItems
 
-void gameInitSnakes(Board *b, Snake *s1, Snake *s2);
-void gameUpdateSnake(Board *b, Snake *s);
-bool gameMoveSnake(Board *b, Snake *s);
-
+//////////////////////////////////////////
+//				UTILITARY				//
+//////////////////////////////////////////
+void gameUpdateSnake(Board b, Snake s);
+bool gameMoveSnake(Board b, Snake s);
 
 Item gameGetFood(Game game);
 
 Coord boardNextPosCell(int x, int y, Direction dir);
-bool boardIsNextCellSnake(Board *b, int x, int y, Direction dir);
-bool boardIsNextCellBorder(Board *b, int x, int y, Direction dir);
+bool boardIsNextCellSnake(Board b, int x, int y, Direction dir);
+bool boardIsNextCellBorder(Board b, int x, int y, Direction dir);
+bool boardIsSnake(Board b, Coord coord);
 
-bool boardInside(Board *b, Coord coord);
-bool boardIsSnake(Board *b, Coord coord);
+bool boardIsCellType(Board b, int x, int y, Direction dir, int n, ...);
+
 void gameFeed(Game game);
 
+bool gameGetIsPlaying(Game g);
+void gameEnd(Game g);
 #endif

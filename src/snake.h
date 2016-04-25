@@ -27,54 +27,54 @@ typedef enum Direction {UP, RIGHT, DOWN, LEFT} Direction;
 typedef enum SnakeType {WATER, FIRE, GRASS} SnakeType;
 
 typedef struct Element Element;
-typedef struct Snake Snake;
+typedef struct Snake* Snake;
 
 
 /* ***************
  *   Init Snake  *
  *************** */
-Snake* snakeCreate(int size, int id, Direction d, SnakeType type);
+Snake snakeCreate(int size, int id, Direction d, SnakeType type);
 
 /* ***************
  *   Move Snake  *
  *************** */
-void snakeGoUp(Snake *s);
-void snakeGoDown(Snake *s);
-void snakeTurnLeft(Snake *s);
-void snakeTurnRight(Snake *s);
-void snakeTeleportation(Snake *s, int posX, int posY);
+void snakeGoUp(Snake s);
+void snakeGoDown(Snake s);
+void snakeTurnLeft(Snake s);
+void snakeTurnRight(Snake s);
+void snakeTeleportation(Snake s, int posX, int posY);
 
 /* ****************
  *    Accessors   *
  **************** */
-Coord snakeGetPos(Snake *s, int posBloc);
+Coord snakeGetPos(Snake s, int posBloc);
 
-Direction snakeGetDirection(Snake *s);
-void snakeSetDirection(Snake *s, Direction d);
+Direction snakeGetDirection(Snake s);
+void snakeSetDirection(Snake s, Direction d);
 
-int snakeGetSize(Snake *s);
+int snakeGetSize(Snake s);
 
-int snakeGetSpeed(Snake *s);
-void snakeSetSpeed(Snake *s, int speed);
+int snakeGetSpeed(Snake s);
+void snakeSetSpeed(Snake s, int speed);
 
-Direction snakeElementGetOrientation(Snake *s, int posElem);
-void snakeElementSetOrientation(Snake *s, int posElem, Direction d);
+Direction snakeElementGetOrientation(Snake s, int posElem);
+void snakeElementSetOrientation(Snake s, int posElem, Direction d);
 
-void snakeSetGhost(Snake *s, bool b);
-bool snakeIsGhost(Snake *s);
+void snakeSetGhost(Snake s, bool b);
+bool snakeIsGhost(Snake s);
 
-int snakeGetId(Snake *s);
+int snakeGetId(Snake s);
 
-SnakeType snakeGetType(Snake *s);
-void snakeSetType(Snake *s, SnakeType t);
+SnakeType snakeGetType(Snake s);
+void snakeSetType(Snake s, SnakeType t);
 
 /* ***************
  *   Utilitary   *
  *************** */
-void snakeInverseWay(Snake *s);
-void snakeDisplay(Snake *s);
-void snakeUpdateElement(Snake *s, int posElem, int posX, int posY);
-void snakeFree(Snake *s);
+void snakeInverseWay(Snake s);
+void snakeDisplay(Snake s);
+void snakeUpdateElement(Snake s, int posElem, int posX, int posY);
+void snakeFree(Snake s);
 
 // TODO: Augmenter la taille de X elements
 // TODO: Diminuer la taille de X elements

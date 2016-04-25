@@ -14,35 +14,32 @@
 #include "coord.h"
 #include "snake.h"
 
-typedef struct Board Board;
+//////////////////////////////////////////
+//				STRUCTURE				//
+//////////////////////////////////////////
+typedef struct Board* Board;
 
-/* ***************
- *   Init Board  *
- *************** */
-Board* boardInit(int sizeX, int sizeY, int sizeCell);
+//////////////////////////////////////////
+//		CONSTRUCTOR/DESTRUCTOR			//
+//////////////////////////////////////////
+Board boardInit(int sizeX, int sizeY, int sizeCell);
+void boardFree(Board b);
 
-/* ****************
- *    Accessors   *
- **************** */
-int boardGetValue(Board *b, int posx, int posy);
-void boardSetValue(Board *b, int posx, int posy, int val);
+//////////////////////////////////////////
+//				ACCESSORS				//
+//////////////////////////////////////////
+int boardGetValue(Board b, int x, int y);
+void boardSetValue(Board b, int x, int y, int val);
 
-//Item boardGetFood(Board *b);
-//void boardSetFood(Board *b, Item food);
+int boardGetHeight(Board b);
+int boardGetWidth(Board b);
 
-int boardGetHeight(Board *b);
-int boardGetWidth(Board *b);
-
-/* ***************
- *   Utilitary   *
- *************** */
-void boardDisplay(Board *b);
-void boardFree(Board *b);
-
-
-
-
-Board* boardCopy(Board* b);
+//////////////////////////////////////////
+//				UTILITARY				//
+//////////////////////////////////////////
+bool boardInside(Board b, int x, int y);
+void boardDisplay(Board b);
+Board boardCopy(Board b);
 
 // TODO: bordure qui se grise
 // TODO: bordure qui se dégrise

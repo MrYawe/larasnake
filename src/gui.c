@@ -44,9 +44,9 @@ void guiPlay(BoardSize size)
     bool continueGameMove2;	//Variable used to check if the snake 2 is dead
 
     Game game;		//Variable to access the game
-    Board* board;	//Variable to access the board
-    Snake* snake1;	//Variable to access the first snake
-    Snake* snake2;	//Variable to access the first snake
+    Board board;	//Variable to access the board
+    Snake snake1;	//Variable to access the first snake
+    Snake snake2;	//Variable to access the first snake
 
 	  /************************/
 	 /**   INITIALIZATION   **/
@@ -248,8 +248,8 @@ SnakeAssets guiLoadSnake(SnakeType type, char* color) {
  * \return The SnakeAssets struct of the loaded snake
  */
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
-    Snake *snake1 = gameGetSnake(game, 1);
-    Snake *snake2 = gameGetSnake(game, 2);
+    Snake snake1 = gameGetSnake(game, 1);
+    Snake snake2 = gameGetSnake(game, 2);
 
     guiApplySurface(0, 0, assets->background, screen, NULL); // dessine le background
     guiDrawSnake(screen, snake1, assets->snakesAssets[snakeGetType(snake1)]);
@@ -258,14 +258,14 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
 }
 
 /**
- * \fn void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets)
+ * \fn void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets)
  * \brief Draw one snake on the screen
  * \details Draw one snake on the screen
  * \param screen The screen to draw on
  * \param snake The snake to draw
  * \param snakeAssets The skin to associate to the snake
  */
-void guiDrawSnake(SDL_Surface *screen, Snake *snake, SnakeAssets snakeAssets) {
+void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets) {
     int i;
     int x, y;
     Direction currentDirection;
@@ -379,13 +379,13 @@ void guiReloadScreen(SDL_Surface *screen) {
 }
 
 /**
- * \fn void guiSnakeEvent(SDL_Event *event, Snake *s)
+ * \fn void guiSnakeEvent(SDL_Event *event, Snake s)
  * \brief Catch all player input
  * \details Catch all player input and set the snake direction
  * \param event The event struct to listen
  * \param s The snake to be oriented
  */
-void guiSnakeEvent(SDL_Event *event, Snake *s) {
+void guiSnakeEvent(SDL_Event *event, Snake s) {
     bool moved = false;
     while (SDL_PollEvent(event)) {
         switch(event->type) {
