@@ -179,11 +179,20 @@ void gameUpdateSnake(Board b, Snake s)
  */
 bool gameMoveSnake(Board b, Snake s)
 {
-		boardSetValue(b, snakeGetPos(s, 0)->x, snakeGetPos(s, 0)->y, 0);
-		bool continueGame = gameCheckMovement(s, b);
-		boardSetValue(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetId(s));
-		return continueGame;
+	bool continueGame = gameCheckMovement(s, b);
+
+	Coord posSnakeTail = snakeGetPos(s, 0);
+	Coord posSnakeHead = snakeGetPos(s, snakeGetSize(s)-1);
+
+	if(continueGame){
+		boardSetValue(b, posSnakeTail->x, posSnakeTail->y, 0);
+		boardSetValue(b, posSnakeHead->x, posSnakeHead->y, snakeGetId(s));
+	}
+	free(posSnakeTail);
+	free(posSnakeHead);
+	return continueGame;
 }
+
 
 /**
  * \fn static bool gameCheckMovement(Snake s, Board b)
@@ -196,32 +205,45 @@ static bool gameCheckMovement(Snake s, Board b)
 {
 	bool canTp = false;
 	bool continueGame = true;
-	if (boardIsNextCellSnake(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetDirection(s)))
-	{
-			printf("Snake mort !\n");
-			continueGame = false;
-	}
-
-	if (boardIsNextCellBorder(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetDirection(s)))
+	Coord coordSnake = snakeGetPos(s, snakeGetSize(s)-1);
+	Direction dirSnake = snakeGetDirection(s);
+	if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, OUTSIDE))
 	{
 		if (canTp)
 		{
 			switch (snakeGetDirection(s))
 			{
 				case UP:
-					snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1)->y, boardGetWidth(b)-1);
+					snakeTeleportation(s, coordSnake->x, boardGetHeight(b)-1);
 					break;
 				case DOWN:
-					snakeTeleportation(s, snakeGetPos(s, snakeGetSize(s)-1)->y, 0);
+					snakeTeleportation(s, coordSnake->x, 0);
 					break;
-					snakeTeleportation(s, boardGetHeight(b)-1, snakeGetPos(s, snakeGetSize(s)-1)->x);
+				case LEFT:
+					snakeTeleportation(s, boardGetWidth(b)-1, coordSnake->y);
 					break;
 				case RIGHT:
-					snakeTeleportation(s, 0, snakeGetPos(s, snakeGetSize(s)-1)->x);
+					snakeTeleportation(s, 0, coordSnake->y);
 					break;
 				default:
 					printf("Error checkMovement\n");
 					break;
+				/*
+				case UP:
+					snakeTeleportation(s, coordSnake->y, boardGetWidth(b)-1);
+					break;
+				case DOWN:
+					snakeTeleportation(s, coordSnake->y, 0);
+					break;/////////////////FRANCK KESAKO
+					snakeTeleportation(s, boardGetHeight(b)-1, coordSnake->x);
+					break;
+				case RIGHT:
+					snakeTeleportation(s, 0, coordSnake->x);
+					break;
+				default:
+					printf("Error checkMovement\n");
+					break;
+					*/
 			}
 		} 
 		else 
@@ -230,9 +252,14 @@ static bool gameCheckMovement(Snake s, Board b)
 			continueGame = false;
 		}
 	}
-	else
+	else if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 2, SNAKE1, SNAKE2))
 	{
-		switch (snakeGetDirection(s))
+		printf("Snake mort !\n");
+		continueGame = false;
+	} 
+	else 
+	{
+		switch (dirSnake)
 		{
 			case UP:
 				snakeGoUp(s);
@@ -251,6 +278,7 @@ static bool gameCheckMovement(Snake s, Board b)
 				break;
 		}
 	}
+	free(coordSnake);
 	return continueGame;
 }
 
@@ -264,14 +292,14 @@ static bool gameCheckMovement(Snake s, Board b)
  * \param coord Coord : Coordinates of the cell to test
  * \return Returns boolean which say if the cell is a snake
  */
-bool boardIsSnake(Board b, Coord coord)
+/*bool boardIsSnake(Board b, Coord coord)
 {
-  bool res=false;
-  if(boardInside(b, coord->x, coord->y) && (boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2)){
-    res = true;
-  }
-  return res;
-}
+	bool res=false;
+	if(boardInside(b, coord->x, coord->y) && (boardGetValue(b, coord->x, coord->y)==1 || boardGetValue(b, coord->x, coord->y)==2)){
+		res = true;
+	}
+	return res;
+}*/
 
 /**
  * \fn void gameFeed(Game game)
@@ -340,11 +368,11 @@ Coord boardNextPosCell(int x, int y, Direction dir)
  * \param dir Direction : Direction to go
  * \return Returns boolean which say if the next cell is a snake
  */
-bool boardIsNextCellSnake(Board b, int x, int y, Direction dir)
+/*bool boardIsNextCellSnake(Board b, int x, int y, Direction dir)
 {
     Coord nextPos = boardNextPosCell(x, y, dir);
     return boardIsSnake(b, nextPos);
-}
+}*/
 
 /**
  * \fn bool boardIsNextCellBorder(Board b, int x, int y, Direction dir)
@@ -356,7 +384,7 @@ bool boardIsNextCellSnake(Board b, int x, int y, Direction dir)
  * \param dir Direction : Direction to go
  * \return Returns boolean which say if the next cell is a border
  */
-bool boardIsNextCellBorder(Board b, int x, int y, Direction dir)
+/*bool boardIsNextCellBorder(Board b, int x, int y, Direction dir)
 {
     bool res = false;
     Coord nextPos = boardNextPosCell(x, y, dir);
@@ -372,7 +400,7 @@ bool boardIsNextCellBorder(Board b, int x, int y, Direction dir)
         res = true;
     }
     return res;
-}
+}*/
 
 /*
  * \fn Item gameGetFood(Game game)
@@ -393,7 +421,7 @@ Item gameSetFood(Game game, int x , int y) {
 }
 */
 
-bool boardIsCellType(Board b, int x, int y, Direction dir, int n, ...){
+/*bool boardIsCellType(Board b, int x, int y, int n, ...){
 	bool res=false;
 	if(boardInside(b, x, y)){
 		int i;
@@ -411,5 +439,28 @@ bool boardIsCellType(Board b, int x, int y, Direction dir, int n, ...){
 	} else {
 		printf("[Error]: game.c_boardIsCellType, coordinates (%d,%d) not inside the board\n", x, y);
 	}
+	return res;
+}*/
+
+
+bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...){
+	Coord coord = boardNextPosCell(x, y, dir);
+	bool res = false;
+	int i;
+	BoardValue value;
+	va_list va;
+	va_start(va,n);	//indicating va to point on the first variable argument
+	for(i=0;i<n;i++){
+		value = va_arg (va, BoardValue);
+		if(!res && value==-1 && !boardInside(b, coord->x, coord->y))
+		{
+			res = true;
+		}
+		else if(!res && boardGetValue(b, coord->x, coord->y)==value){
+			res = true;
+		}
+	}
+	va_end(va); //clean memory assigned to varlist
+	free(coord);
 	return res;
 }

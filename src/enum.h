@@ -10,6 +10,6 @@
  * \details Contains all defines of enums of the program
  */
 
-typedef enum BoardValue {EMPTY, SNAKE1, SNAKE2, FOOD} BoardValue;
+typedef enum BoardValue {OUTSIDE=-1, EMPTY, SNAKE1, SNAKE2, FOOD} BoardValue;
 
 #endif

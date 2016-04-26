@@ -12,15 +12,15 @@
 #include "ia.h"
 #include "coord.h"
 
+/*
 int* iaDirectionsAvailable(Board board, Coord coord, Direction dir) {
 	int *res = malloc(4 * sizeof(int));
 	for(dir=UP;dir<=LEFT;dir++) {
-		if(!boardIsNextCellSnake(board, coord->x, coord->y, dir) && !boardIsNextCellBorder(board, coord->x, coord->y, dir))
+		if(!boardIsNextCellType(board, coord->x, coord->y, dir, 2, SNAKE1, SNAKE2) && !boardIsNextCellBorder(board, coord->x, coord->y, dir))
 			res[dir]=1;
 	}
 	return res;
-
-}
+}*/
 /*
 Direction iaRandom (Board board, Snake snake) {
 	Direction snakeDir = snakeGetDirection(snake);
@@ -65,28 +65,29 @@ Direction iaSurvive (Board board, Snake snake) {
 	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
 
 	//Checking if the next Cell in front of the snake would make him die
-	if(boardIsNextCellBorder(board, posSnake->x, posSnake->y, snakeDir) || boardIsNextCellSnake(board, posSnake->x, posSnake->y, snakeDir))
+	if(boardIsNextCellType(board, posSnake->x, posSnake->y, snakeDir, 3, OUTSIDE, SNAKE1, SNAKE2))
 	{
 		if(snakeDir==UP || snakeDir==DOWN)//Checking if the snake is going up or down
 		{
 			//Checking if the snake can go to the right without dying
-			if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, RIGHT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, RIGHT))
+			if(!boardIsNextCellType(board, posSnake->x, posSnake->y, RIGHT, 3, OUTSIDE, SNAKE1, SNAKE2))
 				snakeDir=RIGHT;
 			//Checking if the snake can go to the left without dying
-			else if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, LEFT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, LEFT))
+			else if(!boardIsNextCellType(board, posSnake->x, posSnake->y, LEFT, 3, OUTSIDE, SNAKE1, SNAKE2))
 				snakeDir=LEFT;
 		}
 		else if(snakeDir==RIGHT || snakeDir==LEFT)//Checking if the snake is going to the right or to the left
 		{
 			//Checking if the snake can go down without dying
-			if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, DOWN) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, DOWN))
+			if(!boardIsNextCellType(board, posSnake->x, posSnake->y, DOWN, 3, OUTSIDE, SNAKE1, SNAKE2))
 				snakeDir=DOWN;
 			//Checking if the snake can go up without dying
-			else if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, UP) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, UP))
+			else if(!boardIsNextCellType(board, posSnake->x, posSnake->y, UP, 3, OUTSIDE, SNAKE1, SNAKE2))
 				snakeDir=UP;
 		}
 	}
-	//free(posSnake);
+
+	free(posSnake);
 	return snakeDir;
 }
 
@@ -106,8 +107,6 @@ Direction iaJambon (Game game, Snake snake) {
 	Coord posBonus = coordNew(food->posX, food->posY);
 	Board board = gameGetBoard(game);
 
-	printf("taille: %zu\n", sizeof(enum Direction));
-
 	if(!(posBonus->x == 0 && posBonus->y == 0))//Checking if there is a bonus to chase
 	{
 		if(snakeDir==UP || snakeDir==DOWN)//Checking if the snake is going UP or DOWN
@@ -115,13 +114,13 @@ Direction iaJambon (Game game, Snake snake) {
 			if (posSnake->x < posBonus->x)//Checking if the bonus is on the right
 			{
 				//Checking if the snake can go to the right without dying
-				if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, RIGHT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, RIGHT))
+				if(!boardIsNextCellType(board, posSnake->x, posSnake->y, RIGHT, 3, OUTSIDE, SNAKE1, SNAKE2))
 					snakeDir=RIGHT;
 			}
 			else if(posSnake->x > posBonus->x) //Checking if the bonus is on the left
 			{
 				//Checking if the snake can go to the right without dying
-				if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, LEFT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, LEFT))
+				if(!boardIsNextCellType(board, posSnake->x, posSnake->y, LEFT, 3, OUTSIDE, SNAKE1, SNAKE2))
 					snakeDir=LEFT;
 			}
 			else if(posSnake->x == posBonus->x) //Checking if the snake is on the right x
@@ -129,10 +128,10 @@ Direction iaJambon (Game game, Snake snake) {
 				if((snakeDir==UP && posSnake->y < posBonus->y) || (snakeDir==DOWN && posSnake->y > posBonus->y))//Checking if the snake is in the good direction
 				{
 					//Checking if the snake can go to the right without dying
-					if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, RIGHT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, RIGHT))
+					if(!boardIsNextCellType(board, posSnake->x, posSnake->y, RIGHT, 3, OUTSIDE, SNAKE1, SNAKE2))
 						snakeDir=RIGHT;
 					//Checking if the snake can go to the right without dying
-					if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, LEFT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, LEFT))
+					if(!boardIsNextCellType(board, posSnake->x, posSnake->y, LEFT, 3, OUTSIDE, SNAKE1, SNAKE2))
 						snakeDir=LEFT;
 				}
 			}
@@ -142,29 +141,29 @@ Direction iaJambon (Game game, Snake snake) {
 			if(posSnake->y > posBonus->y)//Checking if the bonus is somewhere over the snake
 			{
 				//Checking if the snake can go up without dying
-				if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, UP) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, UP))
+				if(!boardIsNextCellType(board, posSnake->x, posSnake->y, UP, 3, OUTSIDE, SNAKE1, SNAKE2))
 					snakeDir=UP;
 			}
 			else if(posSnake->y < posBonus->y)//Checking if the bonus is somewhere down the snake
 			{
 				//Checking if the snake can go down without dying
-				if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, DOWN) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, DOWN))
+				if(!boardIsNextCellType(board, posSnake->x, posSnake->y, DOWN, 3, OUTSIDE, SNAKE1, SNAKE2))
 					snakeDir=DOWN;
 			}
 			else if(posSnake->y == posBonus->y) { //Checking if the snake is on the right y
 				if((snakeDir==RIGHT && posSnake->x > posBonus->x) || (snakeDir==LEFT && posSnake->x < posBonus->x)) //Checking if the direction is wrong
 				{
 					//Checking if the snake can go to the right without dying
-					if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, DOWN) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, DOWN))
+					if(!boardIsNextCellType(board, posSnake->x, posSnake->y, DOWN, 3, OUTSIDE, SNAKE1, SNAKE2))
 						snakeDir=DOWN;
 					//Checking if the snake can go to the right without dying
-					if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, UP) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, UP))
+					if(!boardIsNextCellType(board, posSnake->x, posSnake->y, UP, 3, OUTSIDE, SNAKE1, SNAKE2))
 						snakeDir=UP;
 				}
 			}
 		}
 		//Checking if the chosen direction won't kill the snake (used when the snake is on the right x posSnakeition)
-		if(boardIsNextCellSnake(board, posSnake->x, posSnake->y, snakeDir) || boardIsNextCellBorder(board, posSnake->x, posSnake->y, snakeDir))
+		if(boardIsNextCellType(board, posSnake->x, posSnake->y, snakeDir, 3, OUTSIDE, SNAKE1, SNAKE2))
 			snakeDir = iaSurvive(board, snake);
 	}
 	else//If there is no bonus to chase, then just survive
@@ -172,7 +171,7 @@ Direction iaJambon (Game game, Snake snake) {
 		snakeDir = iaSurvive(board, snake);
 	}
 
-	/* /!\ Just to test out with the jambon /!\ */
+	/* /!\ Just to test out with the jambon /!\ */ 
 	if(coordEquals(boardNextPosCell(posSnake->x, posSnake->y, snakeDir),posBonus))
 	{
 		free(gameGetFood(game));
@@ -181,6 +180,6 @@ Direction iaJambon (Game game, Snake snake) {
 
 
 	free(posSnake);
-	//free(posBonus);
+	free(posBonus);
 	return snakeDir;
 }

@@ -51,11 +51,12 @@ bool gameMoveSnake(Board b, Snake s);
 Item gameGetFood(Game game);
 
 Coord boardNextPosCell(int x, int y, Direction dir);
-bool boardIsNextCellSnake(Board b, int x, int y, Direction dir);
-bool boardIsNextCellBorder(Board b, int x, int y, Direction dir);
-bool boardIsSnake(Board b, Coord coord);
+//bool boardIsNextCellSnake(Board b, int x, int y, Direction dir);
+//bool boardIsNextCellBorder(Board b, int x, int y, Direction dir);
+//bool boardIsSnake(Board b, Coord coord);
 
-bool boardIsCellType(Board b, int x, int y, Direction dir, int n, ...);
+//bool boardIsCellType(Board b, int x, int y, int n, ...);
+bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...);
 
 void gameFeed(Game game);
 

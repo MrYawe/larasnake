@@ -104,7 +104,7 @@ int boardGetValue(Board b, int x, int y)
 		return b->tab[y][x];
 	else
 	{
-		printf("boardGetValue: error out of range (%d, %d) max(%d, %d)\n", x, y, b->sizeX, b->sizeY);
+		printf("boardGetValue: outside of range (%d, %d) max(%d, %d)\n", x, y, b->sizeX-1, b->sizeY-1);
 		return -1;
 	}
 }
@@ -184,12 +184,15 @@ bool boardInside(Board b, int x, int y)
  */
 void boardDisplay(Board b)
 {
-  system("clear");
-  int i, j;
-  for(j=0; j<b->sizeY; j++)
-    for (i=0; i<b->sizeX; i++)
-      printf(" %d ", boardGetValue(b, i, j));
-    printf("\n");
+	system("clear");
+	int i, j;
+	for(j=0; j<b->sizeY; j++)
+	{
+		for (i=0; i<b->sizeX; i++)
+  			printf(" %d ", boardGetValue(b, i, j));
+		printf("\n");
+	}
+
 }
 
 /*
