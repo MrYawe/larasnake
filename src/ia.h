@@ -14,7 +14,8 @@
 #include "snake.h"
 #include "game.h"
 
-//int* iaDirectionsAvailable(Board board, Coord coord, Direction dir);
+void iaDirectionsAvailable(Board board, Coord coord, Direction dir, int* tab);
+Direction iaRandom (Board board, Snake snake);
 Direction iaSurvive (Board board, Snake snake);
 Direction iaJambon (Game game, Snake snake);
 

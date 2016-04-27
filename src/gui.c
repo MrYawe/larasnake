@@ -93,7 +93,7 @@ void guiPlay(BoardSize size)
         /***** Move of snake 2 (AI) *****/
         timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
         if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {  // test if we wait enough time to move the snake 2
-            snakeSetDirection(snake2, iaJambon(game, snake2));  // let ia choose the best direction of snake2
+            snakeSetDirection(snake2, iaRandom(board, snake2));  // let ia choose the best direction of snake2
             continueGameMove2 = gameMoveSnake(board, snake2);   // move th snake2. if snake2 is dead continueGameMove2=false
             timer->snake2MoveTimer = 0 ;                        // set the move timer to 0 when the snake move
         }

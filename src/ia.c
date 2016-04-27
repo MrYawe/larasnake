@@ -12,45 +12,48 @@
 #include "ia.h"
 #include "coord.h"
 
-/*
-int* iaDirectionsAvailable(Board board, Coord coord, Direction dir) {
-	int *res = malloc(4 * sizeof(int));
-	for(dir=UP;dir<=LEFT;dir++) {
-		if(!boardIsNextCellType(board, coord->x, coord->y, dir, 2, SNAKE1, SNAKE2) && !boardIsNextCellBorder(board, coord->x, coord->y, dir))
-			res[dir]=1;
-	}
-	return res;
-}*/
-/*
-Direction iaRandom (Board board, Snake snake) {
-	Direction snakeDir = snakeGetDirection(snake);
-	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
 
-	//Checking if the next Cell in front of the snake would make him die
-	if(boardIsNextCellBorder(board, posSnake->x, posSnake->y, snakeDir) || boardIsNextCellSnake(board, posSnake->x, posSnake->y, snakeDir))
-	{
-		if(snakeDir==UP || snakeDir==DOWN)//Checking if the snake is going up or down
-		{
-			//Checking if the snake can go to the right without dying
-			if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, RIGHT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, RIGHT))
-				snakeDir=RIGHT;
-			//Checking if the snake can go to the left without dying
-			else if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, LEFT) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, LEFT))
-				snakeDir=LEFT;
-		}
-		else if(snakeDir==RIGHT || snakeDir==LEFT)//Checking if the snake is going to the right or to the left
-		{
-			//Checking if the snake can go down without dying
-			if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, DOWN) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, DOWN))
-				snakeDir=DOWN;
-			//Checking if the snake can go up without dying
-			else if(!boardIsNextCellSnake(board, posSnake->x, posSnake->y, UP) && !boardIsNextCellBorder(board, posSnake->x, posSnake->y, UP))
-				snakeDir=UP;
-		}
+void iaDirectionsAvailable(Board board, Coord coord, Direction dir, int* tab) {
+	for(dir=UP;dir<=LEFT;dir++) {
+		if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2))
+			tab[dir]=1;
 	}
+}
+
+Direction iaRandom (Board board, Snake snake) {
+	Direction dirSnake = snakeGetDirection(snake);
+	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
+	int* tab = malloc(4 * sizeof(int));
+
+	iaDirectionsAvailable(board, posSnake, dirSnake, tab);
+	int choose = (rand()%4);
+	int i=0;
+	int j=0;
+
+	printf("UP:%d RIGHT:%d DOWN:%d LEFT:%d \n", tab[0], tab[1], tab[2], tab[3]);
+	printf("choose:%d\n", choose);
+	if(!(tab[0]==0 && tab[1]==0 && tab[2]==0 && tab[3]==0)){
+		do {
+			while(tab[i]==0){
+				i++;
+				i%=4;
+			}
+			if(j!=choose){
+				i++;
+				i%=4;
+			}
+		} while(j++!=choose);
+	} 
+	
+
+	dirSnake=i;
+
+	printf("direction choisie: %d\n\n", dirSnake);
+
+	//free(tab);
 	//free(posSnake);
-	return snakeDir;
-}*/
+	return dirSnake;
+}
 
 /**
  * \fn Direction iaSurvive (Board board, Snake snake)

@@ -310,15 +310,15 @@ static bool gameCheckMovement(Snake s, Board b)
 void gameFeed(Game game)
 {
 	Board b = gameGetBoard(game);
-  int x = rand()%boardGetWidth(b);
-  int y = rand()%boardGetHeight(b);
-  while(boardGetValue(b, x, y)!=0){
-	x = rand()%boardGetWidth(b);
-  	y = rand()%boardGetHeight(b);
-  }
-  Item food = itemCreate(x, y, FOOD);
-  game->food=food;
-  boardSetValue(b, x, y, food->value);
+	int x = rand()%boardGetWidth(b);
+	int y = rand()%boardGetHeight(b);
+	while(boardGetValue(b, x, y)!=0){
+		x = rand()%boardGetWidth(b);
+		y = rand()%boardGetHeight(b);
+	}
+	Item food = itemCreate(x, y, FOOD);
+	game->food=food;
+	boardSetValue(b, x, y, food->value);
 }
 
 /**
