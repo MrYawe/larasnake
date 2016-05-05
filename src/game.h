@@ -40,13 +40,14 @@ void gameInitSnakes(Board b, Snake s1, Snake s2);
 //////////////////////////////////////////
 Board gameGetBoard(Game g);
 Snake gameGetSnake(Game g, int player);
+Item gameGetItemList(Game g);
 //getItems
 
 //////////////////////////////////////////
 //				UTILITARY				//
 //////////////////////////////////////////
 void gameUpdateSnake(Board b, Snake s);
-bool gameMoveSnake(Board b, Snake s);
+bool gameMoveSnake(Game g, Snake s);
 
 Item gameGetFood(Game game);
 

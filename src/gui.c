@@ -84,7 +84,7 @@ void guiPlay(BoardSize size)
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {  // test if we wait enough time to move the snake 1
             guiSnakeEvent(&event, snake1);                      // catch player event and set the direction of snake1
-            continueGameMove1 = gameMoveSnake(board, snake1);   // move th snake1. if snake1 is dead continueGameMove1=false
+            continueGameMove1 = gameMoveSnake(game, snake1);   // move th snake1. if snake1 is dead continueGameMove1=false
             timer->snake1MoveTimer = 0;                         // set the move timer to 0 when the snake move
         }
         timer->snake1LastMove = SDL_GetTicks();
@@ -94,14 +94,16 @@ void guiPlay(BoardSize size)
         timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
         if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {  // test if we wait enough time to move the snake 2
             snakeSetDirection(snake2, iaRandom(board, snake2));  // let ia choose the best direction of snake2
-            continueGameMove2 = gameMoveSnake(board, snake2);   // move th snake2. if snake2 is dead continueGameMove2=false
+            continueGameMove2 = gameMoveSnake(game, snake2);   // move th snake2. if snake2 is dead continueGameMove2=false
             timer->snake2MoveTimer = 0 ;                        // set the move timer to 0 when the snake move
         }
         timer->snake2LastMove = SDL_GetTicks();
         /***********************************/
 
+        /***** Draw *****/
         guiDrawGame(screen, game, assets);  // draw the board on srceen with surfaces stored in the Assets struct
         guiReloadScreen(screen);            // reload all the screen
+        /***************/
 
         if(!continueGameMove1 || !continueGameMove2) // if one snake die the game is over
             gameEnd(game);
@@ -250,12 +252,39 @@ SnakeAssets guiLoadSnake(SnakeType type, char* color) {
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
     Snake snake1 = gameGetSnake(game, 1);
     Snake snake2 = gameGetSnake(game, 2);
+    Item itemList = gameGetItemList(game);
 
     guiApplySurface(0, 0, assets->background, screen, NULL); // dessine le background
     guiDrawSnake(screen, snake1, assets->snakesAssets[snakeGetType(snake1)]);
     guiDrawSnake(screen, snake2, assets->snakesAssets[snakeGetType(snake2)]);
-    guiApplySurface(gameGetFood(game)->posX*M_CELL_SIZE, M_CELL_SIZE*gameGetFood(game)->posY, assets->food, screen, NULL);
+    guiDrawItems(screen, itemList, assets->food);
+    //guiApplySurface(gameGetFood(game)->posX*M_CELL_SIZE, M_CELL_SIZE*gameGetFood(game)->posY, assets->food, screen, NULL);
 }
+
+
+void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface* surface) {
+
+    Item item = itemList;
+    int x, y;
+
+    while(item != NULL) {
+        x = item->posX * M_CELL_SIZE;
+        y = item->posY * M_CELL_SIZE;
+        switch(item->value) {
+            case SENTRY:
+                break;
+
+            case FOOD:
+                guiApplySurface(x, y, surface, screen, NULL);
+                break;
+
+            default:
+                break;
+        }
+        item = item->next;
+    }
+}
+
 
 /**
  * \fn void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets)
