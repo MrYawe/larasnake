@@ -58,8 +58,8 @@ Game gameCreate(BoardSize size)
 			break;
 	}
 
-	g->snake1 = snakeCreate(15, 1, RIGHT, WATER);
-	g->snake2 = snakeCreate(15, 2, LEFT, FIRE);
+	g->snake1 = snakeCreate(10, 1, RIGHT, WATER);
+	g->snake2 = snakeCreate(10, 2, LEFT, FIRE);
 	g->isPlaying = true;
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
@@ -163,10 +163,13 @@ void gameInitSnakes(Board b, Snake s1, Snake s2)
  */
 void gameUpdateSnake(Board b, Snake s)
 {
+	Coord snakePos;
 	int i;
 	for (i=0; i<snakeGetSize(s); i++)
 	{
-		boardSetValue(b, snakeGetPos(s, i)->x, snakeGetPos(s, i)->y, snakeGetId(s));
+		snakePos=snakeGetPos(s, i);
+		boardSetValue(b, snakePos->x, snakePos->y, snakeGetId(s));
+		free(snakePos);
 	}
 }
 
@@ -179,17 +182,22 @@ void gameUpdateSnake(Board b, Snake s)
  */
 bool gameMoveSnake(Board b, Snake s)
 {
-	bool continueGame = gameCheckMovement(s, b);
+	//bool continueGame = gameCheckMovement(s, b);
 
-	Coord posSnakeTail = snakeGetPos(s, 0);
-	Coord posSnakeHead = snakeGetPos(s, snakeGetSize(s)-1);
+	//Coord posSnakeTail = snakeGetPos(s, 0);
+	//Coord posSnakeHead = snakeGetPos(s, snakeGetSize(s)-1);
 
-	if(continueGame){
-		boardSetValue(b, posSnakeTail->x, posSnakeTail->y, 0);
-		boardSetValue(b, posSnakeHead->x, posSnakeHead->y, snakeGetId(s));
-	}
-	free(posSnakeTail);
-	free(posSnakeHead);
+	//if(continueGame){
+        
+
+		boardSetValue(b, snakeGetPos(s, 0)->x, snakeGetPos(s, 0)->y, 0);
+        //printf("posTailBOARD x:%d y:%d\n",posSnakeTail->x, posSnakeTail->y);
+		bool continueGame = gameCheckMovement(s, b);
+		boardSetValue(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetId(s));
+	//}
+		//printf("posHeadBOARD x:%d y:%d\n",posSnakeHead->x, posSnakeHead->y);
+	//free(posSnakeTail);
+	//free(posSnakeHead);
 	return continueGame;
 }
 
@@ -254,7 +262,7 @@ static bool gameCheckMovement(Snake s, Board b)
 	}
 	else if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 2, SNAKE1, SNAKE2))
 	{
-		printf("Snake mort !\n");
+		printf("Snake %d mort !\n", snakeGetId(s));
 		continueGame = false;
 	} 
 	else 

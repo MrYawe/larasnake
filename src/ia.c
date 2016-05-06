@@ -13,25 +13,84 @@
 #include "coord.h"
 
 
-void iaDirectionsAvailable(Board board, Coord coord, Direction dir, int* tab) {
+void iaDirectionsAvailable(Board board, Coord coord, int* tab) {
+	Direction dir;
 	for(dir=UP;dir<=LEFT;dir++) {
 		if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2))
-			tab[dir]=1;
+			tab[dir]+=1;
 	}
+}
+
+Direction iaDirectionRandomize(int* tab, int value) {
+	int choose = (rand()%4);
+	int i=0;
+	int j=0;
+
+	do {
+		while(tab[i]!=value){
+			i++;
+			i%=4;
+		}
+		if(j!=choose){
+			i++;
+			i%=4;
+		}
+	} while(j++!=choose);
+
+	return i;
+}
+
+int iaDirectionMaxValue(int* tab){
+	Direction dir;
+	Direction dirMax;
+
+	dirMax = UP;
+	for(dir=UP;dir<=LEFT;dir++) {
+		printf("tab SENS:%d valeur: %d\n", dir, tab[dir]);
+		if(tab[dirMax]<tab[dir]){
+			dirMax=dir;
+		}
+	}
+	return tab[dirMax];
+}
+
+Direction iaSurviveDepth(Board board, Snake snake) {
+	Direction dirSnake = snakeGetDirection(snake);
+	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
+	Coord posInter;
+	int* tab = calloc(4, sizeof(int));
+	int i=0;
+	int j=0;
+	iaDirectionsAvailable(board, posSnake, tab);
+	for(i=1;i<4;i++){
+		for(j=0;j<4;j++){
+			if(tab[j]!=0){
+				posInter = boardNextPosCell(posSnake->x, posSnake->y, j);
+				iaDirectionsAvailable(board, posInter, tab);
+			}
+		}
+	}
+	dirSnake = iaDirectionRandomize(tab,iaDirectionMaxValue(tab));
+	//
+	free(posInter);
+	free(tab);
+	free(posSnake);
+	printf("direction: %d\n", dirSnake);
+	return dirSnake;
 }
 
 Direction iaRandom (Board board, Snake snake) {
 	Direction dirSnake = snakeGetDirection(snake);
 	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
-	int* tab = malloc(4 * sizeof(int));
+	int* tab = calloc(4, sizeof(int));
 
-	iaDirectionsAvailable(board, posSnake, dirSnake, tab);
+	iaDirectionsAvailable(board, posSnake, tab);
 	int choose = (rand()%4);
 	int i=0;
 	int j=0;
 
-	printf("UP:%d RIGHT:%d DOWN:%d LEFT:%d \n", tab[0], tab[1], tab[2], tab[3]);
-	printf("choose:%d\n", choose);
+	//printf("UP:%d RIGHT:%d DOWN:%d LEFT:%d \n", tab[0], tab[1], tab[2], tab[3]);
+	//printf("choose:%d\n", choose);
 	if(!(tab[0]==0 && tab[1]==0 && tab[2]==0 && tab[3]==0)){
 		do {
 			while(tab[i]==0){
@@ -48,10 +107,10 @@ Direction iaRandom (Board board, Snake snake) {
 
 	dirSnake=i;
 
-	printf("direction choisie: %d\n\n", dirSnake);
-
-	//free(tab);
-	//free(posSnake);
+	//printf("direction choisie: %d\n\n", dirSnake);
+	
+	free(tab);
+	free(posSnake);
 	return dirSnake;
 }
 

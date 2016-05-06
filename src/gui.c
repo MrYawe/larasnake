@@ -72,15 +72,13 @@ void guiPlay(BoardSize size)
     snake2 = gameGetSnake(game, 2);
 
     gameFeed(game); //Function called to put some food on the board
-
    	  /************************/
 	 /**	  GAME LOOP		**/
 	/************************/
     while (gameGetIsPlaying(game)) {
-
         timer->start = SDL_GetTicks(); // Start of the current frame
 
-        /***** Move of snake 1 (player) *****/
+        ////// Move of snake 1 (player) //////
         timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
         if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {  // test if we wait enough time to move the snake 1
             guiSnakeEvent(&event, snake1);                      // catch player event and set the direction of snake1
@@ -88,17 +86,17 @@ void guiPlay(BoardSize size)
             timer->snake1MoveTimer = 0;                         // set the move timer to 0 when the snake move
         }
         timer->snake1LastMove = SDL_GetTicks();
-        /******************************************/
+        ///////////////////////////////////////////////
 
-        /***** Move of snake 2 (AI) *****/
+        ////// Move of snake 2 (AI) //////
         timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
         if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {  // test if we wait enough time to move the snake 2
-            snakeSetDirection(snake2, iaRandom(board, snake2));  // let ia choose the best direction of snake2
+            snakeSetDirection(snake2, iaSurviveDepth(board, snake2));  // let ia choose the best direction of snake2
             continueGameMove2 = gameMoveSnake(board, snake2);   // move th snake2. if snake2 is dead continueGameMove2=false
             timer->snake2MoveTimer = 0 ;                        // set the move timer to 0 when the snake move
         }
         timer->snake2LastMove = SDL_GetTicks();
-        /***********************************/
+        ///////////////////////////////////////////////
 
         guiDrawGame(screen, game, assets);  // draw the board on srceen with surfaces stored in the Assets struct
         guiReloadScreen(screen);            // reload all the screen
@@ -106,7 +104,7 @@ void guiPlay(BoardSize size)
         if(!continueGameMove1 || !continueGameMove2) // if one snake die the game is over
             gameEnd(game);
 
-        /***** Framerate management *****/
+        ////// Framerate management //////
         timer->end = SDL_GetTicks();                           // Get the time after the calculations
         timer->delay = FRAME_MS - (timer->end - timer->start); // Calculate how long to delay should be
         if(timer->delay > 0) {
@@ -114,7 +112,7 @@ void guiPlay(BoardSize size)
         }
     }
 
-    /***** Free *****/
+    ////// Free //////
     gameFree(game);
     guiFreeAssets(assets);
     SDL_Quit();
