@@ -11,6 +11,9 @@
  */
 
 #include "enum.h"
+#include "board.h"
+#include "snake.h"
+
 
 typedef struct Item* Item;
 /**
@@ -18,20 +21,25 @@ typedef struct Item* Item;
  * \brief The item structure
  * \details
  **/
+
 struct Item
 {
     int posX;
     int posY;
     BoardValue value;
-    void (*onCollision)(int idSnake); // idSnake:id du snake qui a touché l'object
+    void (*onCollision)(Item i, Board b, Snake sOnCollision, Snake sBis); // idSnake:id du snake qui a touché l'object
+    Item prev;
+    Item next;
 };
 
 /*** Object ***/
 Item itemCreate(int x, int y, BoardValue value);
+Item itemAdd(Item list, Board board, int x, int y, BoardValue value);
+Item itemSearch(Item list, int x, int y);
+void itemDelete(Item item, Board board);
 void itemFree(Item item);
 
-
 /*** Collisions ***/
-void itemOnCollisionFood(int idSnake);
+void itemOnCollisionFood(Item i, Board b, Snake sOnCollision, Snake sBis);
 
 #endif

@@ -102,15 +102,15 @@ Direction iaRandom (Board board, Snake snake) {
 				i%=4;
 			}
 		} while(j++!=choose);
-	} 
-	
+	}
+
 
 	dirSnake=i;
 
 	//printf("direction choisie: %d\n\n", dirSnake);
-	
 	free(tab);
 	free(posSnake);
+
 	return dirSnake;
 }
 
@@ -161,6 +161,8 @@ Direction iaSurvive (Board board, Snake snake) {
  * \param snake Variable representing the snake
  * \return <Direction> used to change the snake direction
  */
+
+/*
 Direction iaJambon (Game game, Snake snake) {
 
 	Direction snakeDir = snakeGetDirection(snake);
@@ -233,15 +235,16 @@ Direction iaJambon (Game game, Snake snake) {
 		snakeDir = iaSurvive(board, snake);
 	}
 
-	/* /!\ Just to test out with the jambon /!\ */ 
+	// /!\ Just to test out with the jambon /!\
 	if(coordEquals(boardNextPosCell(posSnake->x, posSnake->y, snakeDir),posBonus))
 	{
 		free(gameGetFood(game));
 		gameFeed(game);
-	}	
+	}
 
 
 	free(posSnake);
 	free(posBonus);
 	return snakeDir;
 }
+*/

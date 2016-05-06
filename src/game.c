@@ -15,7 +15,7 @@
 #include "game.h"
 
 // Static function
-static bool gameCheckMovement(Snake s, Board b);
+static bool gameCheckMovement(Game g, Snake s);
 
 //////////////////////////////////////////
 //				STRUCTURE				//
@@ -31,8 +31,9 @@ struct Game
 	Board board; // le board
 	Snake snake1; // joueur 1
 	Snake snake2; // joueur 2
+	Item itemList;
 	bool isPlaying;
-	Item food;
+	//Item food;
 };
 
 /**
@@ -58,8 +59,10 @@ Game gameCreate(BoardSize size)
 			break;
 	}
 
-	g->snake1 = snakeCreate(10, 1, RIGHT, WATER);
-	g->snake2 = snakeCreate(10, 2, LEFT, FIRE);
+	//g->items = itemsCreate(boardGetWidth(g->board), boardGetHeight(g->board));
+	g->snake1 = snakeCreate(15, 1, RIGHT, WATER);
+	g->snake2 = snakeCreate(15, 2, LEFT, FIRE);
+	g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
@@ -77,7 +80,7 @@ void gameFree(Game game) {
 	boardFree(game->board);
 	snakeFree(game->snake1);
 	snakeFree(game->snake2);
-	itemFree(game->food);
+	//itemFree(game->food);
 	free(game);
 }
 
@@ -106,6 +109,10 @@ Snake gameGetSnake(Game g, int player)
 	if (player == 1)
 		return g->snake1;
 	return g->snake2;
+}
+
+Item gameGetItemList(Game g) {
+	return g->itemList;
 }
 
 /**
@@ -177,10 +184,10 @@ void gameUpdateSnake(Board b, Snake s)
  * \fn bool gameMoveSnake(Board b, Snake s)
  * \brief Update the board with the snake movement
  * \details Update the board without iterating on elements
- * \param b Board: where to move the snake
+ * \param g Game: the game
  * \param s Snake to move on the board
  */
-bool gameMoveSnake(Board b, Snake s)
+bool gameMoveSnake(Game g, Snake s)
 {
 	//bool continueGame = gameCheckMovement(s, b);
 
@@ -188,16 +195,31 @@ bool gameMoveSnake(Board b, Snake s)
 	//Coord posSnakeHead = snakeGetPos(s, snakeGetSize(s)-1);
 
 	//if(continueGame){
+	Board b = gameGetBoard(g);
         
 
 		boardSetValue(b, snakeGetPos(s, 0)->x, snakeGetPos(s, 0)->y, 0);
         //printf("posTailBOARD x:%d y:%d\n",posSnakeTail->x, posSnakeTail->y);
-		bool continueGame = gameCheckMovement(s, b);
+		bool continueGame = gameCheckMovement(g, s);
 		boardSetValue(b, snakeGetPos(s, snakeGetSize(s)-1)->x, snakeGetPos(s, snakeGetSize(s)-1)->y, snakeGetId(s));
 	//}
 		//printf("posHeadBOARD x:%d y:%d\n",posSnakeHead->x, posSnakeHead->y);
 	//free(posSnakeTail);
 	//free(posSnakeHead);
+/*
+	Board b = gameGetBoard(g);
+	bool continueGame = gameCheckMovement(g, s);
+
+	Coord posSnakeTail = snakeGetPos(s, 0);
+	Coord posSnakeHead = snakeGetPos(s, snakeGetSize(s)-1);
+
+	if(continueGame){
+		boardSetValue(b, posSnakeTail->x, posSnakeTail->y, 0);
+		boardSetValue(b, posSnakeHead->x, posSnakeHead->y, snakeGetId(s));
+	}
+	free(posSnakeTail);
+	free(posSnakeHead);
+*/
 	return continueGame;
 }
 
@@ -206,11 +228,12 @@ bool gameMoveSnake(Board b, Snake s)
  * \fn static bool gameCheckMovement(Snake s, Board b)
  * \brief Check collisions
  * \details Check if the next cell doesn't contains a snake or isn't a border
- * \param b Board: where to check
+ * \param g Game: the game
  * \param s Snake to move
  */
-static bool gameCheckMovement(Snake s, Board b)
+static bool gameCheckMovement(Game g, Snake s)
 {
+	Board b = gameGetBoard(g);
 	bool canTp = false;
 	bool continueGame = true;
 	Coord coordSnake = snakeGetPos(s, snakeGetSize(s)-1);
@@ -253,8 +276,8 @@ static bool gameCheckMovement(Snake s, Board b)
 					break;
 					*/
 			}
-		} 
-		else 
+		}
+		else
 		{
 			printf("Le snake s'est pris une bordure !\n");
 			continueGame = false;
@@ -264,8 +287,15 @@ static bool gameCheckMovement(Snake s, Board b)
 	{
 		printf("Snake %d mort !\n", snakeGetId(s));
 		continueGame = false;
-	} 
-	else 
+	}
+	else if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, FOOD)) //items
+	{
+		Coord coordItem = boardNextPosCell(coordSnake->x, coordSnake->y, dirSnake);
+		Item itemList = gameGetItemList(g);
+		Item item = itemSearch(itemList, coordItem->x, coordItem->y);
+		item->onCollision(item, b, s, s); // à changer
+	}
+	else
 	{
 		switch (dirSnake)
 		{
@@ -318,15 +348,16 @@ static bool gameCheckMovement(Snake s, Board b)
 void gameFeed(Game game)
 {
 	Board b = gameGetBoard(game);
+	Item itemList = gameGetItemList(game);
 	int x = rand()%boardGetWidth(b);
 	int y = rand()%boardGetHeight(b);
 	while(boardGetValue(b, x, y)!=0){
 		x = rand()%boardGetWidth(b);
 		y = rand()%boardGetHeight(b);
 	}
-	Item food = itemCreate(x, y, FOOD);
-	game->food=food;
-	boardSetValue(b, x, y, food->value);
+
+	itemAdd(itemList, b, x, y, FOOD);
+	printf("AJout du jambon: (%d, %d)\n", x, y);
 }
 
 /**
@@ -340,7 +371,7 @@ void gameFeed(Game game)
  */
 Coord boardNextPosCell(int x, int y, Direction dir)
 {
-  Coord res = coordNew(x, y);
+  	Coord res = coordNew(x, y);
     switch (dir)
     {
         case UP:
@@ -417,10 +448,12 @@ Coord boardNextPosCell(int x, int y, Direction dir)
  * \param game Game: The game which to acess
  * \return Item: The item in the struct game
  */
+ /*
 Item gameGetFood(Game game)
 {
 	return game->food;
 }
+*/
 
 /*
 Item gameSetFood(Game game, int x , int y) {
@@ -437,7 +470,7 @@ Item gameSetFood(Game game, int x , int y) {
 		va_list va;
 		va_start(va,n);	//indicating va to point on the first variable argument
 		for(i=0;i<n;i++){
-			value = va_arg (va, BoardValue);//va will 
+			value = va_arg (va, BoardValue);//va will
 			if(boardGetValue(b, x, y)==value){
 				res=true;
 				break;
