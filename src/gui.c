@@ -102,6 +102,7 @@ void guiPlay(BoardSize size)
         /***** Draw *****/
         guiDrawGame(screen, game, assets);  // draw the board on srceen with surfaces stored in the Assets struct
         guiReloadScreen(screen);            // reload all the screen
+        //boardDisplay(board);
         /***************/
 
         if(!continueGameMove1 || !continueGameMove2) // if one snake die the game is over

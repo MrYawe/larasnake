@@ -41,5 +41,16 @@ void itemFree(Item item);
 
 /*** Collisions ***/
 void itemOnCollisionFood(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionSpeedUp(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionGrowUp(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionGrowDown(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionReverseControl(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionReverseSnake(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionNoBorder(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionGhost(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionSwapSnake(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionNewColor(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionNewMap(Item i, Board b, Snake sOnCollision, Snake sBis);
+void itemOnCollisionWall(Item i, Board b, Snake sOnCollision, Snake sBis);
 
 #endif

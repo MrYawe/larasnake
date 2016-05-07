@@ -21,6 +21,12 @@
 #define SNAKE_DEFAULT_SPEED 100 // en ms
 #define NB_TYPES 3
 
+/*** Bonus parameters ***/
+#define FOOD_VALUE 1
+#define SPEED_UP_VALUE 10 // de combien de ms la vitesse est augmenté
+#define GROW_UP_VALUE 3
+#define GROW_DOWN_VALUE 3
+
 
 /*** Board dimensions ***/
 // Small
