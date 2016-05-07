@@ -196,7 +196,7 @@ bool gameMoveSnake(Game g, Snake s)
 
 	//if(continueGame){
 	Board b = gameGetBoard(g);
-        
+
 
 		boardSetValue(b, snakeGetPos(s, 0)->x, snakeGetPos(s, 0)->y, 0);
         //printf("posTailBOARD x:%d y:%d\n",posSnakeTail->x, posSnakeTail->y);
