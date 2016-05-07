@@ -21,6 +21,7 @@
 
 void itemOnCollisionFood(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION JAMBON\n");
+    snakeGrow(sOnCollision);
     itemDelete(i, b);
 }
 
