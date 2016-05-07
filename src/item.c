@@ -24,6 +24,9 @@ void itemOnCollisionFood(Item i, Board b, Snake sOnCollision, Snake sBis) {
     itemDelete(i, b);
 }
 
+void itemOnCollisionSpeedUp(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    
+}
 
 
 
@@ -58,6 +61,9 @@ Item itemCreate(int x, int y, BoardValue value) {
             break;
         case FOOD:
             item->onCollision = itemOnCollisionFood;
+            break;
+        case SPEED_UP:
+            item->onCollision = itemOnCollisionSpeedUp;
             break;
         default:
             printf("Item non implemented\n");

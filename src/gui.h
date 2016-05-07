@@ -31,7 +31,7 @@ struct Assets
 {
 	SnakeAssets *snakesAssets;
 	SDL_Surface *background;
-	SDL_Surface *food;
+	SDL_Surface **itemsAssets;
 };
 
 /**** General ****/
@@ -46,6 +46,7 @@ void guiClearScreen(SDL_Surface *screen);
 /**** Assets ****/
 Assets guiLoadAssets();
 SnakeAssets guiLoadSnake(SnakeType type, char* color);
+SDL_Surface** guiLoadItems();
 SDL_Surface* guiLoadImage(char* path);
 void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
 void guiFreeAssets(Assets assets);
@@ -53,7 +54,7 @@ void guiFreeAssets(Assets assets);
 /**** Draw ****/
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets);
 void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets);
-void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface* surface);
+void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface** itemsAssets);
 
 /**** Events ****/
 void guiSnakeEvent(SDL_Event *event, Snake s);
