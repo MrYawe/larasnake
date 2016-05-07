@@ -4,11 +4,11 @@ T_TARGET = testAll
 
 CC       = gcc
 # compiling flags here
-CFLAGS   = -Wall -I. `sdl-config --libs` -lSDL_image -lSDL_gfx
+CFLAGS   = -Wall -I. `sdl-config --libs` -lSDL_image
 
 LINKER   = gcc -o
 # linking flags here
-LFLAGS   = -I. -lm `sdl-config --libs` -lSDL_image -lSDL_gfx
+LFLAGS   = -I. -lm `sdl-config --libs` -lSDL_image
 
 # change these to set the proper directories where each files shoould be
 SRCDIR   = src
