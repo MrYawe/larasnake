@@ -35,6 +35,7 @@ struct Item
 /*** Object ***/
 Item itemCreate(int x, int y, BoardValue value);
 Item itemAdd(Item list, Board board, int x, int y, BoardValue value);
+BoardValue itemGetRandomItemValue();
 Item itemSearch(Item list, int x, int y);
 void itemDelete(Item item, Board board);
 void itemFree(Item item);

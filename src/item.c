@@ -45,38 +45,72 @@ void itemOnCollisionGrowUp(Item i, Board b, Snake sOnCollision, Snake sBis) {
 
 void itemOnCollisionGrowDown(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION GROW_DOWN\n");
+    printf("PAS ENCORE IMPLEMENTE\n");
+    // TODO franck: le retrecir
+    itemDelete(i, b);
 }
 
 void itemOnCollisionReverseControl(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION REVERSE_CONTROL\n");
+    snakeSetIsControlReversed(sOnCollision, true);
+    snakeSetIsControlReversed(sBis, true);
+    itemDelete(i, b);
 }
 
 void itemOnCollisionReverseSnake(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION REVERSE_SNAKE\n");
+    // TODO franck: la tete devient la queue
+    itemDelete(i, b);
 }
 
 void itemOnCollisionNoBorder(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION NO_BORDER\n");
+    snakeSetCanCrossBorder(sOnCollision, true);
+    itemDelete(i, b);
 }
 
 void itemOnCollisionGhost(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION GHOST\n");
+    snakeSetCanCrossBorder(sOnCollision, true);
+    snakeSetCanCrossSnake(sOnCollision, true);
+    itemDelete(i, b);
 }
 
 void itemOnCollisionSwapSnake(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION SWAP_SNAKE\n");
+    struct Snake temp = *sBis;
+    *sBis = *sOnCollision;
+    *sOnCollision = temp;
+
+    itemDelete(i, b);
 }
 
 void itemOnCollisionNewColor(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION NEW_COLOR\n");
+    SnakeType t1 = snakeGetType(sOnCollision);
+    SnakeType t2 = snakeGetType(sBis);
+    if( (t1==WATER || t2==WATER) && (t1==FIRE || t2==FIRE) ) {
+        snakeSetType(sOnCollision, GRASS);
+    } else if ( (t1==WATER || t2==WATER) && (t1==GRASS || t2==GRASS) ) {
+        snakeSetType(sOnCollision, FIRE);
+    } else {
+        snakeSetType(sOnCollision, WATER);
+    }
+    itemDelete(i, b);
 }
 
 void itemOnCollisionNewMap(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION NEW_MAP\n");
+    printf("PAS ENCORE IMPLEMENTE\n");
+    // TODO: change la map
+    itemDelete(i, b);
 }
 
 void itemOnCollisionWall(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION WALL\n");
+    printf("PAS ENCORE IMPLEMENTE\n");
+    // TODO: fait pop un item mur
+    itemDelete(i, b);
 }
 
 
@@ -158,6 +192,11 @@ Item itemCreate(int x, int y, BoardValue value) {
     return item;
 }
 
+BoardValue itemGetRandomItemValue() {
+    int x = rand()%12;
+    return x+4;
+}
+
 // ajout en fin
 Item itemAdd(Item list, Board board, int x, int y, BoardValue value) {
     Item newItem = itemCreate(x, y, value);
@@ -189,6 +228,10 @@ void itemDelete(Item item, Board board) {
         return;
 
     boardSetValue(board, item->posX, item->posY, EMPTY);
+
+    if(item->next != NULL) {
+        item->next->prev = item->prev;
+    }
     item->prev->next = item->next;
     itemFree(item);
 }

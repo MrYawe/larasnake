@@ -27,6 +27,40 @@ typedef enum Direction {UP, RIGHT, DOWN, LEFT} Direction;
 typedef enum SnakeType {WATER, FIRE, GRASS} SnakeType;
 
 typedef struct Element Element;
+/**
+ * \struct Element
+ * \brief The whole body of the snake
+ * \details The Element structure which is a chained list which represents the body of the snake
+ **/
+struct Element
+{
+	int posX;
+	int posY;
+	Element *next;
+	Element *previous;
+	Direction orientation;
+};
+
+/**
+ * \struct Snake
+ * \brief The snake structure
+ * \details The snake structure with all the snake attributes
+ **/
+struct Snake
+{
+	int id;
+	Element *first;
+	Element *last;
+	int size;
+	int speed;
+	Direction direction;
+	SnakeType type;
+
+	bool isControlReversed;
+	bool canCrossBorder;
+	bool canCrossSnake;
+	//bool isGhost;
+};
 typedef struct Snake* Snake;
 
 
@@ -62,8 +96,12 @@ void snakeSetSpeed(Snake s, int speed);
 Direction snakeElementGetOrientation(Snake s, int posElem);
 void snakeElementSetOrientation(Snake s, int posElem, Direction d);
 
-void snakeSetGhost(Snake s, bool b);
-bool snakeIsGhost(Snake s);
+void snakeSetIsControlReversed(Snake s, bool b);
+bool snakeGetIsControlReversed(Snake s);
+void snakeSetCanCrossBorder(Snake s, bool b);
+bool snakeGetCanCrossBorder(Snake s);
+void snakeSetCanCrossSnake(Snake s, bool b);
+bool snakeGetCanCrossSnake(Snake s);
 
 int snakeGetId(Snake s);
 

@@ -13,8 +13,10 @@ struct Timer
 	int delay; // temps à attendre à chaque tour
 	int snake1MoveTimer; // le temps en ms depuis que le snake 1 a bougé
 	int snake2MoveTimer;
+	int itemPopTimer;
 	Uint32 snake1LastMove; // la dernière fois que le snake 1 a bougé
 	Uint32 snake2LastMove;
+	Uint32 itemLastPop;
 };
 
 typedef struct SnakeAssets *SnakeAssets;

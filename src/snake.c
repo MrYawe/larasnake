@@ -12,36 +12,8 @@
 #include "snake.h"
 #include "constants.h"
 
-/**
- * \struct Snake
- * \brief The snake structure
- * \details The snake structure with all the snake attributes
- **/
-struct Snake
-{
-	int id;
-	Element *first;
-	Element *last;
-	int size;
-	int speed;
-	Direction direction;
-	SnakeType type;
-	bool isGhost;
-};
 
-/**
- * \struct Element
- * \brief The whole body of the snake
- * \details The Element structure which is a chained list which represents the body of the snake
- **/
-struct Element
-{
-	int posX;
-	int posY;
-	Element *next;
-	Element *previous;
-	Direction orientation;
-};
+
 
 /**
  * \fn Snake snakeCreate(int size, int id, Direction d, SnakeType type)
@@ -61,7 +33,9 @@ Snake snakeCreate(int size, int id, Direction d, SnakeType type)
 	s->speed = SNAKE_DEFAULT_SPEED;
 	s->id = id;
 	s->direction = d;
-	s->isGhost = false;
+	s->isControlReversed = false;
+	s->canCrossSnake = false;
+	s->canCrossBorder = false;
 	//srand(rand()*time(NULL));
 	//s->type = (int)rand()%NB_TYPES;
 	s->type = type;
@@ -343,11 +317,10 @@ void snakeElementSetOrientation(Snake s, int posElem, Direction d)
  * \param s Snake to access
  * \param b Bool: value of the ghost attribute
  */
-void snakeSetGhost(Snake s, bool b)
+void snakeSetIsControlReversed(Snake s, bool b)
 {
-	s->isGhost = b;
+	s->isControlReversed = b;
 }
-
 
 /**
  * \fn bool snakeIsGhost(Snake s)
@@ -356,9 +329,28 @@ void snakeSetGhost(Snake s, bool b)
  * \param s Snake to access
  * \return Bool: value of the ghost attribute
  */
-bool snakeIsGhost(Snake s)
+bool snakeGetIsControlReversed(Snake s)
 {
-	return s->isGhost;
+	return s->isControlReversed;
+}
+
+
+void snakeSetCanCrossBorder(Snake s, bool b)
+{
+	s->canCrossBorder = b;
+}
+bool snakeGetCanCrossBorder(Snake s)
+{
+	return s->canCrossBorder;
+}
+
+void snakeSetCanCrossSnake(Snake s, bool b)
+{
+	s->canCrossSnake = b;
+}
+bool snakeGetCanCrossSnake(Snake s)
+{
+	return s->canCrossSnake;
 }
 
 /**

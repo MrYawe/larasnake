@@ -59,7 +59,6 @@ Game gameCreate(BoardSize size)
 			break;
 	}
 
-	//g->items = itemsCreate(boardGetWidth(g->board), boardGetHeight(g->board));
 	g->snake1 = snakeCreate(15, 1, RIGHT, WATER);
 	g->snake2 = snakeCreate(15, 2, LEFT, FIRE);
 	g->itemList = itemCreate(-1, -1, SENTRY);
@@ -234,13 +233,12 @@ bool gameMoveSnake(Game g, Snake s)
 static bool gameCheckMovement(Game g, Snake s)
 {
 	Board b = gameGetBoard(g);
-	bool canTp = false;
 	bool continueGame = true;
 	Coord coordSnake = snakeGetPos(s, snakeGetSize(s)-1);
 	Direction dirSnake = snakeGetDirection(s);
 	if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, OUTSIDE))
 	{
-		if (canTp)
+		if (snakeGetCanCrossBorder(s)) // if he can cross border
 		{
 			switch (snakeGetDirection(s))
 			{
@@ -290,10 +288,17 @@ static bool gameCheckMovement(Game g, Snake s)
 	}
 	else if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 12, FOOD, SPEED_UP, GROW_UP, GROW_DOWN, REVERSE_CONTROL, REVERSE_SNAKE, NO_BORDER, GHOST, SWAP_SNAKE, NEW_COLOR, NEW_MAP, WALL)) //items
 	{
+		Snake otherSnake;
 		Coord coordItem = boardNextPosCell(coordSnake->x, coordSnake->y, dirSnake);
 		Item itemList = gameGetItemList(g);
 		Item item = itemSearch(itemList, coordItem->x, coordItem->y);
-		item->onCollision(item, b, s, s); // à changer
+		printf("****************************COLLISION ITEM %d (x=%d, y=%d)\n", item->value, item->posX, item->posY);
+		if(snakeGetId(s) == 1) {
+			otherSnake = gameGetSnake(g, 2);
+		} else {
+			otherSnake = gameGetSnake(g, 1);
+		}
+		item->onCollision(item, b, s, otherSnake);
 	}
 	else
 	{
@@ -356,8 +361,9 @@ void gameFeed(Game game)
 		y = rand()%boardGetHeight(b);
 	}
 
-	itemAdd(itemList, b, x, y, GROW_UP);
-	printf("AJout du jambon: (%d, %d)\n", x, y);
+	BoardValue itemValue = itemGetRandomItemValue();
+	itemAdd(itemList, b, x, y, itemValue);
+	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 
 /**
