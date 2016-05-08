@@ -196,7 +196,7 @@ bool gameMoveSnake(Game g, Snake s)
 
 	//if(continueGame){
 	Board b = gameGetBoard(g);
-        
+
 
 		boardSetValue(b, snakeGetPos(s, 0)->x, snakeGetPos(s, 0)->y, 0);
         //printf("posTailBOARD x:%d y:%d\n",posSnakeTail->x, posSnakeTail->y);
@@ -288,7 +288,7 @@ static bool gameCheckMovement(Game g, Snake s)
 		printf("Snake %d mort !\n", snakeGetId(s));
 		continueGame = false;
 	}
-	else if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, FOOD)) //items
+	else if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 12, FOOD, SPEED_UP, GROW_UP, GROW_DOWN, REVERSE_CONTROL, REVERSE_SNAKE, NO_BORDER, GHOST, SWAP_SNAKE, NEW_COLOR, NEW_MAP, WALL)) //items
 	{
 		Coord coordItem = boardNextPosCell(coordSnake->x, coordSnake->y, dirSnake);
 		Item itemList = gameGetItemList(g);
@@ -356,7 +356,7 @@ void gameFeed(Game game)
 		y = rand()%boardGetHeight(b);
 	}
 
-	itemAdd(itemList, b, x, y, FOOD);
+	itemAdd(itemList, b, x, y, GROW_UP);
 	printf("AJout du jambon: (%d, %d)\n", x, y);
 }
 

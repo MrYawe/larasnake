@@ -102,6 +102,7 @@ void guiPlay(BoardSize size)
         /***** Draw *****/
         guiDrawGame(screen, game, assets);  // draw the board on srceen with surfaces stored in the Assets struct
         guiReloadScreen(screen);            // reload all the screen
+        //boardDisplay(board);
         /***************/
 
         if(!continueGameMove1 || !continueGameMove2) // if one snake die the game is over
@@ -172,15 +173,16 @@ SDL_Surface* guiLoadImage(char* path) {
 Assets guiLoadAssets() {
     Assets assets = malloc(sizeof(struct Assets));
     assets->background = guiLoadImage("./images/background/bg-medium.png");
-    assets->food = guiLoadImage("./images/item/food.png");
+    assets->itemsAssets = guiLoadItems();
 
     char *colors[3] = {"blue", "red", "green"};
-
     assets->snakesAssets = malloc(3*sizeof(SnakeAssets));
     int i;
     for (i = 0; i < 3; i++) { // mettre à i < 3 si 3 couleurs chargé
         assets->snakesAssets[i] = guiLoadSnake(i, colors[i]); // WATER=0, FIRE=1, GRASS=2
     }
+
+
 
     return assets;
 }
@@ -193,7 +195,6 @@ Assets guiLoadAssets() {
  */
 void guiFreeAssets(Assets assets) {
     free(assets->background);
-    free(assets->food);
     int i;
     for (i = 0; i < 3; i++) { // mettre à i < 3 si 3 couleurs chargé
         free(assets->snakesAssets[i]); // WATER=0, FIRE=1, GRASS=2
@@ -240,6 +241,32 @@ SnakeAssets guiLoadSnake(SnakeType type, char* color) {
 }
 
 /**
+ * \fn SDL_Surface** guiLoadItems()
+ * \brief The function load Items assets
+ * \details The function load all assets needed to draw items
+ * \return Array of SDL_Surface*
+ */
+SDL_Surface** guiLoadItems() {
+
+    SDL_Surface **itemsAssets = malloc(NB_ITEM*sizeof(SDL_Surface*));
+    itemsAssets[FOOD] = guiLoadImage("./images/item/food.png");
+    itemsAssets[SPEED_UP] = guiLoadImage("./images/item/speed-up.png");
+    itemsAssets[GROW_UP] = guiLoadImage("./images/item/grow-up.png");
+    itemsAssets[GROW_DOWN] = guiLoadImage("./images/item/grow-down.png");
+    itemsAssets[REVERSE_CONTROL] = guiLoadImage("./images/item/reverse-control.png");
+    itemsAssets[REVERSE_SNAKE] = guiLoadImage("./images/item/reverse-snake.png");
+    itemsAssets[NO_BORDER] = guiLoadImage("./images/item/no-border.png");
+    itemsAssets[GHOST] = guiLoadImage("./images/item/ghost.png");
+    itemsAssets[SWAP_SNAKE] = guiLoadImage("./images/item/swap-snake.png");
+    itemsAssets[NEW_COLOR] = guiLoadImage("./images/item/new-color.png");
+    itemsAssets[NEW_MAP] = guiLoadImage("./images/item/new-map.png");
+    itemsAssets[WALL] = guiLoadImage("./images/item/wall.png");
+
+
+    return itemsAssets;
+}
+
+/**
  * \fn void guiDrawGame(SDL_Surface *screen, Game game, Assets assets)
  * \brief Draw the entire game on the screen
  * \details Draw each element of the game on the screen with SDL
@@ -256,12 +283,12 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
     guiApplySurface(0, 0, assets->background, screen, NULL); // dessine le background
     guiDrawSnake(screen, snake1, assets->snakesAssets[snakeGetType(snake1)]);
     guiDrawSnake(screen, snake2, assets->snakesAssets[snakeGetType(snake2)]);
-    guiDrawItems(screen, itemList, assets->food);
+    guiDrawItems(screen, itemList, assets->itemsAssets);
     //guiApplySurface(gameGetFood(game)->posX*M_CELL_SIZE, M_CELL_SIZE*gameGetFood(game)->posY, assets->food, screen, NULL);
 }
 
 
-void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface* surface) {
+void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface** itemsAssets) {
 
     Item item = itemList;
     int x, y;
@@ -269,16 +296,8 @@ void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface* surface) {
     while(item != NULL) {
         x = item->posX * M_CELL_SIZE;
         y = item->posY * M_CELL_SIZE;
-        switch(item->value) {
-            case SENTRY:
-                break;
-
-            case FOOD:
-                guiApplySurface(x, y, surface, screen, NULL);
-                break;
-
-            default:
-                break;
+        if(item->value != SENTRY) {
+            guiApplySurface(x, y, itemsAssets[item->value], screen, NULL);
         }
         item = item->next;
     }

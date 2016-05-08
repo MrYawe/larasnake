@@ -44,6 +44,8 @@ void snakeTurnLeft(Snake s);
 void snakeTurnRight(Snake s);
 void snakeTeleportation(Snake s, int posX, int posY);
 
+void snakeGrow(Snake s);
+
 /* ****************
  *    Accessors   *
  **************** */
@@ -71,6 +73,12 @@ void snakeSetType(Snake s, SnakeType t);
 /* ***************
  *   Utilitary   *
  *************** */
+// Headers for static functions of snake file
+void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation);
+void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation);
+void snakeDeleteFirstElement(Snake s);
+//static void snakeDeleteLastElement(Snake s);
+//static int mod(int a, int b);
 void snakeInverseWay(Snake s);
 void snakeDisplay(Snake s);
 void snakeUpdateElement(Snake s, int posElem, int posX, int posY);

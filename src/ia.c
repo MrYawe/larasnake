@@ -53,7 +53,7 @@ int iaDirectionMaxValue(int* tab){
 
 	dirMax = UP;
 	for(dir=UP;dir<=LEFT;dir++) {
-		printf("tab SENS:%d valeur: %d\n", dir, tab[dir]);
+		//printf("tab SENS:%d valeur: %d\n", dir, tab[dir]);
 		if(tab[dirMax]<tab[dir]){
 			dirMax=dir;
 		}
@@ -97,7 +97,7 @@ Direction iaSurviveDepth(Board board, Snake snake) {
 	free(posInter);
 	free(tab);
 	free(posSnake);
-	printf("direction: %d\n", dirSnake);
+	//printf("direction: %d\n", dirSnake);
 	return dirSnake;
 }
 

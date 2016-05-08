@@ -21,8 +21,67 @@
 
 void itemOnCollisionFood(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION JAMBON\n");
+    int k;
+    for (k = 0; k < FOOD_VALUE; k++) {
+        snakeGrow(sOnCollision);
+    }
     itemDelete(i, b);
 }
+
+void itemOnCollisionSpeedUp(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION SPEED_UP\n");
+    snakeSetSpeed(sOnCollision, snakeGetSpeed(sOnCollision)-SPEED_UP_VALUE);
+    itemDelete(i, b);
+}
+
+void itemOnCollisionGrowUp(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION GROW_UP\n");
+    int k;
+    for (k = 0; k < GROW_UP_VALUE; k++) {
+        snakeGrow(sOnCollision);
+    }
+    itemDelete(i, b);
+}
+
+void itemOnCollisionGrowDown(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION GROW_DOWN\n");
+}
+
+void itemOnCollisionReverseControl(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION REVERSE_CONTROL\n");
+}
+
+void itemOnCollisionReverseSnake(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION REVERSE_SNAKE\n");
+}
+
+void itemOnCollisionNoBorder(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION NO_BORDER\n");
+}
+
+void itemOnCollisionGhost(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION GHOST\n");
+}
+
+void itemOnCollisionSwapSnake(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION SWAP_SNAKE\n");
+}
+
+void itemOnCollisionNewColor(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION NEW_COLOR\n");
+}
+
+void itemOnCollisionNewMap(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION NEW_MAP\n");
+}
+
+void itemOnCollisionWall(Item i, Board b, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION WALL\n");
+}
+
+
+
+
 
 
 
@@ -58,6 +117,39 @@ Item itemCreate(int x, int y, BoardValue value) {
             break;
         case FOOD:
             item->onCollision = itemOnCollisionFood;
+            break;
+        case SPEED_UP:
+            item->onCollision = itemOnCollisionSpeedUp;
+            break;
+        case GROW_UP:
+            item->onCollision = itemOnCollisionGrowUp;
+            break;
+        case GROW_DOWN:
+            item->onCollision = itemOnCollisionGrowDown;
+            break;
+        case REVERSE_CONTROL:
+            item->onCollision = itemOnCollisionReverseControl;
+            break;
+        case REVERSE_SNAKE:
+            item->onCollision = itemOnCollisionReverseSnake;
+            break;
+        case NO_BORDER:
+            item->onCollision = itemOnCollisionNoBorder;
+            break;
+        case GHOST:
+            item->onCollision = itemOnCollisionGhost;
+            break;
+        case SWAP_SNAKE:
+            item->onCollision = itemOnCollisionSwapSnake;
+            break;
+        case NEW_COLOR:
+            item->onCollision = itemOnCollisionNewColor;
+            break;
+        case NEW_MAP:
+            item->onCollision = itemOnCollisionNewMap;
+            break;
+        case WALL:
+            item->onCollision = itemOnCollisionWall;
             break;
         default:
             printf("Item non implemented\n");

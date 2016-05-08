@@ -12,13 +12,6 @@
 #include "snake.h"
 #include "constants.h"
 
-// Headers for static functions of snake file
-static void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation);
-static void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation);
-static void snakeDeleteFirstElement(Snake s);
-//static void snakeDeleteLastElement(Snake s);
-//static int mod(int a, int b);
-
 /**
  * \struct Snake
  * \brief The snake structure
@@ -148,6 +141,28 @@ void snakeTeleportation(Snake s, int posX, int posY)
 {
 	snakeAddLastElement(s, posX, posY, s->direction);
 	snakeDeleteFirstElement(s);
+}
+
+void snakeGrow(Snake s)
+{
+	switch (s->direction)
+	{
+		case UP:
+			snakeAddLastElement(s, s->last->posX, s->last->posY - 1, s->direction);
+			break;
+		case DOWN:
+			snakeAddLastElement(s, s->last->posX, s->last->posY + 1, s->direction);
+			break;
+		case LEFT:
+			snakeAddLastElement(s, s->last->posX - 1, s->last->posY, s->direction);
+			break;
+		case RIGHT:
+			snakeAddLastElement(s, s->last->posX + 1, s->last->posY, s->direction);
+			break;
+		default:
+			printf("Error snakeGrow\n");
+			break;
+	}
 }
 
 /**
@@ -479,7 +494,7 @@ void snakeFree(Snake s)
 
 
 /**
- * \fn static void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation)
+ * \fn void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation)
  * \brief The function add an element at the beginning of the chained list
  * \details The function add an element and set it the correct values and then put this element into the snake
  * \param s Snake to edit
@@ -487,7 +502,7 @@ void snakeFree(Snake s)
  * \param posY Int: value to set to the element
  * \param orientation Direction to set to the element
  */
-static void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation)
+void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation)
 {
 	Element *e = (Element*) malloc(sizeof(struct Element));
 	e->posX = posX;
@@ -509,7 +524,7 @@ static void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientat
 }
 
 /**
- * \fn static void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation)
+ * \fn void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation)
  * \brief The function add an element at the end of the chained list
  * \details The function add an element and set it the correct values and then put this element into the snake
  * \param s Snake to edit
@@ -517,7 +532,7 @@ static void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientat
  * \param posY Int: value to set to the element
  * \param orientation Direction to set to the element
  */
-static void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation)
+void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation)
 {
 	if (s->size == 0)
 	{
@@ -538,12 +553,12 @@ static void snakeAddLastElement(Snake s, int posX, int posY, Direction orientati
 }
 
 /**
- * \fn static void snakeDeleteFirstElement(Snake s)
+ * \fn void snakeDeleteFirstElement(Snake s)
  * \brief The function delete an element at the beggining of the chained list
  * \details The function delete an element from the snake
  * \param s Snake to edit
  */
-static void snakeDeleteFirstElement(Snake s)
+void snakeDeleteFirstElement(Snake s)
 {
 	if (s->size == 0)
 	{
