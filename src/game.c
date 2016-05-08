@@ -60,8 +60,8 @@ Game gameCreate(BoardSize size)
 	}
 
 	//g->items = itemsCreate(boardGetWidth(g->board), boardGetHeight(g->board));
-	g->snake1 = snakeCreate(15, 1, RIGHT, WATER);
-	g->snake2 = snakeCreate(15, 2, LEFT, FIRE);
+	g->snake1 = snakeCreate(50, 1, RIGHT, WATER);
+	g->snake2 = snakeCreate(50, 2, LEFT, FIRE);
 	g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
 
