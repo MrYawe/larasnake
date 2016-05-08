@@ -13,11 +13,18 @@
 #include "coord.h"
 
 
-void iaDirectionsAvailable(Board board, Coord coord, int* tab) {
+void iaDirectionsAvailable(Board board, Coord coord, int* tab, int testDirection) {
 	Direction dir;
-	for(dir=UP;dir<=LEFT;dir++) {
-		if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2))
-			tab[dir]+=1;
+	if(testDirection==-1){
+		for(dir=UP;dir<=LEFT;dir++) {
+			if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2))
+				tab[dir]+=1;
+		}	
+	}else {
+		for(dir=UP;dir<=LEFT;dir++) {
+			if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2))
+				tab[testDirection]+=1;
+		}	
 	}
 }
 
@@ -57,21 +64,36 @@ int iaDirectionMaxValue(int* tab){
 Direction iaSurviveDepth(Board board, Snake snake) {
 	Direction dirSnake = snakeGetDirection(snake);
 	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
-	Coord posInter;
+	Coord posInter = coordNew(posSnake->x,posSnake->y);
+	Coord posNext = coordNew(posSnake->x,posSnake->y);
+
+	printf("POSITION SNAKE : x:%d y:%d \n", posSnake->x, posSnake->y);
+
 	int* tab = calloc(4, sizeof(int));
 	int i=0;
 	int j=0;
-	iaDirectionsAvailable(board, posSnake, tab);
-	for(i=1;i<4;i++){
-		for(j=0;j<4;j++){
+	//printf("\nAvailable 1 \n");
+	iaDirectionsAvailable(board, posSnake, tab, -1);
+
+	
+	for(j=0;j<4;j++){
+		//printf("\nAvailable Direction %d \n", j);
+		posNext->x=posSnake->x;
+		posNext->y=posSnake->y;
+		for(i=0;i<5;i++){
+
 			if(tab[j]!=0){
-				posInter = boardNextPosCell(posSnake->x, posSnake->y, j);
-				iaDirectionsAvailable(board, posInter, tab);
+				posInter = boardNextPosCell(posNext->x, posNext->y, j);
+				//printf("Positions testées x:%d y:%d\n", posInter->x, posInter->y);
+				iaDirectionsAvailable(board, posInter, tab, j);
+				posNext->x=posInter->x;
+				posNext->y=posInter->y;
 			}
 		}
 	}
 	dirSnake = iaDirectionRandomize(tab,iaDirectionMaxValue(tab));
 	//
+	free(posNext);
 	free(posInter);
 	free(tab);
 	free(posSnake);
@@ -84,7 +106,7 @@ Direction iaRandom (Board board, Snake snake) {
 	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
 	int* tab = calloc(4, sizeof(int));
 
-	iaDirectionsAvailable(board, posSnake, tab);
+	iaDirectionsAvailable(board, posSnake, tab, -1);
 	int choose = (rand()%4);
 	int i=0;
 	int j=0;
