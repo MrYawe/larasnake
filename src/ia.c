@@ -61,29 +61,42 @@ int iaDirectionMaxValue(int* tab){
 	return tab[dirMax];
 }
 
+void iaDirectionItem(Board board, Snake snake, int* tab) {
+	Item item = boardGetItemList(board);
+
+
+}
+
+
+
 Direction iaSurviveDepth(Board board, Snake snake) {
 	Direction dirSnake = snakeGetDirection(snake);
-	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
-	Coord posInter = coordNew(posSnake->x,posSnake->y);
-	Coord posNext = coordNew(posSnake->x,posSnake->y);
+	Coord posSnakeHead = snakeGetPos(snake, snakeGetSize(snake)-1);
+	Coord posInter = coordNew(posSnakeHead->x,posSnakeHead->y);
+	Coord posNext = coordNew(posSnakeHead->x,posSnakeHead->y);
 
 	//printf("POSITION SNAKE : x:%d y:%d \n", posSnake->x, posSnake->y);
 
 	int* tab = calloc(4, sizeof(int));
 	int i=0;
 	int j=0;
-	//printf("\nAvailable 1 \n");
-	iaDirectionsAvailable(board, posSnake, tab, -1);
 
+	iaDirectionItem(board, snake, tab);
+	iaDirectionsAvailable(board, posSnakeHead, tab, -1);
 
 	for(j=0;j<4;j++){
 		//printf("\nAvailable Direction %d \n", j);
-		posNext->x=posSnake->x;
-		posNext->y=posSnake->y;
+		posNext->x=posSnakeHead->x;
+		posNext->y=posSnakeHead->y;
 		for(i=0;i<5;i++){
 
 			if(tab[j]!=0){
 				posInter = boardNextPosCell(posNext->x, posNext->y, j);
+				
+				if(boardInside(board, posInter->x, posInter->y)) {
+					boardSetValue(board, posInter->x, posInter->y, snakeGetId(snake));
+				}
+				
 				//printf("Positions testées x:%d y:%d\n", posInter->x, posInter->y);
 				iaDirectionsAvailable(board, posInter, tab, j);
 				posNext->x=posInter->x;
@@ -96,7 +109,7 @@ Direction iaSurviveDepth(Board board, Snake snake) {
 	free(posNext);
 	free(posInter);
 	free(tab);
-	free(posSnake);
+	free(posSnakeHead);
 	//printf("direction: %d\n", dirSnake);
 	return dirSnake;
 }

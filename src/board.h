@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include "coord.h"
 #include "snake.h"
+#include "item.h"
 
 //////////////////////////////////////////
 //				STRUCTURE				//
@@ -34,12 +35,17 @@ void boardSetValue(Board b, int x, int y, int val);
 int boardGetHeight(Board b);
 int boardGetWidth(Board b);
 
+Item boardGetItemList(Board board);
+
 //////////////////////////////////////////
 //				UTILITARY				//
 //////////////////////////////////////////
 bool boardInside(Board b, int x, int y);
 void boardDisplay(Board b);
 Board boardCopy(Board b);
+
+Item boardItemAdd(Board board, Item list, int x, int y, BoardValue value);
+int boardItemDelete(Board board, Item item);
 
 // TODO: bordure qui se grise
 // TODO: bordure qui se dégrise

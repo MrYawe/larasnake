@@ -26,7 +26,7 @@ int main ()
     
 
     const struct CMUnitTest ia[] = {
-
+        cmocka_unit_test(testIaJambon),
     };
 
 
