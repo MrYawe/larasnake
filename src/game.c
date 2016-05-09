@@ -33,6 +33,7 @@ struct Game
 	Snake snake2; // joueur 2
 	//Item itemList;
 	bool isPlaying;
+	bool isPaused;
 };
 
 /**
@@ -62,6 +63,7 @@ Game gameCreate(BoardSize size)
 	g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE, SNAKE2, LEFT, FIRE);
 	//g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
+	g->isPaused = false;
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
 
@@ -124,6 +126,16 @@ Item gameGetItemList(Game g) {
 bool gameGetIsPlaying(Game g)
 {
 	return g->isPlaying;
+}
+
+bool gameGetIsPaused(Game g)
+{
+	return g->isPaused;
+}
+
+void gameSetIsPaused(Game g, bool isPaused)
+{
+	g->isPaused = isPaused;
 }
 
 /**
@@ -237,7 +249,7 @@ static bool gameCheckMovement(Game g, Snake s)
 	Coord coordSnake = snakeGetPos(s, snakeGetSize(s)-1);
 	Direction dirSnake = snakeGetDirection(s);
 	//BUG Next pos cell quand fantôme
-	
+
 	if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, OUTSIDE))
 	{
 		if (snakeGetCanCrossBorder(s)) // if he can cross border
@@ -292,10 +304,10 @@ static bool gameCheckMovement(Game g, Snake s)
 	{
 		Snake otherSnake;
 		Coord coordItem = boardNextPosCell(coordSnake->x, coordSnake->y, dirSnake);
-		
+
 		Item itemList = boardGetItemList(b);
 		Item item = itemSearch(itemList, coordItem->x, coordItem->y);
-		
+
 		printf("****************************COLLISION ITEM %d (x=%d, y=%d)\n", item->value, item->posX, item->posY);
 		if(snakeGetId(s) == 1) {
 			otherSnake = gameGetSnake(g, 2);
@@ -321,9 +333,9 @@ static bool gameCheckMovement(Game g, Snake s)
 				printf("Error checkMovement\n");
 				break;
 		}
-		
+
 		item->onCollision(item, s, otherSnake);
-	
+
 		boardItemDelete(b, item);
 	}
 	else
@@ -388,7 +400,7 @@ void gameFeed(Game game)
 	}
 
 	BoardValue itemValue = itemGetRandomItemValue();
-	boardItemAdd(b, itemList, x, y,SWAP_SNAKE);
+	boardItemAdd(b, itemList, x, y, SWAP_SNAKE);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 

@@ -59,7 +59,7 @@ void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets);
 void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface** itemsAssets);
 
 /**** Events ****/
-void guiSnakeEvent(SDL_Event *event, Snake s);
+void guiEvent(SDL_Event *event, Snake s, Game g);
 void guiGeneralEvent(SDL_Event *event, Game game);
 
 
