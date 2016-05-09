@@ -363,8 +363,7 @@ void gameFeed(Game game)
 	}
 
 	BoardValue itemValue = itemGetRandomItemValue();
-	itemAdd(itemList, b, x, y, SWAP_SNAKE);
-	itemAdd(itemList, b, x+3, y+3, SWAP_SNAKE);
+	itemAdd(itemList, b, x, y, itemValue);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 
