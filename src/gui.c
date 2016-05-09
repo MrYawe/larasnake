@@ -78,7 +78,7 @@ void guiPlay(BoardSize size)
 	/************************/
     while (gameGetIsPlaying(game)) {
         timer->start = SDL_GetTicks(); // Start of the current frame
-        
+
         guiEvent(&event, snake1, game);                      // catch player event and set the direction of snake1
         if(!gameGetIsPaused(game)) {
             ////// Move of snake 1 (player) //////
@@ -93,7 +93,8 @@ void guiPlay(BoardSize size)
             ////// Move of snake 2 (AI) //////
             timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
             if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {  // test if we wait enough time to move the snake 2
-                snakeSetDirection(snake2, iaSurviveDepth(board, snake2));  // let ia choose the best direction of snake2
+                boardIa = boardCopy(board);
+                snakeSetDirection(snake2, iaSurviveDepth(boardIa, snake2));  // let ia choose the best direction of snake2
                 continueGameMove2 = gameMoveSnake(game, snake2);   // move the snake2. if snake2 is dead continueGameMove2=false
                 timer->snake2MoveTimer = 0;                        // set the move timer to 0 when the snake move
             }

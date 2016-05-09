@@ -92,11 +92,11 @@ Direction iaSurviveDepth(Board board, Snake snake) {
 
 			if(tab[j]!=0){
 				posInter = boardNextPosCell(posNext->x, posNext->y, j);
-				
+
 				if(boardInside(board, posInter->x, posInter->y)) {
 					boardSetValue(board, posInter->x, posInter->y, snakeGetId(snake));
 				}
-				
+
 				//printf("Positions testées x:%d y:%d\n", posInter->x, posInter->y);
 				iaDirectionsAvailable(board, posInter, tab, j);
 				posNext->x=posInter->x;
