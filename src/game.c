@@ -63,7 +63,6 @@ Game gameCreate(BoardSize size)
 	g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE, SNAKE2, LEFT, FIRE);
 	//g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
-	g->isPaused = false;
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
 
@@ -187,7 +186,6 @@ void gameUpdateSnake(Board b, Snake s)
 	{
 		snakePos=snakeGetPos(s, i);
 		boardSetValue(b, snakePos->x, snakePos->y, snakeGetId(s));
-		free(snakePos);
 	}
 }
 
@@ -249,7 +247,7 @@ static bool gameCheckMovement(Game g, Snake s)
 	Coord coordSnake = snakeGetPos(s, snakeGetSize(s)-1);
 	Direction dirSnake = snakeGetDirection(s);
 	//BUG Next pos cell quand fantôme
-
+	
 	if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, OUTSIDE))
 	{
 		if (snakeGetCanCrossBorder(s)) // if he can cross border
@@ -304,10 +302,10 @@ static bool gameCheckMovement(Game g, Snake s)
 	{
 		Snake otherSnake;
 		Coord coordItem = boardNextPosCell(coordSnake->x, coordSnake->y, dirSnake);
-
+		
 		Item itemList = boardGetItemList(b);
 		Item item = itemSearch(itemList, coordItem->x, coordItem->y);
-
+		
 		printf("****************************COLLISION ITEM %d (x=%d, y=%d)\n", item->value, item->posX, item->posY);
 		if(snakeGetId(s) == 1) {
 			otherSnake = gameGetSnake(g, 2);
@@ -333,9 +331,9 @@ static bool gameCheckMovement(Game g, Snake s)
 				printf("Error checkMovement\n");
 				break;
 		}
-
+		
 		item->onCollision(item, s, otherSnake);
-
+	
 		boardItemDelete(b, item);
 	}
 	else
@@ -359,7 +357,6 @@ static bool gameCheckMovement(Game g, Snake s)
 				break;
 		}
 	}
-	free(coordSnake);
 	return continueGame;
 }
 
@@ -400,7 +397,7 @@ void gameFeed(Game game)
 	}
 
 	BoardValue itemValue = itemGetRandomItemValue();
-	boardItemAdd(b, itemList, x, y, SWAP_SNAKE);
+	boardItemAdd(b, itemList, x, y,itemValue);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 

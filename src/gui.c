@@ -28,17 +28,17 @@
  */
 void guiPlay(BoardSize size)
 {
-	  /*******************/
-	 /**   VARIABLES   **/
-	/*******************/
+      /*******************/
+     /**   VARIABLES   **/
+    /*******************/
 
-	/***** SDL Variables *****/
-    SDL_Event event;	//Variable to capture mouse/keyboard events
+    /***** SDL Variables *****/
+    SDL_Event event;    //Variable to capture mouse/keyboard events
     SDL_Surface* screen;//Buffer that will contain the pixels to render on the screen
 
     /***** General Variables *****/
-	Assets assets;	//Variable that will contain all the assets used in the game
-    Timer timer;	//Variable used to control the actions based on the time
+    Assets assets;  //Variable that will contain all the assets used in the game
+    Timer timer;    //Variable used to control the actions based on the time
 
     /***** Structure Variables *****/
     bool continueGameMove1;	//Variable used to check if the snake 1 is dead
@@ -60,8 +60,8 @@ void guiPlay(BoardSize size)
     SDL_WM_SetCaption("Larasnake", NULL);	//Set the title and icon name of the displayed window
     screen = guiCreateScreen(size);
 
-	/***** General Variables *****/
-	srand(time(NULL));	//Initialization of the random function
+    /***** General Variables *****/
+    srand(time(NULL));  //Initialization of the random function
     timer = guiCreateTimer();
     assets = guiLoadAssets();
 
@@ -75,9 +75,9 @@ void guiPlay(BoardSize size)
     snake1 = gameGetSnake(game, 1);
     snake2 = gameGetSnake(game, 2);
 
-   	  /************************/
-	 /**	  GAME LOOP		**/
-	/************************/
+      /************************/
+     /**      GAME LOOP     **/
+    /************************/
     while (gameGetIsPlaying(game)) {
         timer->start = SDL_GetTicks(); // Start of the current frame
 
@@ -95,8 +95,7 @@ void guiPlay(BoardSize size)
             ////// Move of snake 2 (AI) //////
             timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
             if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {  // test if we wait enough time to move the snake 2
-                boardIa = boardCopy(board);
-                snakeSetDirection(snake2, iaSurviveDepth(boardIa, snake2));  // let ia choose the best direction of snake2
+                snakeSetDirection(snake2, iaSurviveDepth(board, snake2));  // let ia choose the best direction of snake2
                 continueGameMove2 = gameMoveSnake(game, snake2);   // move the snake2. if snake2 is dead continueGameMove2=false
                 timer->snake2MoveTimer = 0;                        // set the move timer to 0 when the snake move
             }

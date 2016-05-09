@@ -214,7 +214,6 @@ Board boardCopy(Board b)
 {
 	if (b == NULL)
 		return NULL;
-
 	Board res = boardInit(b->sizeX, b->sizeY, b->sizeCell);
 	int j, i;
 	

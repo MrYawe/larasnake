@@ -43,6 +43,9 @@ Snake gameGetSnake(Game g, int player);
 Item gameGetItemList(Game g);
 //getItems
 
+bool gameGetIsPaused(Game g);
+void gameSetIsPaused(Game g, bool isPaused);
+
 //////////////////////////////////////////
 //				UTILITARY				//
 //////////////////////////////////////////
@@ -62,7 +65,5 @@ bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...);
 void gameFeed(Game game);
 
 bool gameGetIsPlaying(Game g);
-void gameSetIsPaused(Game g, bool isPaused);
-bool gameGetIsPaused(Game g);
 void gameEnd(Game g);
 #endif

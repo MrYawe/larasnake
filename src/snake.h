@@ -18,7 +18,7 @@
  * \brief Permet de gérer la direction du snake
  * \details Contient toutes les directions possibles pour le snake
  **/
-typedef enum Direction {UP, RIGHT, DOWN, LEFT} Direction;
+typedef enum Direction {NIL=-1, UP, RIGHT, DOWN, LEFT} Direction;
 
 /**
  * \enum Type
@@ -35,8 +35,7 @@ typedef struct Element Element;
  **/
 struct Element
 {
-	int posX;
-	int posY;
+	Coord pos;
 	Element *next;
 	Element *previous;
 	Direction orientation;

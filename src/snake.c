@@ -55,10 +55,14 @@ Snake snakeCreate(int size, int id, Direction d, SnakeType type)
  */
 void snakeGoUp(Snake s)
 {
-	snakeAddLastElement(s, s->last->posX, s->last->posY - 1, s->direction);
-	//snakeAddLastElement(s, s->last->posX, mod(s->last->posY - 1, BOARD_SIZE));
+
+	/*if(s->direction!=s->last->orientation)
+		snakeAddLastElement(s, s->last->pos->x, s->last->pos->y - 1, NIL);
+		//snakeAddLastElement(s, s->last->posX, mod(s->last->posY - 1, BOARD_SIZE));
+	else
+	*/	snakeAddLastElement(s, s->last->pos->x, s->last->pos->y - 1, s->direction);
+	
 	snakeDeleteFirstElement(s);
-	s->direction = UP;
 }
 
 /**
@@ -69,10 +73,13 @@ void snakeGoUp(Snake s)
  */
 void snakeGoDown(Snake s)
 {
-	snakeAddLastElement(s, s->last->posX, s->last->posY + 1, s->direction);
+	/*if(s->direction!=s->last->orientation)
+		snakeAddLastElement(s, s->last->pos->x, s->last->pos->y + 1, NIL);
 	//snakeAddLastElement(s, s->last->posX, mod(s->last->posY + 1, BOARD_SIZE));
+	else 
+	*/	snakeAddLastElement(s, s->last->pos->x, s->last->pos->y + 1, s->direction);
+
 	snakeDeleteFirstElement(s);
-	s->direction = DOWN;
 }
 
 /**
@@ -83,10 +90,13 @@ void snakeGoDown(Snake s)
  */
 void snakeTurnLeft(Snake s)
 {
-	snakeAddLastElement(s, s->last->posX - 1, s->last->posY, s->direction);
+	/*if(s->direction!=s->last->orientation)
+		snakeAddLastElement(s, s->last->pos->x - 1, s->last->pos->y, NIL);
 	//snakeAddLastElement(s, mod(s->last->posX - 1, BOARD_SIZE), s->last->posY);
+	else
+	*/	snakeAddLastElement(s, s->last->pos->x - 1, s->last->pos->y, s->direction);
+
 	snakeDeleteFirstElement(s);
-	s->direction = LEFT;
 }
 
 /**
@@ -97,10 +107,13 @@ void snakeTurnLeft(Snake s)
  */
 void snakeTurnRight(Snake s)
 {
-	snakeAddLastElement(s, s->last->posX + 1, s->last->posY, s->direction);
+	/*if(s->direction!=s->last->orientation)
+		snakeAddLastElement(s, s->last->pos->x + 1, s->last->pos->y, NIL);
 	//snakeAddLastElement(s, mod(s->last->posX + 1, BOARD_SIZE), s->last->posY);
+	else
+	*/	snakeAddLastElement(s, s->last->pos->x + 1, s->last->pos->y, s->direction);
+		
 	snakeDeleteFirstElement(s);
-	s->direction = RIGHT;
 }
 
 /**
@@ -122,16 +135,16 @@ void snakeGrow(Snake s)
 	switch (s->direction)
 	{
 		case UP:
-			snakeAddLastElement(s, s->last->posX, s->last->posY - 1, s->direction);
+			snakeAddLastElement(s, s->last->pos->x, s->last->pos->y - 1, s->direction);
 			break;
 		case DOWN:
-			snakeAddLastElement(s, s->last->posX, s->last->posY + 1, s->direction);
+			snakeAddLastElement(s, s->last->pos->x, s->last->pos->y + 1, s->direction);
 			break;
 		case LEFT:
-			snakeAddLastElement(s, s->last->posX - 1, s->last->posY, s->direction);
+			snakeAddLastElement(s, s->last->pos->x - 1, s->last->pos->y, s->direction);
 			break;
 		case RIGHT:
-			snakeAddLastElement(s, s->last->posX + 1, s->last->posY, s->direction);
+			snakeAddLastElement(s, s->last->pos->x + 1, s->last->pos->y, s->direction);
 			break;
 		default:
 			printf("Error snakeGrow\n");
@@ -149,10 +162,10 @@ void snakeGrow(Snake s)
  */
 Coord snakeGetPos(Snake s, int posBloc)
 {
-	Coord res = coordNew(0,0);
 	if (posBloc < 0 || posBloc >= s->size)
 	{
 		printf("snakeGetPosition : Error pos parameter out of range\n");
+		return NULL;
 	}
 	else
 	{
@@ -162,10 +175,8 @@ Coord snakeGetPos(Snake s, int posBloc)
 		{
 			e = e->next;
 		}
-		res->x=e->posX;
-		res->y=e->posY;
+		return e->pos;
 	}
-	return res;
 }
 
 /**
@@ -399,7 +410,6 @@ void snakeInverseWay(Snake s)
 {
 	Element *tampon = s->first;
 	s->first = s->last;
-	s->last = tampon;
 
 	Element* tempElem = NULL;
 	while (tampon)
@@ -410,66 +420,7 @@ void snakeInverseWay(Snake s)
 	 	tempElem = tampon;
 		tampon = suivant;
 	}
-
-	Element *curseur = s->first;
-	while(curseur != NULL)
-	{
-		switch (curseur->orientation)
-		{
-			case UP:
-				curseur->orientation = DOWN;
-			break;
-			case DOWN:
-				curseur->orientation = UP;
-			break;
-			case LEFT:
-				curseur->orientation = RIGHT;
-			break;
-			case RIGHT:
-				curseur->orientation = LEFT;
-			break;
-			default:
-			break;
-		}
-		curseur = curseur->next;
-	}
-
-	curseur = s->first;
-	while(curseur != NULL)
-	{
-
-		curseur = curseur->next;
-	}
-
-	switch (s->direction)
-	{
-		case UP:
-			s->direction = DOWN;
-		break;
-		case DOWN:
-			s->direction = UP;
-		break;
-		case LEFT:
-			s->direction = RIGHT;
-		break;
-		case RIGHT:
-			s->direction = LEFT;
-		break;
-		default:
-		break;
-	}
-}
-
-static char* getElemDirectionText(enum Direction orientation)
-{
-	switch(orientation)
-	{
-		case UP: return "UP";
-		case RIGHT: return "RIGHT";
-		case DOWN: return "DOWN";
-		case LEFT: return "LEFT";
-		default: return "";
-	}
+	s->last = tempElem;
 }
 
 /**
@@ -488,13 +439,9 @@ void snakeDisplay(Snake s)
 	printf("\n");printf("\n");
 	Element *curseur = s->first;
 	int i=0;
-	printf("Id du skake: %d\n", snakeGetId(s));
-	printf("First : %p\n", s->first);
-	printf("Last : %p\n", s->last);
-	printf("Snake direction : %s\n", getElemDirectionText(s->direction));
 	while(curseur != NULL)
 	{
-		printf("Actuel : %p | précédent : %p | suivant %p | posX %d | posY %d | direction : %s\n", curseur, curseur->previous, curseur->next, curseur->posX, curseur->posY, getElemDirectionText(curseur->orientation));
+		printf("Actuel : %p | précédent : %p | suivant %p | posX %d | posY %d\n", curseur, curseur->previous, curseur->next, curseur->pos->x, curseur->pos->y);
 		//printf("Maillon %d : [posX: %d, posY: %d]\n", i, curseur->posX, curseur->posY);
 		curseur = curseur->next;
 		i++;
@@ -524,8 +471,8 @@ void snakeUpdateElement(Snake s, int posElem, int posX, int posY)
 		{
 			e = e->next;
 		}
-		e->posX = posX;
-		e->posY = posY;
+		e->pos->x=posX;
+		e->pos->y=posY;
 	}
 }
 
@@ -543,6 +490,7 @@ void snakeFree(Snake s)
 	while(curs != NULL)
 	{
 		curssuiv = curs->next;
+		free(curs->pos);
 		free(curs);
 		curs = curssuiv;
 	}
@@ -561,8 +509,7 @@ void snakeFree(Snake s)
 void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation)
 {
 	Element *e = (Element*) malloc(sizeof(struct Element));
-	e->posX = posX;
-	e->posY = posY;
+	e->pos = coordNew(posX, posY);
 	e->orientation = orientation;
 	e->previous = NULL;
 	if (s->size == 0)
@@ -597,8 +544,7 @@ void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation)
 	else
 	{
 		Element *e = (Element*) malloc(sizeof(struct Element));
-		e->posX = posX;
-		e->posY = posY;
+		e->pos = coordNew(posX, posY);
 		e->orientation = orientation;
 		e->previous = s->last;
 		e->next = NULL;
