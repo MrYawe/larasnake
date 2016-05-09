@@ -20,7 +20,7 @@ static bool gameCheckMovement(Game g, Snake s);
 //////////////////////////////////////////
 //				STRUCTURE				//
 //////////////////////////////////////////
-
+//PROUT
 /**
  * \struct Game
  * \brief The game structure
