@@ -19,12 +19,12 @@ void iaDirectionsAvailable(Board board, Coord coord, int* tab, int testDirection
 		for(dir=UP;dir<=LEFT;dir++) {
 			if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2))
 				tab[dir]+=1;
-		}	
+		}
 	}else {
 		for(dir=UP;dir<=LEFT;dir++) {
 			if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2))
 				tab[testDirection]+=1;
-		}	
+		}
 	}
 }
 
@@ -67,7 +67,7 @@ Direction iaSurviveDepth(Board board, Snake snake) {
 	Coord posInter = coordNew(posSnake->x,posSnake->y);
 	Coord posNext = coordNew(posSnake->x,posSnake->y);
 
-	printf("POSITION SNAKE : x:%d y:%d \n", posSnake->x, posSnake->y);
+	//printf("POSITION SNAKE : x:%d y:%d \n", posSnake->x, posSnake->y);
 
 	int* tab = calloc(4, sizeof(int));
 	int i=0;
@@ -75,7 +75,7 @@ Direction iaSurviveDepth(Board board, Snake snake) {
 	//printf("\nAvailable 1 \n");
 	iaDirectionsAvailable(board, posSnake, tab, -1);
 
-	
+
 	for(j=0;j<4;j++){
 		//printf("\nAvailable Direction %d \n", j);
 		posNext->x=posSnake->x;

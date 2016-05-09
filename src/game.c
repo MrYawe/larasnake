@@ -96,18 +96,19 @@ Board gameGetBoard(Game g)
 }
 
 /**
- * \fn Snake gameGetSnake(Game g, int player)
+ * \fn Snake game(Game g, int player)
  * \brief Accessor to the snake of the game structure
  * \details The function returns the snake of the game
  * \param g Game: The game to access
  * \param player Int: The player number
  * \return Returns Snake pointer
  */
-Snake gameGetSnake(Game g, int player)
+Snake gameGetSnake(Game g, int id)
 {
-	if (player == 1)
+	if (snakeGetId(g->snake1) == id)
 		return g->snake1;
-	return g->snake2;
+	else
+		return g->snake2;
 }
 
 Item gameGetItemList(Game g) {
@@ -362,7 +363,8 @@ void gameFeed(Game game)
 	}
 
 	BoardValue itemValue = itemGetRandomItemValue();
-	itemAdd(itemList, b, x, y, itemValue);
+	itemAdd(itemList, b, x, y, SWAP_SNAKE);
+	itemAdd(itemList, b, x+3, y+3, SWAP_SNAKE);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 
