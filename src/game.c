@@ -33,6 +33,7 @@ struct Game
 	Snake snake2; // joueur 2
 	//Item itemList;
 	bool isPlaying;
+	bool isPaused;
 };
 
 /**
@@ -124,6 +125,16 @@ Item gameGetItemList(Game g) {
 bool gameGetIsPlaying(Game g)
 {
 	return g->isPlaying;
+}
+
+bool gameGetIsPaused(Game g)
+{
+	return g->isPaused;
+}
+
+void gameSetIsPaused(Game g, bool isPaused)
+{
+	g->isPaused = isPaused;
 }
 
 /**
@@ -386,7 +397,7 @@ void gameFeed(Game game)
 	}
 
 	BoardValue itemValue = itemGetRandomItemValue();
-	boardItemAdd(b, itemList, x, y,SWAP_SNAKE);
+	boardItemAdd(b, itemList, x, y,itemValue);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 

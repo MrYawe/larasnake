@@ -43,6 +43,9 @@ Snake gameGetSnake(Game g, int player);
 Item gameGetItemList(Game g);
 //getItems
 
+bool gameGetIsPaused(Game g);
+void gameSetIsPaused(Game g, bool isPaused);
+
 //////////////////////////////////////////
 //				UTILITARY				//
 //////////////////////////////////////////
