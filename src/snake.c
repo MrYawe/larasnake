@@ -399,6 +399,7 @@ void snakeInverseWay(Snake s)
 {
 	Element *tampon = s->first;
 	s->first = s->last;
+	s->last = tampon;
 
 	Element* tempElem = NULL;
 	while (tampon)
@@ -409,7 +410,66 @@ void snakeInverseWay(Snake s)
 	 	tempElem = tampon;
 		tampon = suivant;
 	}
-	s->last = tempElem;
+
+	Element *curseur = s->first;
+	while(curseur != NULL)
+	{
+		switch (curseur->orientation)
+		{
+			case UP:
+				curseur->orientation = DOWN;
+			break;
+			case DOWN:
+				curseur->orientation = UP;
+			break;
+			case LEFT:
+				curseur->orientation = RIGHT;
+			break;
+			case RIGHT:
+				curseur->orientation = LEFT;
+			break;
+			default:
+			break;
+		}
+		curseur = curseur->next;
+	}
+
+	curseur = s->first;
+	while(curseur != NULL)
+	{
+
+		curseur = curseur->next;
+	}
+
+	switch (s->direction)
+	{
+		case UP:
+			s->direction = DOWN;
+		break;
+		case DOWN:
+			s->direction = UP;
+		break;
+		case LEFT:
+			s->direction = RIGHT;
+		break;
+		case RIGHT:
+			s->direction = LEFT;
+		break;
+		default:
+		break;
+	}
+}
+
+static char* getElemDirectionText(enum Direction orientation)
+{
+	switch(orientation)
+	{
+		case UP: return "UP";
+		case RIGHT: return "RIGHT";
+		case DOWN: return "DOWN";
+		case LEFT: return "LEFT";
+		default: return "";
+	}
 }
 
 /**
@@ -428,9 +488,13 @@ void snakeDisplay(Snake s)
 	printf("\n");printf("\n");
 	Element *curseur = s->first;
 	int i=0;
+	printf("Id du skake: %d\n", snakeGetId(s));
+	printf("First : %p\n", s->first);
+	printf("Last : %p\n", s->last);
+	printf("Snake direction : %s\n", getElemDirectionText(s->direction));
 	while(curseur != NULL)
 	{
-		printf("Actuel : %p | précédent : %p | suivant %p | posX %d | posY %d\n", curseur, curseur->previous, curseur->next, curseur->posX, curseur->posY);
+		printf("Actuel : %p | précédent : %p | suivant %p | posX %d | posY %d | direction : %s\n", curseur, curseur->previous, curseur->next, curseur->posX, curseur->posY, getElemDirectionText(curseur->orientation));
 		//printf("Maillon %d : [posX: %d, posY: %d]\n", i, curseur->posX, curseur->posY);
 		curseur = curseur->next;
 		i++;

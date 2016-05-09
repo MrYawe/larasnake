@@ -55,7 +55,7 @@ void itemOnCollisionReverseControl(Item i, Snake sOnCollision, Snake sBis) {
 
 void itemOnCollisionReverseSnake(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION REVERSE_SNAKE\n");
-    // TODO franck: la tete devient la queue
+    snakeInverseWay(sOnCollision);
 }
 
 void itemOnCollisionNoBorder(Item i, Snake sOnCollision, Snake sBis) {
