@@ -2,6 +2,5 @@
 #define TEST_IA_H
 
 void testIaJambon(void **state);
-void testIaJambon(void **state);
 
 #endif

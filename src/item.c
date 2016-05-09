@@ -59,7 +59,8 @@ void itemOnCollisionReverseControl(Item i, Board b, Snake sOnCollision, Snake sB
 
 void itemOnCollisionReverseSnake(Item i, Board b, Snake sOnCollision, Snake sBis) {
     printf("COLLISION REVERSE_SNAKE\n");
-    // TODO franck: la tete devient la queue
+    // TODO franck: la tete devient la queue !OK!
+    snakeInverseWay(sOnCollision);
     itemDelete(i, b);
 }
 
@@ -194,6 +195,7 @@ Item itemCreate(int x, int y, BoardValue value) {
 
 BoardValue itemGetRandomItemValue() {
     int x = rand()%12;
+    return 9;
     return x+4;
 }
 

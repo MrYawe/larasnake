@@ -96,19 +96,18 @@ Board gameGetBoard(Game g)
 }
 
 /**
- * \fn Snake game(Game g, int player)
+ * \fn Snake gameGetSnake(Game g, int player)
  * \brief Accessor to the snake of the game structure
  * \details The function returns the snake of the game
  * \param g Game: The game to access
  * \param player Int: The player number
  * \return Returns Snake pointer
  */
-Snake gameGetSnake(Game g, int id)
+Snake gameGetSnake(Game g, int player)
 {
-	if (snakeGetId(g->snake1) == id)
+	if (player == 1)
 		return g->snake1;
-	else
-		return g->snake2;
+	return g->snake2;
 }
 
 Item gameGetItemList(Game g) {
@@ -299,6 +298,26 @@ static bool gameCheckMovement(Game g, Snake s)
 		} else {
 			otherSnake = gameGetSnake(g, 1);
 		}
+
+		switch (dirSnake)
+		{
+			case UP:
+				snakeGoUp(s);
+				break;
+			case DOWN:
+				snakeGoDown(s);
+				break;
+			case LEFT:
+				snakeTurnLeft(s);
+				break;
+			case RIGHT:
+				snakeTurnRight(s);
+				break;
+			default:
+				printf("Error checkMovement\n");
+				break;
+		}
+
 		item->onCollision(item, b, s, otherSnake);
 	}
 	else

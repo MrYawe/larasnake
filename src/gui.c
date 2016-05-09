@@ -123,6 +123,7 @@ void guiPlay(BoardSize size)
         ////// Framerate management //////
         timer->end = SDL_GetTicks();                           // Get the time after the calculations
         timer->delay = FRAME_MS - (timer->end - timer->start); // Calculate how long to delay should be
+
         // printf("timer left : %d\n", timer->delay);
         if(timer->delay > 0) {
             SDL_Delay(timer->delay);                           // Delay processing
