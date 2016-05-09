@@ -4,11 +4,11 @@ T_TARGET = testAll
 
 CC       = gcc
 # compiling flags here
-CFLAGS   = -Wall -I. `sdl-config --libs` -lSDL_image -g
+CFLAGS   = -Wall -I. `sdl-config --libs` -lSDL_image -lSDL_ttf -g
 
 LINKER   = gcc -o
 # linking flags here
-LFLAGS   = -I. -lm `sdl-config --libs` -lSDL_image -g
+LFLAGS   = -I. -lm `sdl-config --libs` -lSDL_image -lSDL_ttf -g
 
 # change these to set the proper directories where each files shoould be
 SRCDIR   = src
@@ -29,7 +29,7 @@ T_OBJECTS  := $(T_SOURCES:$(T_DIR)/%.c=$(OBJDIR)/%.o)
 
 ####################################################################
 
-all: $(BINDIR)/$(TARGET) 
+all: $(BINDIR)/$(TARGET)
 test: $(BINDIR)/$(T_TARGET)
 
 ####################################################################

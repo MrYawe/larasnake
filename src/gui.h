@@ -19,6 +19,12 @@ struct Timer
 	Uint32 itemLastPop;
 };
 
+typedef struct GuiAssets *GuiAssets;
+struct GuiAssets
+{
+	SDL_Surface *pauseScreen;
+};
+
 typedef struct SnakeAssets *SnakeAssets;
 struct SnakeAssets
 {
@@ -32,6 +38,7 @@ typedef struct Assets *Assets;
 struct Assets
 {
 	SnakeAssets *snakesAssets;
+	GuiAssets guiAssets;
 	SDL_Surface *background;
 	SDL_Surface **itemsAssets;
 };
@@ -39,6 +46,7 @@ struct Assets
 /**** General ****/
 void guiPlay(BoardSize size);
 Timer guiCreateTimer();
+void guiPause(Game g);
 
 /**** Screen ****/
 SDL_Surface* guiCreateScreen(BoardSize size);
@@ -48,6 +56,7 @@ void guiClearScreen(SDL_Surface *screen);
 /**** Assets ****/
 Assets guiLoadAssets();
 SnakeAssets guiLoadSnake(SnakeType type, char* color);
+GuiAssets guiLoadGui();
 SDL_Surface** guiLoadItems();
 SDL_Surface* guiLoadImage(char* path);
 void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
@@ -57,6 +66,7 @@ void guiFreeAssets(Assets assets);
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets);
 void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets);
 void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface** itemsAssets);
+void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets);
 
 /**** Events ****/
 void guiEvent(SDL_Event *event, Snake s, Game g);

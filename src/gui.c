@@ -14,6 +14,7 @@
 #include <time.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 #include "gui.h"
 #include "constants.h"
 #include "game.h"
@@ -55,6 +56,7 @@ void guiPlay(BoardSize size)
 
 	/***** SDL Initialization *****/
     SDL_Init(SDL_INIT_VIDEO);				//Initialization of the SDL Library
+    TTF_Init();
     SDL_WM_SetCaption("Larasnake", NULL);	//Set the title and icon name of the displayed window
     screen = guiCreateScreen(size);
 
@@ -108,15 +110,13 @@ void guiPlay(BoardSize size)
                 timer->itemPopTimer = 0;
             }
             timer->itemLastPop = SDL_GetTicks();
-
-
-
-            /////// Draw ///////
-            guiDrawGame(screen, game, assets);  // draw the board on srceen with surfaces stored in the Assets struct
-            guiReloadScreen(screen);            // reload all the screen
-            //boardDisplay(board);
-            ///////////////////
         }
+
+        /////// Draw ///////
+        guiDrawGame(screen, game, assets);  // draw the board on srceen with surfaces stored in the Assets struct
+        guiReloadScreen(screen);            // reload all the screen
+        //boardDisplay(board);
+        ///////////////////
 
         if(!continueGameMove1 || !continueGameMove2) // if one snake die the game is over
             gameEnd(game);
@@ -133,6 +133,7 @@ void guiPlay(BoardSize size)
     ////// Free //////
     gameFree(game);
     guiFreeAssets(assets);
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -188,6 +189,7 @@ Assets guiLoadAssets() {
     Assets assets = malloc(sizeof(struct Assets));
     assets->background = guiLoadImage("./images/background/bg-medium.png");
     assets->itemsAssets = guiLoadItems();
+    assets->guiAssets = guiLoadGui();
 
     char *colors[3] = {"blue", "red", "green"};
     assets->snakesAssets = malloc(3*sizeof(SnakeAssets));
@@ -281,6 +283,20 @@ SDL_Surface** guiLoadItems() {
 }
 
 /**
+ * \fn GuiAssets guiLoadGui()
+ * \brief The function load Gui assets
+ * \details The function load all assets needed to draw the gui
+ * \return Array of SDL_Surface*
+ */
+GuiAssets guiLoadGui() {
+
+    GuiAssets guiAssets = malloc(sizeof(struct GuiAssets));
+    guiAssets->pauseScreen = guiLoadImage("./images/gui/pause.png");
+
+    return guiAssets;
+}
+
+/**
  * \fn void guiDrawGame(SDL_Surface *screen, Game game, Assets assets)
  * \brief Draw the entire game on the screen
  * \details Draw each element of the game on the screen with SDL
@@ -298,6 +314,7 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
     guiDrawSnake(screen, snake1, assets->snakesAssets[snakeGetType(snake1)]);
     guiDrawSnake(screen, snake2, assets->snakesAssets[snakeGetType(snake2)]);
     guiDrawItems(screen, itemList, assets->itemsAssets);
+    guiDrawGui(screen, game, assets->guiAssets);
     //guiApplySurface(gameGetFood(game)->posX*M_CELL_SIZE, M_CELL_SIZE*gameGetFood(game)->posY, assets->food, screen, NULL);
 }
 
@@ -305,10 +322,6 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
 void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface** itemsAssets) {
 
     Item item = itemList;
-    if(item->next != NULL) {
-        Item item1 = itemList->next;
-        printf("Item  1 : x=%d, y=%d\n", item1->posX, item1->posY);
-    }
     int x, y;
 
     while(item != NULL) {
@@ -390,6 +403,13 @@ void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets) {
     }
 }
 
+void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets) {
+
+    if(gameGetIsPaused(game)) {
+        guiApplySurface(0, 0, guiAssets->pauseScreen, screen, NULL);
+    }
+}
+
 /**
  * \fn void guiApplySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
  * \brief Draw one surface on the screen
@@ -440,6 +460,13 @@ Timer guiCreateTimer() {
  */
 void guiReloadScreen(SDL_Surface *screen) {
     SDL_Flip(screen);
+}
+
+void guiPause(Game g) {
+    if (gameGetIsPaused(g))
+        gameSetIsPaused(g, false);
+    else
+        gameSetIsPaused(g, true);
 }
 
 /**
@@ -495,10 +522,7 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
                             }
                             break;
                         case SDLK_SPACE:
-                            if (gameGetIsPaused(g))
-                                gameSetIsPaused(g, false);
-                            else
-                                gameSetIsPaused(g, true);
+                            guiPause(g);
                             break;
                         default:
                             break;
