@@ -104,18 +104,6 @@ void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * \fn Item itemCreate(int x, int y, BoardValue value)
  * \brief The function create the item struct
