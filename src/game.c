@@ -33,6 +33,7 @@ struct Game
 	Snake snake2; // joueur 2
 	Item itemList;
 	bool isPlaying;
+	bool isPaused;
 	//Item food;
 };
 
@@ -63,6 +64,7 @@ Game gameCreate(BoardSize size)
 	g->snake2 = snakeCreate(15, 2, LEFT, FIRE);
 	g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
+	g->isPaused = false;
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
 
@@ -125,6 +127,16 @@ Item gameGetItemList(Game g) {
 bool gameGetIsPlaying(Game g)
 {
 	return g->isPlaying;
+}
+
+bool gameGetIsPaused(Game g)
+{
+	return g->isPaused;
+}
+
+void gameSetIsPaused(Game g, bool isPaused)
+{
+	g->isPaused = isPaused;
 }
 
 /**
@@ -363,7 +375,7 @@ void gameFeed(Game game)
 	}
 
 	BoardValue itemValue = itemGetRandomItemValue();
-	itemAdd(itemList, b, x, y, itemValue);
+	itemAdd(itemList, b, x, y, SWAP_SNAKE);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 
