@@ -12,6 +12,7 @@
 #include <stdbool.h>
 #include "coord.h"
 
+
 /**
  * \enum Direction
  * \brief Permet de gérer la direction du snake

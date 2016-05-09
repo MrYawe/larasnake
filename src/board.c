@@ -26,6 +26,7 @@ struct Board
 	int sizeX;
 	int sizeY;
 	int sizeCell; // size by pixels of a cell
+	Item itemList;
 };
 
 //////////////////////////////////////////
@@ -60,6 +61,8 @@ Board boardInit(int sizeX, int sizeY, int sizeCell)
 		b->sizeX = sizeX;
 		b->sizeY = sizeY;
 		b->sizeCell = sizeCell;
+
+		b->itemList = itemCreate(-1, -1, SENTRY);
 	}
 	else
 		printf("boardInit: error negative size!\n");
@@ -157,6 +160,11 @@ int boardGetWidth(Board b)
   return res;
 }
 
+
+Item boardGetItemList(Board board) {
+	return board->itemList;
+}
+
 //////////////////////////////////////////
 //				UTILITARY				//
 //////////////////////////////////////////
@@ -216,4 +224,21 @@ Board boardCopy(Board b)
 		  boardSetValue(res, i, j, boardGetValue(b, i, j));
 	}
 	return res;
+}
+
+// ajout en fin
+Item boardItemAdd(Board board, Item list, int x, int y, BoardValue value) {
+    itemAdd(list, x, y, value);
+    boardSetValue(board, x, y, value);
+    return list;
+}
+
+int boardItemDelete(Board board, Item item) {
+    if(itemDelete(item))
+    {
+        boardSetValue(board, item->posX, item->posY, EMPTY);
+        itemFree(item);
+        return 1;
+    }
+    return 0;
 }
