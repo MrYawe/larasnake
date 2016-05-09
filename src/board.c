@@ -237,6 +237,7 @@ int boardItemDelete(Board board, Item item) {
     if(itemDelete(item))
     {
         boardSetValue(board, item->posX, item->posY, EMPTY);
+        itemFree(item);
         return 1;
     }
     return 0;

@@ -53,7 +53,7 @@ int iaDirectionMaxValue(int* tab){
 
 	dirMax = UP;
 	for(dir=UP;dir<=LEFT;dir++) {
-		printf("tab SENS:%d valeur: %d\n", dir, tab[dir]);
+		//printf("tab SENS:%d valeur: %d\n", dir, tab[dir]);
 		if(tab[dirMax]<tab[dir]){
 			dirMax=dir;
 		}

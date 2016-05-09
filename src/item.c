@@ -221,7 +221,6 @@ int itemDelete(Item item) {
         item->next->prev = item->prev;
     }
     item->prev->next = item->next;
-    itemFree(item);
 
     return 1;
 }
