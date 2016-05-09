@@ -31,9 +31,8 @@ struct Game
 	Board board; // le board
 	Snake snake1; // joueur 1
 	Snake snake2; // joueur 2
-	Item itemList;
+	//Item itemList;
 	bool isPlaying;
-	//Item food;
 };
 
 /**
@@ -59,10 +58,9 @@ Game gameCreate(BoardSize size)
 			break;
 	}
 
-	//g->items = itemsCreate(boardGetWidth(g->board), boardGetHeight(g->board));
-	g->snake1 = snakeCreate(50, 1, RIGHT, WATER);
-	g->snake2 = snakeCreate(50, 2, LEFT, FIRE);
-	g->itemList = itemCreate(-1, -1, SENTRY);
+	g->snake1 = snakeCreate(SNAKE_DEFAULT_SIZE, SNAKE1, RIGHT, WATER);
+	g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE, SNAKE2, LEFT, FIRE);
+	//g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
@@ -70,6 +68,7 @@ Game gameCreate(BoardSize size)
 	return g;
 }
 
+//TODO free itemlist
 /**
  * \fn void gameFree(Game game)
  * \brief Free the struct game
@@ -80,7 +79,6 @@ void gameFree(Game game) {
 	boardFree(game->board);
 	snakeFree(game->snake1);
 	snakeFree(game->snake2);
-	//itemFree(game->food);
 	free(game);
 }
 
@@ -110,10 +108,10 @@ Snake gameGetSnake(Game g, int player)
 		return g->snake1;
 	return g->snake2;
 }
-
+/*
 Item gameGetItemList(Game g) {
 	return g->itemList;
-}
+}*/
 
 /**
  * \fn bool gameGetIsPlaying(Game g)
@@ -234,13 +232,28 @@ bool gameMoveSnake(Game g, Snake s)
 static bool gameCheckMovement(Game g, Snake s)
 {
 	Board b = gameGetBoard(g);
-	bool canTp = false;
 	bool continueGame = true;
 	Coord coordSnake = snakeGetPos(s, snakeGetSize(s)-1);
 	Direction dirSnake = snakeGetDirection(s);
+	//BUG Next pos cell quand fantôme
+	if (boardInside(b, coordSnake->x, coordSnake->y) && boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 12, FOOD, SPEED_UP, GROW_UP, GROW_DOWN, REVERSE_CONTROL, REVERSE_SNAKE, NO_BORDER, GHOST, SWAP_SNAKE, NEW_COLOR, NEW_MAP, WALL)) //items
+	{
+		Snake otherSnake;
+		Coord coordItem = boardNextPosCell(coordSnake->x, coordSnake->y, dirSnake);
+		Item itemList = boardGetItemList(b);
+		Item item = itemSearch(itemList, coordItem->x, coordItem->y);
+		printf("****************************COLLISION ITEM %d (x=%d, y=%d)\n", item->value, item->posX, item->posY);
+		if(snakeGetId(s) == 1) {
+			otherSnake = gameGetSnake(g, 2);
+		} else {
+			otherSnake = gameGetSnake(g, 1);
+		}
+		item->onCollision(item, s, otherSnake);
+		boardItemDelete(b, item);
+	}
 	if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, OUTSIDE))
 	{
-		if (canTp)
+		if (snakeGetCanCrossBorder(s)) // if he can cross border
 		{
 			switch (snakeGetDirection(s))
 			{
@@ -287,13 +300,6 @@ static bool gameCheckMovement(Game g, Snake s)
 	{
 		printf("Snake %d mort !\n", snakeGetId(s));
 		continueGame = false;
-	}
-	else if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 12, FOOD, SPEED_UP, GROW_UP, GROW_DOWN, REVERSE_CONTROL, REVERSE_SNAKE, NO_BORDER, GHOST, SWAP_SNAKE, NEW_COLOR, NEW_MAP, WALL)) //items
-	{
-		Coord coordItem = boardNextPosCell(coordSnake->x, coordSnake->y, dirSnake);
-		Item itemList = gameGetItemList(g);
-		Item item = itemSearch(itemList, coordItem->x, coordItem->y);
-		item->onCollision(item, b, s, s); // à changer
 	}
 	else
 	{
@@ -348,7 +354,7 @@ static bool gameCheckMovement(Game g, Snake s)
 void gameFeed(Game game)
 {
 	Board b = gameGetBoard(game);
-	Item itemList = gameGetItemList(game);
+	Item itemList = boardGetItemList(b);
 	int x = rand()%boardGetWidth(b);
 	int y = rand()%boardGetHeight(b);
 	while(boardGetValue(b, x, y)!=0){
@@ -356,8 +362,9 @@ void gameFeed(Game game)
 		y = rand()%boardGetHeight(b);
 	}
 
-	itemAdd(itemList, b, x, y, GROW_UP);
-	printf("AJout du jambon: (%d, %d)\n", x, y);
+	BoardValue itemValue = itemGetRandomItemValue();
+	boardItemAdd(b, itemList, x, y, itemValue);
+	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 
 /**

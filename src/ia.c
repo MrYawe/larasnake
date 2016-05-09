@@ -61,6 +61,14 @@ int iaDirectionMaxValue(int* tab){
 	return tab[dirMax];
 }
 
+void iaDirectionItem(Board board, Snake snake, int* tab) {
+	Item item = boardGetItemList(board);
+
+
+}
+
+
+
 Direction iaSurviveDepth(Board board, Snake snake) {
 	Direction dirSnake = snakeGetDirection(snake);
 	Coord posSnakeHead = snakeGetPos(snake, snakeGetSize(snake)-1);
@@ -72,9 +80,10 @@ Direction iaSurviveDepth(Board board, Snake snake) {
 	int* tab = calloc(4, sizeof(int));
 	int i=0;
 	int j=0;
-	//printf("\nAvailable 1 \n");
+
+	iaDirectionItem(board, snake, tab);
 	iaDirectionsAvailable(board, posSnakeHead, tab, -1);
-	
+
 	for(j=0;j<4;j++){
 		//printf("\nAvailable Direction %d \n", j);
 		posNext->x=posSnakeHead->x;

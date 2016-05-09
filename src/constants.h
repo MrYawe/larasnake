@@ -10,20 +10,18 @@
  * \details All constants defined, used in the program
  */
 
-/** Board values **/
-#define BONUS_SPEED 3
-#define BONUS_JAM 4 // le jambon c'est important
-
 // General
 #define FRAME_MS 30 // Temps en milliseconde par frame. 30ms ~= 30 FPS
 
 /*** Snake ***/
 #define SNAKE_DEFAULT_SPEED 100 // en ms
+#define SNAKE_DEFAULT_SIZE 15
 #define NB_TYPES 3
 
 /*** Bonus parameters ***/
+#define ITEM_POP_INTERVAL 5000
 #define FOOD_VALUE 1
-#define SPEED_UP_VALUE 10 // de combien de ms la vitesse est augmenté
+#define SPEED_UP_VALUE 20 // de combien de ms la vitesse est augmenté
 #define GROW_UP_VALUE 3
 #define GROW_DOWN_VALUE 3
 

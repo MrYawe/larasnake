@@ -19,64 +19,86 @@
 /**   ITEM FONCTIONS   **/
 /************************/
 
-void itemOnCollisionFood(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION JAMBON\n");
     int k;
     for (k = 0; k < FOOD_VALUE; k++) {
         snakeGrow(sOnCollision);
     }
-    itemDelete(i, b);
+    //itemDelete(i, b);
 }
 
-void itemOnCollisionSpeedUp(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionSpeedUp(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION SPEED_UP\n");
     snakeSetSpeed(sOnCollision, snakeGetSpeed(sOnCollision)-SPEED_UP_VALUE);
-    itemDelete(i, b);
 }
 
-void itemOnCollisionGrowUp(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION GROW_UP\n");
     int k;
     for (k = 0; k < GROW_UP_VALUE; k++) {
         snakeGrow(sOnCollision);
     }
-    itemDelete(i, b);
 }
 
-void itemOnCollisionGrowDown(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION GROW_DOWN\n");
+    printf("PAS ENCORE IMPLEMENTE\n");
+    // TODO franck: le retrecir
 }
 
-void itemOnCollisionReverseControl(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionReverseControl(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION REVERSE_CONTROL\n");
+    snakeSetIsControlReversed(sOnCollision, true);
+    snakeSetIsControlReversed(sBis, true);
 }
 
-void itemOnCollisionReverseSnake(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionReverseSnake(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION REVERSE_SNAKE\n");
+    // TODO franck: la tete devient la queue
 }
 
-void itemOnCollisionNoBorder(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionNoBorder(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION NO_BORDER\n");
+    snakeSetCanCrossBorder(sOnCollision, true);
 }
 
-void itemOnCollisionGhost(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionGhost(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION GHOST\n");
+    snakeSetCanCrossBorder(sOnCollision, true);
+    snakeSetCanCrossSnake(sOnCollision, true);
 }
 
-void itemOnCollisionSwapSnake(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionSwapSnake(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION SWAP_SNAKE\n");
+    struct Snake temp = *sBis;
+    *sBis = *sOnCollision;
+    *sOnCollision = temp;
 }
 
-void itemOnCollisionNewColor(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionNewColor(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION NEW_COLOR\n");
+    SnakeType t1 = snakeGetType(sOnCollision);
+    SnakeType t2 = snakeGetType(sBis);
+    if( (t1==WATER || t2==WATER) && (t1==FIRE || t2==FIRE) ) {
+        snakeSetType(sOnCollision, GRASS);
+    } else if ( (t1==WATER || t2==WATER) && (t1==GRASS || t2==GRASS) ) {
+        snakeSetType(sOnCollision, FIRE);
+    } else {
+        snakeSetType(sOnCollision, WATER);
+    }
 }
 
-void itemOnCollisionNewMap(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionNewMap(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION NEW_MAP\n");
+    printf("PAS ENCORE IMPLEMENTE\n");
+    // TODO: change la map
 }
 
-void itemOnCollisionWall(Item i, Board b, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION WALL\n");
+    printf("PAS ENCORE IMPLEMENTE\n");
+    // TODO: fait pop un item mur
 }
 
 
@@ -158,8 +180,13 @@ Item itemCreate(int x, int y, BoardValue value) {
     return item;
 }
 
+BoardValue itemGetRandomItemValue() {
+    int x = rand()%12;
+    return x+4;
+}
+
 // ajout en fin
-Item itemAdd(Item list, Board board, int x, int y, BoardValue value) {
+Item itemAdd(Item list, int x, int y, BoardValue value) {
     Item newItem = itemCreate(x, y, value);
 
     Item temp = list;
@@ -168,7 +195,7 @@ Item itemAdd(Item list, Board board, int x, int y, BoardValue value) {
     }
     temp->next = newItem;
     newItem->prev = temp;
-    boardSetValue(board, x, y, value);
+    //boardSetValue(board, x, y, value);
 
     return list;
 }
@@ -184,13 +211,19 @@ Item itemSearch(Item list, int x, int y) {
     return NULL;
 }
 
-void itemDelete(Item item, Board board) {
+int itemDelete(Item item) {
     if(item->value == SENTRY) // we can't delete the sentry
-        return;
+        return 0;
 
-    boardSetValue(board, item->posX, item->posY, EMPTY);
+    //boardSetValue(board, item->posX, item->posY, EMPTY);
+
+    if(item->next != NULL) {
+        item->next->prev = item->prev;
+    }
     item->prev->next = item->next;
     itemFree(item);
+
+    return 1;
 }
 
 
