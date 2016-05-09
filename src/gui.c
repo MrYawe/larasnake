@@ -78,44 +78,49 @@ void guiPlay(BoardSize size)
 	/************************/
     while (gameGetIsPlaying(game)) {
         timer->start = SDL_GetTicks(); // Start of the current frame
-        
-        guiEvent(&event, snake1, game);                      // catch player event and set the direction of snake1
-        if(!gameGetIsPaused(game)) {
-            ////// Move of snake 1 (player) //////
-            timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
-            if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {  // test if we wait enough time to move the snake 1
-                continueGameMove1 = gameMoveSnake(game, snake1);   // move th snake1. if snake1 is dead continueGameMove1=false
-                timer->snake1MoveTimer = 0;                         // set the move timer to 0 when the snake move
-            }
-            timer->snake1LastMove = SDL_GetTicks();
-            /////////////////////////////////////
-
-            ////// Move of snake 2 (AI) //////
-            timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
-            if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {  // test if we wait enough time to move the snake 2
-                snakeSetDirection(snake2, iaSurviveDepth(board, snake2));  // let ia choose the best direction of snake2
-                continueGameMove2 = gameMoveSnake(game, snake2);   // move the snake2. if snake2 is dead continueGameMove2=false
-                timer->snake2MoveTimer = 0;                        // set the move timer to 0 when the snake move
-            }
-            timer->snake2LastMove = SDL_GetTicks();
-            /////////////////////////////////
-
-            ///////// Item pop /////////
-            timer->itemPopTimer += SDL_GetTicks() - timer->itemLastPop;
-            if(timer->itemPopTimer >= ITEM_POP_INTERVAL) {
-                gameFeed(game); //Function called to put some food on the board
-                timer->itemPopTimer = 0;
-            }
-            timer->itemLastPop = SDL_GetTicks();
-
-
-
-            /////// Draw ///////
-            guiDrawGame(screen, game, assets);  // draw the board on srceen with surfaces stored in the Assets struct
-            guiReloadScreen(screen);            // reload all the screen
-            //boardDisplay(board);
-            ///////////////////
+        ////// Move of snake 1 (player) //////
+        timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
+        if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {  // test if we wait enough time to move the snake 1
+            guiSnakeEvent(&event, snake1);                      // catch player event and set the direction of snake1
+            continueGameMove1 = gameMoveSnake(game, snake1);   // move th snake1. if snake1 is dead continueGameMove1=false
+            timer->snake1MoveTimer = 0;                         // set the move timer to 0 when the snake move
+            
+            
         }
+        timer->snake1LastMove = SDL_GetTicks();
+        /////////////////////////////////////
+
+        ////// Move of snake 2 (AI) //////
+        timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
+        if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {  // test if we wait enough time to move the snake 2
+
+            boardIa = boardCopy(board); 
+            snakeSetDirection(snake2, iaSurviveDepth(boardIa, snake2));  // let ia choose the best direction of snake2
+            continueGameMove2 = gameMoveSnake(game, snake2);   // move the snake2. if snake2 is dead continueGameMove2=false
+            boardFree(boardIa);
+            
+            timer->snake2MoveTimer = 0 ;                        // set the move timer to 0 when the snake move
+
+        }
+        timer->snake2LastMove = SDL_GetTicks();
+        /////////////////////////////////
+
+
+        ///////// Item pop /////////
+        timer->itemPopTimer += SDL_GetTicks() - timer->itemLastPop;
+        if(timer->itemPopTimer >= ITEM_POP_INTERVAL) {
+            gameFeed(game); //Function called to put some food on the board
+            timer->itemPopTimer = 0;
+        }
+        timer->itemLastPop = SDL_GetTicks();
+
+
+
+        /////// Draw ///////
+        guiDrawGame(screen, game, assets);  // draw the board on srceen with surfaces stored in the Assets struct
+        guiReloadScreen(screen);            // reload all the screen
+        //boardDisplay(board);
+        ///////////////////
 
         if(!continueGameMove1 || !continueGameMove2) // if one snake die the game is over
             gameEnd(game);
@@ -304,10 +309,6 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
 void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface** itemsAssets) {
 
     Item item = itemList;
-    if(item->next != NULL) {
-        Item item1 = itemList->next;
-        printf("Item  1 : x=%d, y=%d\n", item1->posX, item1->posY);
-    }
     int x, y;
 
     while(item != NULL) {
@@ -345,7 +346,10 @@ void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets) {
         if(i == 0) // tail
         {
             nextDirection = snakeElementGetOrientation(snake, i+1);
-            guiApplySurface(x, y, snakeAssets->tail[nextDirection], screen, NULL);
+            if(currentDirection != nextDirection)
+                guiApplySurface(x, y, snakeAssets->tail[nextDirection], screen, NULL);
+            else
+                guiApplySurface(x, y, snakeAssets->tail[currentDirection], screen, NULL);
         }
         else if (i == snakeGetSize(snake)-1) // head
             guiApplySurface(x, y, snakeAssets->head[currentDirection], screen, NULL);
@@ -448,7 +452,7 @@ void guiReloadScreen(SDL_Surface *screen) {
  * \param event The event struct to listen
  * \param s The snake to be oriented
  */
-void guiEvent(SDL_Event *event, Snake s, Game g) {
+void guiSnakeEvent(SDL_Event *event, Snake s) {
     bool moved = false;
     bool controlReversed = snakeGetIsControlReversed(s);
     while (SDL_PollEvent(event)) {
@@ -458,46 +462,32 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
                 if (!moved) {
                     switch(event->key.keysym.sym) {
                         case SDLK_UP: // Flèche haut 1
-                            if(!gameGetIsPaused(g)) {
-                                if(controlReversed)
-                                    snakeSetDirection(s, DOWN);
-                                else
-                                    snakeSetDirection(s, UP);
-                                moved = true;
-                            }
+                            if(controlReversed)
+                                snakeSetDirection(s, DOWN);
+                            else
+                                snakeSetDirection(s, UP);
+                            moved = true;
                             break;
                         case SDLK_DOWN: // Flèche bas 2
-                            if(!gameGetIsPaused(g)) {
-                                if(controlReversed)
-                                    snakeSetDirection(s, UP);
-                                else
-                                    snakeSetDirection(s, DOWN);
-                                moved = true;
-                            }
+                            if(controlReversed)
+                                snakeSetDirection(s, UP);
+                            else
+                                snakeSetDirection(s, DOWN);
+                            moved = true;
                             break;
                         case SDLK_RIGHT: // Flèche droite 3
-                            if(!gameGetIsPaused(g)) {
-                                if(controlReversed)
-                                    snakeSetDirection(s, LEFT);
-                                else
-                                    snakeSetDirection(s, RIGHT);
-                                moved = true;
-                            }
+                            if(controlReversed)
+                                snakeSetDirection(s, LEFT);
+                            else
+                                snakeSetDirection(s, RIGHT);
+                            moved = true;
                             break;
                         case SDLK_LEFT: // Flèche gauche 4
-                            if(!gameGetIsPaused(g)) {
-                                if(controlReversed)
-                                    snakeSetDirection(s, RIGHT);
-                                else
-                                    snakeSetDirection(s, LEFT);
-                                moved = true;
-                            }
-                            break;
-                        case SDLK_SPACE:
-                            if (gameGetIsPaused(g))
-                                gameSetIsPaused(g, false);
+                            if(controlReversed)
+                                snakeSetDirection(s, RIGHT);
                             else
-                                gameSetIsPaused(g, true);
+                                snakeSetDirection(s, LEFT);
+                            moved = true;
                             break;
                         default:
                             break;

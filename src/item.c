@@ -55,7 +55,7 @@ void itemOnCollisionReverseControl(Item i, Snake sOnCollision, Snake sBis) {
 
 void itemOnCollisionReverseSnake(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION REVERSE_SNAKE\n");
-    snakeInverseWay(sOnCollision);
+    // TODO franck: la tete devient la queue
 }
 
 void itemOnCollisionNoBorder(Item i, Snake sOnCollision, Snake sBis) {
@@ -100,6 +100,18 @@ void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis) {
     printf("PAS ENCORE IMPLEMENTE\n");
     // TODO: fait pop un item mur
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

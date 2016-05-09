@@ -8,7 +8,6 @@
  */
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
 
 #include "ia.h"
 #include "coord.h"
@@ -62,30 +61,10 @@ int iaDirectionMaxValue(int* tab){
 	return tab[dirMax];
 }
 
-float iaDistance(Coord pos1, Coord pos2){
-	return sqrt((pos2->x-pos1->x)*(pos2->x-pos1->x) + (pos2->y-pos1->y)*(pos2->y-pos1->y));
-}
-
 void iaDirectionItem(Board board, Snake snake, int* tab) {
 	Item item = boardGetItemList(board);
-	
-	Coord posSnakeHead = snakeGetPos(snake, snakeGetSize(snake)-1);
-	Coord posInter = coordNew(posSnakeHead->x,posSnakeHead->y);
 
-	float distance=0;
-	if(item->next != NULL) {
-		item=item->next;
 
-		Coord posItem = coordNew(item->posX, item->posY);
-
-		distance = iaDistance(posInter, posSnakeHead);
-
-		free(posItem);
-		printf("distance: \n");
-
-	}
-	free(posSnakeHead);
-	free(posInter);
 }
 
 
@@ -127,10 +106,9 @@ Direction iaSurviveDepth(Board board, Snake snake) {
 	}
 	dirSnake = iaDirectionRandomize(tab,iaDirectionMaxValue(tab));
 	//
-	free(posNext);
-	free(posInter);
-	free(tab);
-	free(posSnakeHead);
+	//free(posNext);
+	//free(posInter);
+	//free(tab);
 	//printf("direction: %d\n", dirSnake);
 	return dirSnake;
 }
@@ -165,7 +143,6 @@ Direction iaRandom (Board board, Snake snake) {
 
 	//printf("direction choisie: %d\n\n", dirSnake);
 	free(tab);
-	free(posSnake);
 
 	return dirSnake;
 }
@@ -205,7 +182,6 @@ Direction iaSurvive (Board board, Snake snake) {
 		}
 	}
 
-	free(posSnake);
 	return snakeDir;
 }
 
