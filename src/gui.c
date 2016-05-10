@@ -132,8 +132,8 @@ void guiPlay(BoardSize size)
     ////// Free //////
     gameFree(game);
     guiFreeAssets(assets);
-    TTF_Quit();
-    SDL_Quit();
+    //TTF_Quit();
+    //SDL_Quit();
 }
 
 
@@ -451,6 +451,54 @@ Timer guiCreateTimer() {
     return timer;
 }
 
+Title guiCreateTitle(int x, int y, MenuValue value, char* text, SDL_Color color, TTF_Font* font) {
+    Title title = malloc(sizeof(struct Title));
+    title->x = x;
+    title->y = y;
+    title->value = value;
+    title->text = text;
+    title->color = color;
+    title->font = font;
+    title->surface = NULL;
+    title->isSelected = false;
+
+    return title;
+}
+
+void guiSetSelectedTitle(Title *titles, int nbTitles, int state) {
+    int i;
+    for (i = 0; i < nbTitles; i++) {
+        if( (state%nbTitles+nbTitles)%nbTitles == i ) { // modulo positif
+            titles[i]->isSelected = true;
+        } else {
+            titles[i]->isSelected = false;
+        }
+    }
+}
+
+Title guiGetSelectedItem(Title *titles, int nbTitles) {
+    int i;
+    for (i = 0; i < nbTitles; i++) {
+        if(titles[i]->isSelected) {
+            return titles[i];
+        }
+    }
+    return NULL;
+}
+
+void guiDrawTitles(SDL_Surface *screen, Title *titles, int nbTitles, SDL_Color ifSelectedColor) {
+    SDL_Color color;
+    int i;
+    for (i = 0; i < nbTitles; i++) {
+
+        color = titles[i]->color;
+        if(titles[i]->isSelected) {
+            color = ifSelectedColor;
+        }
+        titles[i]->surface = TTF_RenderText_Blended(titles[i]->font, titles[i]->text, color);
+        guiApplySurface(titles[i]->x, titles[i]->y, titles[i]->surface, screen, NULL);
+    }
+}
 /**
  * \fn void guiReloadScreen(SDL_Surface *screen)
  * \brief Reload the entire screen

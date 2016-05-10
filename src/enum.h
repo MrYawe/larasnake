@@ -18,4 +18,8 @@ typedef enum BoardValue {
     NB_ITEM
 } BoardValue;
 
+typedef enum MenuValue {
+    PLAY, INSTRUCTION, OPTION, QUIT
+} MenuValue;
+
 #endif

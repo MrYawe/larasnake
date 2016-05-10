@@ -13,6 +13,14 @@
 // General
 #define FRAME_MS 30 // Temps en milliseconde par frame. 30ms ~= 30 FPS
 
+
+
+/*** Menus ***/
+#define MENU_SIZE_X 600
+#define MENU_SIZE_Y 600
+#define MENU_POLICE_SIZE 30
+#define MENU_POLICE_INTERVAL 80
+
 /*** Snake ***/
 #define SNAKE_DEFAULT_SPEED 100 // en ms
 #define SNAKE_DEFAULT_SIZE 15

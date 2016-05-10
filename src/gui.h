@@ -43,6 +43,18 @@ struct Assets
 	SDL_Surface **itemsAssets;
 };
 
+typedef struct Title *Title;
+struct Title
+{
+	int x, y;
+	MenuValue value;
+	char* text;
+	SDL_Color color;
+	TTF_Font *font;
+	SDL_Surface *surface;
+	bool isSelected;
+};
+
 /**** General ****/
 void guiPlay(BoardSize size);
 Timer guiCreateTimer();
@@ -71,6 +83,12 @@ void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets);
 /**** Events ****/
 void guiEvent(SDL_Event *event, Snake s, Game g);
 void guiGeneralEvent(SDL_Event *event, Game game);
+
+/*** Menu ***/
+Title guiCreateTitle(int x, int y, MenuValue value, char* text, SDL_Color color, TTF_Font* font);
+void guiSetSelectedTitle(Title *titles, int nbTitles, int state);
+Title guiGetSelectedItem(Title *titles, int nbTitles);
+void guiDrawTitles(SDL_Surface *screen, Title *titles, int nbTitles, SDL_Color ifSelectedColor);
 
 
 #endif
