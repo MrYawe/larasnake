@@ -23,7 +23,7 @@ void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION JAMBON\n");
     int k;
     for (k = 0; k < FOOD_VALUE; k++) {
-        snakeGrow(sOnCollision);
+        snakeGrowTail(sOnCollision);
     }
     //itemDelete(i, b);
 }
@@ -37,7 +37,7 @@ void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION GROW_UP\n");
     int k;
     for (k = 0; k < GROW_UP_VALUE; k++) {
-        snakeGrow(sOnCollision);
+        snakeGrowHead(sOnCollision);
     }
 }
 

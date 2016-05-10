@@ -204,7 +204,7 @@ void boardDisplay(Board b)
 }
 
 /*
- * \fn boardCopy
+ * \fn Board boardCopy(Board b)
  * \brief The function returns a copy of the board
  * \details The function copy everything of the board and put it in an other variable
  * \param b Board : The board to access
@@ -225,13 +225,31 @@ Board boardCopy(Board b)
 	return res;
 }
 
-// ajout en fin
+/*
+ * \fn Item boardItemAdd(Board board, Item list, int x, int y, BoardValue value)
+ * \brief The function add an Item on the Board
+ * \details The function add an Item to the Board
+ * \param b Board : The board to access
+ * \param list Item : The list of items
+ * \param x int : The x position to add the item
+ * \param y int : The y position to add the item
+ * \param value BoardValue : the value of the item to add
+ * \return Returns Item which is the list of items of the game
+ */
 Item boardItemAdd(Board board, Item list, int x, int y, BoardValue value) {
     itemAdd(list, x, y, value);
     boardSetValue(board, x, y, value);
     return list;
 }
 
+/*
+ * \fn int boardItemDelete(Board board, Item item)
+ * \brief The function delete an Item on the Board
+ * \details The function delete an Item on the Board
+ * \param b Board : The board to access
+ * \param list Item : The list of items
+ * \return Returns int which is a boolean : 1 if it worked, 0 if it didn't work
+ */
 int boardItemDelete(Board board, Item item) {
     if(itemDelete(item))
     {
