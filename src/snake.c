@@ -11,7 +11,7 @@
 #include <time.h>
 #include "snake.h"
 #include "constants.h"
-
+#include "board.h"
 
 
 
@@ -27,8 +27,8 @@
 Snake snakeCreate(int size, int id, Direction d, SnakeType type)
 {
 	Snake s = malloc(sizeof(struct Snake));
-	s->first = NULL;
-	s->last = NULL;
+	s->tail = NULL;
+	s->head = NULL;
 	s->size = 0;
 	s->speed = SNAKE_DEFAULT_SPEED;
 	s->id = id;
@@ -56,11 +56,11 @@ Snake snakeCreate(int size, int id, Direction d, SnakeType type)
 void snakeGoUp(Snake s)
 {
 
-	/*if(s->direction!=s->last->orientation)
-		snakeAddLastElement(s, s->last->pos->x, s->last->pos->y - 1, NIL);
-		//snakeAddLastElement(s, s->last->posX, mod(s->last->posY - 1, BOARD_SIZE));
+	/*if(s->direction!=s->head->orientation)
+		snakeAddLastElement(s, s->head->pos->x, s->head->pos->y - 1, NIL);
+		//snakeAddLastElement(s, s->head->posX, mod(s->head->posY - 1, BOARD_SIZE));
 	else
-	*/	snakeAddLastElement(s, s->last->pos->x, s->last->pos->y - 1, s->direction);
+	*/	snakeAddLastElement(s, s->head->pos->x, s->head->pos->y - 1, s->direction);
 	
 	snakeDeleteFirstElement(s);
 }
@@ -73,11 +73,11 @@ void snakeGoUp(Snake s)
  */
 void snakeGoDown(Snake s)
 {
-	/*if(s->direction!=s->last->orientation)
-		snakeAddLastElement(s, s->last->pos->x, s->last->pos->y + 1, NIL);
-	//snakeAddLastElement(s, s->last->posX, mod(s->last->posY + 1, BOARD_SIZE));
+	/*if(s->direction!=s->head->orientation)
+		snakeAddLastElement(s, s->head->pos->x, s->head->pos->y + 1, NIL);
+	//snakeAddLastElement(s, s->head->posX, mod(s->head->posY + 1, BOARD_SIZE));
 	else 
-	*/	snakeAddLastElement(s, s->last->pos->x, s->last->pos->y + 1, s->direction);
+	*/	snakeAddLastElement(s, s->head->pos->x, s->head->pos->y + 1, s->direction);
 
 	snakeDeleteFirstElement(s);
 }
@@ -90,11 +90,11 @@ void snakeGoDown(Snake s)
  */
 void snakeTurnLeft(Snake s)
 {
-	/*if(s->direction!=s->last->orientation)
-		snakeAddLastElement(s, s->last->pos->x - 1, s->last->pos->y, NIL);
-	//snakeAddLastElement(s, mod(s->last->posX - 1, BOARD_SIZE), s->last->posY);
+	/*if(s->direction!=s->head->orientation)
+		snakeAddLastElement(s, s->head->pos->x - 1, s->head->pos->y, NIL);
+	//snakeAddLastElement(s, mod(s->head->posX - 1, BOARD_SIZE), s->head->posY);
 	else
-	*/	snakeAddLastElement(s, s->last->pos->x - 1, s->last->pos->y, s->direction);
+	*/	snakeAddLastElement(s, s->head->pos->x - 1, s->head->pos->y, s->direction);
 
 	snakeDeleteFirstElement(s);
 }
@@ -107,11 +107,11 @@ void snakeTurnLeft(Snake s)
  */
 void snakeTurnRight(Snake s)
 {
-	/*if(s->direction!=s->last->orientation)
-		snakeAddLastElement(s, s->last->pos->x + 1, s->last->pos->y, NIL);
-	//snakeAddLastElement(s, mod(s->last->posX + 1, BOARD_SIZE), s->last->posY);
+	/*if(s->direction!=s->head->orientation)
+		snakeAddLastElement(s, s->head->pos->x + 1, s->head->pos->y, NIL);
+	//snakeAddLastElement(s, mod(s->head->posX + 1, BOARD_SIZE), s->head->posY);
 	else
-	*/	snakeAddLastElement(s, s->last->pos->x + 1, s->last->pos->y, s->direction);
+	*/	snakeAddLastElement(s, s->head->pos->x + 1, s->head->pos->y, s->direction);
 		
 	snakeDeleteFirstElement(s);
 }
@@ -130,21 +130,55 @@ void snakeTeleportation(Snake s, int posX, int posY)
 	snakeDeleteFirstElement(s);
 }
 
-void snakeGrow(Snake s)
+/**
+ * \fn void snakeGrowHead(Snake s)
+ * \brief The function allow the snake to grow from the head
+ * \details The function allow the snake to grow from the head
+ * \param s Snake to edit
+ */
+void snakeGrowHead(Snake s)
 {
 	switch (s->direction)
 	{
 		case UP:
-			snakeAddLastElement(s, s->last->pos->x, s->last->pos->y - 1, s->direction);
+			snakeAddLastElement(s, s->head->pos->x, s->head->pos->y - 1, s->direction);
 			break;
 		case DOWN:
-			snakeAddLastElement(s, s->last->pos->x, s->last->pos->y + 1, s->direction);
+			snakeAddLastElement(s, s->head->pos->x, s->head->pos->y + 1, s->direction);
 			break;
 		case LEFT:
-			snakeAddLastElement(s, s->last->pos->x - 1, s->last->pos->y, s->direction);
+			snakeAddLastElement(s, s->head->pos->x - 1, s->head->pos->y, s->direction);
 			break;
 		case RIGHT:
-			snakeAddLastElement(s, s->last->pos->x + 1, s->last->pos->y, s->direction);
+			snakeAddLastElement(s, s->head->pos->x + 1, s->head->pos->y, s->direction);
+			break;
+		default:
+			printf("Error snakeGrow\n");
+			break;
+	}
+}
+
+/**
+ * \fn void snakeGrowTail(Snake s)
+ * \brief The function allow the snake to grow from the tail
+ * \details The function allow the snake to grow from the tail
+ * \param s Snake to edit
+ */
+void snakeGrowTail(Snake s)
+{
+	switch (s->direction)
+	{
+		case UP:
+			snakeAddFirstElement(s, s->tail->pos->x, s->tail->pos->y - 1, s->direction);
+			break;
+		case DOWN:
+			snakeAddFirstElement(s, s->tail->pos->x, s->tail->pos->y + 1, s->direction);
+			break;
+		case LEFT:
+			snakeAddFirstElement(s, s->tail->pos->x - 1, s->tail->pos->y, s->direction);
+			break;
+		case RIGHT:
+			snakeAddFirstElement(s, s->tail->pos->x + 1, s->tail->pos->y, s->direction);
 			break;
 		default:
 			printf("Error snakeGrow\n");
@@ -170,7 +204,7 @@ Coord snakeGetPos(Snake s, int posBloc)
 	else
 	{
 		int i;
-		Element *e = s->first;
+		Element *e = s->tail;
 		for (i = 0; i < posBloc; i++)
 		{
 			e = e->next;
@@ -284,7 +318,7 @@ Direction snakeElementGetOrientation(Snake s, int posElem)
 	else
 	{
 		int i;
-		Element *e = s->first;
+		Element *e = s->tail;
 		for (i = 0; i < posElem; i++)
 		{
 			e = e->next;
@@ -311,7 +345,7 @@ void snakeElementSetOrientation(Snake s, int posElem, Direction d)
 	else
 	{
 		int i;
-		Element *e = s->first;
+		Element *e = s->tail;
 		for (i = 0; i < posElem; i++)
 		{
 			e = e->next;
@@ -345,20 +379,49 @@ bool snakeGetIsControlReversed(Snake s)
 	return s->isControlReversed;
 }
 
-
+/**
+ * \fn void snakeSetCanCrossBorder(Snake s, bool b)
+ * \brief Setter of the canCrossBorder attribute of the snake
+ * \details The function allows to set the value of the canCrossBorder attritute
+ * \param s Snake to access
+ * \param b bool : The boolean to set
+ */
 void snakeSetCanCrossBorder(Snake s, bool b)
 {
 	s->canCrossBorder = b;
 }
+
+/**
+ * \fn bool snakeGetCanCrossBorder(Snake s)
+ * \brief Getter of the canCrossBorder attribute of the snake
+ * \details The function allows to get the value of the canCrossBorder attritute
+ * \param s Snake to access
+ * \return bool : The value of the boolean
+ */
 bool snakeGetCanCrossBorder(Snake s)
 {
 	return s->canCrossBorder;
 }
 
+/**
+ * \fn void snakeSetCanCrossSnake(Snake s, bool b)
+ * \brief Setter of the canCrossSnake attribute of the snake
+ * \details The function allows to set the value of the canCrossSnake attritute
+ * \param s Snake to access
+ * \param b bool : The boolean to set
+ */
 void snakeSetCanCrossSnake(Snake s, bool b)
 {
 	s->canCrossSnake = b;
 }
+
+/**
+ * \fn bool snakeGetCanCrossSnake(Snake s)
+ * \brief Getter of the canCrossSnake attribute of the snake
+ * \details The function allows to get the value of the canCrossSnake attritute
+ * \param s Snake to access
+ * \return bool : The value of the boolean
+ */
 bool snakeGetCanCrossSnake(Snake s)
 {
 	return s->canCrossSnake;
@@ -408,8 +471,8 @@ void snakeSetType(Snake s, SnakeType t)
  */
 void snakeInverseWay(Snake s)
 {
-	Element *tampon = s->first;
-	s->first = s->last;
+	Element *tampon = s->tail;
+	s->tail = s->head;
 
 	Element* tempElem = NULL;
 	while (tampon)
@@ -420,7 +483,7 @@ void snakeInverseWay(Snake s)
 	 	tempElem = tampon;
 		tampon = suivant;
 	}
-	s->last = tempElem;
+	s->head = tempElem;
 }
 
 /**
@@ -437,7 +500,7 @@ void snakeDisplay(Snake s)
 	// char const* type[] = {"feu", "eau", "plante"};
 	// printf("Le type du snake est : %s\n", type[s->type]);
 	printf("\n");printf("\n");
-	Element *curseur = s->first;
+	Element *curseur = s->tail;
 	int i=0;
 	while(curseur != NULL)
 	{
@@ -466,7 +529,7 @@ void snakeUpdateElement(Snake s, int posElem, int posX, int posY)
 	else
 	{
 		int i;
-		Element *e = s->first;
+		Element *e = s->tail;
 		for (i = 0; i < posElem; i++)
 		{
 			e = e->next;
@@ -485,7 +548,7 @@ void snakeUpdateElement(Snake s, int posElem, int posX, int posY)
  */
 void snakeFree(Snake s)
 {
-	Element *curs = s->first;
+	Element *curs = s->tail;
 	Element *curssuiv;
 	while(curs != NULL)
 	{
@@ -515,14 +578,14 @@ void snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation)
 	if (s->size == 0)
 	{
 		e->next = NULL;
-		s->last = e;
+		s->head = e;
 	}
 	else
 	{
-		s->first->previous = e;
-		e->next = s->first;
+		s->tail->previous = e;
+		e->next = s->tail;
 	}
-	s->first = e;
+	s->tail = e;
 	s->size ++;
 }
 
@@ -546,10 +609,10 @@ void snakeAddLastElement(Snake s, int posX, int posY, Direction orientation)
 		Element *e = (Element*) malloc(sizeof(struct Element));
 		e->pos = coordNew(posX, posY);
 		e->orientation = orientation;
-		e->previous = s->last;
+		e->previous = s->head;
 		e->next = NULL;
-		s->last->next = e;
-		s->last = e;
+		s->head->next = e;
+		s->head = e;
 		s->size++;
 	}
 }
@@ -568,9 +631,9 @@ void snakeDeleteFirstElement(Snake s)
 	}
 	else
 	{
-		Element *e = s->first;
-		s->first = s->first->next;
-		s->first->previous = NULL;
+		Element *e = s->tail;
+		s->tail = s->tail->next;
+		s->tail->previous = NULL;
 		free(e);
 		s->size --;
 	}
@@ -591,9 +654,9 @@ static void snakeDeleteLastElement(Snake s)
 	}
 	else
 	{
-		Element *e = s->last;
-		s->last = s->last->previous;
-		s->last->next = NULL;
+		Element *e = s->head;
+		s->head = s->head->previous;
+		s->head->next = NULL;
 		free(e);
 		s->size --;
 	}
