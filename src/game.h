@@ -45,6 +45,8 @@ Item gameGetItemList(Game g);
 
 bool gameGetIsPaused(Game g);
 void gameSetIsPaused(Game g, bool isPaused);
+int gameGetPauseTimer(Game g);
+void gameSetPauseTimer(Game g, int t);
 
 //////////////////////////////////////////
 //				UTILITARY				//
