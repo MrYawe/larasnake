@@ -69,9 +69,9 @@ void guiReloadScreen(SDL_Surface *screen);
 void guiClearScreen(SDL_Surface *screen);
 
 /**** Assets ****/
-Assets guiLoadAssets();
+Assets guiLoadAssets(BoardSize size);
 SnakeAssets guiLoadSnake(SnakeType type, char* color);
-GuiAssets guiLoadGui();
+GuiAssets guiLoadGui(BoardSize size);
 SDL_Surface** guiLoadItems();
 SDL_Surface* guiLoadImage(char* path);
 void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);

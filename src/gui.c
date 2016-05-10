@@ -64,7 +64,7 @@ void guiPlay(BoardSize size)
     /***** General Variables *****/
     srand(time(NULL));  //Initialization of the random function
     timer = guiCreateTimer();
-    assets = guiLoadAssets();
+    assets = guiLoadAssets(size);
 
     /***** Structure Variables *****/
     continueGameMove1 = true;
@@ -192,11 +192,23 @@ SDL_Surface* guiLoadImage(char* path) {
  * \details The function load all assets of the game
  * \return The Assets struct with all assets loaded
  */
-Assets guiLoadAssets() {
+Assets guiLoadAssets(BoardSize size) {
     Assets assets = malloc(sizeof(struct Assets));
-    assets->background = guiLoadImage("./images/background/bg-medium.png");
+
+
+    int tailleTerrain=2;
+    if(size==LARGE)
+      tailleTerrain=3;
+    else if(size==SMALL)
+      tailleTerrain=1;
+    int randType = rand()%2+1; // PASSER LE MODULO A TROIS POUR LES RONCES
+
+    char path[31];
+    sprintf(path,"./images/background/bg-%d-%d.jpg", randType, tailleTerrain);
+    assets->background = guiLoadImage(path); //load random field
+
     assets->itemsAssets = guiLoadItems();
-    assets->guiAssets = guiLoadGui();
+    assets->guiAssets = guiLoadGui(size);
 
     char *colors[3] = {"blue", "red", "green"};
     assets->snakesAssets = malloc(3*sizeof(SnakeAssets));
@@ -292,16 +304,35 @@ SDL_Surface** guiLoadItems() {
 /**
  * \fn GuiAssets guiLoadGui()
  * \brief The function load Gui assets
+ * \param board size choosen for the game
  * \details The function load all assets needed to draw the gui
  * \return Array of SDL_Surface*
  */
-GuiAssets guiLoadGui() {
+GuiAssets guiLoadGui(BoardSize size) {
 
     GuiAssets guiAssets = malloc(sizeof(struct GuiAssets));
-    guiAssets->pauseScreen = guiLoadImage("./images/gui/pause.png");
-    guiAssets->timer3 = guiLoadImage("./images/gui/timer3.png");
-    guiAssets->timer2 = guiLoadImage("./images/gui/timer2.png");
-    guiAssets->timer1 = guiLoadImage("./images/gui/timer1.png");
+    if(size==LARGE)
+    {
+      guiAssets->pauseScreen = guiLoadImage("./images/gui/pauseBig.png");
+      guiAssets->timer3 = guiLoadImage("./images/gui/timer3big.png");
+      guiAssets->timer2 = guiLoadImage("./images/gui/timer2big.png");
+      guiAssets->timer1 = guiLoadImage("./images/gui/timer1big.png");
+    }
+    else if (size==SMALL)
+    {
+      guiAssets->pauseScreen = guiLoadImage("./images/gui/pauseSmall.png");
+      guiAssets->timer3 = guiLoadImage("./images/gui/timer3small.png");
+      guiAssets->timer2 = guiLoadImage("./images/gui/timer2small.png");
+      guiAssets->timer1 = guiLoadImage("./images/gui/timer1small.png");
+    }
+    else
+    {
+      guiAssets->pauseScreen = guiLoadImage("./images/gui/pauseMedium.png");
+      guiAssets->timer3 = guiLoadImage("./images/gui/timer3medium.png");
+      guiAssets->timer2 = guiLoadImage("./images/gui/timer2medium.png");
+      guiAssets->timer1 = guiLoadImage("./images/gui/timer1medium.png");
+    }
+
 
     return guiAssets;
 }
