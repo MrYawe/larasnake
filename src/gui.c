@@ -435,13 +435,15 @@ void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets) {
         guiApplySurface(0, 0, guiAssets->timer1, screen, NULL);
         gameSetPauseTimer(game, gameGetPauseTimer(game)-1);
         SDL_Delay(1000);
-        gameSetIsPaused(game, false);
     }
     else if(gameGetPauseTimer(game)==1)
     {
-        gameSetPauseTimer(game, 0);
+
         SDL_Delay(1000);
+        gameSetPauseTimer(game, 0);
+        gameSetIsPaused(game, false);
     }
+
 
 
 }
@@ -499,12 +501,6 @@ void guiReloadScreen(SDL_Surface *screen) {
 }
 
 void guiPause(Game g) {
-    if (gameGetIsPaused(g))
-    {
-      if(gameGetPauseTimer(g)==0)
-        gameSetIsPaused(g, false);
-    }
-    else
         gameSetIsPaused(g, true);
 }
 
@@ -527,7 +523,7 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
                 if (!moved) {
                     switch(event->key.keysym.sym) {
                         case SDLK_UP: // Flèche haut 1
-                            if(!gameGetIsPaused(g)) {
+                            if(!gameGetIsPaused(g) && gameGetPauseTimer(g)==0) {
                                 if(controlReversed)
                                     snakeSetDirection(s, DOWN);
                                 else
@@ -536,7 +532,7 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
                             }
                             break;
                         case SDLK_DOWN: // Flèche bas 2
-                            if(!gameGetIsPaused(g)) {
+                            if(!gameGetIsPaused(g) && gameGetPauseTimer(g)==0) {
                                 if(controlReversed)
                                     snakeSetDirection(s, UP);
                                 else
@@ -545,7 +541,7 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
                             }
                             break;
                         case SDLK_RIGHT: // Flèche droite 3
-                            if(!gameGetIsPaused(g)) {
+                            if(!gameGetIsPaused(g) && gameGetPauseTimer(g)==0) {
                                 if(controlReversed)
                                     snakeSetDirection(s, LEFT);
                                 else
@@ -554,7 +550,7 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
                             }
                             break;
                         case SDLK_LEFT: // Flèche gauche 4
-                            if(!gameGetIsPaused(g)) {
+                            if(!gameGetIsPaused(g) && gameGetPauseTimer(g)==0) {
                                 if(controlReversed)
                                     snakeSetDirection(s, RIGHT);
                                 else
@@ -564,7 +560,7 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
                             break;
                         case SDLK_SPACE:
 
-                            if(gameGetIsPaused(g))
+                            if(gameGetIsPaused(g) && gameGetPauseTimer(g)==0)
                               gameSetPauseTimer(g,4);
                             else
                               guiPause(g);

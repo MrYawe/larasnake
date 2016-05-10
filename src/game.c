@@ -65,7 +65,7 @@ Game gameCreate(BoardSize size)
 	//g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
 	g->pauseFinished=4;
-	g->isPaused = false;
+	g->isPaused = true;
 	gameInitSnakes(g->board, g->snake1, g->snake2);
 
 	return g;
