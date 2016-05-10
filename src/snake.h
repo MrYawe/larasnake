@@ -49,8 +49,8 @@ struct Element
 struct Snake
 {
 	int id;
-	Element *first;
-	Element *last;
+	Element *head;
+	Element *tail;
 	int size;
 	int speed;
 	Direction direction;
@@ -78,7 +78,8 @@ void snakeTurnLeft(Snake s);
 void snakeTurnRight(Snake s);
 void snakeTeleportation(Snake s, int posX, int posY);
 
-void snakeGrow(Snake s);
+void snakeGrowHead(Snake s);
+void snakeGrowTail(Snake s);
 
 /* ****************
  *    Accessors   *

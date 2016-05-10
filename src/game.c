@@ -34,6 +34,7 @@ struct Game
 	//Item itemList;
 	bool isPlaying;
 	bool isPaused;
+	int pauseFinished;
 };
 
 /**
@@ -63,7 +64,8 @@ Game gameCreate(BoardSize size)
 	g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE, SNAKE2, LEFT, FIRE);
 	//g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
-
+	g->pauseFinished=4;
+	g->isPaused = true;
 	gameInitSnakes(g->board, g->snake1, g->snake2);
 
 	return g;
@@ -135,6 +137,14 @@ bool gameGetIsPaused(Game g)
 void gameSetIsPaused(Game g, bool isPaused)
 {
 	g->isPaused = isPaused;
+}
+int gameGetPauseTimer(Game g)
+{
+	return g->pauseFinished;
+}
+void gameSetPauseTimer(Game g, int t)
+{
+	g->pauseFinished=t;
 }
 
 /**
@@ -247,7 +257,7 @@ static bool gameCheckMovement(Game g, Snake s)
 	Coord coordSnake = snakeGetPos(s, snakeGetSize(s)-1);
 	Direction dirSnake = snakeGetDirection(s);
 	//BUG Next pos cell quand fantôme
-	
+
 	if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, OUTSIDE))
 	{
 		if (snakeGetCanCrossBorder(s)) // if he can cross border
@@ -302,10 +312,10 @@ static bool gameCheckMovement(Game g, Snake s)
 	{
 		Snake otherSnake;
 		Coord coordItem = boardNextPosCell(coordSnake->x, coordSnake->y, dirSnake);
-		
+
 		Item itemList = boardGetItemList(b);
 		Item item = itemSearch(itemList, coordItem->x, coordItem->y);
-		
+
 		printf("****************************COLLISION ITEM %d (x=%d, y=%d)\n", item->value, item->posX, item->posY);
 		if(snakeGetId(s) == 1) {
 			otherSnake = gameGetSnake(g, 2);
@@ -331,9 +341,9 @@ static bool gameCheckMovement(Game g, Snake s)
 				printf("Error checkMovement\n");
 				break;
 		}
-		
+
 		item->onCollision(item, s, otherSnake);
-	
+
 		boardItemDelete(b, item);
 	}
 	else
@@ -525,7 +535,20 @@ Item gameSetFood(Game game, int x , int y) {
 }*/
 
 
-bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...){
+/*
+ * \fn bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...)
+ * \brief Check if the next cell of the board is the type of the given parameter(s)
+ * \details Check if the next cell of the board is the type of the given parameter(s)
+ * \param b Board : board to access
+ * \param x Board : The actual X position
+ * \param y Board : The actual Y position
+ * \param dir Direction : The direction to test
+ * \param n int : Number of arguments after this one (dynamic number of arguments)
+ * \param n*BoardValue : We can pass as much of arguments of we want to test different types at one time
+ * \return bool: If the type is in the list of arguments, = 1
+ */
+bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...)
+{
 	Coord coord = boardNextPosCell(x, y, dir);
 	bool res = false;
 	int i;

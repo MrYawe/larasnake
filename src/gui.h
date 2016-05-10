@@ -23,6 +23,9 @@ typedef struct GuiAssets *GuiAssets;
 struct GuiAssets
 {
 	SDL_Surface *pauseScreen;
+	SDL_Surface *timer3;
+	SDL_Surface *timer2;
+	SDL_Surface *timer1;
 };
 
 typedef struct SnakeAssets *SnakeAssets;
