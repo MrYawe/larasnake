@@ -525,7 +525,20 @@ Item gameSetFood(Game game, int x , int y) {
 }*/
 
 
-bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...){
+/*
+ * \fn bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...)
+ * \brief Check if the next cell of the board is the type of the given parameter(s)
+ * \details Check if the next cell of the board is the type of the given parameter(s)
+ * \param b Board : board to access
+ * \param x Board : The actual X position
+ * \param y Board : The actual Y position
+ * \param dir Direction : The direction to test
+ * \param n int : Number of arguments after this one (dynamic number of arguments)
+ * \param n*BoardValue : We can pass as much of arguments of we want to test different types at one time
+ * \return bool: If the type is in the list of arguments, = 1
+ */
+bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...)
+{
 	Coord coord = boardNextPosCell(x, y, dir);
 	bool res = false;
 	int i;
