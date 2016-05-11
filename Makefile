@@ -5,12 +5,12 @@ T_TARGET = testAll
 # Compiler
 CC       = gcc
 # Compiling flags
-CFLAGS   = -Wall -I. `sdl-config --libs` -lSDL_image -lSDL_ttf -g
+CFLAGS   = -Wall -I. `sdl-config --libs` -lSDL_image -lSDL_ttf -lSDL_mixer -g
 
 # Linker
 LINKER   = gcc -o
 # Linking flags
-LFLAGS   = -I. -lm `sdl-config --libs` -lSDL_image -lSDL_ttf -g
+LFLAGS   = -I. -lm `sdl-config --libs` -lSDL_image -lSDL_ttf -lSDL_mixer -g
 
 # Project directories
 SRCDIR   = src

@@ -53,7 +53,7 @@ void gameSetPauseTimer(Game g, int t);
 //////////////////////////////////////////
 void gameUpdateSnake(Board b, Snake s);
 bool gameMoveSnake(Game g, Snake s);
-
+void playItemSound(Game g, Item i);
 Item gameGetFood(Game game);
 
 Coord boardNextPosCell(int x, int y, Direction dir);
@@ -64,7 +64,7 @@ Coord boardNextPosCell(int x, int y, Direction dir);
 //bool boardIsCellType(Board b, int x, int y, int n, ...);
 bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...);
 
-void gameFeed(Game game);
+void gameFeed(Game game, bool ham);
 
 bool gameGetIsPlaying(Game g);
 void gameEnd(Game g);

@@ -13,6 +13,7 @@
 #include <stdarg.h>
 #include "constants.h"
 #include "game.h"
+#include <SDL/SDL_mixer.h>
 
 // Static function
 static bool gameCheckMovement(Game g, Snake s);
@@ -35,6 +36,9 @@ struct Game
 	bool isPlaying;
 	bool isPaused;
 	int pauseFinished;
+
+	Mix_Chunk **sound;
+	int numberSound;
 };
 
 /**
@@ -46,6 +50,7 @@ struct Game
  */
 Game gameCreate(BoardSize size)
 {
+
 	Game g = malloc(sizeof(struct Game));
 
 	switch (size) {
@@ -66,6 +71,18 @@ Game gameCreate(BoardSize size)
 	g->isPlaying = true;
 	g->pauseFinished=4;
 	g->isPaused = true;
+
+
+	//init sound
+	g->numberSound=2; //CHANGE HERE THE NUMBER OF SOUND
+	g->sound=malloc(g->numberSound*sizeof(Mix_Chunk *));
+	Mix_AllocateChannels(g->numberSound+1);
+
+	//load sounds
+	g->sound[0] = Mix_LoadWAV("./sound/pickItem.wav");
+	g->sound[1] = Mix_LoadWAV("./sound/eatHam.wav");
+
+
 	gameInitSnakes(g->board, g->snake1, g->snake2);
 
 	return g;
@@ -82,6 +99,12 @@ void gameFree(Game game) {
 	boardFree(game->board);
 	snakeFree(game->snake1);
 	snakeFree(game->snake2);
+	int i;
+	for(i=0;i<game->numberSound;i++)
+	{
+	 	Mix_FreeChunk(game->sound[i]); //free all the sounds of the array
+	}
+	free(game->sound);
 	free(game);
 }
 
@@ -341,9 +364,11 @@ static bool gameCheckMovement(Game g, Snake s)
 				printf("Error checkMovement\n");
 				break;
 		}
+		if(item->value==4)
+			gameFeed(g, true);
 
 		item->onCollision(item, s, otherSnake);
-
+		playItemSound(g, item);
 		boardItemDelete(b, item);
 	}
 	else
@@ -370,7 +395,29 @@ static bool gameCheckMovement(Game g, Snake s)
 	return continueGame;
 }
 
+/**
+ * \fn void playItemSound(Game g, Item i)
+ * \brief The function play a sound depending the item
+ * \details The function just check the item id and play a sound when the player pick it
+ * \param g Game : The current game
+ * \param i Item : The item picked
+ */
+void playItemSound(Game g, Item i)
+{
+	int id=i->value;
+	if(id!=4)
+	{
+		Mix_VolumeChunk(g->sound[0], MIX_MAX_VOLUME); //set sound volume
+		Mix_PlayChannel(1, g->sound[0], 0);
+	}
+	else if(id==4)
+	{
+		Mix_VolumeChunk(g->sound[0], MIX_MAX_VOLUME); //set sound volume
+		Mix_PlayChannel(1, g->sound[1], 0);
+	}
 
+
+}
 
 /**
  * \fn bool boardIsSnake(Board b, Coord coord)
@@ -395,7 +442,7 @@ static bool gameCheckMovement(Game g, Snake s)
  * \details The function set a food coodinates in the board structure
  * \param b Board : The board to edit
  */
-void gameFeed(Game game)
+void gameFeed(Game game, bool ham)
 {
 	Board b = gameGetBoard(game);
 	Item itemList = boardGetItemList(b);
@@ -405,8 +452,17 @@ void gameFeed(Game game)
 		x = rand()%boardGetWidth(b);
 		y = rand()%boardGetHeight(b);
 	}
+	BoardValue itemValue;
+	if(ham)
+		itemValue = 4;
+	else
+	{
+		itemValue= itemGetRandomItemValue();
+		if(itemValue==4)
+			itemValue=5;
+	}
 
-	BoardValue itemValue = itemGetRandomItemValue();
+
 	boardItemAdd(b, itemList, x, y,itemValue);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }

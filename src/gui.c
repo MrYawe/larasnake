@@ -15,6 +15,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
+#include <SDL/SDL_mixer.h>
 #include "gui.h"
 #include "constants.h"
 #include "game.h"
@@ -76,10 +77,18 @@ void guiPlay(BoardSize size)
     snake1 = gameGetSnake(game, 1);
     snake2 = gameGetSnake(game, 2);
 
+    //music of the game
+    Mix_Music *musiqueGame = Mix_LoadMUS("./sound/musiqueGame.mp3"); //music of the game
+    Mix_PlayMusic(musiqueGame, -1); //loop  --PLAY HERE
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 6); //half of the maximum sound
+
+
+      //
 
       /************************/
      /**      GAME LOOP     **/
     /************************/
+    gameFeed(game, true);
     while (gameGetIsPlaying(game)) {
         timer->start = SDL_GetTicks(); // Start of the current frame
 
@@ -88,6 +97,7 @@ void guiPlay(BoardSize size)
 
             if(gameGetPauseTimer(game)==0) //know if we don't leave the pause
             {
+
               ////// Move of snake 1 (player) //////
               timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
               if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {  // test if we wait enough time to move the snake 1
@@ -110,7 +120,7 @@ void guiPlay(BoardSize size)
               ///////// Item pop /////////
               timer->itemPopTimer += SDL_GetTicks() - timer->itemLastPop;
               if(timer->itemPopTimer >= ITEM_POP_INTERVAL) {
-                  gameFeed(game); //Function called to put some food on the board
+                  gameFeed(game, false); //Function called to put some food on the board
                   timer->itemPopTimer = 0;
               }
               timer->itemLastPop = SDL_GetTicks();
@@ -140,6 +150,8 @@ void guiPlay(BoardSize size)
     ////// Free //////
     gameFree(game);
     guiFreeAssets(assets);
+    Mix_FreeMusic(musiqueGame); //free the music
+
     //TTF_Quit();
     //SDL_Quit();
 }
@@ -428,7 +440,7 @@ void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets) {
                     if(nextDirection == RIGHT)
                         guiApplySurface(x, y, snakeAssets->corner[UP], screen, NULL);
                     else // LEFT
-                        guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
+                guiApplySurface(x, y, snakeAssets->corner[LEFT], screen, NULL);
                 }
                 else if(currentDirection == LEFT)
                 {

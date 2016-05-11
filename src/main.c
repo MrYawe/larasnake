@@ -15,6 +15,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
+#include <SDL/SDL_mixer.h>
 #include "gui.h"
 #include "constants.h"
 
@@ -97,7 +98,22 @@ int main(int argc, char *argv[])
     police = TTF_OpenFont("./images/font/Black-Ops-2-Font-Julethekiller.ttf", MENU_POLICE_SIZE);
     menu = guiLoadImage("./images/gui/menu.png");
 
+    /************************/
+   /**      SOUND PART     **/
+  /************************/
 
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialization of the Mixer API
+    {
+       printf("%s", Mix_GetError());
+    }
+    Mix_Music *musiqueMenu = Mix_LoadMUS("./sound/musiqueMenu.mp3"); //music of the game
+    Mix_PlayMusic(musiqueMenu, -1); //loop music
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 2); //half of the maximum sound
+
+
+    /************************/
+   /**                    **/
+  /************************/
     Title* titles = malloc(4*sizeof(Title));
     titles[0] =  guiCreateTitle(200, 190, PLAY, "JOUER", white, police);
     titles[1] =  guiCreateTitle(120, 270, INSTRUCTION, "INSTRUCTION", white, police);
@@ -108,6 +124,11 @@ int main(int argc, char *argv[])
     int state = 0;
     while (continuer)
     {
+        if(!Mix_PlayingMusic())
+        {
+           Mix_PlayMusic(musiqueMenu, -1); //loop music only if it doesn't already loop
+        }
+         
         SDL_WaitEvent(&event);
         switch(event.type)
         {
@@ -160,7 +181,8 @@ int main(int argc, char *argv[])
 
     TTF_CloseFont(police);
     TTF_Quit();
-
+    Mix_FreeMusic(musiqueMenu); //free the musicMenu
+    Mix_CloseAudio(); // close audio
     //SDL_FreeSurface(texte);
     SDL_Quit();
 
