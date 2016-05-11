@@ -74,13 +74,16 @@ Game gameCreate(BoardSize size)
 
 
 	//init sound
-	g->numberSound=2; //CHANGE HERE THE NUMBER OF SOUND
+	g->numberSound=5; //CHANGE HERE THE NUMBER OF SOUND
 	g->sound=malloc(g->numberSound*sizeof(Mix_Chunk *));
 	Mix_AllocateChannels(g->numberSound+1);
 
 	//load sounds
 	g->sound[0] = Mix_LoadWAV("./sound/pickItem.wav");
 	g->sound[1] = Mix_LoadWAV("./sound/eatHam.wav");
+	g->sound[2] = Mix_LoadWAV("./sound/changeBody.wav");
+	g->sound[3] = Mix_LoadWAV("./sound/reverseSnake.wav");
+	g->sound[4] = Mix_LoadWAV("./sound/changeBg.wav");
 
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
@@ -345,7 +348,10 @@ static bool gameCheckMovement(Game g, Snake s)
 		} else {
 			otherSnake = gameGetSnake(g, 1);
 		}
-
+		if(item->value==14)
+		{
+			boardsetType(b,true); //changeMap
+		}
 		switch (dirSnake)
 		{
 			case UP:
@@ -405,15 +411,32 @@ static bool gameCheckMovement(Game g, Snake s)
 void playItemSound(Game g, Item i)
 {
 	int id=i->value;
-	if(id!=4)
+
+	if(id==4) //eat ham
 	{
-		Mix_VolumeChunk(g->sound[0], MIX_MAX_VOLUME); //set sound volume
-		Mix_PlayChannel(1, g->sound[0], 0);
-	}
-	else if(id==4)
-	{
-		Mix_VolumeChunk(g->sound[0], MIX_MAX_VOLUME); //set sound volume
+		Mix_VolumeChunk(g->sound[1], MIX_MAX_VOLUME); //set sound volume
 		Mix_PlayChannel(1, g->sound[1], 0);
+	}
+	else if(id==12) //change body
+	{
+		Mix_VolumeChunk(g->sound[2], MIX_MAX_VOLUME/2); //set sound volume
+		Mix_PlayChannel(2, g->sound[2], 0);
+	}
+	else if(id==9)//reverse Snake
+	{
+		Mix_VolumeChunk(g->sound[3], MIX_MAX_VOLUME-40); //set sound volume
+		Mix_PlayChannel(3, g->sound[3], 0);
+	}
+	else if(id==14) //change bg
+	{
+		Mix_VolumeChunk(g->sound[4], MIX_MAX_VOLUME); //set sound volume
+		Mix_PlayChannel(4, g->sound[4], 0);
+	}
+	else
+	{
+		Mix_VolumeChunk(g->sound[0], MIX_MAX_VOLUME); //set sound volume
+		Mix_PlayChannel(5, g->sound[0], 0);
+
 	}
 
 

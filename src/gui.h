@@ -43,6 +43,7 @@ struct Assets
 	SnakeAssets *snakesAssets;
 	GuiAssets guiAssets;
 	SDL_Surface *background;
+	int currentBg;
 	SDL_Surface **itemsAssets;
 };
 
@@ -67,6 +68,7 @@ void guiPause(Game g);
 SDL_Surface* guiCreateScreen(BoardSize size);
 void guiReloadScreen(SDL_Surface *screen);
 void guiClearScreen(SDL_Surface *screen);
+void guiChangeBackground(SDL_Surface* screen, Assets assets, BoardSize size);
 
 /**** Assets ****/
 Assets guiLoadAssets(BoardSize size);

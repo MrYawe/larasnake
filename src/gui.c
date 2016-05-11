@@ -88,7 +88,7 @@ void guiPlay(BoardSize size)
       /************************/
      /**      GAME LOOP     **/
     /************************/
-    gameFeed(game, true);
+    gameFeed(game, true); //first ham appeared
     while (gameGetIsPlaying(game)) {
         timer->start = SDL_GetTicks(); // Start of the current frame
 
@@ -97,7 +97,12 @@ void guiPlay(BoardSize size)
 
             if(gameGetPauseTimer(game)==0) //know if we don't leave the pause
             {
-
+                if(boardGetType(board)) //if we have to change the background
+                {
+                  boardsetType(board, false); //disable change flag
+                  guiChangeBackground(screen, assets,size);
+                  printf("MAP CHANGED\n"); //the map is now changed
+                }
               ////// Move of snake 1 (player) //////
               timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
               if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {  // test if we wait enough time to move the snake 1
@@ -156,7 +161,24 @@ void guiPlay(BoardSize size)
     //SDL_Quit();
 }
 
+void guiChangeBackground(SDL_Surface* screen, Assets assets, BoardSize size)
+{
+  int tailleTerrain=2; //check the field size
+  if(size==LARGE)
+    tailleTerrain=3;
+  else if(size==SMALL)
+    tailleTerrain=1;
+  int randType = rand()%2+1; /// PASSER LE MODULO A TROIS POUR LES RONCES
+  while(randType==assets->currentBg)
+  {
+    randType=rand()%2+1;
+  }
 
+  assets->currentBg = randType;
+  char path[31];
+  sprintf(path,"./images/background/bg-%d-%d.jpg",randType, tailleTerrain);
+  assets->background = guiLoadImage(path); //load random field
+}
 /**
  * \fn SDL_Surface* guiCreateScreen(BoardSize size)
  * \brief The function creates the screen
@@ -218,7 +240,7 @@ Assets guiLoadAssets(BoardSize size) {
     char path[31];
     sprintf(path,"./images/background/bg-%d-%d.jpg", randType, tailleTerrain);
     assets->background = guiLoadImage(path); //load random field
-
+    assets->currentBg = randType;
     assets->itemsAssets = guiLoadItems();
     assets->guiAssets = guiLoadGui(size);
 

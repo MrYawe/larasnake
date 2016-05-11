@@ -37,6 +37,8 @@ int boardGetWidth(Board b);
 
 Item boardGetItemList(Board board);
 
+void boardsetType(Board board, bool b);
+bool boardGetType(Board b);
 //////////////////////////////////////////
 //				UTILITARY				//
 //////////////////////////////////////////

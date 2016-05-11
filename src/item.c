@@ -91,8 +91,7 @@ void itemOnCollisionNewColor(Item i, Snake sOnCollision, Snake sBis) {
 
 void itemOnCollisionNewMap(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION NEW_MAP\n");
-    printf("PAS ENCORE IMPLEMENTE\n");
-    // TODO: change la map
+    //change map: done in gui.c
 }
 
 void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis) {

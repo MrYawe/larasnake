@@ -27,6 +27,7 @@ struct Board
 	int sizeY;
 	int sizeCell; // size by pixels of a cell
 	Item itemList;
+	bool changeType;
 };
 
 //////////////////////////////////////////
@@ -53,7 +54,7 @@ Board boardInit(int sizeX, int sizeY, int sizeCell)
 		// Allocation of tab
 		b->tab = (int**) malloc(sizeY*sizeof(int*));
 		int i;
-		
+
 		for ( i = 0; i < sizeY; i++)
 		  b->tab[i] = (int*) calloc(sizeX, sizeof(int));
 
@@ -61,7 +62,7 @@ Board boardInit(int sizeX, int sizeY, int sizeCell)
 		b->sizeX = sizeX;
 		b->sizeY = sizeY;
 		b->sizeCell = sizeCell;
-
+		b->changeType=false;
 		b->itemList = itemCreate(-1, -1, SENTRY);
 	}
 	else
@@ -216,7 +217,7 @@ Board boardCopy(Board b)
 		return NULL;
 	Board res = boardInit(b->sizeX, b->sizeY, b->sizeCell);
 	int j, i;
-	
+
 	for(j=0; j<b->sizeY; j++)
 	{
 		for (i=0; i<b->sizeX; i++)
@@ -258,4 +259,14 @@ int boardItemDelete(Board board, Item item) {
         return 1;
     }
     return 0;
+}
+
+void boardsetType(Board board, bool b)
+{
+	board->changeType=b;
+}
+
+bool boardGetType(Board b)
+{
+	return b->changeType;
 }
