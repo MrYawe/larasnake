@@ -486,6 +486,30 @@ void gameItemCollision(Item i, Snake sOnCollision, Snake sBis) {
     }
 }
 
+
+void gameItemDebuff(Item i, Snake snake) {
+	switch (i->value) {
+
+		case SENTRY:
+            printf("Sentry debuff\n");
+            break;
+        case SPEED_UP:
+            itemOnDebuffSpeedUp(i, snake);
+            break;
+        case REVERSE_CONTROL:
+            itemOnDebuffReverseControl(i, snake);
+            break;
+        case NO_BORDER:
+            itemOnDebuffNoBorder(i, snake);
+            break;
+        case GHOST:
+            itemOnDebuffGhost(i, snake);
+            break;
+        default:
+            printf("Item non implemented\n");
+    }
+}
+
 /**
  * \fn bool boardIsSnake(Board b, Coord coord)
  * \brief The function allow to know if a cell is a part of a snake
@@ -665,10 +689,20 @@ void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis) {
 	// ! TODO : update board
 }
 
+//---------
 void itemOnCollisionSpeedUp(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION SPEED_UP\n");
     snakeSetSpeed(sOnCollision, snakeGetSpeed(sOnCollision)-SPEED_UP_VALUE);
+	itemAddNew(snakeGetItemList(sOnCollision), -1, -1, i->value);
 }
+
+void itemOnDebuffSpeedUp(Item i, Snake snake) {
+    printf("DEBUFF SPEED_UP\n");
+    snakeSetSpeed(snake, snakeGetSpeed(snake)+SPEED_UP_VALUE);
+	itemDelete(i);
+}
+//---------
+
 
 void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION GROW_UP\n");
@@ -686,27 +720,64 @@ void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis) {
 	// TODO ! board
 }
 
+//---------
 void itemOnCollisionReverseControl(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION REVERSE_CONTROL\n");
     snakeSetIsControlReversed(sOnCollision, true);
     snakeSetIsControlReversed(sBis, true);
+	itemAddNew(snakeGetItemList(sOnCollision), -1, -1, i->value);
+	itemAddNew(snakeGetItemList(sBis), -1, -1, i->value);
 }
+
+void itemOnDebuffReverseControl(Item i, Snake snake) {
+    printf("DEBUFF REVERSE_CONTROL\n");
+    snakeSetIsControlReversed(snake, false);
+	itemDelete(i);
+}
+//---------
+
 
 void itemOnCollisionReverseSnake(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION REVERSE_SNAKE\n");
     // TODO franck: la tete devient la queue
 }
 
+//---------
 void itemOnCollisionNoBorder(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION NO_BORDER\n");
     snakeSetCanCrossBorder(sOnCollision, true);
+	itemAddNew(snakeGetItemList(sOnCollision), -1, -1, i->value);
 }
 
+void itemOnDebuffNoBorder(Item i, Snake snake) {
+    printf("DEBUFF NO_BORDER\n");
+	if(itemSearchByValue(i->next, NO_BORDER) == NULL && itemSearchByValue(i->next, GHOST) == NULL) {
+		snakeSetCanCrossBorder(snake, false);
+	}
+
+	itemDelete(i);
+}
+//---------
+
+//---------
 void itemOnCollisionGhost(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION GHOST\n");
     snakeSetCanCrossBorder(sOnCollision, true);
     snakeSetCanCrossSnake(sOnCollision, true);
+	itemAddNew(snakeGetItemList(sOnCollision), -1, -1, i->value);
 }
+
+void itemOnDebuffGhost(Item i, Snake snake) {
+    printf("DEBUFF GHOST\n");
+	if(itemSearchByValue(i->next, GHOST) == NULL) {
+		if(itemSearchByValue(i->next, NO_BORDER) == NULL) {
+			snakeSetCanCrossBorder(snake, false);
+		}
+		snakeSetCanCrossSnake(snake, false);
+	}
+	itemDelete(i);
+}
+//---------
 
 void itemOnCollisionSwapSnake(Item i, Snake sOnCollision, Snake sBis) {
     printf("COLLISION SWAP_SNAKE\n");

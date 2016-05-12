@@ -11,6 +11,7 @@
 
 #include <stdbool.h>
 #include "coord.h"
+#include "item.h"
 
 
 /**
@@ -55,6 +56,7 @@ struct Snake
 	int speed;
 	Direction direction;
 	SnakeType type;
+	Item itemList;
 
 	bool isControlReversed;
 	bool canCrossBorder;
@@ -91,6 +93,8 @@ void snakeSetDirection(Snake s, Direction d);
 
 int snakeGetSize(Snake s);
 
+Item snakeGetItemList(Snake s);
+void snakeSetItemList(Snake s, Item i);
 int snakeGetSpeed(Snake s);
 void snakeSetSpeed(Snake s, int speed);
 

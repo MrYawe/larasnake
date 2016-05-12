@@ -238,7 +238,7 @@ Board boardCopy(Board b)
  * \return Returns Item which is the list of items of the game
  */
 Item boardItemAdd(Board board, Item list, int x, int y, BoardValue value) {
-    itemAdd(list, x, y, value);
+    itemAddNew(list, x, y, value);
     boardSetValue(board, x, y, value);
     return list;
 }

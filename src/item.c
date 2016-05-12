@@ -39,16 +39,21 @@ BoardValue itemGetRandomItemValue() {
 }
 
 // ajout en fin
-Item itemAdd(Item list, int x, int y, BoardValue value) {
+Item itemAddNew(Item list, int x, int y, BoardValue value) {
     Item newItem = itemCreate(x, y, value);
+    itemAdd(list, newItem);
+
+    return list;
+}
+
+Item itemAdd(Item list, Item toAdd) {
 
     Item temp = list;
     while(temp->next != NULL) {
         temp = temp->next;
     }
-    temp->next = newItem;
-    newItem->prev = temp;
-    //boardSetValue(board, x, y, value);
+    temp->next = toAdd;
+    toAdd->prev = temp;
 
     return list;
 }
@@ -64,20 +69,39 @@ Item itemSearch(Item list, int x, int y) {
     return NULL;
 }
 
+Item itemSearchByValue(Item list, BoardValue value) {
+    Item temp = list;
+    while(temp != NULL) {
+        if(temp->value == value) {
+            return temp;
+        }
+        temp = temp->next;
+    }
+    return NULL;
+}
+
 int itemDelete(Item item) {
     if(item->value == SENTRY) // we can't delete the sentry
         return 0;
 
     //boardSetValue(board, item->posX, item->posY, EMPTY);
-
+    printf("1\n");
     if(item->next != NULL) {
         item->next->prev = item->prev;
     }
+    printf("2\n");
     item->prev->next = item->next;
+    printf("3\n");
 
     return 1;
 }
 
+bool itemListIsEmpty(Item list) {
+    if(list->next != NULL) {
+        return false;
+    }
+    return true;
+}
 
 
 /**

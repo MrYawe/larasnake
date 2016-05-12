@@ -28,6 +28,7 @@
 
 /*** Bonus parameters ***/
 #define ITEM_POP_INTERVAL 5000
+#define ITEM_DEBUFF_INTERVAL 6000
 #define FOOD_VALUE 1
 #define SPEED_UP_VALUE 20 // de combien de ms la vitesse est augmenté
 #define GROW_UP_VALUE 3

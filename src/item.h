@@ -10,6 +10,7 @@
  * \details All header of the item file functions
  */
 
+#include <stdbool.h>
 #include "enum.h"
 
 typedef struct Item* Item;
@@ -31,9 +32,12 @@ struct Item
 
 /*** Object ***/
 Item itemCreate(int x, int y, BoardValue value);
-Item itemAdd(Item list, int x, int y, BoardValue value);
+Item itemAddNew(Item list, int x, int y, BoardValue value);
+Item itemAdd(Item list, Item toAdd);
 BoardValue itemGetRandomItemValue();
 Item itemSearch(Item list, int x, int y);
+Item itemSearchByValue(Item list, BoardValue value);
+bool itemListIsEmpty(Item list);
 int itemDelete(Item item);
 void itemFree(Item item);
 

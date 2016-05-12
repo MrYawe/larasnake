@@ -33,6 +33,7 @@ Snake snakeCreate(int size, int id, Direction d, SnakeType type)
 	s->speed = SNAKE_DEFAULT_SPEED;
 	s->id = id;
 	s->direction = d;
+	s->itemList = itemCreate(-1, -1, SENTRY);
 	s->isControlReversed = false;
 	s->canCrossSnake = false;
 	s->canCrossBorder = false;
@@ -178,7 +179,7 @@ void snakeGrowTail(Snake s)
 			snakeAddFirstElement(s, s->tail->pos->x + 1, s->tail->pos->y, s->tail->orientation);
 			break;
 		case RIGHT:
-			snakeAddFirstElement(s, s->tail->pos->x - 1, s->tail->pos->y, s->tail->orientation);			
+			snakeAddFirstElement(s, s->tail->pos->x - 1, s->tail->pos->y, s->tail->orientation);
 			break;
 		default:
 			printf("Error snakeGrow\n");
@@ -437,6 +438,16 @@ bool snakeGetCanCrossSnake(Snake s)
 int snakeGetId(Snake s)
 {
 	return s->id;
+}
+
+Item snakeGetItemList(Snake s)
+{
+	return s->itemList;
+}
+
+void snakeSetItemList(Snake s, Item i)
+{
+	s->itemList = i;
 }
 
 /**

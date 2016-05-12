@@ -42,8 +42,8 @@ void guiPlay(BoardSize size)
     Timer timer;    //Variable used to control the actions based on the time
 
     /***** Structure Variables *****/
-    bool continueGameMove1;	//Variable used to check if the snake 1 is dead
-    bool continueGameMove2;	//Variable used to check if the snake 2 is dead
+    bool continueGameMove1, continueGameMove2;	//Variable used to check if the snake x is dead
+    bool snake1InDebuff, snake2InDebuff;
 
     Game game;		//Variable to access the game
     Board board;	//Variable to access the board
@@ -70,6 +70,8 @@ void guiPlay(BoardSize size)
     /***** Structure Variables *****/
     continueGameMove1 = true;
     continueGameMove2 = true;
+    snake1InDebuff = false;
+    snake2InDebuff = false;
 
     game = gameCreate(size);
     board = gameGetBoard(game);
@@ -122,6 +124,52 @@ void guiPlay(BoardSize size)
               timer->snake2LastMove = SDL_GetTicks();
               /////////////////////////////////
 
+              ///////////////// Debuff snake1 /////////////////
+              if (!itemListIsEmpty(snakeGetItemList(snake1))) {
+                  if (!snake1InDebuff) {
+                      snake1InDebuff = true;
+                      timer->snake1LastDebuff = SDL_GetTicks();
+                  } else {
+                      timer->snake1DebuffTimer += SDL_GetTicks() - timer->snake1LastDebuff;
+                      if(timer->snake1DebuffTimer >= ITEM_DEBUFF_INTERVAL) {
+                          gameItemDebuff(snakeGetItemList(snake1)->next, snake1);
+                          snake1InDebuff = false;
+                          timer->snake1DebuffTimer = 0;
+                      }
+                      timer->snake1LastDebuff = SDL_GetTicks();
+                  }
+              }
+              ////////////////////////////////////////////////
+
+              ///////////////// Debuff snake2 /////////////////
+              if (!itemListIsEmpty(snakeGetItemList(snake2))) {
+                  if (!snake2InDebuff) {
+                      snake2InDebuff = true;
+                      timer->snake2LastDebuff = SDL_GetTicks();
+                  } else {
+                      timer->snake2DebuffTimer += SDL_GetTicks() - timer->snake2LastDebuff;
+                      if(timer->snake2DebuffTimer >= ITEM_DEBUFF_INTERVAL) {
+                          gameItemDebuff(snakeGetItemList(snake2)->next, snake2);
+                          snake2InDebuff = false;
+                          timer->snake2DebuffTimer = 0;
+                      }
+                      timer->snake2LastDebuff = SDL_GetTicks();
+                  }
+              }
+              ////////////////////////////////////////////////
+
+
+
+
+              printf("******************* Snake1 list: **************************\n");
+              /*Item item = snakeGetItemList(snake1);
+              while (item != NULL) {
+                  printf("Item value: %d\n", item->value);
+                  item = item->next;
+              }*/
+
+
+
               ///////// Item pop /////////
               timer->itemPopTimer += SDL_GetTicks() - timer->itemLastPop;
               if(timer->itemPopTimer >= ITEM_POP_INTERVAL) {
@@ -129,6 +177,8 @@ void guiPlay(BoardSize size)
                   timer->itemPopTimer = 0;
               }
               timer->itemLastPop = SDL_GetTicks();
+              ///////// Item pop /////////
+
             }
 
 
@@ -547,7 +597,11 @@ Timer guiCreateTimer() {
     timer->snake1MoveTimer = SNAKE_DEFAULT_SPEED; // pour être certain que les deux snake bouge des le début
     timer->snake2MoveTimer = SNAKE_DEFAULT_SPEED;
     timer->itemPopTimer = ITEM_POP_INTERVAL;
+    timer->snake1DebuffTimer = 0;
+    timer->snake2DebuffTimer = 0;
 
+    timer->snake1LastDebuff = 0;
+    timer->snake2LastDebuff = 0;
     timer->snake1LastMove = 0;
     timer->snake2LastMove = 0;
     timer->itemLastPop = 0;
