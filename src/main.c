@@ -64,6 +64,8 @@ BoardSize optionAction(SDL_Surface* screen, SDL_Surface* menu) {
                             case OPTION:
                                 return LARGE;
                                 break;
+                            default:
+                                break;
                         }
                         break;
 
@@ -128,7 +130,7 @@ int main(int argc, char *argv[])
         {
            Mix_PlayMusic(musiqueMenu, -1); //loop music only if it doesn't already loop
         }
-         
+
         SDL_WaitEvent(&event);
         switch(event.type)
         {

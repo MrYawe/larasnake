@@ -61,7 +61,7 @@ void snakeGoUp(Snake s)
 		//snakeAddLastElement(s, s->head->posX, mod(s->head->posY - 1, BOARD_SIZE));
 	else
 	*/	snakeAddLastElement(s, s->head->pos->x, s->head->pos->y - 1, s->direction);
-	
+
 	snakeDeleteFirstElement(s);
 }
 
@@ -76,7 +76,7 @@ void snakeGoDown(Snake s)
 	/*if(s->direction!=s->head->orientation)
 		snakeAddLastElement(s, s->head->pos->x, s->head->pos->y + 1, NIL);
 	//snakeAddLastElement(s, s->head->posX, mod(s->head->posY + 1, BOARD_SIZE));
-	else 
+	else
 	*/	snakeAddLastElement(s, s->head->pos->x, s->head->pos->y + 1, s->direction);
 
 	snakeDeleteFirstElement(s);
@@ -112,7 +112,7 @@ void snakeTurnRight(Snake s)
 	//snakeAddLastElement(s, mod(s->head->posX + 1, BOARD_SIZE), s->head->posY);
 	else
 	*/	snakeAddLastElement(s, s->head->pos->x + 1, s->head->pos->y, s->direction);
-		
+
 	snakeDeleteFirstElement(s);
 }
 
@@ -166,19 +166,19 @@ void snakeGrowHead(Snake s)
  */
 void snakeGrowTail(Snake s)
 {
-	switch (s->direction)
+	switch (s->tail->orientation)
 	{
 		case UP:
-			snakeAddFirstElement(s, s->tail->pos->x, s->tail->pos->y - 1, s->direction);
+			snakeAddFirstElement(s, s->tail->pos->x, s->tail->pos->y + 1, s->tail->orientation);
 			break;
 		case DOWN:
-			snakeAddFirstElement(s, s->tail->pos->x, s->tail->pos->y + 1, s->direction);
+			snakeAddFirstElement(s, s->tail->pos->x, s->tail->pos->y - 1, s->tail->orientation);
 			break;
 		case LEFT:
-			snakeAddFirstElement(s, s->tail->pos->x - 1, s->tail->pos->y, s->direction);
+			snakeAddFirstElement(s, s->tail->pos->x + 1, s->tail->pos->y, s->tail->orientation);
 			break;
 		case RIGHT:
-			snakeAddFirstElement(s, s->tail->pos->x + 1, s->tail->pos->y, s->direction);
+			snakeAddFirstElement(s, s->tail->pos->x - 1, s->tail->pos->y, s->tail->orientation);			
 			break;
 		default:
 			printf("Error snakeGrow\n");
