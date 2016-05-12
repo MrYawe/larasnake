@@ -82,6 +82,7 @@ SDL_Surface** guiLoadItems();
 SDL_Surface* guiLoadImage(char* path);
 void guiApplySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
 void guiFreeAssets(Assets assets);
+void guiSetFieldType(Game g, Assets a, BoardSize s);
 
 /**** Draw ****/
 void guiDrawGame(SDL_Surface *screen, Game game, Assets assets);
