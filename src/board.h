@@ -39,6 +39,8 @@ Item boardGetItemList(Board board);
 
 void boardsetType(Board board, bool b);
 bool boardGetType(Board b);
+int boardGetFieldValue(Board b, int x, int y);
+void boardSetFieldValue(Board b, int x, int y, char v);
 //////////////////////////////////////////
 //				UTILITARY				//
 //////////////////////////////////////////

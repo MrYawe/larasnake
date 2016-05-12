@@ -47,6 +47,7 @@ bool gameGetIsPaused(Game g);
 void gameSetIsPaused(Game g, bool isPaused);
 int gameGetPauseTimer(Game g);
 void gameSetPauseTimer(Game g, int t);
+void gameSetFieldValue(Game g, int fieldType, int tailleTerrain);
 
 //////////////////////////////////////////
 //				UTILITARY				//

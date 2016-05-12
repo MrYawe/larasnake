@@ -74,6 +74,9 @@ void guiPlay(BoardSize size)
     game = gameCreate(size);
     board = gameGetBoard(game);
 
+    guiSetFieldType(game, assets, size);
+
+
     snake1 = gameGetSnake(game, 1);
     snake2 = gameGetSnake(game, 2);
 
@@ -174,11 +177,34 @@ void guiChangeBackground(SDL_Surface* screen, Assets assets, BoardSize size)
     randType=rand()%2+1;
   }
 
+
   assets->currentBg = randType;
   char path[31];
   sprintf(path,"./images/background/bg-%d-%d.jpg",randType, tailleTerrain);
   assets->background = guiLoadImage(path); //load random field
 }
+
+/**
+ * \fn void guiSetFieldType(Game g, Assets a)
+ * \brief The function load in the board the field associate to the txt file
+ * \details The function load in the board array the field values, to check if the snake get a bonus or not according to the field
+ * \param g Game: the game instance
+ * \param a Assets: the gui assets (get the current backgroundType)
+ * \param size BoardSize: the size of the board
+ * \return The SDL_Surface* of the screen
+ */
+void guiSetFieldType(Game g, Assets a, BoardSize size)
+{
+  int fieldType=a->currentBg; //curent background type
+  int tailleTerrain=2; //check the field size
+  if(size==LARGE)
+    tailleTerrain=3;
+  else if(size==SMALL)
+    tailleTerrain=1;
+  gameSetFieldValue(g,fieldType, tailleTerrain);
+}
+
+
 /**
  * \fn SDL_Surface* guiCreateScreen(BoardSize size)
  * \brief The function creates the screen

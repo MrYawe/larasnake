@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
         {
            Mix_PlayMusic(musiqueMenu, -1); //loop music only if it doesn't already loop
         }
-         
+
         SDL_WaitEvent(&event);
         switch(event.type)
         {

@@ -376,6 +376,8 @@ static bool gameCheckMovement(Game g, Snake s)
 		item->onCollision(item, s, otherSnake);
 		playItemSound(g, item);
 		boardItemDelete(b, item);
+
+
 	}
 	else
 	{
@@ -398,6 +400,29 @@ static bool gameCheckMovement(Game g, Snake s)
 				break;
 		}
 	}
+	//detection of the field part -fire-water-grass 0-1-2
+	char currentFieldValue=boardGetFieldValue(b,coordSnake->x, coordSnake->y);
+	if(currentFieldValue!='-')
+	{
+		int type=currentFieldValue-'0'; //conversion en int
+
+		int typeSnake=snakeGetType(s);
+		if( typeSnake==type)
+			snakeSetSpeed(s,SNAKE_DEFAULT_SPEED-3*SPEED_UP_VALUE);
+		else
+		{
+			if(( typeSnake==FIRE && type==WATER) || ( typeSnake==WATER && type==GRASS) || ( typeSnake==GRASS && type==FIRE))
+				snakeSetSpeed(s,SNAKE_DEFAULT_SPEED+5*SPEED_UP_VALUE);
+		}
+
+		//printf("%d/%d\n",snakeGetType(s),type);
+		//printf("%d/%d/%d\n",FIRE,WATER,GRASS);
+	}
+	else
+	{
+		snakeSetSpeed(s,SNAKE_DEFAULT_SPEED);
+	}
+	//-----
 	return continueGame;
 }
 
@@ -477,11 +502,11 @@ void gameFeed(Game game, bool ham)
 	}
 	BoardValue itemValue;
 	if(ham)
-		itemValue = 4;
+		itemValue = FOOD;
 	else
 	{
 		itemValue= itemGetRandomItemValue();
-		if(itemValue==4)
+		if(itemValue==FOOD)
 			itemValue=5;
 	}
 
@@ -647,4 +672,39 @@ bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...)
 	va_end(va); //clean memory assigned to varlist
 	free(coord);
 	return res;
+}
+
+/*
+ * \fn void gameSetFieldValue(Game g, int type, int taille)
+ * \brief Open and read the field values
+ * \details Open the file associated to the current board, read the values, and complete the board fieldAssets
+ * \param g Game : the current game
+ * \param type int : the field type (lava, water, ...)
+ * \param taille int: the field size (big, medium, small)
+ */
+void gameSetFieldValue(Game g, int type, int taille)
+{
+	Board b = g->board;
+	int x= boardGetWidth(b);
+	int y= boardGetHeight(b);
+	char path[31];
+	sprintf(path,"./boardData/bg-%d-%d.txt",type, taille); //open de right file text
+	printf("%s\n", path);
+	FILE *field = fopen(path, "r");
+	int i,j;
+	char v;
+//x=50
+//y=35
+	for(j=0;j<y;j++){
+      for(i=0;i<x;i++){
+          v=fgetc(field);
+					while(v==13 || v==10) //remove \n
+						  v=fgetc(field);
+					boardSetFieldValue(b, i, j, v);
+					//printf("%d-%d\n",i,j);
+      }
+		//	printf("\n");
+  }
+
+
 }
