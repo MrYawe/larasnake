@@ -64,6 +64,8 @@ BoardSize optionAction(SDL_Surface* screen, SDL_Surface* menu) {
                             case OPTION:
                                 return LARGE;
                                 break;
+                            default:
+                                break;
                         }
                         break;
 

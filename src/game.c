@@ -373,7 +373,7 @@ static bool gameCheckMovement(Game g, Snake s)
 		if(item->value==4)
 			gameFeed(g, true);
 
-		item->onCollision(item, s, otherSnake);
+		gameItemCollision(item, s, otherSnake);
 		playItemSound(g, item);
 		boardItemDelete(b, item);
 
@@ -461,10 +461,54 @@ void playItemSound(Game g, Item i)
 	{
 		Mix_VolumeChunk(g->sound[0], MIX_MAX_VOLUME); //set sound volume
 		Mix_PlayChannel(5, g->sound[0], 0);
-
 	}
+}
 
+void gameItemCollision(Item i, Snake sOnCollision, Snake sBis) {
+	switch (i->value) {
 
+		case SENTRY:
+            printf("Sentry collision\n");
+            break;
+        case FOOD:
+            itemOnCollisionFood(i, sOnCollision, sBis);
+            break;
+        case SPEED_UP:
+            itemOnCollisionSpeedUp(i, sOnCollision, sBis);
+            break;
+        case GROW_UP:
+            itemOnCollisionGrowUp(i, sOnCollision, sBis);
+            break;
+        case GROW_DOWN:
+            itemOnCollisionGrowDown(i, sOnCollision, sBis);
+            break;
+        case REVERSE_CONTROL:
+            itemOnCollisionReverseControl(i, sOnCollision, sBis);
+            break;
+        case REVERSE_SNAKE:
+            itemOnCollisionReverseSnake(i, sOnCollision, sBis);
+            break;
+        case NO_BORDER:
+            itemOnCollisionNoBorder(i, sOnCollision, sBis);
+            break;
+        case GHOST:
+            itemOnCollisionGhost(i, sOnCollision, sBis);
+            break;
+        case SWAP_SNAKE:
+            itemOnCollisionSwapSnake(i, sOnCollision, sBis);
+            break;
+        case NEW_COLOR:
+            itemOnCollisionNewColor(i, sOnCollision, sBis);
+            break;
+        case NEW_MAP:
+            itemOnCollisionNewMap(i, sOnCollision, sBis);
+            break;
+        case WALL:
+            itemOnCollisionWall(i, sOnCollision, sBis);
+            break;
+        default:
+            printf("Item non implemented\n");
+    }
 }
 
 /**
@@ -597,49 +641,6 @@ Coord boardNextPosCell(int x, int y, Direction dir)
 }*/
 
 /*
- * \fn Item gameGetFood(Game game)
- * \brief The function allow to get the food from the game structure
- * \details The function returns the food attribute
- * \param game Game: The game which to acess
- * \return Item: The item in the struct game
- */
- /*
-Item gameGetFood(Game game)
-{
-	return game->food;
-}
-*/
-
-/*
-Item gameSetFood(Game game, int x , int y) {
-	game->food->posX=x;
-	game->food->posY=y;
-}
-*/
-
-/*bool boardIsCellType(Board b, int x, int y, int n, ...){
-	bool res=false;
-	if(boardInside(b, x, y)){
-		int i;
-		BoardValue value;
-		va_list va;
-		va_start(va,n);	//indicating va to point on the first variable argument
-		for(i=0;i<n;i++){
-			value = va_arg (va, BoardValue);//va will
-			if(boardGetValue(b, x, y)==value){
-				res=true;
-				break;
-			}
-		}
-		va_end(va);
-	} else {
-		printf("[Error]: game.c_boardIsCellType, coordinates (%d,%d) not inside the board\n", x, y);
-	}
-	return res;
-}*/
-
-
-/*
  * \fn bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...)
  * \brief Check if the next cell of the board is the type of the given parameter(s)
  * \details Check if the next cell of the board is the type of the given parameter(s)
@@ -705,6 +706,92 @@ void gameSetFieldValue(Game g, int type, int taille)
       }
 		//	printf("\n");
   }
+}
+/************************/
+/**   ITEM FONCTIONS   **/
+/************************/
 
+void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION JAMBON\n");
+    int k;
+    for (k = 0; k < FOOD_VALUE; k++) {
+        snakeGrowTail(sOnCollision);
+    }
+    //itemDelete(i, b);
+	// ! TODO : update board
+}
+
+void itemOnCollisionSpeedUp(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION SPEED_UP\n");
+    snakeSetSpeed(sOnCollision, snakeGetSpeed(sOnCollision)-SPEED_UP_VALUE);
+}
+
+void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION GROW_UP\n");
+    int k;
+    for (k = 0; k < GROW_UP_VALUE; k++) {
+        snakeGrowHead(sOnCollision);
+    }
+	// ! TODO : update board
+}
+
+void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION GROW_DOWN\n");
+    printf("PAS ENCORE IMPLEMENTE\n");
+    snakeDeleteFirstElement(sOnCollision);
+	// TODO ! board
+}
+
+void itemOnCollisionReverseControl(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION REVERSE_CONTROL\n");
+    snakeSetIsControlReversed(sOnCollision, true);
+    snakeSetIsControlReversed(sBis, true);
+}
+
+void itemOnCollisionReverseSnake(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION REVERSE_SNAKE\n");
+    // TODO franck: la tete devient la queue
+}
+
+void itemOnCollisionNoBorder(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION NO_BORDER\n");
+    snakeSetCanCrossBorder(sOnCollision, true);
+}
+
+void itemOnCollisionGhost(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION GHOST\n");
+    snakeSetCanCrossBorder(sOnCollision, true);
+    snakeSetCanCrossSnake(sOnCollision, true);
+}
+
+void itemOnCollisionSwapSnake(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION SWAP_SNAKE\n");
+    struct Snake temp = *sBis;
+    *sBis = *sOnCollision;
+    *sOnCollision = temp;
+}
+
+void itemOnCollisionNewColor(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION NEW_COLOR\n");
+    SnakeType t1 = snakeGetType(sOnCollision);
+    SnakeType t2 = snakeGetType(sBis);
+    if( (t1==WATER || t2==WATER) && (t1==FIRE || t2==FIRE) ) {
+        snakeSetType(sOnCollision, GRASS);
+    } else if ( (t1==WATER || t2==WATER) && (t1==GRASS || t2==GRASS) ) {
+        snakeSetType(sOnCollision, FIRE);
+    } else {
+        snakeSetType(sOnCollision, WATER);
+    }
+}
+
+void itemOnCollisionNewMap(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION NEW_MAP\n");
+    //change map: done in gui.c
+}
+
+void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis) {
+    printf("COLLISION WALL\n");
+    printf("PAS ENCORE IMPLEMENTE\n");
+    // TODO: fait pop un item mur
 
 }
