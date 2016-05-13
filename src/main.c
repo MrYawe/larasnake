@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
                                 break;
 
                             case QUIT:
-
+                                continuer = 0;
                                 break;
                         }
                         break;

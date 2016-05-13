@@ -104,9 +104,9 @@ void guiPlay(BoardSize size)
             {
                 if(boardGetType(board)) //if we have to change the background
                 {
-                  boardsetType(board, false); //disable change flag
-                  guiChangeBackground(screen, assets,size);
-                  printf("MAP CHANGED\n"); //the map is now changed
+                    boardsetType(board, false); //disable change flag
+                    guiChangeBackground(screen, assets,size);
+                    printf("MAP CHANGED\n"); //the map is now changed
                 }
               ////// Move of snake 1 (player) //////
               timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
@@ -164,8 +164,8 @@ void guiPlay(BoardSize size)
 
 
 
-              printf("******************* Snake1 list: **************************\n");
-              /*Item item = snakeGetItemList(snake1);
+              /*printf("******************* Snake1 list: **************************\n");
+              Item item = snakeGetItemList(snake1);
               while (item != NULL) {
                   printf("Item value: %d\n", item->value);
                   item = item->next;
