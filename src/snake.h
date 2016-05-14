@@ -61,6 +61,8 @@ struct Snake
 	bool isControlReversed;
 	bool canCrossBorder;
 	bool canCrossSnake;
+
+	bool isAffectedByField;
 	//bool isGhost;
 };
 typedef struct Snake* Snake;

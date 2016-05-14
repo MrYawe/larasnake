@@ -405,7 +405,7 @@ static bool gameCheckMovement(Game g, Snake s)
 	if(currentFieldValue!='-')
 	{
 		int type=currentFieldValue-'0'; //conversion en int
-
+		s->isAffectedByField=true;
 		int typeSnake=snakeGetType(s);
 		if( typeSnake==type)
 			snakeSetSpeed(s,SNAKE_DEFAULT_SPEED-3*SPEED_UP_VALUE);
@@ -418,8 +418,9 @@ static bool gameCheckMovement(Game g, Snake s)
 		//printf("%d/%d\n",snakeGetType(s),type);
 		//printf("%d/%d/%d\n",FIRE,WATER,GRASS);
 	}
-	else
+	else if(s->isAffectedByField) //we leave the affected field
 	{
+		s->isAffectedByField=false;
 		snakeSetSpeed(s,SNAKE_DEFAULT_SPEED);
 	}
 	//-----
