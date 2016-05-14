@@ -407,6 +407,7 @@ SDL_Surface** guiLoadItems() {
     itemsAssets[NEW_COLOR] = guiLoadImage("./images/item/new-color.png");
     itemsAssets[NEW_MAP] = guiLoadImage("./images/item/new-map.png");
     itemsAssets[WALL] = guiLoadImage("./images/item/wall.png");
+    itemsAssets[WALL_P] = guiLoadImage("./images/item/wall_p.png");
 
 
     return itemsAssets;
