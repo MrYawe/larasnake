@@ -162,17 +162,6 @@ void guiPlay(BoardSize size)
               ////////////////////////////////////////////////
 
 
-
-
-              /*printf("******************* Snake1 list: **************************\n");
-              Item item = snakeGetItemList(snake1);
-              while (item != NULL) {
-                  printf("Item value: %d\n", item->value);
-                  item = item->next;
-              }*/
-
-
-
               ///////// Item pop /////////
               timer->itemPopTimer += SDL_GetTicks() - timer->itemLastPop;
               if(timer->itemPopTimer >= ITEM_POP_INTERVAL) {
@@ -188,7 +177,7 @@ void guiPlay(BoardSize size)
         }
 
         /////// Draw ///////
-        guiDrawGame(screen, game, assets);  // draw the board on screen with surfaces stored in the Assets struct
+        guiDrawGame(screen, game, assets, size);  // draw the board on screen with surfaces stored in the Assets struct
         guiReloadScreen(screen);            // reload all the screen
         //boardDisplay(board);
         ///////////////////
@@ -216,22 +205,22 @@ void guiPlay(BoardSize size)
 
 void guiChangeBackground(SDL_Surface* screen, Assets assets, BoardSize size)
 {
-  int tailleTerrain=2; //check the field size
-  if(size==LARGE)
+    int tailleTerrain=2; //check the field size
+    if(size==LARGE)
     tailleTerrain=3;
-  else if(size==SMALL)
+    else if(size==SMALL)
     tailleTerrain=1;
-  int randType = rand()%2+1; /// PASSER LE MODULO A TROIS POUR LES RONCES
-  while(randType==assets->currentBg)
-  {
+    int randType = rand()%2+1; /// PASSER LE MODULO A TROIS POUR LES RONCES
+    while(randType==assets->currentBg)
+    {
     randType=rand()%2+1;
-  }
+    }
 
 
-  assets->currentBg = randType;
-  char path[31];
-  sprintf(path,"./images/background/bg-%d-%d.jpg",randType, tailleTerrain);
-  assets->background = guiLoadImage(path); //load random field
+    assets->currentBg = randType;
+    char path[31];
+    sprintf(path,"./images/background/bg-%d-%d.jpg",randType, tailleTerrain);
+    assets->background = guiLoadImage(path); //load random field
 }
 
 /**
@@ -245,13 +234,13 @@ void guiChangeBackground(SDL_Surface* screen, Assets assets, BoardSize size)
  */
 void guiSetFieldType(Game g, Assets a, BoardSize size)
 {
-  int fieldType=a->currentBg; //curent background type
-  int tailleTerrain=2; //check the field size
-  if(size==LARGE)
+    int fieldType=a->currentBg; //curent background type
+    int tailleTerrain=2; //check the field size
+    if(size==LARGE)
     tailleTerrain=3;
-  else if(size==SMALL)
+    else if(size==SMALL)
     tailleTerrain=1;
-  gameSetFieldValue(g,fieldType, tailleTerrain);
+    gameSetFieldValue(g,fieldType, tailleTerrain);
 }
 
 
@@ -266,15 +255,15 @@ SDL_Surface* guiCreateScreen(BoardSize size) {
     SDL_Surface* screen;
     switch (size) {
         case SMALL:
-            screen = SDL_SetVideoMode(S_SIZE_BOARD_X*S_CELL_SIZE, S_SIZE_BOARD_Y*S_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+            screen = SDL_SetVideoMode(S_SIZE_BOARD_X*S_CELL_SIZE, 2*S_CELL_SIZE + S_SIZE_BOARD_Y*S_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
             break;
 
         case MEDIUM:
-            screen = SDL_SetVideoMode(M_SIZE_BOARD_X*M_CELL_SIZE, M_SIZE_BOARD_Y*M_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+            screen = SDL_SetVideoMode(M_SIZE_BOARD_X*M_CELL_SIZE, 2*M_CELL_SIZE + M_SIZE_BOARD_Y*M_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
             break;
 
         case LARGE:
-            screen = SDL_SetVideoMode(L_SIZE_BOARD_X*L_CELL_SIZE, L_SIZE_BOARD_Y*L_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+            screen = SDL_SetVideoMode(L_SIZE_BOARD_X*L_CELL_SIZE, 2*L_CELL_SIZE + L_SIZE_BOARD_Y*L_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
             break;
     }
 
@@ -427,6 +416,7 @@ GuiAssets guiLoadGui(BoardSize size) {
       guiAssets->timer3 = guiLoadImage("./images/gui/timer3big.png");
       guiAssets->timer2 = guiLoadImage("./images/gui/timer2big.png");
       guiAssets->timer1 = guiLoadImage("./images/gui/timer1big.png");
+      guiAssets->sideBar = guiLoadImage("./images/gui/sideBar_big.png");
     }
     else if (size==SMALL)
     {
@@ -434,6 +424,7 @@ GuiAssets guiLoadGui(BoardSize size) {
       guiAssets->timer3 = guiLoadImage("./images/gui/timer3small.png");
       guiAssets->timer2 = guiLoadImage("./images/gui/timer2small.png");
       guiAssets->timer1 = guiLoadImage("./images/gui/timer1small.png");
+      guiAssets->sideBar = guiLoadImage("./images/gui/sideBar_small.png");
     }
     else
     {
@@ -441,7 +432,10 @@ GuiAssets guiLoadGui(BoardSize size) {
       guiAssets->timer3 = guiLoadImage("./images/gui/timer3medium.png");
       guiAssets->timer2 = guiLoadImage("./images/gui/timer2medium.png");
       guiAssets->timer1 = guiLoadImage("./images/gui/timer1medium.png");
+      guiAssets->sideBar = guiLoadImage("./images/gui/sideBar_medium.png");
     }
+
+
 
 
     return guiAssets;
@@ -456,7 +450,7 @@ GuiAssets guiLoadGui(BoardSize size) {
  * \param assets The Assets struct containing all assets of the game
  * \return The SnakeAssets struct of the loaded snake
  */
-void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
+void guiDrawGame(SDL_Surface *screen, Game game, Assets assets, BoardSize size) {
     Snake snake1 = gameGetSnake(game, 1);
     Snake snake2 = gameGetSnake(game, 2);
     Item itemList = boardGetItemList(gameGetBoard(game));
@@ -465,7 +459,7 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets) {
     guiDrawSnake(screen, snake1, assets->snakesAssets[snakeGetType(snake1)]);
     guiDrawSnake(screen, snake2, assets->snakesAssets[snakeGetType(snake2)]);
     guiDrawItems(screen, itemList, assets->itemsAssets);
-    guiDrawGui(screen, game, assets->guiAssets);
+    guiDrawGui(screen, game, assets->guiAssets, assets->itemsAssets, size);
     //guiApplySurface(gameGetFood(game)->posX*M_CELL_SIZE, M_CELL_SIZE*gameGetFood(game)->posY, assets->food, screen, NULL);
 }
 
@@ -554,7 +548,7 @@ void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets) {
     }
 }
 
-void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets) {
+void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets, SDL_Surface** itemsAssets, BoardSize size) {
 
     if(gameGetIsPaused(game) && gameGetPauseTimer(game)==0) {
         guiApplySurface(0, 0, guiAssets->pauseScreen, screen, NULL);
@@ -585,8 +579,49 @@ void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets) {
         gameSetIsPaused(game, false);
     }
 
+    int xOffset, x2Offset, xMax, y, maxItem;
+    if (size == SMALL) {
+        y = S_SIZE_BOARD_Y*M_CELL_SIZE;
+        xMax = S_SIZE_BOARD_X*M_CELL_SIZE;
+        xOffset = 110;
+        x2Offset = 135;
+        maxItem = 9;
+    } else if(size == MEDIUM) {
+        y = M_SIZE_BOARD_Y*M_CELL_SIZE;
+        xMax = M_SIZE_BOARD_X*M_CELL_SIZE;
+        xOffset = 130;
+        x2Offset = 153;
+        maxItem = 15;
+    } else {
+        y = L_SIZE_BOARD_Y*M_CELL_SIZE;
+        xMax = L_SIZE_BOARD_X*M_CELL_SIZE;
+        xOffset = 130;
+        x2Offset = 150;
+        maxItem = 21;
+    }
 
+    guiApplySurface(0, y, guiAssets->sideBar, screen, NULL);
+    Snake snake1 = gameGetSnake(game, 1);
+    Item item = snakeGetItemList(snake1)->next;
+    int i = 0;
+    while (item != NULL) {
+        if(i < maxItem) {
+            guiApplySurface(xOffset+i*1.2*M_CELL_SIZE, y+10, itemsAssets[item->value], screen, NULL);
+        }
+        item = item->next;
+        i++;
+    }
 
+    Snake snake2 = gameGetSnake(game, 2);
+    item = snakeGetItemList(snake2)->next;
+    i = 0;
+    while (item != NULL) {
+        if(i < maxItem) {
+            guiApplySurface(xMax-x2Offset-i*1.2*M_CELL_SIZE, y+10, itemsAssets[item->value], screen, NULL);
+        }
+        item = item->next;
+        i++;
+    }
 }
 
 /**

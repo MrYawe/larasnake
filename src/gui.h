@@ -30,6 +30,7 @@ struct GuiAssets
 	SDL_Surface *timer3;
 	SDL_Surface *timer2;
 	SDL_Surface *timer1;
+	SDL_Surface *sideBar;
 };
 
 typedef struct SnakeAssets *SnakeAssets;
@@ -85,10 +86,10 @@ void guiFreeAssets(Assets assets);
 void guiSetFieldType(Game g, Assets a, BoardSize s);
 
 /**** Draw ****/
-void guiDrawGame(SDL_Surface *screen, Game game, Assets assets);
+void guiDrawGame(SDL_Surface *screen, Game game, Assets assets, BoardSize size);
 void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets);
 void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface** itemsAssets);
-void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets);
+void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets, SDL_Surface** itemsAssets, BoardSize size);
 
 /**** Events ****/
 void guiEvent(SDL_Event *event, Snake s, Game g);

@@ -579,7 +579,7 @@ void gameFeed(Game game, bool ham)
 	}
 
 
-	boardItemAdd(b, itemList, x, y,itemValue);
+	boardItemAdd(b, itemList, x, y, itemValue);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 
