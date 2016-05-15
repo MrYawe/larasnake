@@ -210,7 +210,7 @@ void guiChangeBackground(SDL_Surface* screen, Assets assets, BoardSize size)
     tailleTerrain=3;
     else if(size==SMALL)
     tailleTerrain=1;
-    int randType = rand()%2+1; /// PASSER LE MODULO A TROIS POUR LES RONCES
+    int randType = rand()%3+1; /// PASSER LE MODULO A TROIS POUR LES RONCES
     while(randType==assets->currentBg)
     {
     randType=rand()%2+1;

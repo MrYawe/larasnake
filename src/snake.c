@@ -37,6 +37,7 @@ Snake snakeCreate(int size, int id, Direction d, SnakeType type)
 	s->isControlReversed = false;
 	s->canCrossSnake = false;
 	s->canCrossBorder = false;
+	s->isAffectedByField=false;
 	//srand(rand()*time(NULL));
 	//s->type = (int)rand()%NB_TYPES;
 	s->type = type;

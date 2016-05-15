@@ -74,7 +74,7 @@ Game gameCreate(BoardSize size)
 
 
 	//init sound
-	g->numberSound=5; //CHANGE HERE THE NUMBER OF SOUND
+	g->numberSound=6; //CHANGE HERE THE NUMBER OF SOUND
 	g->sound=malloc(g->numberSound*sizeof(Mix_Chunk *));
 	Mix_AllocateChannels(g->numberSound+1);
 
@@ -84,6 +84,7 @@ Game gameCreate(BoardSize size)
 	g->sound[2] = Mix_LoadWAV("./sound/changeBody.wav");
 	g->sound[3] = Mix_LoadWAV("./sound/reverseSnake.wav");
 	g->sound[4] = Mix_LoadWAV("./sound/changeBg.wav");
+	g->sound[5] = Mix_LoadWAV("./sound/mp.wav");
 
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
@@ -329,6 +330,11 @@ static bool gameCheckMovement(Game g, Snake s)
 			continueGame = false;
 		}
 	}
+	else if (!snakeGetCanCrossBorder(s) && boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, WALL_P))
+	{
+		printf("Le snake s'est pris un mur !\n");
+		continueGame = false;
+	}
 	else if (boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 2, SNAKE1, SNAKE2))
 	{
 		printf("Snake %d mort !\n", snakeGetId(s));
@@ -373,7 +379,7 @@ static bool gameCheckMovement(Game g, Snake s)
 		if(item->value==4)
 			gameFeed(g, true);
 
-		gameItemCollision(item, s, otherSnake);
+		gameItemCollision(item, s, otherSnake,g);
 		playItemSound(g, item);
 		boardItemDelete(b, item);
 
@@ -405,7 +411,7 @@ static bool gameCheckMovement(Game g, Snake s)
 	if(currentFieldValue!='-')
 	{
 		int type=currentFieldValue-'0'; //conversion en int
-
+		s->isAffectedByField=true;
 		int typeSnake=snakeGetType(s);
 		if( typeSnake==type)
 			snakeSetSpeed(s,SNAKE_DEFAULT_SPEED-3*SPEED_UP_VALUE);
@@ -418,8 +424,9 @@ static bool gameCheckMovement(Game g, Snake s)
 		//printf("%d/%d\n",snakeGetType(s),type);
 		//printf("%d/%d/%d\n",FIRE,WATER,GRASS);
 	}
-	else
+	else if(s->isAffectedByField) //we leave the affected field
 	{
+		s->isAffectedByField=false;
 		snakeSetSpeed(s,SNAKE_DEFAULT_SPEED);
 	}
 	//-----
@@ -457,6 +464,11 @@ void playItemSound(Game g, Item i)
 		Mix_VolumeChunk(g->sound[4], MIX_MAX_VOLUME); //set sound volume
 		Mix_PlayChannel(4, g->sound[4], 0);
 	}
+	else if(id==15) //wall
+	{
+		Mix_VolumeChunk(g->sound[5], MIX_MAX_VOLUME/2); //set sound volume
+		Mix_PlayChannel(5, g->sound[5], 0);
+	}
 	else
 	{
 		Mix_VolumeChunk(g->sound[0], MIX_MAX_VOLUME); //set sound volume
@@ -464,7 +476,7 @@ void playItemSound(Game g, Item i)
 	}
 }
 
-void gameItemCollision(Item i, Snake sOnCollision, Snake sBis) {
+void gameItemCollision(Item i, Snake sOnCollision, Snake sBis, Game g) {
 	switch (i->value) {
 
 		case SENTRY:
@@ -504,7 +516,7 @@ void gameItemCollision(Item i, Snake sOnCollision, Snake sBis) {
             itemOnCollisionNewMap(i, sOnCollision, sBis);
             break;
         case WALL:
-            itemOnCollisionWall(i, sOnCollision, sBis);
+            itemOnCollisionWall(i, sOnCollision, sBis, g);
             break;
         default:
             printf("Item non implemented\n");
@@ -860,9 +872,33 @@ void itemOnCollisionNewMap(Item i, Snake sOnCollision, Snake sBis) {
     //change map: done in gui.c
 }
 
-void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionWall(Item it, Snake sOnCollision, Snake sBis, Game game) {
     printf("COLLISION WALL\n");
-    printf("PAS ENCORE IMPLEMENTE\n");
-    // TODO: fait pop un item mur
 
+		Board b = gameGetBoard(game);
+		Item itemList = boardGetItemList(b);
+		int xMax=boardGetWidth(b)-1;
+		int yMax=boardGetHeight(b)-1;
+		int x = rand()%xMax+1;
+		int y = rand()%yMax+1;
+
+
+		BoardValue itemValue=16;
+		int j=rand()%80+30;
+		int i;
+
+		for(i=0;i<j;i++)
+		{
+			boardItemAdd(b, itemList, x, y,itemValue);
+			int nx = rand()%3-1;
+			int ny = rand()%3-1;
+			while((x==nx && y == ny) || !boardInside(b,x+nx,y+ny))
+			{
+				nx = rand()%3-1;
+				ny = rand()%3-1;
+			}
+			x=x+nx;
+			y=y+ny;
+		}
+		printf("Ajout d'un mur !\n");
 }

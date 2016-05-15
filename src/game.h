@@ -64,7 +64,7 @@ Coord boardNextPosCell(int x, int y, Direction dir);
 
 //bool boardIsCellType(Board b, int x, int y, int n, ...);
 bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...);
-void gameItemCollision(Item i, Snake sOnCollision, Snake sBis);
+void gameItemCollision(Item i, Snake sOnCollision, Snake sBis, Game g);
 void gameItemDebuff(Item i, Snake snake);
 
 void gameFeed(Game game, bool ham);
@@ -84,7 +84,7 @@ void itemOnCollisionGhost(Item i, Snake sOnCollision, Snake sBis);
 void itemOnCollisionSwapSnake(Item i, Snake sOnCollision, Snake sBis);
 void itemOnCollisionNewColor(Item i, Snake sOnCollision, Snake sBis);
 void itemOnCollisionNewMap(Item i, Snake sOnCollision, Snake sBis);
-void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis, Game game);
 
 
 /*** Debuff ***/
