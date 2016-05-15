@@ -106,6 +106,7 @@ void guiPlay(BoardSize size)
                 {
                     boardsetType(board, false); //disable change flag
                     guiChangeBackground(screen, assets,size);
+                    guiSetFieldType(game, assets, size);
                     printf("MAP CHANGED\n"); //the map is now changed
                 }
               ////// Move of snake 1 (player) //////
@@ -213,7 +214,7 @@ void guiChangeBackground(SDL_Surface* screen, Assets assets, BoardSize size)
     int randType = rand()%3+1; /// PASSER LE MODULO A TROIS POUR LES RONCES
     while(randType==assets->currentBg)
     {
-    randType=rand()%2+1;
+      randType=rand()%3+1;
     }
 
 
@@ -300,7 +301,7 @@ Assets guiLoadAssets(BoardSize size) {
       tailleTerrain=3;
     else if(size==SMALL)
       tailleTerrain=1;
-    int randType = rand()%2+1; // PASSER LE MODULO A TROIS POUR LES RONCES
+    int randType = rand()%3+1; // PASSER LE MODULO A TROIS POUR LES RONCES
 
     char path[31];
     sprintf(path,"./images/background/bg-%d-%d.jpg", randType, tailleTerrain);
@@ -395,6 +396,7 @@ SDL_Surface** guiLoadItems() {
     itemsAssets[NEW_COLOR] = guiLoadImage("./images/item/new-color.png");
     itemsAssets[NEW_MAP] = guiLoadImage("./images/item/new-map.png");
     itemsAssets[WALL] = guiLoadImage("./images/item/wall.png");
+    itemsAssets[WALL_P] = guiLoadImage("./images/item/wall_p.png");
 
 
     return itemsAssets;

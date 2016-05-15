@@ -585,7 +585,7 @@ void gameFeed(Game game, bool ham)
 		itemValue = FOOD;
 	else
 	{
-		itemValue= itemGetRandomItemValue();
+		itemValue= WALL;//itemGetRandomItemValue();
 		if(itemValue==FOOD)
 			itemValue=5;
 	}
