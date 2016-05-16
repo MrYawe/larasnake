@@ -56,18 +56,21 @@ Game gameCreate(BoardSize size)
 	switch (size) {
 		case SMALL:
 			g->board = boardInit(S_SIZE_BOARD_X, S_SIZE_BOARD_Y, S_CELL_SIZE);
+			g->snake1 = snakeCreate(SNAKE_DEFAULT_SIZE_SMALL, SNAKE1, RIGHT, WATER);
+			g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE_SMALL, SNAKE2, LEFT, FIRE);
 			break;
 		case MEDIUM:
 			g->board = boardInit(M_SIZE_BOARD_X, M_SIZE_BOARD_Y, M_CELL_SIZE);
+			g->snake1 = snakeCreate(SNAKE_DEFAULT_SIZE_MEDIUM, SNAKE1, RIGHT, WATER);
+			g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE_MEDIUM, SNAKE2, LEFT, FIRE);
 			break;
 		case LARGE:
 			g->board = boardInit(L_SIZE_BOARD_X, L_SIZE_BOARD_Y, L_CELL_SIZE);
+			g->snake1 = snakeCreate(SNAKE_DEFAULT_SIZE_LARGE, SNAKE1, RIGHT, WATER);
+			g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE_LARGE, SNAKE2, LEFT, FIRE);
 			break;
 	}
 
-	g->snake1 = snakeCreate(SNAKE_DEFAULT_SIZE, SNAKE1, RIGHT, WATER);
-	g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE, SNAKE2, LEFT, FIRE);
-	//g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
 	g->pauseFinished=4;
 	g->isPaused = true;
@@ -92,7 +95,6 @@ Game gameCreate(BoardSize size)
 	return g;
 }
 
-//TODO free itemlist
 /**
  * \fn void gameFree(Game game)
  * \brief Free the struct game
@@ -575,7 +577,8 @@ void gameFeed(Game game, bool ham)
 	}
 
 
-	boardItemAdd(b, itemList, x, y, itemValue);
+	boardItemAdd(b, itemList, x, y, SWAP_SNAKE);
+	boardItemAdd(b, itemList, x+5, y+5, SPEED_UP);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 

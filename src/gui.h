@@ -70,7 +70,7 @@ struct Title
 void guiPlay(BoardSize size);
 Timer guiCreateTimer();
 void guiPause(Game g);
-void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_Event *event, bool snake1Win);
+void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_Event *event, int idWinner);
 
 /**** Screen ****/
 SDL_Surface* guiCreateScreen(BoardSize size);

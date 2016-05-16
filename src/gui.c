@@ -88,8 +88,6 @@ void guiPlay(BoardSize size)
     Mix_VolumeMusic(MIX_MAX_VOLUME / 6); //half of the maximum sound
 
 
-      //
-
       /************************/
      /**      GAME LOOP     **/
     /************************/
@@ -195,7 +193,20 @@ void guiPlay(BoardSize size)
         }
     }
 
-    guiEndScreen(screen, assets->guiAssets, size, &event, continueGameMove1);
+    int idWinner;
+    if(continueGameMove1) {
+        if(snakeGetId(snake1) == 1)
+            idWinner = 1;
+        else
+            idWinner = 2;
+    } else {
+        if(snakeGetId(snake1) == 1)
+            idWinner = 2;
+        else
+            idWinner = 1;
+    }
+    guiEndScreen(screen, assets->guiAssets, size, &event, idWinner);
+
 
     ////// Free //////
     gameFree(game);
@@ -258,7 +269,7 @@ SDL_Surface* guiCreateScreen(BoardSize size) {
     SDL_Surface* screen;
     switch (size) {
         case SMALL:
-            screen = SDL_SetVideoMode(S_SIZE_BOARD_X*S_CELL_SIZE, 2*S_CELL_SIZE + S_SIZE_BOARD_Y*S_CELL_SIZE, 32, /*SDL_HWSURFACE*/SDL_FULLSCREEN | SDL_DOUBLEBUF );
+            screen = SDL_SetVideoMode(S_SIZE_BOARD_X*S_CELL_SIZE, 2*S_CELL_SIZE + S_SIZE_BOARD_Y*S_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
             break;
 
         case MEDIUM:
@@ -470,10 +481,16 @@ void guiDrawGame(SDL_Surface *screen, Game game, Assets assets, BoardSize size) 
     guiDrawSnake(screen, snake2, assets->snakesAssets[snakeGetType(snake2)]);
     guiDrawItems(screen, itemList, assets->itemsAssets);
     guiDrawGui(screen, game, assets->guiAssets, assets->itemsAssets, size);
-    //guiApplySurface(gameGetFood(game)->posX*M_CELL_SIZE, M_CELL_SIZE*gameGetFood(game)->posY, assets->food, screen, NULL);
 }
 
-
+/**
+ * \fn void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface** itemsAssets)
+ * \brief Draw all items on the screen
+ * \details Draw each item of the game on the screen with SDL
+ * \param screen The screen to draw on
+ * \param itemList The linked list of item
+ * \param itemsAssets The Assets struct containing all assets of items
+ */
 void guiDrawItems(SDL_Surface *screen, Item itemList, SDL_Surface** itemsAssets) {
 
     Item item = itemList;
@@ -558,6 +575,16 @@ void guiDrawSnake(SDL_Surface *screen, Snake snake, SnakeAssets snakeAssets) {
     }
 }
 
+/**
+ * \fn void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets, SDL_Surface** itemsAssets, BoardSize size)
+ * \brief Draw the GUI on the sreen
+ * \details Draw the Graphical User Interface on the sreen
+ * \param screen The screen to draw on
+ * \param game The game struct
+ * \param guiAssets The struct with gui surfaces
+ * \param itemsAssets The struct with item surfaces
+ * \param size The size of the board
+ */
 void guiDrawGui(SDL_Surface *screen, Game game, GuiAssets guiAssets, SDL_Surface** itemsAssets, BoardSize size) {
 
     if(gameGetIsPaused(game) && gameGetPauseTimer(game)==0) {
@@ -680,6 +707,17 @@ Timer guiCreateTimer() {
     return timer;
 }
 
+/**
+ * \fn Title guiCreateTitle(int x, int y, MenuValue value, char* text, SDL_Color color, TTF_Font* font)
+ * \brief Create one Title struct
+ * \details Create one Title struct. A title is an option on the menu
+ * \param x The x position
+ * \param y The y position
+ * \param value The MenuVAlue
+ * \param text The text of the title
+ * \param color The color of the title
+ * \param color The font of the title
+ */
 Title guiCreateTitle(int x, int y, MenuValue value, char* text, SDL_Color color, TTF_Font* font) {
     Title title = malloc(sizeof(struct Title));
     title->x = x;
@@ -694,6 +732,14 @@ Title guiCreateTitle(int x, int y, MenuValue value, char* text, SDL_Color color,
     return title;
 }
 
+/**
+ * \fn void guiSetSelectedTitle(Title *titles, int nbTitles, int state)
+ * \brief Set the selected titles
+ * \details Set the selected titles within the titles array
+ * \param titles The array of titles
+ * \param nbTitles The number of title
+ * \param state The state of the menu
+ */
 void guiSetSelectedTitle(Title *titles, int nbTitles, int state) {
     int i;
     for (i = 0; i < nbTitles; i++) {
@@ -705,6 +751,13 @@ void guiSetSelectedTitle(Title *titles, int nbTitles, int state) {
     }
 }
 
+/**
+ * \fn Title guiGetSelectedItem(Title *titles, int nbTitles)
+ * \brief Get the selected titles
+ * \details Get the selected titles within the titles array
+ * \param titles The array of titles
+ * \param nbTitles The number of title
+ */
 Title guiGetSelectedItem(Title *titles, int nbTitles) {
     int i;
     for (i = 0; i < nbTitles; i++) {
@@ -715,6 +768,14 @@ Title guiGetSelectedItem(Title *titles, int nbTitles) {
     return NULL;
 }
 
+/**
+ * \fn void guiDrawTitles(SDL_Surface *screen, Title *titles, int nbTitles, SDL_Color ifSelectedColor)
+ * \brief Draw the titles ont the screen
+ * \param screen The screen to draw
+ * \param titles The array of titles
+ * \param nbTitles The number of title
+ * \param ifSelectedColor The color of the title if selected
+ */
 void guiDrawTitles(SDL_Surface *screen, Title *titles, int nbTitles, SDL_Color ifSelectedColor) {
     SDL_Color color;
     int i;
@@ -816,16 +877,18 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
 }
 
 /**
- * \fn void guiGeneralEvent(SDL_Event *event, Game game)
- * \brief Catch all player input
- * \details Catch all player input and quit the game on SDL_QUIT
- * \param event The event struct to listen
- * \param game The game to end on quit
+ * \fn void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_Event *event, bool snka1Win)
+ * \brief Draw the end screen
+ * \param screen The screen to draw
+ * \param guiAssets Struct with the asset to draw
+ * \param size The size of the board
+ * \param event The event struc to get input from the player
+ * \param idWinner Id of the winner
  */
-void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_Event *event, bool snka1Win) {
+void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_Event *event, int idWinner) {
 
     bool continuer = true;
-    if(snka1Win)
+    if(idWinner == 1)
         guiApplySurface(0, 0, guiAssets->endScreenSnake1, screen, NULL);
     else
         guiApplySurface(0, 0, guiAssets->endScreenSnake2, screen, NULL);
@@ -847,6 +910,7 @@ void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_
                         break;
                     case SDLK_ESCAPE:
                         continuer = false;
+                        break;
                     default:
                         break;
                 }

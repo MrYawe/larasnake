@@ -25,12 +25,19 @@ TTF_Font *police;
 SDL_Surface* menu;
 SDL_Color yellow = {249, 240, 57}, white = {255, 255, 255};
 
-
+/**
+ * \fn BoardSize optionAction(SDL_Surface* screen, SDL_Surface* menu)
+ * \brief Display the option menu
+ * \details Display the option menu where you can choose between 3 size of board
+ * \param screen The screen to draw on
+ * \param menu The menu background surface
+ * \return BoardSize The selected size
+ */
 BoardSize optionAction(SDL_Surface* screen, SDL_Surface* menu) {
 
     Title* titles = malloc(3*sizeof(Title));
     titles[0] =  guiCreateTitle(200, 250, PLAY, "SMALL", white, police);
-    titles[1] =  guiCreateTitle(200, 330, INSTRUCTION, "MEDIUM", white, police);
+    titles[1] =  guiCreateTitle(180, 330, INSTRUCTION, "MEDIUM", white, police);
     titles[2] =  guiCreateTitle(200, 410, OPTION, "LARGE", white, police);
     Title title;
     int state = 0;
@@ -85,6 +92,13 @@ BoardSize optionAction(SDL_Surface* screen, SDL_Surface* menu) {
     }
 }
 
+
+
+/**
+ * \fn int main(int argc, char *argv[])
+ * \brief Display the main menu
+ * \details Display the main menu where you can play, choose option or quit
+ */
 int main(int argc, char *argv[])
 {
     BoardSize boardSize = MEDIUM;
@@ -100,7 +114,7 @@ int main(int argc, char *argv[])
     menu = guiLoadImage("./images/gui/menu.png");
 
     /************************/
-   /**      SOUND PART     **/
+   /**      SOUND PART    **/
   /************************/
 
     if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialization of the Mixer API
@@ -117,7 +131,7 @@ int main(int argc, char *argv[])
   /************************/
     Title* titles = malloc(4*sizeof(Title));
     titles[0] =  guiCreateTitle(200, 190, PLAY, "JOUER", white, police);
-    titles[1] =  guiCreateTitle(120, 270, INSTRUCTION, "INSTRUCTION", white, police);
+    titles[1] =  guiCreateTitle(100, 270, INSTRUCTION, "INSTRUCTION", white, police);
     titles[2] =  guiCreateTitle(190, 350, OPTION, "OPTION", white, police);
     titles[3] =  guiCreateTitle(180, 500, QUIT, "QUITTER", white, police);
 
