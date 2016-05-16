@@ -109,6 +109,7 @@ void snakeSetCanCrossBorder(Snake s, bool b);
 bool snakeGetCanCrossBorder(Snake s);
 void snakeSetCanCrossSnake(Snake s, bool b);
 bool snakeGetCanCrossSnake(Snake s);
+bool snakeIsGhost(Snake s);
 
 int snakeGetId(Snake s);
 

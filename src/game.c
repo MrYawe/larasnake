@@ -74,7 +74,7 @@ Game gameCreate(BoardSize size)
 
 
 	//init sound
-	g->numberSound=6; //CHANGE HERE THE NUMBER OF SOUND
+	g->numberSound=8; //CHANGE HERE THE NUMBER OF SOUND
 	g->sound=malloc(g->numberSound*sizeof(Mix_Chunk *));
 	Mix_AllocateChannels(g->numberSound+1);
 
@@ -85,6 +85,8 @@ Game gameCreate(BoardSize size)
 	g->sound[3] = Mix_LoadWAV("./sound/reverseSnake.wav");
 	g->sound[4] = Mix_LoadWAV("./sound/changeBg.wav");
 	g->sound[5] = Mix_LoadWAV("./sound/mp.wav");
+	g->sound[6] = Mix_LoadWAV("./sound/speedUp.wav");
+	g->sound[7] = Mix_LoadWAV("./sound/ghostBuster.wav");
 
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
@@ -99,7 +101,7 @@ Game gameCreate(BoardSize size)
  * \details  Free the struct game
  * \param game The game struct to free
  */
-void gameFree(Game game) 
+void gameFree(Game game)
 {
 	boardFree(game->board);
 	snakeFree(game->snake1);
@@ -315,7 +317,7 @@ static bool gameCheckMovement(Game g, Snake s)
 			continueGame = false;
 		}
 	}
-	else if (!snakeGetCanCrossBorder(s) && boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, WALL_P))
+	else if (!snakeIsGhost(s) && !snakeGetCanCrossBorder(s) && boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, WALL_P))
 	{
 		printf("Le snake s'est pris un mur !\n");
 		continueGame = false;
@@ -454,10 +456,20 @@ void playItemSound(Game g, Item i)
 		Mix_VolumeChunk(g->sound[5], MIX_MAX_VOLUME/2); //set sound volume
 		Mix_PlayChannel(5, g->sound[5], 0);
 	}
+	else if(id==5)//speed_up
+	{
+		Mix_VolumeChunk(g->sound[6], MIX_MAX_VOLUME/2); //set sound volume
+		Mix_PlayChannel(6, g->sound[6], 0);
+	}
+	else if(id==11)//ghost
+	{
+		Mix_VolumeChunk(g->sound[7], MIX_MAX_VOLUME); //set sound volume
+		Mix_PlayChannel(7, g->sound[7], 0);
+	}
 	else
 	{
 		Mix_VolumeChunk(g->sound[0], MIX_MAX_VOLUME); //set sound volume
-		Mix_PlayChannel(5, g->sound[0], 0);
+		Mix_PlayChannel(0, g->sound[0], 0);
 	}
 }
 
@@ -569,7 +581,7 @@ void gameFeed(Game game, bool ham)
 		itemValue = FOOD;
 	else
 	{
-		itemValue= itemGetRandomItemValue();
+		itemValue=itemGetRandomItemValue();
 		if(itemValue==FOOD)
 			itemValue=5;
 	}
@@ -768,6 +780,9 @@ void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis, Board b) {
     printf("COLLISION GROW_DOWN\n");
     boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
     snakeDeleteFirstElement(sOnCollision);
+		snakeDeleteFirstElement(sOnCollision);
+		snakeDeleteFirstElement(sOnCollision);
+		snakeDeleteFirstElement(sOnCollision);
 }
 
 //---------
@@ -858,12 +873,10 @@ void itemOnCollisionWall(Item it, Snake sOnCollision, Snake sBis, Game game) {
     printf("COLLISION WALL\n");
 
 		Board b = gameGetBoard(game);
-		Item itemList = boardGetItemList(b);
 		int xMax=boardGetWidth(b)-1;
 		int yMax=boardGetHeight(b)-1;
 		int x = rand()%xMax+1;
 		int y = rand()%yMax+1;
-
 
 		BoardValue itemValue=16;
 		int j=rand()%80+30;
