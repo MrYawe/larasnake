@@ -195,6 +195,8 @@ void guiPlay(BoardSize size)
         }
     }
 
+    guiEndScreen(screen, assets->guiAssets, size, &event, continueGameMove1);
+
     ////// Free //////
     gameFree(game);
     guiFreeAssets(assets);
@@ -256,15 +258,15 @@ SDL_Surface* guiCreateScreen(BoardSize size) {
     SDL_Surface* screen;
     switch (size) {
         case SMALL:
-            screen = SDL_SetVideoMode(S_SIZE_BOARD_X*S_CELL_SIZE, 2*S_CELL_SIZE + S_SIZE_BOARD_Y*S_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+            screen = SDL_SetVideoMode(S_SIZE_BOARD_X*S_CELL_SIZE, 2*S_CELL_SIZE + S_SIZE_BOARD_Y*S_CELL_SIZE, 32, /*SDL_HWSURFACE*/SDL_FULLSCREEN | SDL_DOUBLEBUF );
             break;
 
         case MEDIUM:
-            screen = SDL_SetVideoMode(M_SIZE_BOARD_X*M_CELL_SIZE, 2*M_CELL_SIZE + M_SIZE_BOARD_Y*M_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+            screen = SDL_SetVideoMode(M_SIZE_BOARD_X*M_CELL_SIZE, 2*M_CELL_SIZE + M_SIZE_BOARD_Y*M_CELL_SIZE, 32, SDL_FULLSCREEN | SDL_DOUBLEBUF);
             break;
 
         case LARGE:
-            screen = SDL_SetVideoMode(L_SIZE_BOARD_X*L_CELL_SIZE, 2*L_CELL_SIZE + L_SIZE_BOARD_Y*L_CELL_SIZE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF );
+            screen = SDL_SetVideoMode(L_SIZE_BOARD_X*L_CELL_SIZE, 2*L_CELL_SIZE + L_SIZE_BOARD_Y*L_CELL_SIZE, 32, SDL_FULLSCREEN | SDL_DOUBLEBUF);
             break;
     }
 
@@ -419,6 +421,8 @@ GuiAssets guiLoadGui(BoardSize size) {
       guiAssets->timer2 = guiLoadImage("./images/gui/timer2big.png");
       guiAssets->timer1 = guiLoadImage("./images/gui/timer1big.png");
       guiAssets->sideBar = guiLoadImage("./images/gui/sideBar_big.png");
+      guiAssets->endScreenSnake1 = guiLoadImage("./images/gui/snake1big.png");
+      guiAssets->endScreenSnake2 = guiLoadImage("./images/gui/snake2big.png");
     }
     else if (size==SMALL)
     {
@@ -427,6 +431,8 @@ GuiAssets guiLoadGui(BoardSize size) {
       guiAssets->timer2 = guiLoadImage("./images/gui/timer2small.png");
       guiAssets->timer1 = guiLoadImage("./images/gui/timer1small.png");
       guiAssets->sideBar = guiLoadImage("./images/gui/sideBar_small.png");
+      guiAssets->endScreenSnake1 = guiLoadImage("./images/gui/snake1small.png");
+      guiAssets->endScreenSnake2 = guiLoadImage("./images/gui/snake2small.png");
     }
     else
     {
@@ -435,6 +441,8 @@ GuiAssets guiLoadGui(BoardSize size) {
       guiAssets->timer2 = guiLoadImage("./images/gui/timer2medium.png");
       guiAssets->timer1 = guiLoadImage("./images/gui/timer1medium.png");
       guiAssets->sideBar = guiLoadImage("./images/gui/sideBar_medium.png");
+      guiAssets->endScreenSnake1 = guiLoadImage("./images/gui/snake1medium.png");
+      guiAssets->endScreenSnake2 = guiLoadImage("./images/gui/snake2medium.png");
     }
 
 
@@ -814,14 +822,34 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
  * \param event The event struct to listen
  * \param game The game to end on quit
  */
-void guiGeneralEvent(SDL_Event *event, Game game) {
-    while (SDL_PollEvent(event)) {
+void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_Event *event, bool snka1Win) {
 
-        switch(event->type) {
+    bool continuer = true;
+    if(snka1Win)
+        guiApplySurface(0, 0, guiAssets->endScreenSnake1, screen, NULL);
+    else
+        guiApplySurface(0, 0, guiAssets->endScreenSnake2, screen, NULL);
 
+    SDL_Flip(screen);
+
+    while (continuer)
+    {
+        SDL_WaitEvent(event);
+        switch(event->type)
+        {
             case SDL_QUIT:
-                printf("game quit\n");
-                gameEnd(game);
+                continuer = false;
+                break;
+            case SDL_KEYDOWN:
+                switch(event->key.keysym.sym) {
+                    case SDLK_RETURN:
+                        guiPlay(size);
+                        break;
+                    case SDLK_ESCAPE:
+                        continuer = false;
+                    default:
+                        break;
+                }
                 break;
         }
     }
