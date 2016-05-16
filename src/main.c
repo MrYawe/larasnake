@@ -88,7 +88,6 @@ BoardSize optionAction(SDL_Surface* screen, SDL_Surface* menu) {
 int main(int argc, char *argv[])
 {
     BoardSize boardSize = MEDIUM;
-    SDL_Color yellow = {249, 240, 57}, white = {255, 255, 255};
     int continuer = 1;
     //char *titles[4] = {"JOUER", "HIGHSCORE", "OPTION", "QUITTER"};
 

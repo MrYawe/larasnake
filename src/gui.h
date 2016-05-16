@@ -31,6 +31,8 @@ struct GuiAssets
 	SDL_Surface *timer2;
 	SDL_Surface *timer1;
 	SDL_Surface *sideBar;
+	SDL_Surface *endScreenSnake1;
+	SDL_Surface *endScreenSnake2;
 };
 
 typedef struct SnakeAssets *SnakeAssets;
@@ -68,6 +70,7 @@ struct Title
 void guiPlay(BoardSize size);
 Timer guiCreateTimer();
 void guiPause(Game g);
+void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_Event *event, bool snake1Win);
 
 /**** Screen ****/
 SDL_Surface* guiCreateScreen(BoardSize size);
