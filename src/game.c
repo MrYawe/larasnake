@@ -306,22 +306,6 @@ static bool gameCheckMovement(Game g, Snake s)
 				default:
 					printf("Error checkMovement\n");
 					break;
-				/*
-				case UP:
-					snakeTeleportation(s, coordSnake->y, boardGetWidth(b)-1);
-					break;
-				case DOWN:
-					snakeTeleportation(s, coordSnake->y, 0);
-					break;/////////////////FRANCK KESAKO
-					snakeTeleportation(s, boardGetHeight(b)-1, coordSnake->x);
-					break;
-				case RIGHT:
-					snakeTeleportation(s, 0, coordSnake->x);
-					break;
-				default:
-					printf("Error checkMovement\n");
-					break;
-					*/
 			}
 		}
 		else
@@ -483,16 +467,16 @@ void gameItemCollision(Item i, Snake sOnCollision, Snake sBis, Game g) {
             printf("Sentry collision\n");
             break;
         case FOOD:
-            itemOnCollisionFood(i, sOnCollision, sBis);
+            itemOnCollisionFood(i, sOnCollision, sBis, g->board);
             break;
         case SPEED_UP:
             itemOnCollisionSpeedUp(i, sOnCollision, sBis);
             break;
         case GROW_UP:
-            itemOnCollisionGrowUp(i, sOnCollision, sBis);
+            itemOnCollisionGrowUp(i, sOnCollision, sBis, g->board);
             break;
         case GROW_DOWN:
-            itemOnCollisionGrowDown(i, sOnCollision, sBis);
+            itemOnCollisionGrowDown(i, sOnCollision, sBis, g->board);
             break;
         case REVERSE_CONTROL:
             itemOnCollisionReverseControl(i, sOnCollision, sBis);
@@ -585,7 +569,7 @@ void gameFeed(Game game, bool ham)
 		itemValue = FOOD;
 	else
 	{
-		itemValue= WALL;//itemGetRandomItemValue();
+		itemValue= itemGetRandomItemValue();
 		if(itemValue==FOOD)
 			itemValue=5;
 	}
@@ -747,14 +731,13 @@ void gameSetFieldValue(Game g, int type, int taille)
 /**   ITEM FONCTIONS   **/
 /************************/
 
-void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis, Board b) {
     printf("COLLISION JAMBON\n");
     int k;
     for (k = 0; k < FOOD_VALUE; k++) {
         snakeGrowTail(sOnCollision);
     }
-    //itemDelete(i, b);
-	// ! TODO : update board
+	gameUpdateSnake(b, sOnCollision);
 }
 
 //---------
@@ -772,20 +755,20 @@ void itemOnDebuffSpeedUp(Item i, Snake snake) {
 //---------
 
 
-void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis, Board b) {
     printf("COLLISION GROW_UP\n");
     int k;
     for (k = 0; k < GROW_UP_VALUE; k++) {
         snakeGrowHead(sOnCollision);
     }
-	// ! TODO : update board
+	gameUpdateSnake(b, sOnCollision);
 }
 
-void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis) {
+void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis, Board b) {
     printf("COLLISION GROW_DOWN\n");
     printf("PAS ENCORE IMPLEMENTE\n");
+    boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
     snakeDeleteFirstElement(sOnCollision);
-	// TODO ! board
 }
 
 //---------

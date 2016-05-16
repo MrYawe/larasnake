@@ -73,10 +73,10 @@ bool gameGetIsPlaying(Game g);
 void gameEnd(Game g);
 
 /*** Collisions ***/
-void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis, Board b);
 void itemOnCollisionSpeedUp(Item i, Snake sOnCollision, Snake sBis);
-void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis);
-void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis, Board b);
+void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis, Board b);
 void itemOnCollisionReverseControl(Item i, Snake sOnCollision, Snake sBis);
 void itemOnCollisionReverseSnake(Item i, Snake sOnCollision, Snake sBis);
 void itemOnCollisionNoBorder(Item i, Snake sOnCollision, Snake sBis);
