@@ -99,7 +99,8 @@ Game gameCreate(BoardSize size)
  * \details  Free the struct game
  * \param game The game struct to free
  */
-void gameFree(Game game) {
+void gameFree(Game game) 
+{
 	boardFree(game->board);
 	snakeFree(game->snake1);
 	snakeFree(game->snake2);
@@ -340,7 +341,7 @@ static bool gameCheckMovement(Game g, Snake s)
 		}
 		if(item->value==14)
 		{
-			boardsetType(b,true); //changeMap
+			boardSetType(b,true); //changeMap
 		}
 		switch (dirSnake)
 		{
@@ -557,7 +558,6 @@ void gameItemDebuff(Item i, Snake snake) {
 void gameFeed(Game game, bool ham)
 {
 	Board b = gameGetBoard(game);
-	Item itemList = boardGetItemList(b);
 	int x = rand()%boardGetWidth(b);
 	int y = rand()%boardGetHeight(b);
 	while(boardGetValue(b, x, y)!=0){
@@ -575,7 +575,7 @@ void gameFeed(Game game, bool ham)
 	}
 
 
-	boardItemAdd(b, itemList, x, y, itemValue);
+	boardItemAdd(b, x, y, itemValue);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
 }
 
@@ -766,7 +766,6 @@ void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis, Board b) {
 
 void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis, Board b) {
     printf("COLLISION GROW_DOWN\n");
-    printf("PAS ENCORE IMPLEMENTE\n");
     boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
     snakeDeleteFirstElement(sOnCollision);
 }
@@ -872,7 +871,7 @@ void itemOnCollisionWall(Item it, Snake sOnCollision, Snake sBis, Game game) {
 
 		for(i=0;i<j;i++)
 		{
-			boardItemAdd(b, itemList, x, y,itemValue);
+			boardItemAdd(b, x, y,itemValue);
 			int nx = rand()%3-1;
 			int ny = rand()%3-1;
 			while((x==nx && y == ny) || !boardInside(b,x+nx,y+ny))

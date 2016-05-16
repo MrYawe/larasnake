@@ -104,7 +104,7 @@ void guiPlay(BoardSize size)
             {
                 if(boardGetType(board)) //if we have to change the background
                 {
-                    boardsetType(board, false); //disable change flag
+                    boardSetType(board, false); //disable change flag
                     guiChangeBackground(screen, assets,size);
                     guiSetFieldType(game, assets, size);
                     printf("MAP CHANGED\n"); //the map is now changed
