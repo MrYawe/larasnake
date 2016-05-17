@@ -45,13 +45,16 @@ Item gameGetItemList(Game g);
 
 bool gameGetIsPaused(Game g);
 void gameSetIsPaused(Game g, bool isPaused);
+int gameGetPauseTimer(Game g);
+void gameSetPauseTimer(Game g, int t);
+void gameSetFieldValue(Game g, int fieldType, int tailleTerrain);
 
 //////////////////////////////////////////
 //				UTILITARY				//
 //////////////////////////////////////////
 void gameUpdateSnake(Board b, Snake s);
 bool gameMoveSnake(Game g, Snake s);
-
+void playItemSound(Game g, Item i);
 Item gameGetFood(Game game);
 
 Coord boardNextPosCell(int x, int y, Direction dir);
@@ -61,9 +64,32 @@ Coord boardNextPosCell(int x, int y, Direction dir);
 
 //bool boardIsCellType(Board b, int x, int y, int n, ...);
 bool boardIsNextCellType(Board b, int x, int y, Direction dir, int n, ...);
+void gameItemCollision(Item i, Snake sOnCollision, Snake sBis, Game g);
+void gameItemDebuff(Item i, Snake snake);
 
-void gameFeed(Game game);
+void gameFeed(Game game, bool ham);
 
 bool gameGetIsPlaying(Game g);
 void gameEnd(Game g);
+
+/*** Collisions ***/
+void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis, Board b);
+void itemOnCollisionSpeedUp(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis, Board b);
+void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis, Board b);
+void itemOnCollisionReverseControl(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionReverseSnake(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionNoBorder(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionGhost(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionSwapSnake(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionNewColor(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionNewMap(Item i, Snake sOnCollision, Snake sBis);
+void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis, Game game);
+
+
+/*** Debuff ***/
+void itemOnDebuffSpeedUp(Item i, Snake snake);
+void itemOnDebuffReverseControl(Item i, Snake snake);
+void itemOnDebuffNoBorder(Item i, Snake snake);
+void itemOnDebuffGhost(Item i, Snake snake);
 #endif

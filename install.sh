@@ -13,5 +13,8 @@ sudo apt-get install libsdl-image1.2-dev -y --force-yes
 sudo apt-get install libsdl-ttf2.0-0 -y --force-yes
 sudo apt-get install libsdl-ttf2.0-dev -y --force-yes
 
+sudo apt-get install libsdl-mixer1.2 -y --force-yes
+sudo apt-get install libsdl-mixer1.2-dev -y --force-yes
+
 sudo apt-get update
 # gcc -o prog main.c `sdl-config --cflags --libs`

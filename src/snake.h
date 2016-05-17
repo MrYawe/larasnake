@@ -11,6 +11,7 @@
 
 #include <stdbool.h>
 #include "coord.h"
+#include "item.h"
 
 
 /**
@@ -49,16 +50,19 @@ struct Element
 struct Snake
 {
 	int id;
-	Element *first;
-	Element *last;
+	Element *head;
+	Element *tail;
 	int size;
 	int speed;
 	Direction direction;
 	SnakeType type;
+	Item itemList;
 
 	bool isControlReversed;
 	bool canCrossBorder;
 	bool canCrossSnake;
+
+	bool isAffectedByField;
 	//bool isGhost;
 };
 typedef struct Snake* Snake;
@@ -78,7 +82,8 @@ void snakeTurnLeft(Snake s);
 void snakeTurnRight(Snake s);
 void snakeTeleportation(Snake s, int posX, int posY);
 
-void snakeGrow(Snake s);
+void snakeGrowHead(Snake s);
+void snakeGrowTail(Snake s);
 
 /* ****************
  *    Accessors   *
@@ -90,6 +95,8 @@ void snakeSetDirection(Snake s, Direction d);
 
 int snakeGetSize(Snake s);
 
+Item snakeGetItemList(Snake s);
+void snakeSetItemList(Snake s, Item i);
 int snakeGetSpeed(Snake s);
 void snakeSetSpeed(Snake s, int speed);
 
@@ -102,6 +109,7 @@ void snakeSetCanCrossBorder(Snake s, bool b);
 bool snakeGetCanCrossBorder(Snake s);
 void snakeSetCanCrossSnake(Snake s, bool b);
 bool snakeGetCanCrossSnake(Snake s);
+bool snakeIsGhost(Snake s);
 
 int snakeGetId(Snake s);
 

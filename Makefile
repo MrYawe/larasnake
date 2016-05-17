@@ -1,38 +1,47 @@
-# project name (generate executable with this name)
+# Executables
 TARGET   = larasnake
 T_TARGET = testAll
 
+# Compiler
 CC       = gcc
-# compiling flags here
-CFLAGS   = -Wall -I. `sdl-config --libs` -lSDL_image -lSDL_ttf -g
+# Compiling flags
+CFLAGS   = -Wall -I. `sdl-config --libs` -lSDL_image -lSDL_ttf -lSDL_mixer -g
 
+# Linker
 LINKER   = gcc -o
-# linking flags here
-LFLAGS   = -I. -lm `sdl-config --libs` -lSDL_image -lSDL_ttf -g
+# Linking flags
+LFLAGS   = -I. -lm `sdl-config --libs` -lSDL_image -lSDL_ttf -lSDL_mixer -g
 
-# change these to set the proper directories where each files shoould be
+# Project directories
 SRCDIR   = src
 OBJDIR   = build
 BINDIR   = bin
 
-SOURCES  := $(wildcard $(SRCDIR)/*.c)
-INCLUDES := $(wildcard $(SRCDIR)/*.h)
-OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-rm       = rm -f
-
-OBJBASIC = $(filter-out build/main.o, $(OBJECTS))
-
+# Get files for tests compiling
 T_DIR = tests
 T_SOURCES  := $(wildcard $(T_DIR)/*.c)
 T_OBJECTS  := $(T_SOURCES:$(T_DIR)/%.c=$(OBJDIR)/%.o)
 
+# Get files to compile the project
+SOURCES  := $(wildcard $(SRCDIR)/*.c)
+INCLUDES := $(wildcard $(SRCDIR)/*.h)
+OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+
+# Get all objects without the main.o
+OBJBASIC = $(filter-out build/main.o, $(OBJECTS))
+
+# Shortcut to rm files
+rm       = rm -f
+
 
 ####################################################################
+# Every compiling links availables
 
 all: $(BINDIR)/$(TARGET)
 test: $(BINDIR)/$(T_TARGET)
 
 ####################################################################
+# Compiles the project
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
 	@test -d $(BINDIR) || mkdir -p $(BINDIR)
@@ -46,8 +55,7 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 
 
 #####################################################################
-
-
+# Compiles the test
 
 $(BINDIR)/$(T_TARGET): $(OBJBASIC) $(T_OBJECTS)
 	@test -d $(BINDIR) || mkdir -p $(BINDIR)
@@ -61,7 +69,7 @@ $(T_OBJECTS): $(OBJDIR)/%.o : $(T_DIR)/%.c
 
 
 #####################################################################
-
+# Allow to clean and remove
 
 .PHONEY: clean
 clean:

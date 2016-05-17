@@ -13,109 +13,6 @@
 #include "item.h"
 #include "constants.h"
 
-
-
-/************************/
-/**   ITEM FONCTIONS   **/
-/************************/
-
-void itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION JAMBON\n");
-    int k;
-    for (k = 0; k < FOOD_VALUE; k++) {
-        snakeGrow(sOnCollision);
-    }
-    //itemDelete(i, b);
-}
-
-void itemOnCollisionSpeedUp(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION SPEED_UP\n");
-    snakeSetSpeed(sOnCollision, snakeGetSpeed(sOnCollision)-SPEED_UP_VALUE);
-}
-
-void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION GROW_UP\n");
-    int k;
-    for (k = 0; k < GROW_UP_VALUE; k++) {
-        snakeGrow(sOnCollision);
-    }
-}
-
-void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION GROW_DOWN\n");
-    printf("PAS ENCORE IMPLEMENTE\n");
-    // TODO franck: le retrecir
-}
-
-void itemOnCollisionReverseControl(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION REVERSE_CONTROL\n");
-    snakeSetIsControlReversed(sOnCollision, true);
-    snakeSetIsControlReversed(sBis, true);
-}
-
-void itemOnCollisionReverseSnake(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION REVERSE_SNAKE\n");
-    // TODO franck: la tete devient la queue
-}
-
-void itemOnCollisionNoBorder(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION NO_BORDER\n");
-    snakeSetCanCrossBorder(sOnCollision, true);
-}
-
-void itemOnCollisionGhost(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION GHOST\n");
-    snakeSetCanCrossBorder(sOnCollision, true);
-    snakeSetCanCrossSnake(sOnCollision, true);
-}
-
-void itemOnCollisionSwapSnake(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION SWAP_SNAKE\n");
-    struct Snake temp = *sBis;
-    *sBis = *sOnCollision;
-    *sOnCollision = temp;
-}
-
-void itemOnCollisionNewColor(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION NEW_COLOR\n");
-    SnakeType t1 = snakeGetType(sOnCollision);
-    SnakeType t2 = snakeGetType(sBis);
-    if( (t1==WATER || t2==WATER) && (t1==FIRE || t2==FIRE) ) {
-        snakeSetType(sOnCollision, GRASS);
-    } else if ( (t1==WATER || t2==WATER) && (t1==GRASS || t2==GRASS) ) {
-        snakeSetType(sOnCollision, FIRE);
-    } else {
-        snakeSetType(sOnCollision, WATER);
-    }
-}
-
-void itemOnCollisionNewMap(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION NEW_MAP\n");
-    printf("PAS ENCORE IMPLEMENTE\n");
-    // TODO: change la map
-}
-
-void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis) {
-    printf("COLLISION WALL\n");
-    printf("PAS ENCORE IMPLEMENTE\n");
-    // TODO: fait pop un item mur
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * \fn Item itemCreate(int x, int y, BoardValue value)
  * \brief The function create the item struct
@@ -123,8 +20,8 @@ void itemOnCollisionWall(Item i, Snake sOnCollision, Snake sBis) {
  * \param x The x postion
  * \param y The y postion
  * \param value The value of the item in the board
+ * \return Item Return the created item
  */
-
 Item itemCreate(int x, int y, BoardValue value) {
     Item item = malloc(sizeof(struct Item));
     item->posX = x;
@@ -133,73 +30,62 @@ Item itemCreate(int x, int y, BoardValue value) {
     item->prev = NULL;
     item->next = NULL;
 
-    switch (item->value) {
-        case SENTRY:
-            item->onCollision = NULL;
-            break;
-        case FOOD:
-            item->onCollision = itemOnCollisionFood;
-            break;
-        case SPEED_UP:
-            item->onCollision = itemOnCollisionSpeedUp;
-            break;
-        case GROW_UP:
-            item->onCollision = itemOnCollisionGrowUp;
-            break;
-        case GROW_DOWN:
-            item->onCollision = itemOnCollisionGrowDown;
-            break;
-        case REVERSE_CONTROL:
-            item->onCollision = itemOnCollisionReverseControl;
-            break;
-        case REVERSE_SNAKE:
-            item->onCollision = itemOnCollisionReverseSnake;
-            break;
-        case NO_BORDER:
-            item->onCollision = itemOnCollisionNoBorder;
-            break;
-        case GHOST:
-            item->onCollision = itemOnCollisionGhost;
-            break;
-        case SWAP_SNAKE:
-            item->onCollision = itemOnCollisionSwapSnake;
-            break;
-        case NEW_COLOR:
-            item->onCollision = itemOnCollisionNewColor;
-            break;
-        case NEW_MAP:
-            item->onCollision = itemOnCollisionNewMap;
-            break;
-        case WALL:
-            item->onCollision = itemOnCollisionWall;
-            break;
-        default:
-            printf("Item non implemented\n");
-    }
-
     return item;
 }
 
+/**
+ * \fn BoardValue itemGetRandomItemValue()
+ * \brief Get a random item value
+ * \return BoardValue Return the random board value
+ */
 BoardValue itemGetRandomItemValue() {
     int x = rand()%12;
     return x+4;
 }
 
-// ajout en fin
-Item itemAdd(Item list, int x, int y, BoardValue value) {
+/**
+ * \fn Item itemAddNew(Item list, int x, int y, BoardValue value)
+ * \brief Add a new item in a item list
+ * \param list The item list
+ * \param x The x postion
+ * \param y The y postion
+ * \param value The value of the item in the board
+ * \return Item Return the first item (sentry) of the list
+ */
+Item itemAddNew(Item list, int x, int y, BoardValue value) {
     Item newItem = itemCreate(x, y, value);
+    itemAdd(list, newItem);
+
+    return list;
+}
+
+/**
+ * \fn Item itemAdd(Item list, Item toAdd)
+ * \brief Add a existing item in the item list
+ * \param list The item list
+ * \param toAdd The item to add
+ * \return Item Return the first item (sentry) of the list
+ */
+Item itemAdd(Item list, Item toAdd) {
 
     Item temp = list;
     while(temp->next != NULL) {
         temp = temp->next;
     }
-    temp->next = newItem;
-    newItem->prev = temp;
-    //boardSetValue(board, x, y, value);
+    temp->next = toAdd;
+    toAdd->prev = temp;
 
     return list;
 }
 
+/**
+ * \fn Item itemSearch(Item list, int x, int y)
+ * \brief Search a item in the list by position x, y
+ * \param list The item list
+ * \param x The x position
+ * \param y The y position
+ * \return Item The item searched. NULL if not found
+ */
 Item itemSearch(Item list, int x, int y) {
     Item temp = list;
     while(temp != NULL) {
@@ -211,12 +97,35 @@ Item itemSearch(Item list, int x, int y) {
     return NULL;
 }
 
+/**
+ * \fn Item itemSearchByValue(Item list, BoardValue value)
+ * \brief Search a item in the list by value
+ * \param list The item list
+ * \param value The value of the item
+ * \return Item The item searched. NULL if not found
+ */
+Item itemSearchByValue(Item list, BoardValue value) {
+    Item temp = list;
+    while(temp != NULL) {
+        if(temp->value == value) {
+            return temp;
+        }
+        temp = temp->next;
+    }
+    return NULL;
+}
+
+/**
+ * \fn int itemDelete(Item item)
+ * \brief Delete an item in his list
+ * \param item The item to delete
+ * \return Return 1 if the item is deleted
+ */
 int itemDelete(Item item) {
     if(item->value == SENTRY) // we can't delete the sentry
         return 0;
 
     //boardSetValue(board, item->posX, item->posY, EMPTY);
-
     if(item->next != NULL) {
         item->next->prev = item->prev;
     }
@@ -225,6 +134,17 @@ int itemDelete(Item item) {
     return 1;
 }
 
+/**
+ * \fn bool itemListIsEmpty(Item list)
+ * \brief Test if the item list is empty
+ * \param list The item list
+ */
+bool itemListIsEmpty(Item list) {
+    if(list->next != NULL) {
+        return false;
+    }
+    return true;
+}
 
 
 /**

@@ -23,10 +23,12 @@
 struct Board
 {
 	int** tab;
+	char** fieldAssets;
 	int sizeX;
 	int sizeY;
 	int sizeCell; // size by pixels of a cell
 	Item itemList;
+	bool changeType;
 };
 
 //////////////////////////////////////////
@@ -52,16 +54,21 @@ Board boardInit(int sizeX, int sizeY, int sizeCell)
 
 		// Allocation of tab
 		b->tab = (int**) malloc(sizeY*sizeof(int*));
+		b->fieldAssets = (char**) malloc(sizeY*sizeof(char*));
 		int i;
-		
+
 		for ( i = 0; i < sizeY; i++)
-		  b->tab[i] = (int*) calloc(sizeX, sizeof(int));
+		{
+			b->tab[i] = (int*) calloc(sizeX, sizeof(int));
+			b->fieldAssets[i] = (char*)  calloc(sizeX, sizeof(char));
+		}
+
 
 		// Set sizes
 		b->sizeX = sizeX;
 		b->sizeY = sizeY;
 		b->sizeCell = sizeCell;
-
+		b->changeType=false;
 		b->itemList = itemCreate(-1, -1, SENTRY);
 	}
 	else
@@ -78,10 +85,15 @@ Board boardInit(int sizeX, int sizeY, int sizeCell)
  */
 void boardFree(Board b)
 {
-	int i;
 	if(b!=NULL) {
+		itemFree(b->itemList);
+		int i;
 		for ( i = 0; i < b->sizeY; i++)
+		{
 			free(b->tab[i]);
+			free(b->fieldAssets[i]);
+		}
+		free(b->fieldAssets);
 		free(b->tab);
 		free(b);
 	}
@@ -204,7 +216,7 @@ void boardDisplay(Board b)
 }
 
 /*
- * \fn boardCopy
+ * \fn Board boardCopy(Board b)
  * \brief The function returns a copy of the board
  * \details The function copy everything of the board and put it in an other variable
  * \param b Board : The board to access
@@ -216,7 +228,7 @@ Board boardCopy(Board b)
 		return NULL;
 	Board res = boardInit(b->sizeX, b->sizeY, b->sizeCell);
 	int j, i;
-	
+
 	for(j=0; j<b->sizeY; j++)
 	{
 		for (i=0; i<b->sizeX; i++)
@@ -225,13 +237,31 @@ Board boardCopy(Board b)
 	return res;
 }
 
-// ajout en fin
-Item boardItemAdd(Board board, Item list, int x, int y, BoardValue value) {
-    itemAdd(list, x, y, value);
+/*
+ * \fn Item boardItemAdd(Board board, Item list, int x, int y, BoardValue value)
+ * \brief The function add an Item on the Board
+ * \details The function add an Item to the Board
+ * \param b Board : The board to access
+ * \param list Item : The list of items
+ * \param x int : The x position to add the item
+ * \param y int : The y position to add the item
+ * \param value BoardValue : the value of the item to add
+ * \return Returns Item which is the list of items of the game
+ */
+Item boardItemAdd(Board board, int x, int y, BoardValue value) {
+    itemAddNew(boardGetItemList(board), x, y, value);
     boardSetValue(board, x, y, value);
-    return list;
+    return boardGetItemList(board);
 }
 
+/*
+ * \fn int boardItemDelete(Board board, Item item)
+ * \brief The function delete an Item on the Board
+ * \details The function delete an Item on the Board
+ * \param b Board : The board to access
+ * \param list Item : The list of items
+ * \return Returns int which is a boolean : 1 if it worked, 0 if it didn't work
+ */
 int boardItemDelete(Board board, Item item) {
     if(itemDelete(item))
     {
@@ -240,4 +270,70 @@ int boardItemDelete(Board board, Item item) {
         return 1;
     }
     return 0;
+}
+
+/**
+ * \fn void boardSetType(Board board, bool b)
+ * \brief Accessor of the changeType Attribute
+ * \details This function is an accessor and set the changeType attribute regarding the parameter
+ * \param board Board : The board we want to change the changeType value
+ * \param b bool : New value of changeType
+ */
+void boardSetType(Board board, bool b)
+{
+	board->changeType=b;
+}
+
+/**
+ * \fn void boardGetType(Board board)
+ * \brief Accessor of the changeType Attribute
+ * \details This function is an accessor and get the changeType attribute of the board in parameter
+ * \param board Board : The board we want to know the changeType value
+ * \return Returns the changeType value of the board
+ */
+bool boardGetType(Board b)
+{
+	return b->changeType;
+}
+
+
+/**
+ * \fn int boardGetFieldValue(Board b, int posx, int posy)
+ * \brief The function allow to get a value of the fieldAssets tab
+ * \details The function tests if the parameters are correct and if it's the case, it returns the value
+ * \param b Board : Represents the board to access
+ * \param x int : The position to access
+ * \param y int : The position to access
+ * \return Returns int which correspond to the correct value / -1 if out of range
+ */
+int boardGetFieldValue(Board b, int x, int y)
+{
+	// Check for out of range exceptions
+	if (b!=NULL && boardInside(b, x, y))
+		return b->fieldAssets[y][x];
+	else
+	{
+		printf("boardGetValue: outside of range (%d, %d) max(%d, %d)\n", x, y, b->sizeX-1, b->sizeY-1);
+		return -1;
+	}
+}
+
+/*
+ * \fn void boardSetFieldValue(Board b, int x, int y, char v)
+ * \brief complete the array fieldAssets
+ * \details complete and fill the fieldAssets tab with the values in parameters
+ * \param b Board : the current board
+ * \param x int : the x position
+ * \param y int : the y position
+ * \param value char : the value to put in the array
+ */
+void boardSetFieldValue(Board b, int x, int y, char v)
+{
+	
+	if (b!=NULL && boardInside(b, x, y))
+		b->fieldAssets[y][x] = v;
+
+
+	else
+		printf("boardSetValue: error out of range\n");
 }
