@@ -370,7 +370,7 @@ void snakeSetIsControlReversed(Snake s, bool b)
 }
 
 /**
- * \fn bool snakeIsGhost(Snake s)
+ * \fn bool snakeinitIsGhost(Snake s)
  * \brief Accessor of the ghost attribute of the snake
  * \details The function allows to get the value of the ghost attritute
  * \param s Snake to access
@@ -562,6 +562,7 @@ void snakeFree(Snake s)
 {
 	Element *curs = s->tail;
 	Element *curssuiv;
+	free(s->itemList);
 	while(curs != NULL)
 	{
 		curssuiv = curs->next;
@@ -569,6 +570,7 @@ void snakeFree(Snake s)
 		free(curs);
 		curs = curssuiv;
 	}
+	free(s);
 }
 
 
