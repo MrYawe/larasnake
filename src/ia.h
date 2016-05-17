@@ -17,7 +17,7 @@
 Direction iaRandom (Board board, Snake snake);
 Direction iaSurvive (Board board, Snake snake);
 Direction iaJambon (Game game, Snake snake);
-Direction iaSurviveDepth(Board board, Snake snake);
-void iaDirectionItem(Board board, Snake snake, int* tab);
-
+Direction iaSurviveDepth(Board board, Snake snake, Snake ennemySnake);
+void iaDirectionItem(Board board, Snake snake, double* tab);
+void iaValueGoToCell(Board board, Snake snake, int x, int y, double* tab);
 #endif

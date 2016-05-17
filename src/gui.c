@@ -46,7 +46,6 @@ void guiPlay(BoardSize size)
 
     Game game;		//Variable to access the game
     Board board;	//Variable to access the board
-    Board boardIa; //Variable to access the board with the ia, so it can be modified
     Snake snake1;	//Variable to access the first snake
     Snake snake2;	//Variable to access the first snake
 
@@ -89,13 +88,18 @@ void guiPlay(BoardSize size)
                 continueGameMove1 = gameMoveSnake(game, snake1);   // move th snake1. if snake1 is dead continueGameMove1=false
                 timer->snake1MoveTimer = 0;                         // set the move timer to 0 when the snake move
             }
+            /*if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {  // test if we wait enough time to move the snake 2
+                snakeSetDirection(snake1, iaSurviveDepth(board, snake1, snake2));  // let ia choose the best direction of snake2
+                continueGameMove1 = gameMoveSnake(game, snake1);   // move the snake2. if snake2 is dead continueGameMove2=false
+                timer->snake1MoveTimer = 0;                        // set the move timer to 0 when the snake move
+            }*/
             timer->snake1LastMove = SDL_GetTicks();
             /////////////////////////////////////
 
             ////// Move of snake 2 (AI) //////
             timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
             if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {  // test if we wait enough time to move the snake 2
-                snakeSetDirection(snake2, iaSurviveDepth(board, snake2));  // let ia choose the best direction of snake2
+                snakeSetDirection(snake2, iaSurviveDepth(board, snake2, snake1));  // let ia choose the best direction of snake2
                 continueGameMove2 = gameMoveSnake(game, snake2);   // move the snake2. if snake2 is dead continueGameMove2=false
                 timer->snake2MoveTimer = 0;                        // set the move timer to 0 when the snake move
             }
