@@ -67,10 +67,10 @@ struct Title
 };
 
 /**** General ****/
-void guiPlay(BoardSize size);
+int guiPlay(BoardSize size);
 Timer guiCreateTimer();
 void guiPause(Game g);
-void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_Event *event, int idWinner);
+void guiEndScreen(SDL_Surface* screen, BoardSize size, SDL_Event *event, int idWinner);
 
 /**** Screen ****/
 SDL_Surface* guiCreateScreen(BoardSize size);

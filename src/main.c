@@ -23,6 +23,7 @@ SDL_Surface *screen;
 SDL_Event event;
 TTF_Font *police;
 SDL_Surface* menu;
+SDL_Surface *instruction;
 SDL_Color yellow = {249, 240, 57}, white = {255, 255, 255};
 
 /**
@@ -95,6 +96,41 @@ BoardSize optionAction(SDL_Surface* screen, SDL_Surface* menu) {
 
 
 /**
+ * \fn void instructionAction(SDL_Surface* screen, SDL_Surface* menu)
+ * \brief Display the insctruction menu
+ * \details Display the option menu where you can read insctructions
+ * \param screen The screen to draw on
+ * \param menu The menu background surface
+ */
+void instructionAction(SDL_Surface* screen, SDL_Surface* menu) {
+
+    bool inWhile = true;
+    while (inWhile)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                inWhile = false;
+                break;
+            case SDL_KEYDOWN:
+                switch(event.key.keysym.sym) {
+                    case SDLK_RETURN:
+                        inWhile = false;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+        }
+        guiApplySurface(0, 0, menu, screen, NULL);
+        SDL_Flip(screen);
+    }
+}
+
+
+
+/**
  * \fn int main(int argc, char *argv[])
  * \brief Display the main menu
  * \details Display the main menu where you can play, choose option or quit
@@ -103,6 +139,7 @@ int main(int argc, char *argv[])
 {
     BoardSize boardSize = MEDIUM;
     int continuer = 1;
+    int idWinner;
     //char *titles[4] = {"JOUER", "HIGHSCORE", "OPTION", "QUITTER"};
 
     SDL_Init(SDL_INIT_VIDEO);
@@ -112,6 +149,7 @@ int main(int argc, char *argv[])
     SDL_WM_SetCaption("Larasnake", NULL);
     police = TTF_OpenFont("./images/font/Black-Ops-2-Font-Julethekiller.ttf", MENU_POLICE_SIZE);
     menu = guiLoadImage("./images/gui/menu.png");
+    instruction = guiLoadImage("./images/gui/instructions.png");
 
     /************************/
    /**      SOUND PART    **/
@@ -162,11 +200,12 @@ int main(int argc, char *argv[])
                         title = guiGetSelectedItem(titles, 4);
                         switch (title->value) {
                             case PLAY:
-                                guiPlay(boardSize);
+                                idWinner = guiPlay(boardSize);
+                                guiEndScreen(screen, boardSize, &event, idWinner);
                                 break;
 
                             case INSTRUCTION:
-
+                                instructionAction(screen, instruction);
                                 break;
 
                             case OPTION:

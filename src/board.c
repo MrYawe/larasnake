@@ -85,14 +85,15 @@ Board boardInit(int sizeX, int sizeY, int sizeCell)
  */
 void boardFree(Board b)
 {
-	int i;
 	if(b!=NULL) {
+		itemFree(b->itemList);
+		int i;
 		for ( i = 0; i < b->sizeY; i++)
 		{
 			free(b->tab[i]);
-		  free(b->fieldAssets[i]);
+			free(b->fieldAssets[i]);
 		}
-	  free(b->fieldAssets);
+		free(b->fieldAssets);
 		free(b->tab);
 		free(b);
 	}
@@ -247,10 +248,10 @@ Board boardCopy(Board b)
  * \param value BoardValue : the value of the item to add
  * \return Returns Item which is the list of items of the game
  */
-Item boardItemAdd(Board board, Item list, int x, int y, BoardValue value) {
-    itemAddNew(list, x, y, value);
+Item boardItemAdd(Board board, int x, int y, BoardValue value) {
+    itemAddNew(boardGetItemList(board), x, y, value);
     boardSetValue(board, x, y, value);
-    return list;
+    return boardGetItemList(board);
 }
 
 /*
@@ -278,7 +279,7 @@ int boardItemDelete(Board board, Item item) {
  * \param board Board : The board we want to change the changeType value
  * \param b bool : New value of changeType
  */
-void boardsetType(Board board, bool b)
+void boardSetType(Board board, bool b)
 {
 	board->changeType=b;
 }

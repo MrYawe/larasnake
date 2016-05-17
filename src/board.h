@@ -37,7 +37,7 @@ int boardGetWidth(Board b);
 
 Item boardGetItemList(Board board);
 
-void boardsetType(Board board, bool b);
+void boardSetType(Board board, bool b);
 bool boardGetType(Board b);
 int boardGetFieldValue(Board b, int x, int y);
 void boardSetFieldValue(Board b, int x, int y, char v);
@@ -48,7 +48,7 @@ bool boardInside(Board b, int x, int y);
 void boardDisplay(Board b);
 Board boardCopy(Board b);
 
-Item boardItemAdd(Board board, Item list, int x, int y, BoardValue value);
+Item boardItemAdd(Board board, int x, int y, BoardValue value);
 int boardItemDelete(Board board, Item item);
 
 // TODO: bordure qui se grise

@@ -62,8 +62,8 @@ void snakeGoUp(Snake s)
 		snakeAddLastElement(s, s->head->pos->x, s->head->pos->y - 1, NIL);
 		//snakeAddLastElement(s, s->head->posX, mod(s->head->posY - 1, BOARD_SIZE));
 	else
-	*/	snakeAddLastElement(s, s->head->pos->x, s->head->pos->y - 1, s->direction);
-
+	*/
+	snakeAddLastElement(s, s->head->pos->x, s->head->pos->y - 1, s->direction);
 	snakeDeleteFirstElement(s);
 }
 
@@ -79,8 +79,8 @@ void snakeGoDown(Snake s)
 		snakeAddLastElement(s, s->head->pos->x, s->head->pos->y + 1, NIL);
 	//snakeAddLastElement(s, s->head->posX, mod(s->head->posY + 1, BOARD_SIZE));
 	else
-	*/	snakeAddLastElement(s, s->head->pos->x, s->head->pos->y + 1, s->direction);
-
+	*/
+	snakeAddLastElement(s, s->head->pos->x, s->head->pos->y + 1, s->direction);
 	snakeDeleteFirstElement(s);
 }
 
@@ -96,8 +96,8 @@ void snakeTurnLeft(Snake s)
 		snakeAddLastElement(s, s->head->pos->x - 1, s->head->pos->y, NIL);
 	//snakeAddLastElement(s, mod(s->head->posX - 1, BOARD_SIZE), s->head->posY);
 	else
-	*/	snakeAddLastElement(s, s->head->pos->x - 1, s->head->pos->y, s->direction);
-
+	*/
+	snakeAddLastElement(s, s->head->pos->x - 1, s->head->pos->y, s->direction);
 	snakeDeleteFirstElement(s);
 }
 
@@ -113,8 +113,8 @@ void snakeTurnRight(Snake s)
 		snakeAddLastElement(s, s->head->pos->x + 1, s->head->pos->y, NIL);
 	//snakeAddLastElement(s, mod(s->head->posX + 1, BOARD_SIZE), s->head->posY);
 	else
-	*/	snakeAddLastElement(s, s->head->pos->x + 1, s->head->pos->y, s->direction);
-
+	*/
+	snakeAddLastElement(s, s->head->pos->x + 1, s->head->pos->y, s->direction);
 	snakeDeleteFirstElement(s);
 }
 
@@ -376,6 +376,18 @@ void snakeSetIsControlReversed(Snake s, bool b)
  * \param s Snake to access
  * \return Bool: value of the ghost attribute
  */
+bool snakeIsGhost(Snake s)
+{
+	return s->isControlReversed;
+}
+
+ /**
+  * \fn bool snakeGetIsControlReversed(Snake s)
+  * \brief Accessor of the isControlReversed attribute of the snake
+  * \details The function allows to get the value of the ghost attritute
+  * \param s Snake to access
+  * \return Bool: value of the isControlReversed attribute
+  */
 bool snakeGetIsControlReversed(Snake s)
 {
 	return s->isControlReversed;

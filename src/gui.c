@@ -27,7 +27,7 @@
  * \details Function that create a new game, perform the game loop and display the game with SDL
  * \param size Variable representing the size of the Board (Small, Medium or Large)
  */
-void guiPlay(BoardSize size)
+int guiPlay(BoardSize size)
 {
       /*******************/
      /**   VARIABLES   **/
@@ -102,7 +102,7 @@ void guiPlay(BoardSize size)
             {
                 if(boardGetType(board)) //if we have to change the background
                 {
-                    boardsetType(board, false); //disable change flag
+                    boardSetType(board, false); //disable change flag
                     guiChangeBackground(screen, assets,size);
                     guiSetFieldType(game, assets, size);
                     printf("MAP CHANGED\n"); //the map is now changed
@@ -205,8 +205,6 @@ void guiPlay(BoardSize size)
         else
             idWinner = 1;
     }
-    guiEndScreen(screen, assets->guiAssets, size, &event, idWinner);
-
 
     ////// Free //////
     gameFree(game);
@@ -215,6 +213,7 @@ void guiPlay(BoardSize size)
 
     //TTF_Quit();
     //SDL_Quit();
+    return idWinner;
 }
 
 void guiChangeBackground(SDL_Surface* screen, Assets assets, BoardSize size)
@@ -885,18 +884,33 @@ void guiEvent(SDL_Event *event, Snake s, Game g) {
  * \param event The event struc to get input from the player
  * \param idWinner Id of the winner
  */
-void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_Event *event, int idWinner) {
+void guiEndScreen(SDL_Surface* screen, BoardSize size, SDL_Event *event, int idWinner) {
 
     bool continuer = true;
-    if(idWinner == 1)
-        guiApplySurface(0, 0, guiAssets->endScreenSnake1, screen, NULL);
-    else
-        guiApplySurface(0, 0, guiAssets->endScreenSnake2, screen, NULL);
+    SDL_Surface* endScreenSnake1;
+    SDL_Surface* endScreenSnake2;
 
-    SDL_Flip(screen);
+    if(size==LARGE) {
+        endScreenSnake1 = guiLoadImage("./images/gui/snake1big.png");
+        endScreenSnake2 = guiLoadImage("./images/gui/snake2big.png");
+    }
+    else if (size==SMALL) {
+        endScreenSnake1 = guiLoadImage("./images/gui/snake1small.png");
+        endScreenSnake2 = guiLoadImage("./images/gui/snake2small.png");
+    } else {
+        endScreenSnake1 = guiLoadImage("./images/gui/snake1medium.png");
+        endScreenSnake2 = guiLoadImage("./images/gui/snake2medium.png");
+    }
 
     while (continuer)
     {
+
+        if(idWinner == 1)
+            guiApplySurface(0, 0, endScreenSnake1, screen, NULL);
+        else
+            guiApplySurface(0, 0, endScreenSnake2, screen, NULL);
+        SDL_Flip(screen);
+
         SDL_WaitEvent(event);
         switch(event->type)
         {
@@ -906,7 +920,7 @@ void guiEndScreen(SDL_Surface* screen, GuiAssets guiAssets, BoardSize size, SDL_
             case SDL_KEYDOWN:
                 switch(event->key.keysym.sym) {
                     case SDLK_RETURN:
-                        guiPlay(size);
+                        idWinner = guiPlay(size);
                         break;
                     case SDLK_ESCAPE:
                         continuer = false;

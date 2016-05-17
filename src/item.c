@@ -126,13 +126,10 @@ int itemDelete(Item item) {
         return 0;
 
     //boardSetValue(board, item->posX, item->posY, EMPTY);
-    printf("1\n");
     if(item->next != NULL) {
         item->next->prev = item->prev;
     }
-    printf("2\n");
     item->prev->next = item->next;
-    printf("3\n");
 
     return 1;
 }
