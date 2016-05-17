@@ -778,11 +778,17 @@ void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis, Board b) {
 
 void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis, Board b) {
     printf("COLLISION GROW_DOWN\n");
-    boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
-    snakeDeleteFirstElement(sOnCollision);
+    if(snakeGetSize(sOnCollision)>5){
+    	boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
+    	snakeDeleteFirstElement(sOnCollision);
+    	boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
 		snakeDeleteFirstElement(sOnCollision);
+    	boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
 		snakeDeleteFirstElement(sOnCollision);
+    	boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
 		snakeDeleteFirstElement(sOnCollision);
+    }
+    
 }
 
 //---------
@@ -884,16 +890,19 @@ void itemOnCollisionWall(Item it, Snake sOnCollision, Snake sBis, Game game) {
 
 		for(i=0;i<j;i++)
 		{
-			boardItemAdd(b, x, y,itemValue);
-			int nx = rand()%3-1;
-			int ny = rand()%3-1;
-			while((x==nx && y == ny) || !boardInside(b,x+nx,y+ny))
-			{
-				nx = rand()%3-1;
-				ny = rand()%3-1;
+			if(boardGetValue(b,x,y)==EMPTY) {
+				boardItemAdd(b, x, y,itemValue);
+				int nx = rand()%3-1;
+				int ny = rand()%3-1;
+				while((x==nx && y == ny) || !boardInside(b,x+nx,y+ny))
+				{
+					nx = rand()%3-1;
+					ny = rand()%3-1;
+				}
+				x=x+nx;
+				y=y+ny;
 			}
-			x=x+nx;
-			y=y+ny;
+			
 		}
 		printf("Ajout d'un mur !\n");
 }

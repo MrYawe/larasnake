@@ -96,34 +96,6 @@ int guiPlay(BoardSize size)
 
         guiEvent(&event, snake1, game); // catch player event and set the direction of snake1
         if(!gameGetIsPaused(game)) {
-/*<<<<<<< HEAD
-            ////// Move of snake 1 (player) //////
-            timer->snake1MoveTimer += SDL_GetTicks() - timer->snake1LastMove;
-            if (timer->snake1MoveTimer >= snakeGetSpeed(snake1)) {  // test if we wait enough time to move the snake 1
-                continueGameMove1 = gameMoveSnake(game, snake1);   // move th snake1. if snake1 is dead continueGameMove1=false
-                timer->snake1MoveTimer = 0;                         // set the move timer to 0 when the snake move
-            }
-            
-            timer->snake1LastMove = SDL_GetTicks();
-            /////////////////////////////////////
-
-            ////// Move of snake 2 (AI) //////
-            timer->snake2MoveTimer += SDL_GetTicks() - timer->snake2LastMove;
-            if (timer->snake2MoveTimer >= snakeGetSpeed(snake2)) {  // test if we wait enough time to move the snake 2
-                snakeSetDirection(snake2, iaSurviveDepth(board, snake2, snake1));  // let ia choose the best direction of snake2
-                continueGameMove2 = gameMoveSnake(game, snake2);   // move the snake2. if snake2 is dead continueGameMove2=false
-                timer->snake2MoveTimer = 0;                        // set the move timer to 0 when the snake move
-            }
-            timer->snake2LastMove = SDL_GetTicks();
-            /////////////////////////////////
-
-            ///////// Item pop /////////
-            timer->itemPopTimer += SDL_GetTicks() - timer->itemLastPop;
-            if(timer->itemPopTimer >= ITEM_POP_INTERVAL) {
-                gameFeed(game); //Function called to put some food on the board
-                timer->itemPopTimer = 0;
-=======*/
-
             if(gameGetPauseTimer(game)==0) //know if we don't leave the pause
             {
                 if(boardGetType(board)) //if we have to change the background

@@ -13,22 +13,38 @@
 #include "ia.h"
 #include "coord.h"
 
-
+/**
+ * \fn void iaDirectionsAvailable(Board board, Coord coord, double* tab, int testDirection)
+ * \brief Ia that checks if the cells around the given position are available
+ * \details Ia that checks if the cells around the given position are available
+ * \param board Board Variable representing the board
+ * \param coord Coord Variable representing the position to test
+ * \param tab double* Variable used to memorise the values of the ia
+ * \param testDirection int Variable used to check if we wanna test a specific direction
+ */
 void iaDirectionsAvailable(Board board, Coord coord, double* tab, int testDirection) {
 	Direction dir;
 	if(testDirection==-1){
 		for(dir=UP;dir<=LEFT;dir++) {
-			if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2))
-				tab[dir]+=10000;
+			if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2, WALL_P))
+				tab[dir]+=1000000;
 		}
 	}else {
 		for(dir=UP;dir<=LEFT;dir++) {
-			if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2))
+			if(!boardIsNextCellType(board, coord->x, coord->y, dir, 3, OUTSIDE, SNAKE1, SNAKE2, WALL_P))
 				tab[testDirection]+=50;
 		}
 	}
 }
 
+/**
+ * \fn Direction iaDirectionRandomize(double* tab, double value)
+ * \brief Function that returns a random Direction between those with the given value
+ * \details Function that returns a random Direction between those with the given value
+ * \param tab double* Array 
+ * \param value double Value to look for
+ * \return <Direction> used to change the snake direction
+ */
 Direction iaDirectionRandomize(double* tab, double value) {
 	int choose = (rand()%4);
 	int i=0;
@@ -48,6 +64,13 @@ Direction iaDirectionRandomize(double* tab, double value) {
 	return i;
 }
 
+/**
+ * \fn double iaDirectionMaxValue(double* tab)
+ * \brief function that return the max value of the tab
+ * \details function used afterwards to choose the best direction possible between the Direction in the tab
+ * \param tab double* Array with direction values
+ * \return <double> max value of the array
+ */
 double iaDirectionMaxValue(double* tab){
 	Direction dir;
 	Direction dirMax;
@@ -61,21 +84,49 @@ double iaDirectionMaxValue(double* tab){
 	return tab[dirMax];
 }
 
+/**
+ * \fn double iaDistance(Coord pos1, Coord pos2)
+ * \brief function that computes the distance between two cells
+ * \details function that computes the distance between two cells
+ * \param pos1 Coord Cell 1
+ * \param pos2 Coord Cell 2
+ * \return <double> distance between the cells
+ */
 double iaDistance(Coord pos1, Coord pos2){
 	//return sqrt((pos2->x-pos1->x)*(pos2->x-pos1->x) + (pos2->y-pos1->y)*(pos2->y-pos1->y));
 	return fabs(pos1->x-pos2->x) + fabs(pos1->y-pos2->y);
 }
 
+/**
+ * \fn void iaDirectionItem(Board board, Snake snake, double* tab)
+ * \brief function that puts in the tab the values depending on the position of the first item in the itemList
+ * \details The Ai tries to get the first item of the list
+ * \param board Variable representing the board
+ * \param snake Variable representing the ai snake
+ * \param double* Variable array used to memorise the values for each direction
+ */
 void iaDirectionItem(Board board, Snake snake, double* tab) {
 	Item item = boardGetItemList(board);
 	
-	if(item->next != NULL) 
-	{
+	while(item->next!=NULL){
 		item=item->next;
-		iaValueGoToCell(board, snake, item->posX, item->posY, tab);
+		if(boardGetValue(board, item->posX,item->posY)!=WALL_P)
+		{
+			iaValueGoToCell(board, snake, item->posX, item->posY, tab);
+			break;
+		} 
 	}
 }
 
+/**
+ * \fn void iaKillEnnemySnake(Board board, Snake snake, Snake ennemySnake, double* tab)
+ * \brief function that puts in the tab the values depending on the head position of the ennemy snake
+ * \details The Ai tries to get in front of the other snake
+ * \param board Variable representing the board
+ * \param snake Variable representing the ai snake
+ * \param snake Variable representing the ennemy snake
+ * \param double* Variable array used to memorise the values for each direction
+ */
 void iaKillEnnemySnake(Board board, Snake snake, Snake ennemySnake, double* tab) {
 	Coord posEnnemySnakeHead = snakeGetPos(ennemySnake, snakeGetSize(snake)-1);
 	Direction dirSnake = snakeGetDirection(ennemySnake);
@@ -87,6 +138,14 @@ void iaKillEnnemySnake(Board board, Snake snake, Snake ennemySnake, double* tab)
 	free(posGoTo);
 }
 
+/**
+ * \fn void iaValueSurviveCollisionSnake(Board board, Snake snake, double* tab)
+ * \brief function that puts in the tab the values depending on the distance of the ennemy snake
+ * \details The Ai tries to get as far as possible from the ennemys snake 
+ * \param board Variable representing the board
+ * \param snake Variable representing the ai snake
+ * \param double* Variable array used to memorise the values for each direction
+ */
 void iaValueSurviveCollisionSnake(Board board, Snake snake, double* tab)
 {
 	Coord posSnakeHead = snakeGetPos(snake, snakeGetSize(snake)-1);
@@ -126,11 +185,19 @@ void iaValueSurviveCollisionSnake(Board board, Snake snake, double* tab)
 	//free(boardIa);
 }
 
+/**
+ * \fn void iaValueSurviveCollisionBorder(Board board, Snake snake, double* tab)
+ * \brief function that puts in the tab the values depending on the distance of the boarders
+ * \details The Ai tries to get as far as possible from the borders 
+ * \param board Board Variable representing the board
+ * \param snake Snake Variable representing the ai snake
+ * \param tab double* Variable array used to memorise the values for each direction
+ */
 void iaValueSurviveCollisionBorder(Board board, Snake snake, double* tab){
 	Coord posSnake = snakeGetPos(snake, snakeGetSize(snake)-1);
 	Direction dirSnake = snakeGetDirection(snake);
 	Direction dirSnakeInverse = (dirSnake+2)%4;
-	double value = 100.0;
+	double value = 1.0;
 
 	Direction i = UP;
 
@@ -157,11 +224,11 @@ void iaValueSurviveCollisionBorder(Board board, Snake snake, double* tab){
  * \fn void iaValueGoToCell(Board board, Snake snake, int x, int y, double* tab)
  * \brief function that puts in the tab the values depending on the cell where the snake should go
  * \details function that puts in the tab the values depending on the cell where the snake should go
- * \param board Variable representing the board
- * \param snake Variable representing the ai snake
- * \param int Variable position x where the snake should go
- * \param int Variable position y where the snake should go
- * \param double Variable array used to memorise the values for each direction
+ * \param board Board Variable representing the board
+ * \param snake Snake Variable representing the ai snake
+ * \param x int Variable position x where the snake should go
+ * \param y int Variable position y where the snake should go
+ * \param tab double* Variable array used to memorise the values for each direction
  */
 void iaValueGoToCell(Board board, Snake snake, int x, int y, double* tab)
 {
@@ -172,7 +239,7 @@ void iaValueGoToCell(Board board, Snake snake, int x, int y, double* tab)
 	Coord posGoTo = coordNew(x, y);
 	Coord posInter;
 
-	double value = 100.0;
+	double value = 500.0;
 	double distance = 0.0;
 	double distanceMax = 0.0;
 	Coord cornerUpLeft = coordNew(0,0);
@@ -201,9 +268,9 @@ void iaValueGoToCell(Board board, Snake snake, int x, int y, double* tab)
  * \fn Direction iaSurviveDepth (Board board, Snake snake, Snake ennemySnake)
  * \brief Ia that uses a valued tab to choose the best position to survive and to either kill the ennemy or go to an item
  * \details Ia that uses a valued tab to choose the best position to survive and to either kill the ennemy or go to an item
- * \param board Variable representing the board
- * \param snake Variable representing the ai snake
- * \param snake Variable representing the ennemy snake
+ * \param board Board Variable representing the board
+ * \param snake Snake Variable representing the ai snake
+ * \param ennemySnake Snake Variable representing the ennemy snake
  * \return <Direction> used to change the snake direction
  */
 Direction iaSurviveDepth(Board board, Snake snake, Snake ennemySnake) {
@@ -215,12 +282,13 @@ Direction iaSurviveDepth(Board board, Snake snake, Snake ennemySnake) {
 	double* tab = calloc(4, sizeof(double));
 
 	iaDirectionsAvailable(boardIa, posSnakeHead, tab, -1);
-	//iaDirectionItem(board, snake, tab);
-	iaKillEnnemySnake(board, snake, ennemySnake, tab);
+	iaDirectionItem(board, snake, tab);
+	//iaKillEnnemySnake(board, snake, ennemySnake, tab);
 	iaValueSurviveCollisionSnake(board, snake, tab);
 
 	dirSnake = iaDirectionRandomize(tab,iaDirectionMaxValue(tab));
-	
+	boardDisplay(board);
+
 	free(tab);
 	boardFree(boardIa);
 	return dirSnake;
@@ -230,8 +298,8 @@ Direction iaSurviveDepth(Board board, Snake snake, Snake ennemySnake) {
  * \fn Direction iaRandom (Game game, Snake snake)
  * \brief Ia that choose a random direction beetween the case available around 
  * \details Ia that choose a random direction beetween the case available around 
- * \param board Variable representing the board
- * \param snake Variable representing the snake
+ * \param board Board Variable representing the board
+ * \param snake Snake Variable representing the snake
  * \return <Direction> used to change the snake direction
  */
 Direction iaRandom (Board board, Snake snake) {
@@ -272,8 +340,8 @@ Direction iaRandom (Board board, Snake snake) {
  * \fn Direction iaSurvive (Board board, Snake snake)
  * \brief Function used to get a direction for the snake to follow to not die
  * \details Function that checks if the snake can go forward. If not, it tries to go right then left.
- * \param board Variable representing the board
- * \param snake Variable representing the snake
+ * \param board Board Variable representing the board
+ * \param snake Snake Variable representing the snake
  * \return <Direction> used to change the snake direction
  */
 Direction iaSurvive (Board board, Snake snake) {
@@ -310,8 +378,8 @@ Direction iaSurvive (Board board, Snake snake) {
  * \fn Direction iaJambon (Game game, Snake snake)
  * \brief Function used to chase the given bonus without dying
  * \details Function that goes to the given bonus and that is calling iaSurvive to not die
- * \param board Variable representing the board
- * \param snake Variable representing the snake
+ * \param board Board Variable representing the board
+ * \param snake Snake Variable representing the snake
  * \return <Direction> used to change the snake direction
  */
 
