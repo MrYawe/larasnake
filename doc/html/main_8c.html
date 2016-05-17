@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Larakis: main.c File Reference</title>
+<title>LarakisSnake: main.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Larakis
+   <div id="projectname">LarakisSnake
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('main_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -101,11 +101,15 @@ $(document).ready(function(){initNavTree('main_8c.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">main.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents the program.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br/>
 <code>#include &lt;stdio.h&gt;</code><br/>
 <code>#include &lt;string.h&gt;</code><br/>
@@ -113,15 +117,90 @@ $(document).ready(function(){initNavTree('main_8c.html','');});
 <code>#include &lt;stdbool.h&gt;</code><br/>
 <code>#include &lt;SDL/SDL.h&gt;</code><br/>
 <code>#include &lt;SDL/SDL_image.h&gt;</code><br/>
-<code>#include &quot;<a class="el" href="gui_8h_source.html">gui.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br/>
+<code>#include &lt;SDL/SDL_ttf.h&gt;</code><br/>
+<code>#include &lt;SDL/SDL_mixer.h&gt;</code><br/>
+<code>#include &quot;gui.h&quot;</code><br/>
+<code>#include &quot;constants.h&quot;</code><br/>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a086cb4a433f2f6d051a340676d72c32d"><td class="memItemLeft" align="right" valign="top">BoardSize&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a086cb4a433f2f6d051a340676d72c32d">optionAction</a> (SDL_Surface *screen, SDL_Surface *menu)</td></tr>
+<tr class="memdesc:a086cb4a433f2f6d051a340676d72c32d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display the option menu.  <a href="#a086cb4a433f2f6d051a340676d72c32d">More...</a><br/></td></tr>
+<tr class="separator:a086cb4a433f2f6d051a340676d72c32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa1571d73e940e63717cdb485bd8959e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#afa1571d73e940e63717cdb485bd8959e">instructionAction</a> (SDL_Surface *screen, SDL_Surface *menu)</td></tr>
+<tr class="memdesc:afa1571d73e940e63717cdb485bd8959e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display the insctruction menu.  <a href="#afa1571d73e940e63717cdb485bd8959e">More...</a><br/></td></tr>
+<tr class="separator:afa1571d73e940e63717cdb485bd8959e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display the main menu.  <a href="#a0ddf1224851353fc92bfbff6f499fa97">More...</a><br/></td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a78fa3957d73de49cb81d047857504218"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78fa3957d73de49cb81d047857504218"></a>
+SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><b>screen</b></td></tr>
+<tr class="separator:a78fa3957d73de49cb81d047857504218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b57f01d3c576db5368dd0efc2f435a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b57f01d3c576db5368dd0efc2f435a4"></a>
+SDL_Event&#160;</td><td class="memItemRight" valign="bottom"><b>event</b></td></tr>
+<tr class="separator:a6b57f01d3c576db5368dd0efc2f435a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49a11b0728728090fa1189391c9fe0c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49a11b0728728090fa1189391c9fe0c8"></a>
+TTF_Font *&#160;</td><td class="memItemRight" valign="bottom"><b>police</b></td></tr>
+<tr class="separator:a49a11b0728728090fa1189391c9fe0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a745b7e43a9a702a9aef1dd63ed039e40"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a745b7e43a9a702a9aef1dd63ed039e40"></a>
+SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><b>menu</b></td></tr>
+<tr class="separator:a745b7e43a9a702a9aef1dd63ed039e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6c03c85c3b77ef5d728feeb09e2573"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff6c03c85c3b77ef5d728feeb09e2573"></a>
+SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><b>instruction</b></td></tr>
+<tr class="separator:aff6c03c85c3b77ef5d728feeb09e2573"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42e01f5e20d2a1fc15bad39176bb9c09"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42e01f5e20d2a1fc15bad39176bb9c09"></a>
+SDL_Color&#160;</td><td class="memItemRight" valign="bottom"><b>yellow</b> = {249, 240, 57}</td></tr>
+<tr class="separator:a42e01f5e20d2a1fc15bad39176bb9c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18ac556fad863e56fdff8263c2b93f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae18ac556fad863e56fdff8263c2b93f0"></a>
+SDL_Color&#160;</td><td class="memItemRight" valign="bottom"><b>white</b> = {255, 255, 255}</td></tr>
+<tr class="separator:ae18ac556fad863e56fdff8263c2b93f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents the program. </p>
+<dl class="section author"><dt>Author</dt><dd>groupe Larakis </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20/02/2016</dd></dl>
+<p>All the actions of the program </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="afa1571d73e940e63717cdb485bd8959e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void instructionAction </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>menu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display the insctruction menu. </p>
+<p>Display the option menu where you can read insctructions </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">screen</td><td>The screen to draw on </td></tr>
+    <tr><td class="paramname">menu</td><td>The menu background surface </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a0ddf1224851353fc92bfbff6f499fa97"></a>
 <div class="memitem">
 <div class="memproto">
@@ -146,6 +225,47 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Display the main menu. </p>
+<p>Display the main menu where you can play, choose option or quit </p>
+<p>SOUND PART </p>
+
+</div>
+</div>
+<a class="anchor" id="a086cb4a433f2f6d051a340676d72c32d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BoardSize optionAction </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>screen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>menu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display the option menu. </p>
+<p>Display the option menu where you can choose between 3 size of board </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">screen</td><td>The screen to draw on </td></tr>
+    <tr><td class="paramname">menu</td><td>The menu background surface </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BoardSize The selected size </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -154,7 +274,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="main_8c.html">main.c</a></li>
-    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
+    <li class="footer">Generated on Tue May 17 2016 08:41:18 for LarakisSnake by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

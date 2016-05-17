@@ -23,7 +23,10 @@
 
 /*** Snake ***/
 #define SNAKE_DEFAULT_SPEED 100 // en ms
-#define SNAKE_DEFAULT_SIZE 15
+#define SNAKE_DEFAULT_SIZE_SMALL 8
+#define SNAKE_DEFAULT_SIZE_MEDIUM 15
+#define SNAKE_DEFAULT_SIZE_LARGE 20
+
 #define NB_TYPES 3
 
 /*** Bonus parameters ***/

@@ -1,8 +1,26 @@
 var searchData=
 [
-  ['iajambon',['iaJambon',['../ia_8c.html#ae488b60bfa6d0935c506194be93edd72',1,'iaJambon(Game game, Snake *snake):&#160;ia.c'],['../ia_8h.html#ae488b60bfa6d0935c506194be93edd72',1,'iaJambon(Game game, Snake *snake):&#160;ia.c']]],
-  ['iasurvive',['iaSurvive',['../ia_8c.html#aaa3bdfe7e200b4fed9b86532efeb848f',1,'iaSurvive(Board *board, Snake *snake):&#160;ia.c'],['../ia_8h.html#aaa3bdfe7e200b4fed9b86532efeb848f',1,'iaSurvive(Board *board, Snake *snake):&#160;ia.c']]],
+  ['iadirectionitem',['iaDirectionItem',['../ia_8c.html#ae6a2cf3ef9c19d8d020e3c6ad32aeaa1',1,'iaDirectionItem(Board board, Snake snake, double *tab):&#160;ia.c'],['../ia_8h.html#ae6a2cf3ef9c19d8d020e3c6ad32aeaa1',1,'iaDirectionItem(Board board, Snake snake, double *tab):&#160;ia.c']]],
+  ['iadirectionmaxvalue',['iaDirectionMaxValue',['../ia_8c.html#a08b32005fb3fc5e47bd415b565db5ea3',1,'ia.c']]],
+  ['iadirectionrandomize',['iaDirectionRandomize',['../ia_8c.html#ab99975604dc24fbebfd8d67e53c8607a',1,'ia.c']]],
+  ['iadirectionsavailable',['iaDirectionsAvailable',['../ia_8c.html#a70a18c6ff300c66198ee5963dc28d4c1',1,'ia.c']]],
+  ['iadistance',['iaDistance',['../ia_8c.html#a819e5a10fa56dc4b0999e06562a613b5',1,'ia.c']]],
+  ['iajambon',['iaJambon',['../ia_8h.html#af0d9f68aa04f002560aee53836bfe8e8',1,'ia.h']]],
+  ['iakillennemysnake',['iaKillEnnemySnake',['../ia_8c.html#a1653a04995bb0090fb3782824e7d356e',1,'ia.c']]],
+  ['iasurvive',['iaSurvive',['../ia_8c.html#ad50ee7da17bf46c5fc40c13e2412f14c',1,'iaSurvive(Board board, Snake snake):&#160;ia.c'],['../ia_8h.html#ad50ee7da17bf46c5fc40c13e2412f14c',1,'iaSurvive(Board board, Snake snake):&#160;ia.c']]],
+  ['iasurvivedepth',['iaSurviveDepth',['../ia_8c.html#ad80fbcc9a0d22956a9f683e76db71fc2',1,'iaSurviveDepth(Board board, Snake snake, Snake ennemySnake):&#160;ia.c'],['../ia_8h.html#ad80fbcc9a0d22956a9f683e76db71fc2',1,'iaSurviveDepth(Board board, Snake snake, Snake ennemySnake):&#160;ia.c']]],
+  ['iavaluegotocell',['iaValueGoToCell',['../ia_8c.html#a3566b75ecd58c966209e1b611d564d34',1,'iaValueGoToCell(Board board, Snake snake, int x, int y, double *tab):&#160;ia.c'],['../ia_8h.html#a3566b75ecd58c966209e1b611d564d34',1,'iaValueGoToCell(Board board, Snake snake, int x, int y, double *tab):&#160;ia.c']]],
+  ['iavaluesurvivecollisionborder',['iaValueSurviveCollisionBorder',['../ia_8c.html#ad9541f74f12d64c589e019d19944ba8a',1,'ia.c']]],
+  ['iavaluesurvivecollisionsnake',['iaValueSurviveCollisionSnake',['../ia_8c.html#a464b3918cca1301840f55ee23812f78b',1,'ia.c']]],
+  ['instructionaction',['instructionAction',['../main_8c.html#afa1571d73e940e63717cdb485bd8959e',1,'main.c']]],
+  ['itemadd',['itemAdd',['../item_8c.html#ac3dff4c42d20553451963cf328ec99f0',1,'itemAdd(Item list, Item toAdd):&#160;item.c'],['../item_8h.html#ac3dff4c42d20553451963cf328ec99f0',1,'itemAdd(Item list, Item toAdd):&#160;item.c']]],
+  ['itemaddnew',['itemAddNew',['../item_8c.html#af0aafabf7853afb202bf1431a2984ad0',1,'itemAddNew(Item list, int x, int y, BoardValue value):&#160;item.c'],['../item_8h.html#af0aafabf7853afb202bf1431a2984ad0',1,'itemAddNew(Item list, int x, int y, BoardValue value):&#160;item.c']]],
   ['itemcreate',['itemCreate',['../item_8c.html#a66bd7f31ba408096b471a0f8384bdda7',1,'itemCreate(int x, int y, BoardValue value):&#160;item.c'],['../item_8h.html#a66bd7f31ba408096b471a0f8384bdda7',1,'itemCreate(int x, int y, BoardValue value):&#160;item.c']]],
+  ['itemdelete',['itemDelete',['../item_8c.html#af914a3869a46e9bf6443f45e24da975d',1,'itemDelete(Item item):&#160;item.c'],['../item_8h.html#af914a3869a46e9bf6443f45e24da975d',1,'itemDelete(Item item):&#160;item.c']]],
   ['itemfree',['itemFree',['../item_8c.html#ad3db5d0006013fd63177268384b09f19',1,'itemFree(Item item):&#160;item.c'],['../item_8h.html#ad3db5d0006013fd63177268384b09f19',1,'itemFree(Item item):&#160;item.c']]],
-  ['itemoncollisionfood',['itemOnCollisionFood',['../item_8c.html#a059ffc47def9e5958428b2f14490306e',1,'itemOnCollisionFood(int idSnake):&#160;item.c'],['../item_8h.html#a059ffc47def9e5958428b2f14490306e',1,'itemOnCollisionFood(int idSnake):&#160;item.c']]]
+  ['itemgetrandomitemvalue',['itemGetRandomItemValue',['../item_8c.html#aa0d1607df495755fbd781a6b337f6df0',1,'itemGetRandomItemValue():&#160;item.c'],['../item_8h.html#aa0d1607df495755fbd781a6b337f6df0',1,'itemGetRandomItemValue():&#160;item.c']]],
+  ['itemlistisempty',['itemListIsEmpty',['../item_8c.html#a1572d8f40241339ad02e7eb57ec3db19',1,'itemListIsEmpty(Item list):&#160;item.c'],['../item_8h.html#a1572d8f40241339ad02e7eb57ec3db19',1,'itemListIsEmpty(Item list):&#160;item.c']]],
+  ['itemoncollisionfood',['itemOnCollisionFood',['../game_8c.html#a4e68feaae7cd6dc7adf4fdc72613b84b',1,'itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis, Board b):&#160;game.c'],['../game_8h.html#a4e68feaae7cd6dc7adf4fdc72613b84b',1,'itemOnCollisionFood(Item i, Snake sOnCollision, Snake sBis, Board b):&#160;game.c']]],
+  ['itemsearch',['itemSearch',['../item_8c.html#a229d10a307cee76de5720da8063ce2f4',1,'itemSearch(Item list, int x, int y):&#160;item.c'],['../item_8h.html#a229d10a307cee76de5720da8063ce2f4',1,'itemSearch(Item list, int x, int y):&#160;item.c']]],
+  ['itemsearchbyvalue',['itemSearchByValue',['../item_8c.html#a805978719280ce081fb51d6e72265a56',1,'itemSearchByValue(Item list, BoardValue value):&#160;item.c'],['../item_8h.html#a805978719280ce081fb51d6e72265a56',1,'itemSearchByValue(Item list, BoardValue value):&#160;item.c']]]
 ];

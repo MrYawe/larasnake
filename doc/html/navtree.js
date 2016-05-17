@@ -1,23 +1,16 @@
 var NAVTREE =
 [
-  [ "Larakis", "index.html", [
+  [ "LarakisSnake", "index.html", [
     [ "Data Structures", null, [
       [ "Data Structures", "annotated.html", "annotated" ],
-      [ "Data Structure Index", "classes.html", null ],
-      [ "Data Fields", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Variables", "functions_vars.html", null ]
-      ] ]
+      [ "Data Structure Index", "classes.html", null ]
     ] ],
     [ "Files", null, [
       [ "File List", "files.html", "files" ],
       [ "Globals", "globals.html", [
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Enumerations", "globals_enum.html", null ]
       ] ]
     ] ]
   ] ]
@@ -26,7 +19,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"struct_snake.html#a075da34cf55b9b4c699e017d3a0a0e17"
+"snake_8c.html#a34d1ffa3c8c5372e6adbd516de63d28d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

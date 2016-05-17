@@ -56,25 +56,28 @@ Game gameCreate(BoardSize size)
 	switch (size) {
 		case SMALL:
 			g->board = boardInit(S_SIZE_BOARD_X, S_SIZE_BOARD_Y, S_CELL_SIZE);
+			g->snake1 = snakeCreate(SNAKE_DEFAULT_SIZE_SMALL, SNAKE1, RIGHT, WATER);
+			g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE_SMALL, SNAKE2, LEFT, FIRE);
 			break;
 		case MEDIUM:
 			g->board = boardInit(M_SIZE_BOARD_X, M_SIZE_BOARD_Y, M_CELL_SIZE);
+			g->snake1 = snakeCreate(SNAKE_DEFAULT_SIZE_MEDIUM, SNAKE1, RIGHT, WATER);
+			g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE_MEDIUM, SNAKE2, LEFT, FIRE);
 			break;
 		case LARGE:
 			g->board = boardInit(L_SIZE_BOARD_X, L_SIZE_BOARD_Y, L_CELL_SIZE);
+			g->snake1 = snakeCreate(SNAKE_DEFAULT_SIZE_LARGE, SNAKE1, RIGHT, WATER);
+			g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE_LARGE, SNAKE2, LEFT, FIRE);
 			break;
 	}
 
-	g->snake1 = snakeCreate(SNAKE_DEFAULT_SIZE, SNAKE1, RIGHT, WATER);
-	g->snake2 = snakeCreate(SNAKE_DEFAULT_SIZE, SNAKE2, LEFT, FIRE);
-	//g->itemList = itemCreate(-1, -1, SENTRY);
 	g->isPlaying = true;
 	g->pauseFinished=4;
 	g->isPaused = true;
 
 
 	//init sound
-	g->numberSound=6; //CHANGE HERE THE NUMBER OF SOUND
+	g->numberSound=8; //CHANGE HERE THE NUMBER OF SOUND
 	g->sound=malloc(g->numberSound*sizeof(Mix_Chunk *));
 	Mix_AllocateChannels(g->numberSound+1);
 
@@ -85,6 +88,8 @@ Game gameCreate(BoardSize size)
 	g->sound[3] = Mix_LoadWAV("./sound/reverseSnake.wav");
 	g->sound[4] = Mix_LoadWAV("./sound/changeBg.wav");
 	g->sound[5] = Mix_LoadWAV("./sound/mp.wav");
+	g->sound[6] = Mix_LoadWAV("./sound/speedUp.wav");
+	g->sound[7] = Mix_LoadWAV("./sound/ghostBuster.wav");
 
 
 	gameInitSnakes(g->board, g->snake1, g->snake2);
@@ -92,14 +97,13 @@ Game gameCreate(BoardSize size)
 	return g;
 }
 
-//TODO free itemlist
 /**
  * \fn void gameFree(Game game)
  * \brief Free the struct game
  * \details  Free the struct game
  * \param game The game struct to free
  */
-void gameFree(Game game) 
+void gameFree(Game game)
 {
 	boardFree(game->board);
 	snakeFree(game->snake1);
@@ -315,7 +319,7 @@ static bool gameCheckMovement(Game g, Snake s)
 			continueGame = false;
 		}
 	}
-	else if (!snakeGetCanCrossBorder(s) && boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, WALL_P))
+	else if (!snakeIsGhost(s) && !snakeGetCanCrossBorder(s) && boardIsNextCellType(b, coordSnake->x, coordSnake->y, dirSnake, 1, WALL_P))
 	{
 		printf("Le snake s'est pris un mur !\n");
 		continueGame = false;
@@ -333,7 +337,6 @@ static bool gameCheckMovement(Game g, Snake s)
 		Item itemList = boardGetItemList(b);
 		Item item = itemSearch(itemList, coordItem->x, coordItem->y);
 
-		printf("****************************COLLISION ITEM %d (x=%d, y=%d)\n", item->value, item->posX, item->posY);
 		if(snakeGetId(s) == 1) {
 			otherSnake = gameGetSnake(g, 2);
 		} else {
@@ -454,10 +457,20 @@ void playItemSound(Game g, Item i)
 		Mix_VolumeChunk(g->sound[5], MIX_MAX_VOLUME/2); //set sound volume
 		Mix_PlayChannel(5, g->sound[5], 0);
 	}
+	else if(id==5)//speed_up
+	{
+		Mix_VolumeChunk(g->sound[6], MIX_MAX_VOLUME/2); //set sound volume
+		Mix_PlayChannel(6, g->sound[6], 0);
+	}
+	else if(id==11)//ghost
+	{
+		Mix_VolumeChunk(g->sound[7], MIX_MAX_VOLUME); //set sound volume
+		Mix_PlayChannel(7, g->sound[7], 0);
+	}
 	else
 	{
 		Mix_VolumeChunk(g->sound[0], MIX_MAX_VOLUME); //set sound volume
-		Mix_PlayChannel(5, g->sound[0], 0);
+		Mix_PlayChannel(0, g->sound[0], 0);
 	}
 }
 
@@ -569,11 +582,10 @@ void gameFeed(Game game, bool ham)
 		itemValue = FOOD;
 	else
 	{
-		itemValue= itemGetRandomItemValue();
+		itemValue=itemGetRandomItemValue();
 		if(itemValue==FOOD)
 			itemValue=5;
 	}
-
 
 	boardItemAdd(b, x, y, itemValue);
 	printf("Ajout de l'item %d: (%d, %d)\n", itemValue, x, y);
@@ -766,8 +778,17 @@ void itemOnCollisionGrowUp(Item i, Snake sOnCollision, Snake sBis, Board b) {
 
 void itemOnCollisionGrowDown(Item i, Snake sOnCollision, Snake sBis, Board b) {
     printf("COLLISION GROW_DOWN\n");
-    boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
-    snakeDeleteFirstElement(sOnCollision);
+    if(snakeGetSize(sOnCollision)>5){
+    	boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
+    	snakeDeleteFirstElement(sOnCollision);
+    	boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
+		snakeDeleteFirstElement(sOnCollision);
+    	boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
+		snakeDeleteFirstElement(sOnCollision);
+    	boardSetValue(b, sOnCollision->tail->pos->x, sOnCollision->tail->pos->y, EMPTY);
+		snakeDeleteFirstElement(sOnCollision);
+    }
+    
 }
 
 //---------
@@ -858,12 +879,10 @@ void itemOnCollisionWall(Item it, Snake sOnCollision, Snake sBis, Game game) {
     printf("COLLISION WALL\n");
 
 		Board b = gameGetBoard(game);
-		Item itemList = boardGetItemList(b);
 		int xMax=boardGetWidth(b)-1;
 		int yMax=boardGetHeight(b)-1;
 		int x = rand()%xMax+1;
 		int y = rand()%yMax+1;
-
 
 		BoardValue itemValue=16;
 		int j=rand()%80+30;
@@ -871,16 +890,19 @@ void itemOnCollisionWall(Item it, Snake sOnCollision, Snake sBis, Game game) {
 
 		for(i=0;i<j;i++)
 		{
-			boardItemAdd(b, x, y,itemValue);
-			int nx = rand()%3-1;
-			int ny = rand()%3-1;
-			while((x==nx && y == ny) || !boardInside(b,x+nx,y+ny))
-			{
-				nx = rand()%3-1;
-				ny = rand()%3-1;
+			if(boardGetValue(b,x,y)==EMPTY) {
+				boardItemAdd(b, x, y,itemValue);
+				int nx = rand()%3-1;
+				int ny = rand()%3-1;
+				while((x==nx && y == ny) || !boardInside(b,x+nx,y+ny))
+				{
+					nx = rand()%3-1;
+					ny = rand()%3-1;
+				}
+				x=x+nx;
+				y=y+ny;
 			}
-			x=x+nx;
-			y=y+ny;
+			
 		}
 		printf("Ajout d'un mur !\n");
 }

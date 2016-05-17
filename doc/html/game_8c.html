@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Larakis: game.c File Reference</title>
+<title>LarakisSnake: game.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Larakis
+   <div id="projectname">LarakisSnake
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('game_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -107,11 +107,16 @@ $(document).ready(function(){initNavTree('game_8c.html','');});
 <div class="title">game.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Everything about the game class.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br/>
 <code>#include &lt;stdlib.h&gt;</code><br/>
 <code>#include &lt;unistd.h&gt;</code><br/>
-<code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br/>
+<code>#include &lt;stdarg.h&gt;</code><br/>
+<code>#include &quot;constants.h&quot;</code><br/>
 <code>#include &quot;<a class="el" href="game_8h_source.html">game.h</a>&quot;</code><br/>
+<code>#include &lt;SDL/SDL_mixer.h&gt;</code><br/>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
@@ -121,230 +126,121 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a4cffe73c190ea4ad3f69f544fac069f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_game.html">Game</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a4cffe73c190ea4ad3f69f544fac069f6">gameCreate</a> (<a class="el" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a> size)</td></tr>
+<tr class="memitem:a4cffe73c190ea4ad3f69f544fac069f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_game.html">Game</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a4cffe73c190ea4ad3f69f544fac069f6">gameCreate</a> (BoardSize size)</td></tr>
 <tr class="memdesc:a4cffe73c190ea4ad3f69f544fac069f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function creates the game.  <a href="#a4cffe73c190ea4ad3f69f544fac069f6">More...</a><br/></td></tr>
 <tr class="separator:a4cffe73c190ea4ad3f69f544fac069f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a741e872beae7c2cfaadc5e5b1c73a0b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a741e872beae7c2cfaadc5e5b1c73a0b0">gameFree</a> (<a class="el" href="struct_game.html">Game</a> game)</td></tr>
 <tr class="memdesc:a741e872beae7c2cfaadc5e5b1c73a0b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the struct game.  <a href="#a741e872beae7c2cfaadc5e5b1c73a0b0">More...</a><br/></td></tr>
 <tr class="separator:a741e872beae7c2cfaadc5e5b1c73a0b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a935e57d87e0b3ab801f0b6530d5f395a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_board.html">Board</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a935e57d87e0b3ab801f0b6530d5f395a">gameGetBoard</a> (<a class="el" href="struct_game.html">Game</a> g)</td></tr>
-<tr class="memdesc:a935e57d87e0b3ab801f0b6530d5f395a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor to the board of the game structure.  <a href="#a935e57d87e0b3ab801f0b6530d5f395a">More...</a><br/></td></tr>
-<tr class="separator:a935e57d87e0b3ab801f0b6530d5f395a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea510cd27be7762e647de01b74a7078d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#aea510cd27be7762e647de01b74a7078d">gameGetSnake</a> (<a class="el" href="struct_game.html">Game</a> g, int player)</td></tr>
-<tr class="memdesc:aea510cd27be7762e647de01b74a7078d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor to the snake of the game structure.  <a href="#aea510cd27be7762e647de01b74a7078d">More...</a><br/></td></tr>
-<tr class="separator:aea510cd27be7762e647de01b74a7078d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a297e7be351335171694582dbd83956c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_board.html">Board</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a297e7be351335171694582dbd83956c5">gameGetBoard</a> (<a class="el" href="struct_game.html">Game</a> g)</td></tr>
+<tr class="memdesc:a297e7be351335171694582dbd83956c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor to the board of the game structure.  <a href="#a297e7be351335171694582dbd83956c5">More...</a><br/></td></tr>
+<tr class="separator:a297e7be351335171694582dbd83956c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ca7ac71f86c57a26c4cd14d261f097c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ca7ac71f86c57a26c4cd14d261f097c"></a>
+<a class="el" href="struct_snake.html">Snake</a>&#160;</td><td class="memItemRight" valign="bottom"><b>gameGetSnake</b> (<a class="el" href="struct_game.html">Game</a> g, int id)</td></tr>
+<tr class="separator:a7ca7ac71f86c57a26c4cd14d261f097c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92fb345b64698bce4cdeda9b9fef40ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a92fb345b64698bce4cdeda9b9fef40ee">gameGetIsPlaying</a> (<a class="el" href="struct_game.html">Game</a> g)</td></tr>
 <tr class="memdesc:a92fb345b64698bce4cdeda9b9fef40ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor to the isPlaying boolean of the game structure.  <a href="#a92fb345b64698bce4cdeda9b9fef40ee">More...</a><br/></td></tr>
 <tr class="separator:a92fb345b64698bce4cdeda9b9fef40ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af76a6692c7db7bda6927fe33b45e4e20"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af76a6692c7db7bda6927fe33b45e4e20"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>gameGetIsPaused</b> (<a class="el" href="struct_game.html">Game</a> g)</td></tr>
+<tr class="separator:af76a6692c7db7bda6927fe33b45e4e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf3bf13e38c38760f702b0a73b6b20b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaaf3bf13e38c38760f702b0a73b6b20b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gameSetIsPaused</b> (<a class="el" href="struct_game.html">Game</a> g, bool isPaused)</td></tr>
+<tr class="separator:aaaf3bf13e38c38760f702b0a73b6b20b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff5bcbbcdeb288b5970143619f5185c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff5bcbbcdeb288b5970143619f5185c2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>gameGetPauseTimer</b> (<a class="el" href="struct_game.html">Game</a> g)</td></tr>
+<tr class="separator:aff5bcbbcdeb288b5970143619f5185c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d2a37d2fd042d72e966e838f5a9e71"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7d2a37d2fd042d72e966e838f5a9e71"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gameSetPauseTimer</b> (<a class="el" href="struct_game.html">Game</a> g, int t)</td></tr>
+<tr class="separator:ae7d2a37d2fd042d72e966e838f5a9e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57d987f35e4418363b0a066a12d3639a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a57d987f35e4418363b0a066a12d3639a">gameEnd</a> (<a class="el" href="struct_game.html">Game</a> g)</td></tr>
 <tr class="memdesc:a57d987f35e4418363b0a066a12d3639a"><td class="mdescLeft">&#160;</td><td class="mdescRight">End the game.  <a href="#a57d987f35e4418363b0a066a12d3639a">More...</a><br/></td></tr>
 <tr class="separator:a57d987f35e4418363b0a066a12d3639a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5aad763dcc2aef7c9eb888aa4d16c4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#ac5aad763dcc2aef7c9eb888aa4d16c4b">gameInitSnakes</a> (<a class="el" href="struct_board.html">Board</a> *b, <a class="el" href="struct_snake.html">Snake</a> *s1, <a class="el" href="struct_snake.html">Snake</a> *s2)</td></tr>
-<tr class="memdesc:ac5aad763dcc2aef7c9eb888aa4d16c4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the snakes of the game.  <a href="#ac5aad763dcc2aef7c9eb888aa4d16c4b">More...</a><br/></td></tr>
-<tr class="separator:ac5aad763dcc2aef7c9eb888aa4d16c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ee077f39967ae4dab63b1012bf06427"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a6ee077f39967ae4dab63b1012bf06427">gameUpdateSnake</a> (<a class="el" href="struct_board.html">Board</a> *b, <a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
-<tr class="memdesc:a6ee077f39967ae4dab63b1012bf06427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the board with the position of the snake.  <a href="#a6ee077f39967ae4dab63b1012bf06427">More...</a><br/></td></tr>
-<tr class="separator:a6ee077f39967ae4dab63b1012bf06427"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83e2c2090682055f6aa5a7198e7b695b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a83e2c2090682055f6aa5a7198e7b695b">gameMoveSnake</a> (<a class="el" href="struct_board.html">Board</a> *b, <a class="el" href="struct_snake.html">Snake</a> *s)</td></tr>
-<tr class="memdesc:a83e2c2090682055f6aa5a7198e7b695b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the board with the snake movement.  <a href="#a83e2c2090682055f6aa5a7198e7b695b">More...</a><br/></td></tr>
-<tr class="separator:a83e2c2090682055f6aa5a7198e7b695b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab179988afbcfa7c5d170546953f0a69a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#ab179988afbcfa7c5d170546953f0a69a">boardInside</a> (<a class="el" href="struct_board.html">Board</a> *b, <a class="el" href="struct_coord.html">Coord</a> coord)</td></tr>
-<tr class="memdesc:ab179988afbcfa7c5d170546953f0a69a"><td class="mdescLeft">&#160;</td><td class="mdescRight">La fonction vérifie si la position est dans le board.  <a href="#ab179988afbcfa7c5d170546953f0a69a">More...</a><br/></td></tr>
-<tr class="separator:ab179988afbcfa7c5d170546953f0a69a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa129db908daf1dcf226fb576204253a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#afa129db908daf1dcf226fb576204253a">boardIsSnake</a> (<a class="el" href="struct_board.html">Board</a> *b, <a class="el" href="struct_coord.html">Coord</a> coord)</td></tr>
-<tr class="memdesc:afa129db908daf1dcf226fb576204253a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow to know if a cell is a part of a snake.  <a href="#afa129db908daf1dcf226fb576204253a">More...</a><br/></td></tr>
-<tr class="separator:afa129db908daf1dcf226fb576204253a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15298482a2742396f1adf7d19c2ccd69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a15298482a2742396f1adf7d19c2ccd69">gameFeed</a> (<a class="el" href="struct_game.html">Game</a> game)</td></tr>
-<tr class="memdesc:a15298482a2742396f1adf7d19c2ccd69"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function puts a food in the board.  <a href="#a15298482a2742396f1adf7d19c2ccd69">More...</a><br/></td></tr>
-<tr class="separator:a15298482a2742396f1adf7d19c2ccd69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31901da102d32b94ba4a908b2d57dd5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a31901da102d32b94ba4a908b2d57dd5a">gameInitSnakes</a> (<a class="el" href="struct_board.html">Board</a> b, <a class="el" href="struct_snake.html">Snake</a> s1, <a class="el" href="struct_snake.html">Snake</a> s2)</td></tr>
+<tr class="memdesc:a31901da102d32b94ba4a908b2d57dd5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the snakes of the game.  <a href="#a31901da102d32b94ba4a908b2d57dd5a">More...</a><br/></td></tr>
+<tr class="separator:a31901da102d32b94ba4a908b2d57dd5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a037e23fdfd0f886dbddafe1d1fd31e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a2a037e23fdfd0f886dbddafe1d1fd31e">gameUpdateSnake</a> (<a class="el" href="struct_board.html">Board</a> b, <a class="el" href="struct_snake.html">Snake</a> s)</td></tr>
+<tr class="memdesc:a2a037e23fdfd0f886dbddafe1d1fd31e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the board with the position of the snake.  <a href="#a2a037e23fdfd0f886dbddafe1d1fd31e">More...</a><br/></td></tr>
+<tr class="separator:a2a037e23fdfd0f886dbddafe1d1fd31e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad24583a22f856054ec1909902199b4b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad24583a22f856054ec1909902199b4b5"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>gameMoveSnake</b> (<a class="el" href="struct_game.html">Game</a> g, <a class="el" href="struct_snake.html">Snake</a> s)</td></tr>
+<tr class="separator:ad24583a22f856054ec1909902199b4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15e7ee9e39f3eabbf7910932c5239623"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a15e7ee9e39f3eabbf7910932c5239623">playItemSound</a> (<a class="el" href="struct_game.html">Game</a> g, <a class="el" href="struct_item.html">Item</a> i)</td></tr>
+<tr class="memdesc:a15e7ee9e39f3eabbf7910932c5239623"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function play a sound depending the item.  <a href="#a15e7ee9e39f3eabbf7910932c5239623">More...</a><br/></td></tr>
+<tr class="separator:a15e7ee9e39f3eabbf7910932c5239623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6128f0d2552ea0c1c44868c1d7c4bd95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6128f0d2552ea0c1c44868c1d7c4bd95"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gameItemCollision</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis, <a class="el" href="struct_game.html">Game</a> g)</td></tr>
+<tr class="separator:a6128f0d2552ea0c1c44868c1d7c4bd95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40fbefb53580b65992a0fa02ffad46aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40fbefb53580b65992a0fa02ffad46aa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gameItemDebuff</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> snake)</td></tr>
+<tr class="separator:a40fbefb53580b65992a0fa02ffad46aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af237adc7e5734739331e7a234f3cad87"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af237adc7e5734739331e7a234f3cad87"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gameFeed</b> (<a class="el" href="struct_game.html">Game</a> game, bool ham)</td></tr>
+<tr class="separator:af237adc7e5734739331e7a234f3cad87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00c18f10b8f569e55d4800741e5c134d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_coord.html">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a00c18f10b8f569e55d4800741e5c134d">boardNextPosCell</a> (int x, int y, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
 <tr class="memdesc:a00c18f10b8f569e55d4800741e5c134d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow to get the next cell.  <a href="#a00c18f10b8f569e55d4800741e5c134d">More...</a><br/></td></tr>
 <tr class="separator:a00c18f10b8f569e55d4800741e5c134d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92483958610c33749bfac22378207e85"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a92483958610c33749bfac22378207e85">boardIsNextCellSnake</a> (<a class="el" href="struct_board.html">Board</a> *b, int x, int y, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
-<tr class="memdesc:a92483958610c33749bfac22378207e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow to know if the next cell is a part of a snake.  <a href="#a92483958610c33749bfac22378207e85">More...</a><br/></td></tr>
-<tr class="separator:a92483958610c33749bfac22378207e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad736b4fe5326474eec4453b1b0aebda7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#ad736b4fe5326474eec4453b1b0aebda7">boardIsNextCellBorder</a> (<a class="el" href="struct_board.html">Board</a> *b, int x, int y, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
-<tr class="memdesc:ad736b4fe5326474eec4453b1b0aebda7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function allow to know if the next cell is a part of a border.  <a href="#ad736b4fe5326474eec4453b1b0aebda7">More...</a><br/></td></tr>
-<tr class="separator:ad736b4fe5326474eec4453b1b0aebda7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa678da73c5e3ef0a7dd676035dbd82f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_item.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#aa678da73c5e3ef0a7dd676035dbd82f5">gameGetFood</a> (<a class="el" href="struct_game.html">Game</a> game)</td></tr>
-<tr class="separator:aa678da73c5e3ef0a7dd676035dbd82f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ab31e8ee428b12cd01b1fce1d61106e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ab31e8ee428b12cd01b1fce1d61106e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>boardIsNextCellType</b> (<a class="el" href="struct_board.html">Board</a> b, int x, int y, <a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir, int n,...)</td></tr>
+<tr class="separator:a6ab31e8ee428b12cd01b1fce1d61106e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7ac8d4cee903cc771cef54308b02de0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab7ac8d4cee903cc771cef54308b02de0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gameSetFieldValue</b> (<a class="el" href="struct_game.html">Game</a> g, int type, int taille)</td></tr>
+<tr class="separator:ab7ac8d4cee903cc771cef54308b02de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e68feaae7cd6dc7adf4fdc72613b84b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a4e68feaae7cd6dc7adf4fdc72613b84b">itemOnCollisionFood</a> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis, <a class="el" href="struct_board.html">Board</a> b)</td></tr>
+<tr class="separator:a4e68feaae7cd6dc7adf4fdc72613b84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51e356f5ccb3c552a2f2e43a50e10e8b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51e356f5ccb3c552a2f2e43a50e10e8b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionSpeedUp</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis)</td></tr>
+<tr class="separator:a51e356f5ccb3c552a2f2e43a50e10e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64cc65400529228846af7c4648d95f4a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64cc65400529228846af7c4648d95f4a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnDebuffSpeedUp</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> snake)</td></tr>
+<tr class="separator:a64cc65400529228846af7c4648d95f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3248d18507385fcfa332d98957ff37e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3248d18507385fcfa332d98957ff37e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionGrowUp</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis, <a class="el" href="struct_board.html">Board</a> b)</td></tr>
+<tr class="separator:ac3248d18507385fcfa332d98957ff37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80c9b0538b2ec3b2d11e753882f05d9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80c9b0538b2ec3b2d11e753882f05d9f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionGrowDown</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis, <a class="el" href="struct_board.html">Board</a> b)</td></tr>
+<tr class="separator:a80c9b0538b2ec3b2d11e753882f05d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea760baf07b113dcd42fb45a8f36e7ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea760baf07b113dcd42fb45a8f36e7ad"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionReverseControl</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis)</td></tr>
+<tr class="separator:aea760baf07b113dcd42fb45a8f36e7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36eae9b5fc46c662a344033add487b05"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36eae9b5fc46c662a344033add487b05"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnDebuffReverseControl</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> snake)</td></tr>
+<tr class="separator:a36eae9b5fc46c662a344033add487b05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4989ba9f72c185f4de2f35f8da025d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa4989ba9f72c185f4de2f35f8da025d8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionReverseSnake</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis)</td></tr>
+<tr class="separator:aa4989ba9f72c185f4de2f35f8da025d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a634d95a3c0c5928a1689919d5e37121e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a634d95a3c0c5928a1689919d5e37121e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionNoBorder</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis)</td></tr>
+<tr class="separator:a634d95a3c0c5928a1689919d5e37121e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a340ce3621960f4de707f65ae7009a0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a340ce3621960f4de707f65ae7009a0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnDebuffNoBorder</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> snake)</td></tr>
+<tr class="separator:a2a340ce3621960f4de707f65ae7009a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96d76c8e3af25e839c4888da219730ca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96d76c8e3af25e839c4888da219730ca"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionGhost</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis)</td></tr>
+<tr class="separator:a96d76c8e3af25e839c4888da219730ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a009b7eca5c3bdcc9a3fc3f9b8ef536ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a009b7eca5c3bdcc9a3fc3f9b8ef536ac"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnDebuffGhost</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> snake)</td></tr>
+<tr class="separator:a009b7eca5c3bdcc9a3fc3f9b8ef536ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54a01a44a4b78065be1beb046ecf7c66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54a01a44a4b78065be1beb046ecf7c66"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionSwapSnake</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis)</td></tr>
+<tr class="separator:a54a01a44a4b78065be1beb046ecf7c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2b9bc711be17a7b4227af62252aebb4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae2b9bc711be17a7b4227af62252aebb4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionNewColor</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis)</td></tr>
+<tr class="separator:ae2b9bc711be17a7b4227af62252aebb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25561a43ec9125947704d83bf1f298cf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a25561a43ec9125947704d83bf1f298cf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionNewMap</b> (<a class="el" href="struct_item.html">Item</a> i, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis)</td></tr>
+<tr class="separator:a25561a43ec9125947704d83bf1f298cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c43b356ea37a8b1a33c7116193f5b66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c43b356ea37a8b1a33c7116193f5b66"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemOnCollisionWall</b> (<a class="el" href="struct_item.html">Item</a> it, <a class="el" href="struct_snake.html">Snake</a> sOnCollision, <a class="el" href="struct_snake.html">Snake</a> sBis, <a class="el" href="struct_game.html">Game</a> game)</td></tr>
+<tr class="separator:a3c43b356ea37a8b1a33c7116193f5b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ab179988afbcfa7c5d170546953f0a69a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool boardInside </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
-          <td class="paramname"><em>b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_coord.html">Coord</a>&#160;</td>
-          <td class="paramname"><em>coord</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>La fonction vérifie si la position est dans le board. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">b</td><td>Variable de type <a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> qui correspond au tableau à effacer </td></tr>
-    <tr><td class="paramname">posX</td><td>position X de la case à tester </td></tr>
-    <tr><td class="paramname">posY</td><td>position Y de la case à tester </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="ad736b4fe5326474eec4453b1b0aebda7"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool boardIsNextCellBorder </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
-          <td class="paramname"><em>b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
-          <td class="paramname"><em>dir</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The function allow to know if the next cell is a part of a border. </p>
-<p>The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a border </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The board to access </td></tr>
-    <tr><td class="paramname">x</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The actual X position </td></tr>
-    <tr><td class="paramname">y</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The actual Y position </td></tr>
-    <tr><td class="paramname">dir</td><td>Direction : Direction to go </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns boolean which say if the next cell is a border </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a92483958610c33749bfac22378207e85"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool boardIsNextCellSnake </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
-          <td class="paramname"><em>b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="snake_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
-          <td class="paramname"><em>dir</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The function allow to know if the next cell is a part of a snake. </p>
-<p>The function returns a boolean to know if the next cell of the coordinates passed in arguments is a part of a snake </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The board to access </td></tr>
-    <tr><td class="paramname">x</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The actual X position </td></tr>
-    <tr><td class="paramname">y</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The actual Y position </td></tr>
-    <tr><td class="paramname">dir</td><td>Direction : Direction to go </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns boolean which say if the next cell is a snake </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="afa129db908daf1dcf226fb576204253a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool boardIsSnake </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
-          <td class="paramname"><em>b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_coord.html">Coord</a>&#160;</td>
-          <td class="paramname"><em>coord</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The function allow to know if a cell is a part of a snake. </p>
-<p>The function returns a boolean to know if the cell of the coordinates passed in arguments is a part of a snake </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The board to access </td></tr>
-    <tr><td class="paramname">coord</td><td><a class="el" href="struct_coord.html" title="Coordinates structure. ">Coord</a> : Coordinates of the cell to test </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns boolean which say if the cell is a snake </dd></dl>
-
-</div>
-</div>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Everything about the game class. </p>
+<dl class="section author"><dt>Author</dt><dd>groupe Larakis </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>19/04/2016</dd></dl>
+<p>Contains all functions to manage the game </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a00c18f10b8f569e55d4800741e5c134d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -396,7 +292,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="struct_game.html">Game</a> gameCreate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="game_8h.html#a42eef434283eb2b097a6bf3d3115e5e5">BoardSize</a>&#160;</td>
+          <td class="paramtype">BoardSize&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
@@ -440,31 +336,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a15298482a2742396f1adf7d19c2ccd69"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void gameFeed </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_game.html">Game</a>&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The function puts a food in the board. </p>
-<p>The function set a food coodinates in the board structure </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> : The board to edit </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a class="anchor" id="a741e872beae7c2cfaadc5e5b1c73a0b0"></a>
 <div class="memitem">
 <div class="memproto">
@@ -490,12 +361,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a935e57d87e0b3ab801f0b6530d5f395a"></a>
+<a class="anchor" id="a297e7be351335171694582dbd83956c5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_board.html">Board</a> * gameGetBoard </td>
+          <td class="memname"><a class="el" href="struct_board.html">Board</a> gameGetBoard </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_game.html">Game</a>&#160;</td>
           <td class="paramname"><em>g</em></td><td>)</td>
@@ -513,22 +384,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns <a class="el" href="struct_board.html" title="The structure of the board. ">Board</a> pointer </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aa678da73c5e3ef0a7dd676035dbd82f5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_item.html">Item</a> gameGetFood </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_game.html">Game</a>&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -558,63 +413,26 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aea510cd27be7762e647de01b74a7078d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_snake.html">Snake</a> * gameGetSnake </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_game.html">Game</a>&#160;</td>
-          <td class="paramname"><em>g</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>player</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Accessor to the snake of the game structure. </p>
-<p>The function returns the snake of the game </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td><a class="el" href="struct_game.html" title="The game structure. ">Game</a>: The game to access </td></tr>
-    <tr><td class="paramname">player</td><td>Int: The player number </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns <a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> pointer </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ac5aad763dcc2aef7c9eb888aa4d16c4b"></a>
+<a class="anchor" id="a31901da102d32b94ba4a908b2d57dd5a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void gameInitSnakes </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a>&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a>&#160;</td>
           <td class="paramname"><em>s1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a>&#160;</td>
           <td class="paramname"><em>s2</em>&#160;</td>
         </tr>
         <tr>
@@ -638,56 +456,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a83e2c2090682055f6aa5a7198e7b695b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool gameMoveSnake </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
-          <td class="paramname"><em>b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
-          <td class="paramname"><em>s</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Update the board with the snake movement. </p>
-<p>Update the board without iterating on elements </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">b</td><td><a class="el" href="struct_board.html" title="The structure of the board. ">Board</a>: where to move the snake </td></tr>
-    <tr><td class="paramname">s</td><td><a class="el" href="struct_snake.html" title="The snake structure. ">Snake</a> to move on the board </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a6ee077f39967ae4dab63b1012bf06427"></a>
+<a class="anchor" id="a2a037e23fdfd0f886dbddafe1d1fd31e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void gameUpdateSnake </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a>&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a>&#160;</td>
           <td class="paramname"><em>s</em>&#160;</td>
         </tr>
         <tr>
@@ -710,13 +492,88 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a4e68feaae7cd6dc7adf4fdc72613b84b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void itemOnCollisionFood </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_item.html">Item</a>&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a>&#160;</td>
+          <td class="paramname"><em>sOnCollision</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_snake.html">Snake</a>&#160;</td>
+          <td class="paramname"><em>sBis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a>&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ITEM FONCTIONS </p>
+
+</div>
+</div>
+<a class="anchor" id="a15e7ee9e39f3eabbf7910932c5239623"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void playItemSound </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_game.html">Game</a>&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_item.html">Item</a>&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The function play a sound depending the item. </p>
+<p>The function just check the item id and play a sound when the player pick it </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td><a class="el" href="struct_game.html" title="The game structure. ">Game</a> : The current game </td></tr>
+    <tr><td class="paramname">i</td><td><a class="el" href="struct_item.html" title="The item structure. ">Item</a> : The item picked </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="game_8c.html">game.c</a></li>
-    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
+    <li class="footer">Generated on Tue May 17 2016 08:41:18 for LarakisSnake by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

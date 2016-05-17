@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Larakis: item.h Source File</title>
+<title>LarakisSnake: item.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Larakis
+   <div id="projectname">LarakisSnake
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('item_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -107,44 +107,50 @@ $(document).ready(function(){initNavTree('item_8h_source.html','');});
 <a href="item_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ITEM_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define ITEM_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="enum_8h.html">enum.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="item_8h.html#a81bc1cd3ad27e2b9eff1a0d766205705">    6</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_item.html">Item</a>* <a class="code" href="item_8h.html#a81bc1cd3ad27e2b9eff1a0d766205705">Item</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct_item.html">   12</a></span>&#160;<span class="keyword">struct </span>Item</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="struct_item.html#ab34f89ef94db9dd6d3a04425dd6d9c9d">   14</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_item.html#ab34f89ef94db9dd6d3a04425dd6d9c9d">posX</a>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="struct_item.html#a65ab2de052c17234c8a1db3fd3b868a9">   15</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_item.html#a65ab2de052c17234c8a1db3fd3b868a9">posY</a>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="struct_item.html#abf36ad63c6cbefb455bb8dbb0f07ba33">   16</a></span>&#160;    <a class="code" href="enum_8h.html#a2dacfc71b564278029e3ad9693430e87">BoardValue</a> <a class="code" href="struct_item.html#abf36ad63c6cbefb455bb8dbb0f07ba33">value</a>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="struct_item.html#a8610178c9afe6f9c9577ae316a688f60">   17</a></span>&#160;    void (*<a class="code" href="struct_item.html#a8610178c9afe6f9c9577ae316a688f60">onCollision</a>)(<span class="keywordtype">int</span> idSnake); <span class="comment">// idSnake:id du snake qui a touché l&#39;object</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/*** Object ***/</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;Item <a class="code" href="item_8h.html#a66bd7f31ba408096b471a0f8384bdda7">itemCreate</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <a class="code" href="enum_8h.html#a2dacfc71b564278029e3ad9693430e87">BoardValue</a> value);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="item_8h.html#ad3db5d0006013fd63177268384b09f19">itemFree</a>(Item item);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/*** Collisions ***/</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> <a class="code" href="item_8h.html#a059ffc47def9e5958428b2f14490306e">itemOnCollisionFood</a>(<span class="keywordtype">int</span> idSnake);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="item_8h_html_a66bd7f31ba408096b471a0f8384bdda7"><div class="ttname"><a href="item_8h.html#a66bd7f31ba408096b471a0f8384bdda7">itemCreate</a></div><div class="ttdeci">Item itemCreate(int x, int y, BoardValue value)</div><div class="ttdoc">The function create the item struct. </div><div class="ttdef"><b>Definition:</b> item.c:19</div></div>
-<div class="ttc" id="struct_item_html_a8610178c9afe6f9c9577ae316a688f60"><div class="ttname"><a href="struct_item.html#a8610178c9afe6f9c9577ae316a688f60">Item::onCollision</a></div><div class="ttdeci">void(* onCollision)(int idSnake)</div><div class="ttdef"><b>Definition:</b> item.h:17</div></div>
-<div class="ttc" id="enum_8h_html_a2dacfc71b564278029e3ad9693430e87"><div class="ttname"><a href="enum_8h.html#a2dacfc71b564278029e3ad9693430e87">BoardValue</a></div><div class="ttdeci">BoardValue</div><div class="ttdef"><b>Definition:</b> enum.h:4</div></div>
-<div class="ttc" id="struct_item_html"><div class="ttname"><a href="struct_item.html">Item</a></div><div class="ttdoc">The item structure. </div><div class="ttdef"><b>Definition:</b> item.h:12</div></div>
-<div class="ttc" id="struct_item_html_a65ab2de052c17234c8a1db3fd3b868a9"><div class="ttname"><a href="struct_item.html#a65ab2de052c17234c8a1db3fd3b868a9">Item::posY</a></div><div class="ttdeci">int posY</div><div class="ttdef"><b>Definition:</b> item.h:15</div></div>
-<div class="ttc" id="enum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div></div>
-<div class="ttc" id="struct_item_html_ab34f89ef94db9dd6d3a04425dd6d9c9d"><div class="ttname"><a href="struct_item.html#ab34f89ef94db9dd6d3a04425dd6d9c9d">Item::posX</a></div><div class="ttdeci">int posX</div><div class="ttdef"><b>Definition:</b> item.h:14</div></div>
-<div class="ttc" id="item_8h_html_a059ffc47def9e5958428b2f14490306e"><div class="ttname"><a href="item_8h.html#a059ffc47def9e5958428b2f14490306e">itemOnCollisionFood</a></div><div class="ttdeci">void itemOnCollisionFood(int idSnake)</div><div class="ttdef"><b>Definition:</b> item.c:7</div></div>
-<div class="ttc" id="struct_item_html_abf36ad63c6cbefb455bb8dbb0f07ba33"><div class="ttname"><a href="struct_item.html#abf36ad63c6cbefb455bb8dbb0f07ba33">Item::value</a></div><div class="ttdeci">BoardValue value</div><div class="ttdef"><b>Definition:</b> item.h:16</div></div>
-<div class="ttc" id="item_8h_html_a81bc1cd3ad27e2b9eff1a0d766205705"><div class="ttname"><a href="item_8h.html#a81bc1cd3ad27e2b9eff1a0d766205705">Item</a></div><div class="ttdeci">struct Item * Item</div><div class="ttdef"><b>Definition:</b> item.h:6</div></div>
-<div class="ttc" id="item_8h_html_ad3db5d0006013fd63177268384b09f19"><div class="ttname"><a href="item_8h.html#ad3db5d0006013fd63177268384b09f19">itemFree</a></div><div class="ttdeci">void itemFree(Item item)</div><div class="ttdoc">The function free the memory of the item. </div><div class="ttdef"><b>Definition:</b> item.c:42</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="enum_8h.html">enum.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_item.html">Item</a>* <a class="code" href="struct_item.html">Item</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="struct_item.html">   23</a></span>&#160;<span class="keyword">struct </span>Item</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">int</span> posX;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> posY;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    BoardValue value;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">//void (*onCollision)(Item i, Snake sOnCollision, Snake sBis); // idSnake:id du snake qui a touché l&#39;object</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    Item prev;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Item next;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/*** Object ***/</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;Item <a class="code" href="item_8h.html#a66bd7f31ba408096b471a0f8384bdda7">itemCreate</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, BoardValue value);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;Item <a class="code" href="item_8h.html#af0aafabf7853afb202bf1431a2984ad0">itemAddNew</a>(Item list, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, BoardValue value);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;Item <a class="code" href="item_8h.html#ac3dff4c42d20553451963cf328ec99f0">itemAdd</a>(Item list, Item toAdd);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;BoardValue <a class="code" href="item_8h.html#aa0d1607df495755fbd781a6b337f6df0">itemGetRandomItemValue</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;Item <a class="code" href="item_8h.html#a229d10a307cee76de5720da8063ce2f4">itemSearch</a>(Item list, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;Item <a class="code" href="item_8h.html#a805978719280ce081fb51d6e72265a56">itemSearchByValue</a>(Item list, BoardValue value);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="item_8h.html#a1572d8f40241339ad02e7eb57ec3db19">itemListIsEmpty</a>(Item list);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">int</span> <a class="code" href="item_8h.html#af914a3869a46e9bf6443f45e24da975d">itemDelete</a>(Item item);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> <a class="code" href="item_8h.html#ad3db5d0006013fd63177268384b09f19">itemFree</a>(Item item);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="item_8h_html_ac3dff4c42d20553451963cf328ec99f0"><div class="ttname"><a href="item_8h.html#ac3dff4c42d20553451963cf328ec99f0">itemAdd</a></div><div class="ttdeci">Item itemAdd(Item list, Item toAdd)</div><div class="ttdoc">Add a existing item in the item list. </div><div class="ttdef"><b>Definition:</b> item.c:69</div></div>
+<div class="ttc" id="item_8h_html_a229d10a307cee76de5720da8063ce2f4"><div class="ttname"><a href="item_8h.html#a229d10a307cee76de5720da8063ce2f4">itemSearch</a></div><div class="ttdeci">Item itemSearch(Item list, int x, int y)</div><div class="ttdoc">Search a item in the list by position x, y. </div><div class="ttdef"><b>Definition:</b> item.c:89</div></div>
+<div class="ttc" id="item_8h_html_a66bd7f31ba408096b471a0f8384bdda7"><div class="ttname"><a href="item_8h.html#a66bd7f31ba408096b471a0f8384bdda7">itemCreate</a></div><div class="ttdeci">Item itemCreate(int x, int y, BoardValue value)</div><div class="ttdoc">The function create the item struct. </div><div class="ttdef"><b>Definition:</b> item.c:25</div></div>
+<div class="ttc" id="item_8h_html_af0aafabf7853afb202bf1431a2984ad0"><div class="ttname"><a href="item_8h.html#af0aafabf7853afb202bf1431a2984ad0">itemAddNew</a></div><div class="ttdeci">Item itemAddNew(Item list, int x, int y, BoardValue value)</div><div class="ttdoc">Add a new item in a item list. </div><div class="ttdef"><b>Definition:</b> item.c:55</div></div>
+<div class="ttc" id="struct_item_html"><div class="ttname"><a href="struct_item.html">Item</a></div><div class="ttdoc">The item structure. </div><div class="ttdef"><b>Definition:</b> item.h:23</div></div>
+<div class="ttc" id="enum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">All the enums of the program. </div></div>
+<div class="ttc" id="item_8h_html_aa0d1607df495755fbd781a6b337f6df0"><div class="ttname"><a href="item_8h.html#aa0d1607df495755fbd781a6b337f6df0">itemGetRandomItemValue</a></div><div class="ttdeci">BoardValue itemGetRandomItemValue()</div><div class="ttdoc">Get a random item value. </div><div class="ttdef"><b>Definition:</b> item.c:41</div></div>
+<div class="ttc" id="item_8h_html_ad3db5d0006013fd63177268384b09f19"><div class="ttname"><a href="item_8h.html#ad3db5d0006013fd63177268384b09f19">itemFree</a></div><div class="ttdeci">void itemFree(Item item)</div><div class="ttdoc">The function free the memory of the item. </div><div class="ttdef"><b>Definition:</b> item.c:156</div></div>
+<div class="ttc" id="item_8h_html_a805978719280ce081fb51d6e72265a56"><div class="ttname"><a href="item_8h.html#a805978719280ce081fb51d6e72265a56">itemSearchByValue</a></div><div class="ttdeci">Item itemSearchByValue(Item list, BoardValue value)</div><div class="ttdoc">Search a item in the list by value. </div><div class="ttdef"><b>Definition:</b> item.c:107</div></div>
+<div class="ttc" id="item_8h_html_a1572d8f40241339ad02e7eb57ec3db19"><div class="ttname"><a href="item_8h.html#a1572d8f40241339ad02e7eb57ec3db19">itemListIsEmpty</a></div><div class="ttdeci">bool itemListIsEmpty(Item list)</div><div class="ttdoc">Test if the item list is empty. </div><div class="ttdef"><b>Definition:</b> item.c:142</div></div>
+<div class="ttc" id="item_8h_html_af914a3869a46e9bf6443f45e24da975d"><div class="ttname"><a href="item_8h.html#af914a3869a46e9bf6443f45e24da975d">itemDelete</a></div><div class="ttdeci">int itemDelete(Item item)</div><div class="ttdoc">Delete an item in his list. </div><div class="ttdef"><b>Definition:</b> item.c:124</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="item_8h.html">item.h</a></li>
-    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
+    <li class="footer">Generated on Tue May 17 2016 08:41:18 for LarakisSnake by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['head',['head',['../struct_snake_assets.html#a17fd5a519e5c67b17e3b4f9df388c772',1,'SnakeAssets']]]
+  ['main',['main',['../main_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.c']]],
+  ['main_2ec',['main.c',['../main_8c.html',1,'']]]
 ];

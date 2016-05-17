@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['snake',['Snake',['../struct_snake.html',1,'']]],
-  ['snake_2ec',['snake.c',['../snake_8c.html',1,'']]],
-  ['snake_2eh',['snake.h',['../snake_8h.html',1,'']]],
   ['snakeaddfirstelement',['snakeAddFirstElement',['../snake_8c.html#a41036b8768f713ee32695dce8c85fbf3',1,'snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation):&#160;snake.c'],['../snake_8h.html#a41036b8768f713ee32695dce8c85fbf3',1,'snakeAddFirstElement(Snake s, int posX, int posY, Direction orientation):&#160;snake.c']]],
   ['snakeaddlastelement',['snakeAddLastElement',['../snake_8c.html#ab88ab7ffffa535586cfc3804dbecfe18',1,'snakeAddLastElement(Snake s, int posX, int posY, Direction orientation):&#160;snake.c'],['../snake_8h.html#ab88ab7ffffa535586cfc3804dbecfe18',1,'snakeAddLastElement(Snake s, int posX, int posY, Direction orientation):&#160;snake.c']]],
-  ['snakeassets',['SnakeAssets',['../struct_snake_assets.html',1,'']]],
   ['snakecreate',['snakeCreate',['../snake_8c.html#a9f076906b5d1184db39191a438ab2a9e',1,'snakeCreate(int size, int id, Direction d, SnakeType type):&#160;snake.c'],['../snake_8h.html#a9f076906b5d1184db39191a438ab2a9e',1,'snakeCreate(int size, int id, Direction d, SnakeType type):&#160;snake.c']]],
   ['snakedeletefirstelement',['snakeDeleteFirstElement',['../snake_8c.html#a4b08ce2348071ab1b1afb0abfbe19ac3',1,'snakeDeleteFirstElement(Snake s):&#160;snake.c'],['../snake_8h.html#a4b08ce2348071ab1b1afb0abfbe19ac3',1,'snakeDeleteFirstElement(Snake s):&#160;snake.c']]],
   ['snakedisplay',['snakeDisplay',['../snake_8c.html#aa1ff9d202ecd6c4bd35ffa30db447ff9',1,'snakeDisplay(Snake s):&#160;snake.c'],['../snake_8h.html#aa1ff9d202ecd6c4bd35ffa30db447ff9',1,'snakeDisplay(Snake s):&#160;snake.c']]],

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Larakis: item.h File Reference</title>
+<title>LarakisSnake: item.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Larakis
+   <div id="projectname">LarakisSnake
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('item_8h.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -108,7 +108,11 @@ $(document).ready(function(){initNavTree('item_8h.html','');});
 <div class="title">item.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="enum_8h_source.html">enum.h</a>&quot;</code><br/>
+
+<p>Headers of item file.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="enum_8h_source.html">enum.h</a>&quot;</code><br/>
 </div>
 <p><a href="item_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -120,34 +124,133 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a81bc1cd3ad27e2b9eff1a0d766205705"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_item.html">Item</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#a81bc1cd3ad27e2b9eff1a0d766205705">Item</a></td></tr>
+<tr class="memitem:a81bc1cd3ad27e2b9eff1a0d766205705"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81bc1cd3ad27e2b9eff1a0d766205705"></a>
+typedef struct <a class="el" href="struct_item.html">Item</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>Item</b></td></tr>
 <tr class="separator:a81bc1cd3ad27e2b9eff1a0d766205705"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a66bd7f31ba408096b471a0f8384bdda7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_item.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#a66bd7f31ba408096b471a0f8384bdda7">itemCreate</a> (int x, int y, <a class="el" href="enum_8h.html#a2dacfc71b564278029e3ad9693430e87">BoardValue</a> value)</td></tr>
+<tr class="memitem:a66bd7f31ba408096b471a0f8384bdda7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_item.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#a66bd7f31ba408096b471a0f8384bdda7">itemCreate</a> (int x, int y, BoardValue value)</td></tr>
 <tr class="memdesc:a66bd7f31ba408096b471a0f8384bdda7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function create the item struct.  <a href="#a66bd7f31ba408096b471a0f8384bdda7">More...</a><br/></td></tr>
 <tr class="separator:a66bd7f31ba408096b471a0f8384bdda7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0aafabf7853afb202bf1431a2984ad0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_item.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#af0aafabf7853afb202bf1431a2984ad0">itemAddNew</a> (<a class="el" href="struct_item.html">Item</a> list, int x, int y, BoardValue value)</td></tr>
+<tr class="memdesc:af0aafabf7853afb202bf1431a2984ad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new item in a item list.  <a href="#af0aafabf7853afb202bf1431a2984ad0">More...</a><br/></td></tr>
+<tr class="separator:af0aafabf7853afb202bf1431a2984ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3dff4c42d20553451963cf328ec99f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_item.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#ac3dff4c42d20553451963cf328ec99f0">itemAdd</a> (<a class="el" href="struct_item.html">Item</a> list, <a class="el" href="struct_item.html">Item</a> toAdd)</td></tr>
+<tr class="memdesc:ac3dff4c42d20553451963cf328ec99f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a existing item in the item list.  <a href="#ac3dff4c42d20553451963cf328ec99f0">More...</a><br/></td></tr>
+<tr class="separator:ac3dff4c42d20553451963cf328ec99f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0d1607df495755fbd781a6b337f6df0"><td class="memItemLeft" align="right" valign="top">BoardValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#aa0d1607df495755fbd781a6b337f6df0">itemGetRandomItemValue</a> ()</td></tr>
+<tr class="memdesc:aa0d1607df495755fbd781a6b337f6df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a random item value.  <a href="#aa0d1607df495755fbd781a6b337f6df0">More...</a><br/></td></tr>
+<tr class="separator:aa0d1607df495755fbd781a6b337f6df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a229d10a307cee76de5720da8063ce2f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_item.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#a229d10a307cee76de5720da8063ce2f4">itemSearch</a> (<a class="el" href="struct_item.html">Item</a> list, int x, int y)</td></tr>
+<tr class="memdesc:a229d10a307cee76de5720da8063ce2f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search a item in the list by position x, y.  <a href="#a229d10a307cee76de5720da8063ce2f4">More...</a><br/></td></tr>
+<tr class="separator:a229d10a307cee76de5720da8063ce2f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a805978719280ce081fb51d6e72265a56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_item.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#a805978719280ce081fb51d6e72265a56">itemSearchByValue</a> (<a class="el" href="struct_item.html">Item</a> list, BoardValue value)</td></tr>
+<tr class="memdesc:a805978719280ce081fb51d6e72265a56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search a item in the list by value.  <a href="#a805978719280ce081fb51d6e72265a56">More...</a><br/></td></tr>
+<tr class="separator:a805978719280ce081fb51d6e72265a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1572d8f40241339ad02e7eb57ec3db19"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#a1572d8f40241339ad02e7eb57ec3db19">itemListIsEmpty</a> (<a class="el" href="struct_item.html">Item</a> list)</td></tr>
+<tr class="memdesc:a1572d8f40241339ad02e7eb57ec3db19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if the item list is empty.  <a href="#a1572d8f40241339ad02e7eb57ec3db19">More...</a><br/></td></tr>
+<tr class="separator:a1572d8f40241339ad02e7eb57ec3db19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af914a3869a46e9bf6443f45e24da975d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#af914a3869a46e9bf6443f45e24da975d">itemDelete</a> (<a class="el" href="struct_item.html">Item</a> item)</td></tr>
+<tr class="memdesc:af914a3869a46e9bf6443f45e24da975d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an item in his list.  <a href="#af914a3869a46e9bf6443f45e24da975d">More...</a><br/></td></tr>
+<tr class="separator:af914a3869a46e9bf6443f45e24da975d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3db5d0006013fd63177268384b09f19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#ad3db5d0006013fd63177268384b09f19">itemFree</a> (<a class="el" href="struct_item.html">Item</a> item)</td></tr>
 <tr class="memdesc:ad3db5d0006013fd63177268384b09f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function free the memory of the item.  <a href="#ad3db5d0006013fd63177268384b09f19">More...</a><br/></td></tr>
 <tr class="separator:ad3db5d0006013fd63177268384b09f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a059ffc47def9e5958428b2f14490306e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="item_8h.html#a059ffc47def9e5958428b2f14490306e">itemOnCollisionFood</a> (int idSnake)</td></tr>
-<tr class="separator:a059ffc47def9e5958428b2f14490306e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="a81bc1cd3ad27e2b9eff1a0d766205705"></a>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Headers of item file. </p>
+<dl class="section author"><dt>Author</dt><dd>groupe Larakis </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20/02/2016</dd></dl>
+<p>All header of the item file functions </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ac3dff4c42d20553451963cf328ec99f0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="struct_item.html">Item</a>* <a class="el" href="struct_item.html">Item</a></td>
+          <td class="memname"><a class="el" href="struct_item.html">Item</a> itemAdd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_item.html">Item</a>&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_item.html">Item</a>&#160;</td>
+          <td class="paramname"><em>toAdd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a existing item in the item list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>The item list </td></tr>
+    <tr><td class="paramname">toAdd</td><td>The item to add </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_item.html" title="The item structure. ">Item</a> Return the first item (sentry) of the list </dd></dl>
+
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="af0aafabf7853afb202bf1431a2984ad0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_item.html">Item</a> itemAddNew </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_item.html">Item</a>&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BoardValue&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a new item in a item list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>The item list </td></tr>
+    <tr><td class="paramname">x</td><td>The x postion </td></tr>
+    <tr><td class="paramname">y</td><td>The y postion </td></tr>
+    <tr><td class="paramname">value</td><td>The value of the item in the board </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_item.html" title="The item structure. ">Item</a> Return the first item (sentry) of the list </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a66bd7f31ba408096b471a0f8384bdda7"></a>
 <div class="memitem">
 <div class="memproto">
@@ -167,7 +270,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="enum_8h.html#a2dacfc71b564278029e3ad9693430e87">BoardValue</a>&#160;</td>
+          <td class="paramtype">BoardValue&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
@@ -188,6 +291,32 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_item.html" title="The item structure. ">Item</a> Return the created item </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af914a3869a46e9bf6443f45e24da975d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int itemDelete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_item.html">Item</a>&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete an item in his list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td>The item to delete </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 1 if the item is deleted </dd></dl>
 
 </div>
 </div>
@@ -216,19 +345,124 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a059ffc47def9e5958428b2f14490306e"></a>
+<a class="anchor" id="aa0d1607df495755fbd781a6b337f6df0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void itemOnCollisionFood </td>
+          <td class="memname">BoardValue itemGetRandomItemValue </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>idSnake</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get a random item value. </p>
+<dl class="section return"><dt>Returns</dt><dd>BoardValue Return the random board value </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1572d8f40241339ad02e7eb57ec3db19"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool itemListIsEmpty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_item.html">Item</a>&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Test if the item list is empty. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>The item list </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a229d10a307cee76de5720da8063ce2f4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_item.html">Item</a> itemSearch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_item.html">Item</a>&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Search a item in the list by position x, y. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>The item list </td></tr>
+    <tr><td class="paramname">x</td><td>The x position </td></tr>
+    <tr><td class="paramname">y</td><td>The y position </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_item.html" title="The item structure. ">Item</a> The item searched. NULL if not found </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a805978719280ce081fb51d6e72265a56"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_item.html">Item</a> itemSearchByValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_item.html">Item</a>&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BoardValue&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Search a item in the list by value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>The item list </td></tr>
+    <tr><td class="paramname">value</td><td>The value of the item </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_item.html" title="The item structure. ">Item</a> The item searched. NULL if not found </dd></dl>
 
 </div>
 </div>
@@ -238,7 +472,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="item_8h.html">item.h</a></li>
-    <li class="footer">Generated on Tue Apr 19 2016 12:16:12 for Larakis by
+    <li class="footer">Generated on Tue May 17 2016 08:41:18 for LarakisSnake by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
